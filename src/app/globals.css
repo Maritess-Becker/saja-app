@@ -67,7 +67,7 @@
 
 /* Swipe card animations */
 .swipe-card {
-  touch-action: none;
+  touch-action: pan-y;
   user-select: none;
 }
 
