@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo, useRef } from 'react'
+import { useState, useMemo } from 'react'
 import {
   Heart, X, MapPin, Briefcase, Sparkles, SlidersHorizontal, RotateCcw,
   Search, ChevronDown, Lock, Mic, Ruler,
@@ -105,7 +105,6 @@ export function DiscoverClient({ initialProfiles, currentUserId, isInConnection,
   const [current, setCurrent] = useState(0)
   const [photoIndex, setPhotoIndex] = useState(0)
   const [showMatchAnim, setShowMatchAnim] = useState(false)
-  const pageRef = useRef<HTMLDivElement>(null)
 
   const x = useMotionValue(0)
   const rotate = useTransform(x, [-200, 200], [-18, 18])
@@ -163,7 +162,7 @@ export function DiscoverClient({ initialProfiles, currentUserId, isInConnection,
     setCurrent((c) => c + 1)
     setPhotoIndex(0)
     x.set(0)
-    pageRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   function handlePhotoTap(e: React.MouseEvent<HTMLDivElement>) {
@@ -338,7 +337,6 @@ export function DiscoverClient({ initialProfiles, currentUserId, isInConnection,
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            ref={pageRef as any}
             className="max-w-lg mx-auto pb-36"
           >
             {/* ── Photo area (swipeable) ── */}

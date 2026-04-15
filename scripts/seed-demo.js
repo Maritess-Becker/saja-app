@@ -200,6 +200,18 @@ async function run() {
     if (error && error.message.includes('is_demo')) {
       ;({ error } = await supabase.from('profiles').upsert(profileData, { onConflict: 'user_id' }))
     }
+    // If height_cm column doesn't exist yet, insert without it
+    if (error && error.message.includes('height_cm')) {
+      const { height_cm, ...profileWithoutHeight } = profileData
+      ;({ error } = await supabase.from('profiles').upsert(
+        { ...profileWithoutHeight, is_demo: true },
+        { onConflict: 'user_id' }
+      ))
+      if (error && error.message.includes('is_demo')) {
+        ;({ error } = await supabase.from('profiles').upsert(profileWithoutHeight, { onConflict: 'user_id' }))
+      }
+      if (!error) console.log(`  ⚠️  height_cm wurde nicht gesetzt (Spalte fehlt noch — SQL-Migration ausführen)`)
+    }
     if (error) throw new Error(`profile ${u.name}: ${error.message}`)
     console.log(`✓ Profil: ${u.name}`)
   }
