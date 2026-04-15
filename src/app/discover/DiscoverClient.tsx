@@ -103,7 +103,6 @@ export function DiscoverClient({ initialProfiles, currentUserId, isInConnection,
   const [filters, setFilters] = useState<Filters>(DEFAULT_FILTERS)
   const [showFilters, setShowFilters] = useState(false)
   const [current, setCurrent] = useState(0)
-  const [photoIndex, setPhotoIndex] = useState(0)
   const [showMatchAnim, setShowMatchAnim] = useState(false)
 
   const x = useMotionValue(0)
@@ -128,7 +127,6 @@ export function DiscoverClient({ initialProfiles, currentUserId, isInConnection,
 
   const profile = profiles[current]
   const activeFilterCount = countActiveFilters(filters)
-  const photoCount = profile?.photos?.length ?? 0
 
   async function handleLike() {
     if (!profile) return
@@ -160,21 +158,8 @@ export function DiscoverClient({ initialProfiles, currentUserId, isInConnection,
 
   function next() {
     setCurrent((c) => c + 1)
-    setPhotoIndex(0)
     x.set(0)
     window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
-
-  function handlePhotoTap(e: React.MouseEvent<HTMLDivElement>) {
-    const rect = e.currentTarget.getBoundingClientRect()
-    const tapX = e.clientX - rect.left
-    const width = rect.width
-    if (tapX < width * 0.35) {
-      setPhotoIndex((i) => Math.max(0, i - 1))
-    } else if (tapX > width * 0.65) {
-      setPhotoIndex((i) => Math.min((photoCount || 1) - 1, i + 1))
-    }
-    // center 30% does nothing
   }
 
   if (tier === 'free') {
@@ -356,29 +341,11 @@ export function DiscoverClient({ initialProfiles, currentUserId, isInConnection,
               }}
               className="relative mx-3 rounded-3xl overflow-hidden shadow-lg cursor-grab active:cursor-grabbing"
             >
-              {/* Photo progress bars */}
-              {photoCount > 1 && (
-                <div className="absolute top-3 left-3 right-3 z-10 flex gap-1">
-                  {Array.from({ length: photoCount }).map((_, i) => (
-                    <div key={i} className="flex-1 h-0.5 rounded-full overflow-hidden bg-white/30">
-                      <div className={cn('h-full rounded-full transition-all', i <= photoIndex ? 'bg-white' : 'bg-transparent')} />
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              {/* Tap zones for photo navigation */}
-              <div className="absolute inset-0 z-10 flex" onClick={handlePhotoTap}>
-                <div className="w-[35%] h-full" />
-                <div className="w-[30%] h-full" />
-                <div className="w-[35%] h-full" />
-              </div>
-
-              {/* Photo */}
-              {profile.photos?.[photoIndex] ? (
+              {/* Foto 1 — nur erstes Bild, kein Karussell */}
+              {profile.photos?.[0] ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
-                  src={profile.photos[photoIndex]}
+                  src={profile.photos[0]}
                   alt={profile.name}
                   className="w-full h-full object-cover pointer-events-none"
                 />
@@ -420,135 +387,133 @@ export function DiscoverClient({ initialProfiles, currentUserId, isInConnection,
               </div>
             </motion.div>
 
-            {/* ── Profile info section cards ── */}
-            <div className="mx-3 mt-3 space-y-3">
+            {/* ── Hinge-Style: fließendes Profil mit verteilten Fotos ── */}
+            <div className="mt-2">
 
-              {/* Basics card */}
-              <div className="bg-white rounded-2xl border border-sand shadow-sm px-5 py-4 space-y-2">
+              {/* Kurzinfos als Chips */}
+              <div className="px-5 pt-4 pb-1 flex flex-wrap gap-2">
                 {profile.height_cm && (
-                  <div className="flex items-center gap-2 text-sm text-dark">
-                    <Ruler className="w-4 h-4 text-text/40 flex-shrink-0" />
-                    <span>{profile.height_cm} cm</span>
-                  </div>
+                  <span className="flex items-center gap-1.5 text-sm text-text/60 bg-sand px-3 py-1.5 rounded-full">
+                    <Ruler className="w-3.5 h-3.5" />{profile.height_cm} cm
+                  </span>
                 )}
                 {profile.occupation && (
-                  <div className="flex items-center gap-2 text-sm text-text/70">
-                    <Briefcase className="w-4 h-4 text-text/40 flex-shrink-0" />
-                    <span>{profile.occupation}</span>
-                  </div>
-                )}
-                {!profile.hide_location && profile.location && (
-                  <div className="flex items-center gap-2 text-sm text-text/70">
-                    <MapPin className="w-4 h-4 text-text/40 flex-shrink-0" />
-                    <span>{profile.location}</span>
-                  </div>
+                  <span className="flex items-center gap-1.5 text-sm text-text/60 bg-sand px-3 py-1.5 rounded-full">
+                    <Briefcase className="w-3.5 h-3.5" />{profile.occupation}
+                  </span>
                 )}
                 {profile.intention && (
-                  <div className="flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-primary flex-shrink-0" />
-                    <span className="text-sm bg-light text-primary px-2.5 py-0.5 rounded-full">{profile.intention}</span>
-                  </div>
+                  <span className="flex items-center gap-1.5 text-sm text-primary bg-light px-3 py-1.5 rounded-full">
+                    <Sparkles className="w-3.5 h-3.5" />{profile.intention}
+                  </span>
                 )}
                 {profile.has_children && (
-                  <div className="text-sm text-text/60">{profile.has_children}</div>
+                  <span className="text-sm text-text/60 bg-sand px-3 py-1.5 rounded-full">{profile.has_children}</span>
                 )}
               </div>
 
-              {/* Quote card */}
+              {/* Foto 2 */}
+              {profile.photos?.[1] && (
+                <div className="mx-3 mt-4 rounded-3xl overflow-hidden" style={{ height: '62vh' }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={profile.photos[1]} alt={profile.name} className="w-full h-full object-cover" />
+                </div>
+              )}
+
+              {/* Zitat */}
               {profile.profile_quote && (
-                <div className="bg-white rounded-2xl border border-sand shadow-sm px-5 py-4">
-                  <p className="font-heading text-xl text-dark italic leading-snug">
+                <div className="px-5 pt-6 pb-4">
+                  <p className="font-heading text-2xl text-dark italic leading-snug">
                     &ldquo;{profile.profile_quote}&rdquo;
                   </p>
                 </div>
               )}
 
-              {/* Voice intro card (placeholder) */}
-              <div className="bg-white rounded-2xl border border-sand shadow-sm px-5 py-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-light flex items-center justify-center flex-shrink-0">
-                    <Mic className="w-5 h-5 text-primary" />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-sm font-medium text-dark">Sprach-Intro</p>
-                    {/* Fake waveform */}
-                    <div className="flex items-center gap-0.5 mt-1.5 h-6">
-                      {Array.from({ length: 24 }).map((_, i) => (
-                        <div
-                          key={i}
-                          className="w-1 bg-primary/30 rounded-full animate-pulse"
-                          style={{
-                            height: `${20 + Math.sin(i * 0.8) * 14 + Math.cos(i * 1.3) * 6}%`,
-                            animationDelay: `${i * 60}ms`,
-                          }}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                  <span className="text-xs bg-sand text-text/50 px-2.5 py-1 rounded-full flex-shrink-0">Bald verfügbar</span>
+              {/* Sprach-Intro */}
+              <div className="px-5 py-5 border-t border-sand/70 flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-light flex items-center justify-center flex-shrink-0">
+                  <Mic className="w-5 h-5 text-primary" />
                 </div>
+                <div className="flex-1">
+                  <p className="text-sm font-medium text-dark mb-1.5">Sprach-Intro</p>
+                  <div className="flex items-center gap-0.5 h-5">
+                    {Array.from({ length: 26 }).map((_, i) => (
+                      <div key={i} className="w-1 bg-primary/25 rounded-full animate-pulse"
+                        style={{ height: `${30 + Math.sin(i * 0.9) * 50 + Math.cos(i * 1.4) * 20}%`, animationDelay: `${i * 55}ms` }} />
+                    ))}
+                  </div>
+                </div>
+                <span className="text-xs text-text/35 flex-shrink-0">Bald verfügbar</span>
               </div>
 
-              {/* Bio card */}
+              {/* Foto 3 */}
+              {profile.photos?.[2] && (
+                <div className="mx-3 rounded-3xl overflow-hidden" style={{ height: '62vh' }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={profile.photos[2]} alt={profile.name} className="w-full h-full object-cover" />
+                </div>
+              )}
+
+              {/* Über mich */}
               {profile.bio && (
-                <div className="bg-white rounded-2xl border border-sand shadow-sm px-5 py-4">
-                  <p className="text-xs text-text/40 uppercase tracking-wider mb-2">Über mich</p>
+                <div className="px-5 py-5 border-t border-sand/70">
+                  <p className="text-[11px] text-text/35 uppercase tracking-widest mb-3">Über mich</p>
                   <p className="text-text/70 text-sm leading-relaxed">{profile.bio}</p>
                 </div>
               )}
 
-              {/* Interests section */}
+              {/* Interessen */}
               {profile.interests?.length > 0 && (
-                <div className="bg-white rounded-2xl border border-sand shadow-sm px-5 py-4">
-                  <p className="text-xs text-text/40 uppercase tracking-wider mb-2">Interessen</p>
-                  <div className="flex flex-wrap gap-1.5">
-                    {profile.interests.map((i) => (
-                      <span key={i} className="text-xs bg-sand text-text/60 px-3 py-1.5 rounded-full">{i}</span>
+                <div className="px-5 py-5 border-t border-sand/70">
+                  <p className="text-[11px] text-text/35 uppercase tracking-widest mb-3">Interessen</p>
+                  <div className="flex flex-wrap gap-2">
+                    {profile.interests.map((item) => (
+                      <span key={item} className="text-sm text-text/60 bg-sand px-3 py-1.5 rounded-full">{item}</span>
                     ))}
                   </div>
                 </div>
               )}
 
-              {/* Werte section */}
+              {/* Werte */}
               {profile.werte?.length > 0 && (
-                <div className="bg-white rounded-2xl border border-sand shadow-sm px-5 py-4">
-                  <p className="text-xs text-text/40 uppercase tracking-wider mb-2">Werte</p>
-                  <div className="flex flex-wrap gap-1.5">
+                <div className="px-5 py-5 border-t border-sand/70">
+                  <p className="text-[11px] text-text/35 uppercase tracking-widest mb-3">Werte</p>
+                  <div className="flex flex-wrap gap-2">
                     {profile.werte.map((w) => (
-                      <span key={w} className="text-xs bg-light text-primary px-3 py-1.5 rounded-full">{w}</span>
+                      <span key={w} className="text-sm text-primary bg-light px-3 py-1.5 rounded-full">{w}</span>
                     ))}
                   </div>
                 </div>
               )}
 
-              {/* Relationship card */}
+              {/* Beziehung & Bindung */}
               {(profile.relationship_model || profile.bindungstyp || profile.love_language) && (
-                <div className="bg-white rounded-2xl border border-sand shadow-sm px-5 py-4 space-y-3">
+                <div className="px-5 py-5 border-t border-sand/70 space-y-4">
                   {profile.relationship_model && (
-                    <div className="flex items-center justify-between text-sm">
-                      <span className="text-text/40">Beziehungsmodell</span>
-                      <span className="text-dark font-medium">{profile.relationship_model}</span>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-text/40">Beziehungsmodell</span>
+                      <span className="text-sm text-dark font-medium">{profile.relationship_model}</span>
                     </div>
                   )}
                   {profile.bindungstyp && (
-                    <div className="flex items-center justify-between text-sm">
-                      <span className="text-text/40">Bindungstyp</span>
-                      <span className="text-dark font-medium">{profile.bindungstyp}</span>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-text/40">Bindungstyp</span>
+                      <span className="text-sm text-dark font-medium">{profile.bindungstyp}</span>
                     </div>
                   )}
                   {profile.love_language && (
-                    <div className="flex items-center justify-between text-sm">
-                      <span className="text-text/40">Love Language</span>
-                      <span className="text-dark font-medium">{profile.love_language}</span>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-text/40">Love Language</span>
+                      <span className="text-sm text-dark font-medium">{profile.love_language}</span>
                     </div>
                   )}
                 </div>
               )}
 
-              {/* Persönlichkeit card */}
+              {/* Persönlichkeit */}
               {(profile.introvert_extrovert != null || profile.spontan_strukturiert != null || profile.rational_emotional != null) && (
-                <div className="bg-white rounded-2xl border border-sand shadow-sm px-5 py-4 space-y-3">
-                  <p className="text-xs text-text/40 uppercase tracking-wider mb-1">Persönlichkeit</p>
+                <div className="px-5 py-5 border-t border-sand/70 space-y-4">
+                  <p className="text-[11px] text-text/35 uppercase tracking-widest">Persönlichkeit</p>
                   {profile.introvert_extrovert != null && (
                     <PersonalityBar leftLabel="Introvertiert" rightLabel="Extravertiert" value={profile.introvert_extrovert} />
                   )}
@@ -560,6 +525,7 @@ export function DiscoverClient({ initialProfiles, currentUserId, isInConnection,
                   )}
                 </div>
               )}
+
             </div>
           </motion.div>
         </AnimatePresence>
