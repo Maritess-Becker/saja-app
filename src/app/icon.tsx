@@ -19,15 +19,17 @@ export default function Icon() {
         }}
       >
         <svg width="460" height="460" viewBox="0 0 512 512" fill="none">
-          <g transform="rotate(135, 256, 256)">
-            <path
-              d="M 68 444 A 212 212 0 1 1 444 444"
-              stroke="#9E6B47"
-              strokeWidth="44"
-              strokeLinecap="round"
-              fill="none"
-            />
-          </g>
+          <circle
+            cx="256"
+            cy="256"
+            r="200"
+            fill="none"
+            stroke="#9E6B47"
+            strokeWidth="44"
+            strokeLinecap="round"
+            strokeDasharray="942 314"
+            transform="rotate(135, 256, 256)"
+          />
         </svg>
       </div>
     ),
