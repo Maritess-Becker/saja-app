@@ -426,6 +426,7 @@ export function DiscoverClient({ initialProfiles, currentUserId, isInConnection,
               }}
               transition={{ duration: 0.2 }}
               className="swipe-card"
+              style={{ touchAction: 'pan-y' }}
             >
               {/* Card */}
               <div className="bg-white rounded-3xl shadow-lg overflow-hidden border border-sand">
