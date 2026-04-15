@@ -48,6 +48,7 @@ export default function OnboardingPage() {
   const [seeking, setSeeking] = useState<string[]>([])
   const [languages, setLanguages] = useState('')
   const [hasChildren, setHasChildren] = useState('')
+  const [heightCm, setHeightCm] = useState('')
   // Step 3
   const [bio, setBio] = useState('')
   const [notCompatible, setNotCompatible] = useState('')
@@ -94,6 +95,7 @@ export default function OnboardingPage() {
         setSeeking(p.seeking ?? [])
         setLanguages(p.languages?.join(', ') ?? '')
         setHasChildren(p.has_children ?? '')
+        setHeightCm(p.height_cm ? String(p.height_cm) : '')
         setBio(p.bio ?? '')
         setNotCompatible(p.not_compatible_with ?? '')
         setOccupation(p.occupation ?? '')
@@ -136,6 +138,7 @@ export default function OnboardingPage() {
       seeking,
       languages: languages.split(',').map((l) => l.trim()).filter(Boolean),
       has_children: hasChildren || null,
+      height_cm: heightCm ? parseInt(heightCm) : null,
       bio: bio || null,
       not_compatible_with: notCompatible || null,
       occupation: occupation || null,
@@ -213,7 +216,7 @@ export default function OnboardingPage() {
       location: location || null, origin: origin || null,
       gender: gender || null, orientation: orientation || null,
       seeking, languages: languages.split(',').map((l) => l.trim()).filter(Boolean),
-      has_children: hasChildren || null, bio: bio || null,
+      has_children: hasChildren || null, height_cm: heightCm ? parseInt(heightCm) : null, bio: bio || null,
       not_compatible_with: notCompatible || null, occupation: occupation || null,
       interests, bindungstyp: bindungstyp || null, love_language: loveLanguage || null,
       werte, introvert_extrovert: sliderIE, spontan_strukturiert: sliderSS, rational_emotional: sliderRE,
@@ -337,7 +340,7 @@ export default function OnboardingPage() {
               <h2 className="font-heading text-4xl text-dark mb-2">Basis-Informationen</h2>
               <p className="text-text/50">Lass andere wissen, wer du bist.</p>
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-3 gap-4">
               <div>
                 <label className="label">Vorname *</label>
                 <input className="input" placeholder="Dein Name" value={name} onChange={(e) => setName(e.target.value)} />
@@ -345,6 +348,10 @@ export default function OnboardingPage() {
               <div>
                 <label className="label">Alter</label>
                 <input className="input" type="number" placeholder="z.B. 32" value={age} onChange={(e) => setAge(e.target.value)} min="18" max="99" />
+              </div>
+              <div>
+                <label className="label">Größe (cm)</label>
+                <input className="input" type="number" placeholder="z.B. 172" value={heightCm} onChange={(e) => setHeightCm(e.target.value)} min="140" max="220" />
               </div>
             </div>
             <div className="grid grid-cols-2 gap-4">
@@ -624,6 +631,11 @@ export default function OnboardingPage() {
               {occupation && (
                 <div className="flex items-center gap-2 text-text/60 text-sm">
                   <Briefcase className="w-4 h-4" />{occupation}
+                </div>
+              )}
+              {heightCm && (
+                <div className="flex items-center gap-2 text-text/60 text-sm">
+                  📏 {heightCm} cm
                 </div>
               )}
               {intention && (

@@ -51,6 +51,7 @@ export interface Profile {
   seeking: string[]
   languages: string[]
   has_children: string | null
+  height_cm: number | null
   bio: string | null
   not_compatible_with: string | null
   occupation: string | null
