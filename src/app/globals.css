@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background-color: #FAF8F4;
+    color: #1A1410;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary text-white px-6 py-3 rounded-full font-body font-medium
+           hover:bg-dark transition-colors duration-200 disabled:opacity-50
+           disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply border border-primary text-primary px-6 py-3 rounded-full font-body font-medium
+           hover:bg-light transition-colors duration-200 disabled:opacity-50;
+  }
+
+  .btn-ghost {
+    @apply text-primary px-6 py-3 rounded-full font-body font-medium
+           hover:bg-light transition-colors duration-200;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl shadow-sm border border-sand p-6;
+  }
+
+  .input {
+    @apply w-full px-4 py-3 rounded-xl border border-sand bg-white
+           focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary
+           font-body text-text placeholder:text-text/40 transition-all duration-200;
+  }
+
+  .label {
+    @apply block text-sm font-medium text-text/70 mb-1.5;
+  }
+
+  .chip {
+    @apply px-3 py-1.5 rounded-full text-sm border border-sand cursor-pointer
+           transition-all duration-200 hover:border-primary hover:text-primary;
+    background-color: #EDE8E0;
+  }
+
+  .chip-active {
+    @apply bg-primary border-primary text-white;
+  }
+
+  /* Accent-Tags (terrakotta getönt) */
+  .tag-accent {
+    background-color: rgba(180, 140, 110, 0.14);
+    color: #7A4E30;
+    @apply px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+}
+
+/* Swipe card animations */
+.swipe-card {
+  touch-action: none;
+  user-select: none;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FAF8F4;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #9E6B4740;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9E6B47;
+}
