@@ -19,8 +19,8 @@ export default function AppleIcon() {
         }}
       >
         <svg
-          width="112"
-          height="112"
+          width="148"
+          height="148"
           viewBox="0 0 512 512"
           fill="none"
           style={{ transform: 'rotate(135deg)' }}
@@ -28,7 +28,7 @@ export default function AppleIcon() {
           <path
             d="M 142.86 369.14 A 160 160 0 1 1 369.14 369.14"
             stroke="white"
-            strokeWidth="36"
+            strokeWidth="40"
             strokeLinecap="round"
             fill="none"
           />
