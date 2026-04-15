@@ -14,42 +14,25 @@ export default function Icon() {
           borderRadius: '114px',
           background: '#9E6B47',
           display: 'flex',
-          flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          gap: '8px',
         }}
       >
-        {/* Arc SVG */}
         <svg
-          width="160"
-          height="160"
-          viewBox="0 0 160 160"
+          width="320"
+          height="320"
+          viewBox="0 0 512 512"
           fill="none"
           style={{ transform: 'rotate(135deg)' }}
         >
           <path
-            d="M 33.43 113.13 A 66 66 0 1 1 126.57 113.13"
+            d="M 142.86 369.14 A 160 160 0 1 1 369.14 369.14"
             stroke="white"
-            strokeWidth="12"
+            strokeWidth="36"
             strokeLinecap="round"
             fill="none"
           />
         </svg>
-        {/* Wordmark */}
-        <span
-          style={{
-            color: 'white',
-            fontSize: 128,
-            fontFamily: 'Georgia, serif',
-            fontWeight: 600,
-            letterSpacing: '-3px',
-            lineHeight: 1,
-            marginTop: '-8px',
-          }}
-        >
-          Saja
-        </span>
       </div>
     ),
     { width: 512, height: 512 }
