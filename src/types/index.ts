@@ -71,6 +71,12 @@ export interface Profile {
   profile_paused: boolean
   photos: string[]
   profile_quote: string | null
+  birth_date: string | null
+  smoking: string | null
+  alcohol: string | null
+  prompts: Array<{ question: string; answer: string }>
+  dealbreakers: string[]
+  audio_prompt_url: string | null
   is_complete: boolean
   created_at: string
   updated_at: string
