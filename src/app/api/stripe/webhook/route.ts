@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
   switch (event.type) {
     // ─── Subscription activated ──────────────────────────────────────────────
     case 'checkout.session.completed': {
-      const session = event.data.object as Stripe.CheckoutSession
+      const session = event.data.object as Stripe.Checkout.Session
       const userId = session.metadata?.userId
       const tier = session.metadata?.tier
 
