@@ -33,7 +33,7 @@ export default async function ProfilePage() {
     <div className="min-h-screen bg-background">
       <AppNav />
       <main className="md:pl-64 pb-20 md:pb-0">
-        <div className="max-w-2xl mx-auto px-4 pt-8">
+        <div className="max-w-2xl mx-auto px-4 pt-8 pb-32">
           <h1 className="font-heading text-3xl text-dark mb-8">Mein Profil</h1>
 
           {/* Profile card */}

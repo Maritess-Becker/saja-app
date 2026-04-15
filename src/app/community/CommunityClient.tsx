@@ -105,7 +105,7 @@ export function CommunityClient({ tier }: Props) {
 
   if (!isPremium) {
     return (
-      <div className="max-w-2xl mx-auto px-4 pt-8">
+      <div className="max-w-2xl mx-auto px-4 pt-8 pb-32">
         <h1 className="font-heading text-3xl text-dark mb-1">Community</h1>
         <p className="text-text/50 text-sm mb-10">Gruppen zu Bindungstypen, Sexualität, Beziehungsmodellen und mehr.</p>
 
@@ -149,7 +149,7 @@ export function CommunityClient({ tier }: Props) {
   // Group detail view
   if (selectedGroup && group) {
     return (
-      <div className="max-w-2xl mx-auto px-4 pt-8">
+      <div className="max-w-2xl mx-auto px-4 pt-8 pb-32">
         <button
           onClick={() => setSelectedGroup(null)}
           className="flex items-center gap-2 text-text/50 hover:text-text text-sm mb-6 transition-colors"
