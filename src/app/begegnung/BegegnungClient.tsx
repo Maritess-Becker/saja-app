@@ -172,7 +172,7 @@ export function BegegnungClient({
 
       {/* Header */}
       <div className="flex items-center gap-4 p-4 bg-white border-b border-sand">
-        <div className="w-12 h-12 rounded-xl bg-sand flex items-center justify-center overflow-hidden flex-shrink-0">
+        <Link href={`/profile/${otherProfile?.user_id}`} className="w-12 h-12 rounded-xl bg-sand flex items-center justify-center overflow-hidden flex-shrink-0 hover:opacity-90 transition-opacity">
           {otherProfile?.photos?.[0] ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img src={otherProfile.photos[0]} alt="" className="w-full h-full object-cover" />
@@ -181,8 +181,8 @@ export function BegegnungClient({
               {otherProfile?.name?.[0]}
             </span>
           )}
-        </div>
-        <div className="flex-1 min-w-0">
+        </Link>
+        <Link href={`/profile/${otherProfile?.user_id}`} className="flex-1 min-w-0 hover:opacity-70 transition-opacity">
           <h2 className="font-heading text-xl text-dark">{otherProfile?.name}</h2>
           {otherProfile?.location && !otherProfile.hide_location && (
             <div className="flex items-center gap-1 text-text/40 text-xs">
@@ -190,7 +190,7 @@ export function BegegnungClient({
               {otherProfile.location}
             </div>
           )}
-        </div>
+        </Link>
         <div className="flex items-center gap-1.5 bg-light px-3 py-1.5 rounded-full">
           <Heart className="w-3.5 h-3.5 text-primary fill-primary" />
           <span className="text-xs text-primary font-medium">Begegnung aktiv</span>

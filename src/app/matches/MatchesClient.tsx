@@ -144,20 +144,20 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
 
           return (
             <div key={match.id} className={cn('card flex gap-4', isThisActiveMatch && 'border-2 border-primary')}>
-              {/* Avatar */}
-              <div className="w-16 h-16 rounded-2xl bg-sand flex-shrink-0 flex items-center justify-center overflow-hidden">
+              {/* Avatar — klickbar */}
+              <Link href={`/profile/${profile.user_id}`} className="w-16 h-16 rounded-2xl bg-sand flex-shrink-0 flex items-center justify-center overflow-hidden hover:opacity-90 transition-opacity">
                 {profile.photos?.[0] ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img src={profile.photos[0]} alt={profile.name} className="w-full h-full object-cover" />
                 ) : (
                   <span className="font-heading text-2xl text-primary">{profile.name?.[0]}</span>
                 )}
-              </div>
+              </Link>
 
               {/* Info */}
               <div className="flex-1 min-w-0">
                 <div className="flex items-start justify-between gap-2">
-                  <div>
+                  <Link href={`/profile/${profile.user_id}`} className="hover:opacity-70 transition-opacity">
                     <h3 className="font-heading text-xl text-dark">
                       {profile.name}{!profile.hide_age && profile.age ? `, ${profile.age}` : ''}
                     </h3>
@@ -167,7 +167,7 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
                         {profile.location}
                       </div>
                     )}
-                  </div>
+                  </Link>
                   {isThisActiveMatch && (
                     <span className="flex items-center gap-1 text-xs text-primary bg-light px-2 py-1 rounded-full">
                       <CheckCircle className="w-3 h-3" /> Aktiv

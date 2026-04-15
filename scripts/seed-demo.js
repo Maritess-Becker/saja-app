@@ -129,6 +129,47 @@ const DEMO_USERS = [
     matchStatus: 'open',
     connection: null,
   },
+  // ── Discover-only profiles (sie liken mich, ich noch nicht zurück) ──
+  {
+    email: 'demo.felix@saja.app',
+    name: 'Felix', age: 35, location: 'Berlin', gender: 'Mann',
+    occupation: 'Musiker & Sounddesigner', bindungstyp: 'Sicher', love_language: 'Quality Time',
+    intention: 'Tiefe Verbindung',
+    bio: 'Ich lebe in Tönen und Stille. Musik hat mich gelehrt, wirklich zuzuhören — das vermisse ich auch in Beziehungen.',
+    profile_quote: 'Stille ist keine Leere, sondern ein Raum für das Wesentliche.',
+    interests: ['Musik', 'Meditation', 'Natur', 'Philosophie'],
+    height_cm: 180,
+    photos: [
+      'https://randomuser.me/api/portraits/men/41.jpg',
+      'https://randomuser.me/api/portraits/men/42.jpg',
+      'https://randomuser.me/api/portraits/men/43.jpg',
+    ],
+    werte: ['Tiefe', 'Präsenz', 'Ehrlichkeit', 'Freiheit'],
+    relationship_model: 'Monogamie',
+    matchStatus: null,   // kein Match — erscheint in Entdecken
+    connection: null,
+    discoverOnly: true,  // kein outgoing like von mir
+  },
+  {
+    email: 'demo.nina@saja.app',
+    name: 'Nina', age: 31, location: 'Köln', gender: 'Frau',
+    occupation: 'Heilpraktikerin', bindungstyp: 'Sicher', love_language: 'Körperliche Berührung',
+    intention: 'Bewusstes Dating',
+    bio: 'Ich arbeite mit dem Körper, weil er nie lügt. Heilsame Berührung, Atemarbeit und echte Begegnungen sind mein Alltag.',
+    profile_quote: 'Der Körper weiß, was der Kopf noch lernt.',
+    interests: ['Atemarbeit', 'Tanz', 'Heilkräuter', 'Yoga'],
+    height_cm: 166,
+    photos: [
+      'https://randomuser.me/api/portraits/women/55.jpg',
+      'https://randomuser.me/api/portraits/women/56.jpg',
+      'https://randomuser.me/api/portraits/women/57.jpg',
+    ],
+    werte: ['Verkörperung', 'Heilung', 'Präsenz', 'Authentizität'],
+    relationship_model: 'Offen',
+    matchStatus: null,
+    connection: null,
+    discoverOnly: true,
+  },
 ]
 
 async function run() {
@@ -218,16 +259,22 @@ async function run() {
 
   console.log('')
 
-  // ─── Likes (alle 6 liken mich + ich like alle zurück) ────────────
+  // ─── Likes ────────────────────────────────────────────────────────
   for (const u of createdUsers) {
-    // Demo user likes me
+    // Demo user always likes me
     const { error: e1 } = await supabase.from('likes').upsert(
       { from_user_id: u.userId, to_user_id: myId },
       { onConflict: 'from_user_id,to_user_id' }
     )
     if (e1) throw new Error(`like ${u.name}→me: ${e1.message}`)
 
-    // I like them back
+    if (u.discoverOnly) {
+      // discoverOnly: kein outgoing like → erscheint in Entdecken
+      console.log(`✓ Like: ${u.name} → du  (erscheint in Entdecken)`)
+      continue
+    }
+
+    // I like them back → mutual → Match
     const { error: e2 } = await supabase.from('likes').upsert(
       { from_user_id: myId, to_user_id: u.userId },
       { onConflict: 'from_user_id,to_user_id' }
@@ -238,8 +285,10 @@ async function run() {
 
   console.log('')
 
-  // ─── Matches ─────────────────────────────────────────────────────
+  // ─── Matches (nur für nicht-discoverOnly) ─────────────────────────
   for (const u of createdUsers) {
+    if (u.discoverOnly) continue
+
     // Check if match already exists (either direction)
     const { data: existing } = await supabase
       .from('matches')
@@ -267,7 +316,7 @@ async function run() {
 
   // ─── Connections ─────────────────────────────────────────────────
   for (const u of createdUsers) {
-    if (!u.connection) continue
+    if (!u.connection || u.discoverOnly) continue
 
     // Remove old connection for this match first (idempotent)
     await supabase.from('connections').delete().eq('match_id', u.matchId)
@@ -301,6 +350,7 @@ async function run() {
 
   Passwort für alle:  ${DEMO_PASSWORD}
 
+  Matches:
   1. 🌸 Sophia    demo.sophia@saja.app      → Begegnung angefragt
   2. 🏛  Marco     demo.marco@saja.app       → Match (offen)
   3. 🌿 Elena     demo.elena@saja.app       → Aktive Begegnung
@@ -308,8 +358,13 @@ async function run() {
   5. 🧭 Thomas    demo.thomas@saja.app      → Match (offen)
   6. 🎨 Julia     demo.julia@saja.app       → Match (offen)
 
+  Entdecken:
+  7. 🎵 Felix     demo.felix@saja.app       → erscheint in Entdecken
+  8. 🌿 Nina      demo.nina@saja.app        → erscheint in Entdecken
+
 ═══════════════════════════════════════════════════
-  Alle 6 erscheinen in deiner Matches-Liste.
+  Alle 6 Matches erscheinen in der Matches-Liste.
+  Felix & Nina erscheinen in Entdecken (noch kein Match).
   Elena ist bereits in aktiver Begegnung mit dir.
   Sophia & Lena haben eine Begegnung angefragt.
 ═══════════════════════════════════════════════════
