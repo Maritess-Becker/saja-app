@@ -18,20 +18,16 @@ export default function Icon() {
           justifyContent: 'center',
         }}
       >
-        <svg
-          width="460"
-          height="460"
-          viewBox="0 0 512 512"
-          fill="none"
-          style={{ transform: 'rotate(135deg)' }}
-        >
-          <path
-            d="M 68 444 A 212 212 0 1 1 444 444"
-            stroke="#9E6B47"
-            strokeWidth="44"
-            strokeLinecap="round"
-            fill="none"
-          />
+        <svg width="460" height="460" viewBox="0 0 512 512" fill="none">
+          <g transform="rotate(135, 256, 256)">
+            <path
+              d="M 68 444 A 212 212 0 1 1 444 444"
+              stroke="#9E6B47"
+              strokeWidth="44"
+              strokeLinecap="round"
+              fill="none"
+            />
+          </g>
         </svg>
       </div>
     ),
