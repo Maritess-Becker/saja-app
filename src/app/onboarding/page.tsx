@@ -216,6 +216,114 @@ function computeTopKey(answers: string[]): string {
   return Object.entries(counts).sort((a, b) => b[1] - a[1])[0]?.[0] ?? answers[0]
 }
 
+// ── Shared UI components (module-level to prevent remount on re-render) ──
+
+function Chip({ label, active, onClick, disabled }: {
+  label: string; active: boolean; onClick: () => void; disabled?: boolean
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      className={cn(
+        'px-3 py-1.5 rounded-full text-sm border cursor-pointer transition-colors',
+        active
+          ? 'bg-[#9E6B47] border-[#9E6B47] text-white'
+          : 'border-[#E2DAD0] bg-[#EDE8E0] text-[#1A1410] hover:border-[#9E6B47]',
+        disabled && !active && 'opacity-40 cursor-not-allowed',
+      )}
+    >
+      {label}
+    </button>
+  )
+}
+
+function StepShell({ title, subtitle, children }: {
+  title: string; subtitle?: string; children: React.ReactNode
+}) {
+  return (
+    <div className="max-w-lg mx-auto px-4 pt-8">
+      <h1 className="font-heading text-3xl text-[#1A1410] mb-1">{title}</h1>
+      {subtitle && <p className="font-body text-sm text-[#1A1410]/60 mb-6">{subtitle}</p>}
+      {!subtitle && <div className="mb-6" />}
+      {children}
+    </div>
+  )
+}
+
+function NavButtons({ onNext, nextLabel = 'Weiter', nextDisabled = false, showSkip = false, onSkip, step, goBack }: {
+  onNext: () => void
+  nextLabel?: string
+  nextDisabled?: boolean
+  showSkip?: boolean
+  onSkip?: () => void
+  step: number
+  goBack: () => void
+}) {
+  return (
+    <div className="flex items-center justify-between pt-6 pb-10">
+      {step > 1 ? (
+        <button
+          type="button"
+          onClick={goBack}
+          className="px-5 py-2.5 rounded-full border border-[#9E6B47] text-[#9E6B47] text-sm font-body hover:bg-[#9E6B47]/5 transition-colors"
+        >
+          Zurück
+        </button>
+      ) : <div />}
+      <div className="flex items-center gap-3">
+        {showSkip && (
+          <button
+            type="button"
+            onClick={onSkip ?? goBack}
+            className="px-5 py-2.5 rounded-full border border-[#E2DAD0] text-[#1A1410]/50 text-sm font-body hover:border-[#9E6B47]/40 transition-colors"
+          >
+            Überspringen
+          </button>
+        )}
+        <button
+          type="button"
+          onClick={onNext}
+          disabled={nextDisabled}
+          className={cn(
+            'px-6 py-2.5 rounded-full text-sm font-body transition-colors',
+            nextDisabled
+              ? 'bg-[#E2DAD0] text-[#1A1410]/30 cursor-not-allowed'
+              : 'bg-[#9E6B47] text-white hover:bg-[#7A4E30]',
+          )}
+        >
+          {nextLabel}
+        </button>
+      </div>
+    </div>
+  )
+}
+
+function OnboardingHeader({ step }: { step: number }) {
+  return (
+    <div className="sticky top-0 z-10 bg-[#FAF8F4] border-b border-[#E2DAD0] px-4 py-3">
+      <div className="max-w-lg mx-auto">
+        <div className="flex items-center justify-between mb-3">
+          <SajaLogo className="h-7 w-auto" />
+          <span className="text-xs text-[#1A1410]/50 font-body">Schritt {step} von {TOTAL_STEPS}</span>
+        </div>
+        <div className="flex gap-1">
+          {Array.from({ length: TOTAL_STEPS }).map((_, i) => (
+            <div
+              key={i}
+              className={cn(
+                'h-1 flex-1 rounded-full transition-colors',
+                i < step ? 'bg-[#9E6B47]' : 'bg-[#E2DAD0]',
+              )}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 // ────────────────────────────────────────────────────────────────────
 export default function OnboardingPage() {
   const router = useRouter()
@@ -378,6 +486,7 @@ export default function OnboardingPage() {
       audio_prompt_url: audioPromptUrl,
       sun_sign: sunSign || null,
       ascendant: ascendant || null,
+      chinese_zodiac: birthDate ? getChineseZodiac(new Date(birthDate).getFullYear()) : null,
     }
   }
 
@@ -573,12 +682,17 @@ export default function OnboardingPage() {
         audio_prompt_url: finalAudioUrl,
         sun_sign: sunSign || null,
         ascendant: ascendant || null,
+        chinese_zodiac: birthDate ? getChineseZodiac(new Date(birthDate).getFullYear()) : null,
         is_complete: true,
       })
-      if (error) throw error
+      if (error) {
+        console.error('Profile save error:', error)
+        throw error
+      }
       toast.success('Profil gespeichert!')
       router.push('/discover')
-    } catch {
+    } catch (err) {
+      console.error('handleFinish error:', err)
       toast.error('Etwas ist schiefgelaufen.')
     } finally {
       setSaving(false)
@@ -593,104 +707,6 @@ export default function OnboardingPage() {
       </div>
     )
   }
-
-  // ── Shared UI helpers ───────────────────────────────────────────
-  const Chip = ({
-    label, active, onClick, disabled,
-  }: { label: string; active: boolean; onClick: () => void; disabled?: boolean }) => (
-    <button
-      type="button"
-      onClick={onClick}
-      disabled={disabled}
-      className={cn(
-        'px-3 py-1.5 rounded-full text-sm border cursor-pointer transition-colors',
-        active
-          ? 'bg-[#9E6B47] border-[#9E6B47] text-white'
-          : 'border-[#E2DAD0] bg-[#EDE8E0] text-[#1A1410] hover:border-[#9E6B47]',
-        disabled && !active && 'opacity-40 cursor-not-allowed',
-      )}
-    >
-      {label}
-    </button>
-  )
-
-  // ── Progress bar ────────────────────────────────────────────────
-  const Header = () => (
-    <div className="sticky top-0 z-10 bg-[#FAF8F4] border-b border-[#E2DAD0] px-4 py-3">
-      <div className="max-w-lg mx-auto">
-        <div className="flex items-center justify-between mb-3">
-          <SajaLogo className="h-7 w-auto" />
-          <span className="text-xs text-[#1A1410]/50 font-body">Schritt {step} von {TOTAL_STEPS}</span>
-        </div>
-        <div className="flex gap-1">
-          {Array.from({ length: TOTAL_STEPS }).map((_, i) => (
-            <div
-              key={i}
-              className={cn(
-                'h-1 flex-1 rounded-full transition-colors',
-                i < step ? 'bg-[#9E6B47]' : 'bg-[#E2DAD0]',
-              )}
-            />
-          ))}
-        </div>
-      </div>
-    </div>
-  )
-
-  const NavButtons = ({
-    onNext, nextLabel = 'Weiter', nextDisabled = false, showSkip = false, onSkip,
-  }: {
-    onNext: () => void
-    nextLabel?: string
-    nextDisabled?: boolean
-    showSkip?: boolean
-    onSkip?: () => void
-  }) => (
-    <div className="flex items-center justify-between pt-6 pb-10">
-      {step > 1 ? (
-        <button
-          type="button"
-          onClick={goBack}
-          className="px-5 py-2.5 rounded-full border border-[#9E6B47] text-[#9E6B47] text-sm font-body hover:bg-[#9E6B47]/5 transition-colors"
-        >
-          Zurück
-        </button>
-      ) : <div />}
-      <div className="flex items-center gap-3">
-        {showSkip && (
-          <button
-            type="button"
-            onClick={onSkip ?? goNext}
-            className="px-5 py-2.5 rounded-full border border-[#E2DAD0] text-[#1A1410]/50 text-sm font-body hover:border-[#9E6B47]/40 transition-colors"
-          >
-            Überspringen
-          </button>
-        )}
-        <button
-          type="button"
-          onClick={onNext}
-          disabled={nextDisabled}
-          className={cn(
-            'px-6 py-2.5 rounded-full text-sm font-body transition-colors',
-            nextDisabled
-              ? 'bg-[#E2DAD0] text-[#1A1410]/30 cursor-not-allowed'
-              : 'bg-[#9E6B47] text-white hover:bg-[#7A4E30]',
-          )}
-        >
-          {nextLabel}
-        </button>
-      </div>
-    </div>
-  )
-
-  const StepShell = ({ title, subtitle, children }: { title: string; subtitle?: string; children: React.ReactNode }) => (
-    <div className="max-w-lg mx-auto px-4 pt-8">
-      <h1 className="font-heading text-3xl text-[#1A1410] mb-1">{title}</h1>
-      {subtitle && <p className="font-body text-sm text-[#1A1410]/60 mb-6">{subtitle}</p>}
-      {!subtitle && <div className="mb-6" />}
-      {children}
-    </div>
-  )
 
   // ════════════════════════════════════════════════════════════════
   // STEP RENDERS
@@ -755,7 +771,7 @@ export default function OnboardingPage() {
           />
         </div>
       </div>
-      <NavButtons onNext={goNext} nextDisabled={!canProceedStep1()} />
+      <NavButtons step={step} goBack={goBack} onNext={goNext} nextDisabled={!canProceedStep1()} />
     </StepShell>
   )
 
@@ -824,7 +840,7 @@ export default function OnboardingPage() {
           {photos.length}/6 Fotos · Ziehen zum Sortieren
         </p>
       </div>
-      <NavButtons onNext={goNext} nextDisabled={photos.length < 3} />
+      <NavButtons step={step} goBack={goBack} onNext={goNext} nextDisabled={photos.length < 3} />
     </StepShell>
   )
 
@@ -884,7 +900,7 @@ export default function OnboardingPage() {
           </div>
         </div>
       </div>
-      <NavButtons onNext={goNext} showSkip onSkip={goNext} />
+      <NavButtons step={step} goBack={goBack} onNext={goNext} showSkip onSkip={goNext} />
     </StepShell>
   )
 
@@ -943,7 +959,7 @@ export default function OnboardingPage() {
             </div>
           )}
         </div>
-        <NavButtons onNext={goNext} showSkip onSkip={goNext} />
+        <NavButtons step={step} goBack={goBack} onNext={goNext} showSkip onSkip={goNext} />
       </StepShell>
     )
   }
@@ -969,7 +985,7 @@ export default function OnboardingPage() {
           </div>
         </div>
       </div>
-      <NavButtons onNext={goNext} nextDisabled={!intention || !relationshipModel} />
+      <NavButtons step={step} goBack={goBack} onNext={goNext} nextDisabled={!intention || !relationshipModel} />
     </StepShell>
   )
 
@@ -1141,7 +1157,7 @@ export default function OnboardingPage() {
         })}
       </div>
       <p className="text-xs font-body text-[#1A1410]/40 mb-6">{werte.length}/5 ausgewählt</p>
-      <NavButtons onNext={goNext} nextDisabled={werte.length === 0} showSkip onSkip={goNext} />
+      <NavButtons step={step} goBack={goBack} onNext={goNext} nextDisabled={werte.length === 0} showSkip onSkip={goNext} />
     </StepShell>
   )
 
@@ -1190,7 +1206,7 @@ export default function OnboardingPage() {
         />
       )}
       <p className="text-xs font-body text-[#1A1410]/40 mt-2 mb-2">{dealbreakers.length}/3 ausgewählt</p>
-      <NavButtons onNext={goNext} showSkip onSkip={goNext} />
+      <NavButtons step={step} goBack={goBack} onNext={goNext} showSkip onSkip={goNext} />
     </StepShell>
   )
 
@@ -1422,7 +1438,7 @@ export default function OnboardingPage() {
 
   return (
     <div className="min-h-screen bg-[#FAF8F4]">
-      <Header />
+      <OnboardingHeader step={step} />
       <main className="pb-safe">
         {renderStep()}
       </main>
