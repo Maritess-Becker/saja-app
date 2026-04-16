@@ -211,7 +211,7 @@ function PromptBlock({ question, answer }: { question: string; answer: string })
     <div className="px-4 py-4 border-t border-[#F6F2EC]/70">
       <div className="bg-[#F6F2EC] rounded-xl px-4 py-4 border-l-[3px] border-[#9E6B47]">
         <p className="text-[11px] text-[#1A1410]/40 uppercase tracking-widest mb-2">{question}</p>
-        <p className="font-heading text-xl italic text-[#7A4E30] leading-snug">{answer}</p>
+        <p className="font-heading text-xl italic text-[#7A4E30] leading-snug text-justify">{answer}</p>
       </div>
     </div>
   )
@@ -228,7 +228,7 @@ function PhotoWithCaption({ photo, alt }: { photo: { url: string; path: string; 
         <img src={url} alt={alt} className="w-full h-full object-cover" draggable={false} />
       </div>
       {photo.caption && (
-        <p className="px-2 pt-2.5 text-sm text-[#1A1410]/60 italic leading-relaxed">{photo.caption}</p>
+        <p className="px-2 pt-2.5 text-sm text-[#1A1410]/60 italic leading-relaxed text-justify">{photo.caption}</p>
       )}
     </div>
   )
@@ -733,7 +733,7 @@ export function DiscoverClient({
               {profile.bio && (
                 <div className="px-5 py-5 border-t border-[#F6F2EC]/70">
                   <p className="text-[11px] text-[#1A1410]/35 uppercase tracking-widest mb-3">Über mich</p>
-                  <p className="text-[#1A1410]/70 text-sm leading-relaxed">{profile.bio}</p>
+                  <p className="text-[#1A1410]/70 text-sm leading-relaxed text-justify">{profile.bio}</p>
                 </div>
               )}
 

@@ -66,7 +66,7 @@ function PhotoWithCaption({ photo, name, height }: { photo: { url: string; path:
         <img src={url} alt={name} className="w-full h-full object-cover" />
       </div>
       {photo.caption && (
-        <p className="px-5 pt-2.5 text-sm text-text/55 italic leading-relaxed">{photo.caption}</p>
+        <p className="px-5 pt-2.5 text-sm text-text/55 italic leading-relaxed text-justify">{photo.caption}</p>
       )}
     </div>
   )
@@ -77,7 +77,7 @@ function PromptBlock({ question, answer }: { question: string; answer: string })
     <div className="px-4 py-4 border-t border-sand/70">
       <div className="bg-light rounded-xl px-4 py-4 border-l-[3px] border-primary">
         <p className="text-[11px] text-text/40 uppercase tracking-widest mb-2">{question}</p>
-        <p className="font-heading text-xl italic text-[#7A4E30] leading-snug">{answer}</p>
+        <p className="font-heading text-xl italic text-[#7A4E30] leading-snug text-justify">{answer}</p>
       </div>
     </div>
   )
@@ -153,7 +153,7 @@ export function ProfileDetailClient({ profile }: { profile: Profile }) {
       {profile.bio && (
         <div className="px-5 py-5 border-t border-sand/70">
           <p className="text-[11px] text-text/35 uppercase tracking-widest mb-3">Über mich</p>
-          <p className="text-text/70 text-sm leading-relaxed">{profile.bio}</p>
+          <p className="text-text/70 text-sm leading-relaxed text-justify">{profile.bio}</p>
         </div>
       )}
 

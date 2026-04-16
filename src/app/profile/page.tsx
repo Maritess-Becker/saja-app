@@ -111,7 +111,7 @@ export default async function ProfilePage() {
 
             {/* Bio */}
             {profile?.bio && (
-              <p className="text-[#6E6560] text-sm leading-relaxed mb-4 text-center">{profile.bio}</p>
+              <p className="text-[#6E6560] text-sm leading-relaxed mb-4 text-justify">{profile.bio}</p>
             )}
 
             {/* Interests */}
