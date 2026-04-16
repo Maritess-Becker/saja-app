@@ -127,7 +127,7 @@ export function CommunityClient({ tier }: Props) {
                   {g.icon}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-heading text-[22px]" style={{ color: g.iconColor }}>{g.name}</h3>
+                  <h3 className="font-heading text-[22px]" style={{ color: g.iconBg }}>{g.name}</h3>
                   <p className="text-[#1A1410]/70 text-sm truncate">{g.description}</p>
                   <p className="text-[#A89888]/60 text-xs mt-1">
                     <span className="font-body font-semibold text-[#1A1410] text-[15px]">{g.members}</span>
@@ -246,7 +246,7 @@ export function CommunityClient({ tier }: Props) {
               {g.icon}
             </div>
             <div className="flex-1 min-w-0">
-              <h3 className="font-heading text-[22px]" style={{ color: g.iconColor }}>{g.name}</h3>
+              <h3 className="font-heading text-[22px]" style={{ color: g.iconBg }}>{g.name}</h3>
               <p className="text-[#1A1410]/70 text-sm leading-snug mb-1.5">{g.description}</p>
               <div className="flex items-center gap-1 text-xs">
                 <span className="font-body font-semibold text-[#1A1410] text-[15px]">{g.members}</span>
