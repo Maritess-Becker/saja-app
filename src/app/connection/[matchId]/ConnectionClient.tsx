@@ -8,7 +8,7 @@ import toast from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { formatRelativeTime, cn, photoUrl } from '@/lib/utils'
-import { useKeyboardNav } from '@/hooks/useKeyboardNav'
+import { useChatLayout } from '@/hooks/useChatLayout'
 
 interface Connection {
   id: string
@@ -44,11 +44,13 @@ export function ConnectionClient({ connection, otherProfile, initialMessages, cu
   const [sending, setSending] = useState(false)
   const [showEndConfirm, setShowEndConfirm] = useState(false)
   const bottomRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const spacerRef = useRef<HTMLDivElement>(null)
 
   const dailyQuestion = DAILY_QUESTIONS[new Date().getDate() % DAILY_QUESTIONS.length]
 
-  // Push mobile bottom nav behind keyboard when typing
-  useKeyboardNav()
+  // Keeps input glued above keyboard and nav behind keyboard
+  useChatLayout(containerRef, spacerRef)
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -107,7 +109,7 @@ export function ConnectionClient({ connection, otherProfile, initialMessages, cu
   }
 
   return (
-    <div className="flex flex-col w-full max-w-2xl mx-auto overflow-hidden" style={{ height: '100%' }}>
+    <div ref={containerRef} className="flex flex-col w-full max-w-2xl mx-auto overflow-hidden" style={{ height: '100dvh' }}>
       {/* Header */}
       <div className="flex items-center gap-4 p-4 bg-white border-b border-sand">
         <Link href={`/profile/${otherProfile?.user_id}`} className="w-12 h-12 rounded-xl bg-sand flex items-center justify-center overflow-hidden flex-shrink-0 hover:opacity-90 transition-opacity">
@@ -204,8 +206,8 @@ export function ConnectionClient({ connection, otherProfile, initialMessages, cu
         </button>
       </form>
 
-      {/* Abstand zur Nav auf Mobile */}
-      <div className="flex-shrink-0 md:hidden bg-white" style={{ height: 'calc(4rem + env(safe-area-inset-bottom, 0px))' }} />
+      {/* Abstand zur Nav auf Mobile — kollabiert wenn Tastatur offen ist */}
+      <div ref={spacerRef} className="flex-shrink-0 md:hidden bg-white" style={{ height: 'calc(4rem + env(safe-area-inset-bottom, 0px))' }} />
 
       {/* End confirmation modal */}
       {showEndConfirm && (

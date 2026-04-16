@@ -8,7 +8,7 @@ import toast from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
 import { formatRelativeTime, cn, photoUrl } from '@/lib/utils'
 import Link from 'next/link'
-import { useKeyboardNav } from '@/hooks/useKeyboardNav'
+import { useChatLayout } from '@/hooks/useChatLayout'
 
 const DAILY_QUESTIONS = [
   'Was war dein schönster Moment diese Woche?',
@@ -44,11 +44,13 @@ export function BegegnungClient({
   const [sending, setSending] = useState(false)
   const [showEndConfirm, setShowEndConfirm] = useState(false)
   const bottomRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const spacerRef = useRef<HTMLDivElement>(null)
 
   const dailyQuestion = DAILY_QUESTIONS[new Date().getDate() % DAILY_QUESTIONS.length]
 
-  // Push mobile bottom nav behind keyboard when typing
-  useKeyboardNav()
+  // Keeps input glued above keyboard and nav behind keyboard
+  useChatLayout(containerRef, spacerRef)
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -172,7 +174,7 @@ export function BegegnungClient({
 
   // ── Aktive Begegnung ────────────────────────────────────────────────────
   return (
-    <div className="flex flex-col w-full max-w-2xl mx-auto overflow-hidden" style={{ height: '100%' }}>
+    <div ref={containerRef} className="flex flex-col w-full max-w-2xl mx-auto overflow-hidden" style={{ height: '100dvh' }}>
 
       {/* Header */}
       <div className="flex items-center gap-4 p-4 bg-white border-b border-sand">
@@ -288,8 +290,8 @@ export function BegegnungClient({
         </button>
       </form>
 
-      {/* Abstand zur Nav auf Mobile — verschwindet wenn die Tastatur offen ist */}
-      <div className="flex-shrink-0 md:hidden bg-white" style={{ height: 'calc(4rem + env(safe-area-inset-bottom, 0px))' }} />
+      {/* Abstand zur Nav auf Mobile — kollabiert wenn Tastatur offen ist */}
+      <div ref={spacerRef} className="flex-shrink-0 md:hidden bg-white" style={{ height: 'calc(4rem + env(safe-area-inset-bottom, 0px))' }} />
 
       {/* Bestätigungs-Modal */}
       {showEndConfirm && (
