@@ -22,6 +22,8 @@ export default async function ProfilePage() {
 
   const tier = userData?.subscription_tier ?? 'free'
 
+  if (!profile) redirect('/onboarding')
+
   return (
     <div className="min-h-screen bg-[#FAF8F4]">
       <AppNav />
