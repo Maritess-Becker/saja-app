@@ -154,7 +154,7 @@ export default async function ProfilePage() {
                 <Star className="w-5 h-5 text-[#9E6B47]" />
                 <span className="font-heading text-xl">Premium freischalten</span>
               </div>
-              <p className="text-[#F6F2EC]/60 text-sm mb-4 leading-relaxed">
+              <p className="text-[#F6F2EC]/60 text-sm mb-4 leading-relaxed text-justify">
                 Love Language Test, 36 Fragen, 50 Tiefen-Fragen, Kompatibilitäts-Score und mehr.
               </p>
               <Link href="/pricing" className="btn-primary text-sm py-2.5 inline-block">
