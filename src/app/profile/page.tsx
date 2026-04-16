@@ -4,6 +4,7 @@ import { AppNav } from '@/components/layout/AppNav'
 import Link from 'next/link'
 import { Edit, Shield, Star, User, Bell, LogOut, ChevronRight } from 'lucide-react'
 import { photoUrl } from '@/lib/utils'
+import { ProfilePreviewModal } from './ProfilePreviewModal'
 
 export default async function ProfilePage() {
   const supabase = createClient()
@@ -56,28 +57,36 @@ export default async function ProfilePage() {
               <Edit className="w-3.5 h-3.5" /> Bearbeiten
             </Link>
 
-            {/* Centered avatar */}
+            {/* Centered avatar — click opens preview */}
             <div className="flex flex-col items-center text-center mb-5">
-              <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-[#E2DAD0] mx-auto flex items-center justify-center bg-[#F6F2EC]">
-                {photoUrl(profile?.photos?.[0]) ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={photoUrl(profile?.photos?.[0])}
-                    alt=""
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <svg viewBox="0 0 512 512" width="40" height="40">
-                    <path
-                      d="M 68 444 A 212 212 0 1 1 444 444"
-                      stroke="#E2DAD0"
-                      strokeWidth="44"
-                      strokeLinecap="round"
-                      fill="none"
-                    />
-                  </svg>
-                )}
-              </div>
+              <ProfilePreviewModal profile={profile}>
+                <div className="relative group">
+                  <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-[#E2DAD0] mx-auto flex items-center justify-center bg-[#F6F2EC] transition-opacity group-hover:opacity-80">
+                    {photoUrl(profile?.photos?.[0]) ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={photoUrl(profile?.photos?.[0])}
+                        alt=""
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <svg viewBox="0 0 512 512" width="40" height="40">
+                        <path
+                          d="M 68 444 A 212 212 0 1 1 444 444"
+                          stroke="#E2DAD0"
+                          strokeWidth="44"
+                          strokeLinecap="round"
+                          fill="none"
+                        />
+                      </svg>
+                    )}
+                  </div>
+                  {/* Hover overlay hint */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                    <span className="bg-black/50 text-white text-[10px] font-body rounded-full px-2 py-0.5">Vorschau</span>
+                  </div>
+                </div>
+              </ProfilePreviewModal>
 
               {/* Name + age */}
               <h2 className="font-heading text-2xl text-[#1A1410] text-center mt-3">
@@ -92,6 +101,11 @@ export default async function ProfilePage() {
               {/* Tier badge */}
               <p className="text-[#9E6B47] text-xs font-body text-center mt-1">
                 {tier === 'premium' ? '✦ Premium' : tier === 'membership' ? '✦ Mitgliedschaft' : 'Kostenlos'}
+              </p>
+
+              {/* Preview hint */}
+              <p className="text-[#A89888] text-[11px] font-body mt-2">
+                Tippe auf das Foto für die Profilvorschau
               </p>
             </div>
 
