@@ -41,7 +41,7 @@ export default async function ConnectionPage({ params }: { params: { matchId: st
   return (
     <div className="min-h-screen bg-background">
       <AppNav />
-      <main className="md:pl-64 h-screen flex flex-col">
+      <main className="md:pl-64 flex flex-col overflow-hidden" style={{ height: '100dvh' }}>
         <ConnectionClient
           connection={connection}
           otherProfile={otherProfile}

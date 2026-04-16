@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { Send, Heart, X, MapPin, Sparkles, Users, Lock } from 'lucide-react'
+import { Send, Heart, X, MapPin, Sparkles, Users, Lock, ChevronLeft } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import type { Profile, Message } from '@/types'
 import toast from 'react-hot-toast'
@@ -168,10 +168,14 @@ export function BegegnungClient({
 
   // ── Aktive Begegnung ────────────────────────────────────────────────────
   return (
-    <div className="flex flex-col h-full max-w-2xl mx-auto w-full">
+    <div className="flex flex-col w-full max-w-2xl mx-auto overflow-hidden" style={{ height: '100%' }}>
 
       {/* Header */}
       <div className="flex items-center gap-4 p-4 bg-white border-b border-sand">
+        {/* Back to Discover — only shown on mobile where the bottom nav is hidden */}
+        <Link href="/discover" className="md:hidden p-1 -ml-1 text-text/30 hover:text-text/60 transition-colors flex-shrink-0">
+          <ChevronLeft className="w-5 h-5" />
+        </Link>
         <Link href={`/profile/${otherProfile?.user_id}`} className="w-12 h-12 rounded-xl bg-sand flex items-center justify-center overflow-hidden flex-shrink-0 hover:opacity-90 transition-opacity">
           {photoUrl(otherProfile?.photos?.[0]) ? (
             // eslint-disable-next-line @next/next/no-img-element
@@ -218,8 +222,8 @@ export function BegegnungClient({
         </div>
       </div>
 
-      {/* Nachrichten */}
-      <div className="flex-1 overflow-y-auto px-4 py-6 space-y-3">
+      {/* Nachrichten — einziger scrollbarer Bereich */}
+      <div className="flex-1 overflow-y-auto overscroll-contain px-4 py-6 space-y-3">
         {messages.length === 0 && (
           <div className="text-center py-16">
             <Heart className="w-12 h-12 text-primary/20 mx-auto mb-4" />
@@ -262,10 +266,11 @@ export function BegegnungClient({
         <div ref={bottomRef} />
       </div>
 
-      {/* Eingabe */}
+      {/* Eingabe — bleibt immer unten sichtbar */}
       <form
         onSubmit={sendMessage}
-        className="px-4 pt-3 pb-3 bg-white border-t border-[#E2DAD0] flex gap-3 flex-shrink-0"
+        className="flex-shrink-0 px-4 pt-3 bg-white border-t border-[#E2DAD0] flex gap-3"
+        style={{ paddingBottom: 'calc(0.75rem + env(safe-area-inset-bottom, 0px))' }}
       >
         <input
           type="text"
@@ -282,8 +287,6 @@ export function BegegnungClient({
           <Send className="w-5 h-5 text-white" />
         </button>
       </form>
-      {/* Spacer so input stays above the fixed bottom nav on mobile */}
-      <div className="flex-shrink-0 md:hidden" style={{ height: 'calc(4rem + env(safe-area-inset-bottom, 0px))' }} />
 
       {/* Bestätigungs-Modal */}
       {showEndConfirm && (

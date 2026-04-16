@@ -1,11 +1,12 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { Send, Heart, X, MapPin } from 'lucide-react'
+import { Send, Heart, X, MapPin, ChevronLeft } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import type { Profile, Message } from '@/types'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { formatRelativeTime, cn, photoUrl } from '@/lib/utils'
 
 interface Connection {
@@ -102,18 +103,22 @@ export function ConnectionClient({ connection, otherProfile, initialMessages, cu
   }
 
   return (
-    <div className="flex flex-col h-full max-w-2xl mx-auto w-full">
+    <div className="flex flex-col w-full max-w-2xl mx-auto overflow-hidden" style={{ height: '100%' }}>
       {/* Header */}
       <div className="flex items-center gap-4 p-4 bg-white border-b border-sand">
-        <div className="w-12 h-12 rounded-xl bg-sand flex items-center justify-center overflow-hidden flex-shrink-0">
+        {/* Back to Discover — only shown on mobile where the bottom nav is hidden */}
+        <Link href="/discover" className="md:hidden p-1 -ml-1 text-text/30 hover:text-text/60 transition-colors flex-shrink-0">
+          <ChevronLeft className="w-5 h-5" />
+        </Link>
+        <Link href={`/profile/${otherProfile?.user_id}`} className="w-12 h-12 rounded-xl bg-sand flex items-center justify-center overflow-hidden flex-shrink-0 hover:opacity-90 transition-opacity">
           {photoUrl(otherProfile?.photos?.[0]) ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img src={photoUrl(otherProfile?.photos?.[0])} alt="" className="w-full h-full object-cover" />
           ) : (
             <span className="font-heading text-xl text-primary">{otherProfile?.name?.[0]}</span>
           )}
-        </div>
-        <div className="flex-1 min-w-0">
+        </Link>
+        <Link href={`/profile/${otherProfile?.user_id}`} className="flex-1 min-w-0 hover:opacity-70 transition-opacity">
           <h2 className="font-heading text-xl text-dark">{otherProfile?.name}</h2>
           {otherProfile?.location && !otherProfile.hide_location && (
             <div className="flex items-center gap-1 text-text/40 text-xs">
@@ -121,7 +126,7 @@ export function ConnectionClient({ connection, otherProfile, initialMessages, cu
               {otherProfile.location}
             </div>
           )}
-        </div>
+        </Link>
         <div className="flex items-center gap-1">
           <Heart className="w-4 h-4 text-primary fill-primary" />
           <span className="text-xs text-primary font-medium">Begegnung</span>
@@ -146,8 +151,8 @@ export function ConnectionClient({ connection, otherProfile, initialMessages, cu
         </div>
       </div>
 
-      {/* Messages */}
-      <div className="flex-1 overflow-y-auto px-4 py-6 space-y-3">
+      {/* Nachrichten — einziger scrollbarer Bereich */}
+      <div className="flex-1 overflow-y-auto overscroll-contain px-4 py-6 space-y-3">
         {messages.length === 0 && (
           <div className="text-center py-12">
             <Heart className="w-12 h-12 text-primary/20 mx-auto mb-4" />
@@ -177,8 +182,12 @@ export function ConnectionClient({ connection, otherProfile, initialMessages, cu
         <div ref={bottomRef} />
       </div>
 
-      {/* Input */}
-      <form onSubmit={sendMessage} className="px-4 pt-3 pb-3 bg-white border-t border-[#E2DAD0] flex gap-3 flex-shrink-0">
+      {/* Eingabe — bleibt immer unten sichtbar */}
+      <form
+        onSubmit={sendMessage}
+        className="flex-shrink-0 px-4 pt-3 bg-white border-t border-[#E2DAD0] flex gap-3"
+        style={{ paddingBottom: 'calc(0.75rem + env(safe-area-inset-bottom, 0px))' }}
+      >
         <input
           type="text"
           className="flex-1 rounded-2xl border border-[#E2DAD0] bg-[#F6F2EC] px-4 py-3 text-sm font-body text-[#1A1410] placeholder:text-[#A89888] focus:outline-none focus:ring-2 focus:ring-[#9E6B47]/30"
@@ -194,8 +203,6 @@ export function ConnectionClient({ connection, otherProfile, initialMessages, cu
           <Send className="w-5 h-5 text-white" />
         </button>
       </form>
-      {/* Spacer so input stays above the fixed bottom nav on mobile */}
-      <div className="flex-shrink-0 md:hidden" style={{ height: 'calc(4rem + env(safe-area-inset-bottom, 0px))' }} />
 
       {/* End confirmation modal */}
       {showEndConfirm && (
