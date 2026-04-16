@@ -45,10 +45,6 @@ export function AppNav() {
   const router = useRouter()
   const supabase = createClient()
 
-  // On chat pages the bottom nav hides so the keyboard doesn't push it up
-  const isChatPage =
-    pathname.startsWith('/begegnung') || pathname.startsWith('/connection/')
-
   async function handleLogout() {
     await supabase.auth.signOut()
     toast.success('Abgemeldet.')
@@ -95,9 +91,10 @@ export function AppNav() {
         </button>
       </aside>
 
-      {/* Mobile bottom bar — hidden on chat pages so the keyboard can't push it up */}
+      {/* Mobile bottom bar */}
       <nav
-        className={cn('md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-[#E2DAD0] z-50', isChatPage && 'hidden')}
+        data-mobile-nav
+        className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-[#E2DAD0] z-50"
         style={{ paddingBottom: 'env(safe-area-inset-bottom)', boxShadow: '0 -4px 20px rgba(26,20,16,0.06)' }}
       >
         <div className="flex">

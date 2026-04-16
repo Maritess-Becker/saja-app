@@ -1,13 +1,14 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { Send, Heart, X, MapPin, Sparkles, Users, Lock, ChevronLeft } from 'lucide-react'
+import { Send, Heart, X, MapPin, Sparkles, Users, Lock } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import type { Profile, Message } from '@/types'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
 import { formatRelativeTime, cn, photoUrl } from '@/lib/utils'
 import Link from 'next/link'
+import { useKeyboardNav } from '@/hooks/useKeyboardNav'
 
 const DAILY_QUESTIONS = [
   'Was war dein schönster Moment diese Woche?',
@@ -45,6 +46,9 @@ export function BegegnungClient({
   const bottomRef = useRef<HTMLDivElement>(null)
 
   const dailyQuestion = DAILY_QUESTIONS[new Date().getDate() % DAILY_QUESTIONS.length]
+
+  // Push mobile bottom nav behind keyboard when typing
+  useKeyboardNav()
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -172,10 +176,6 @@ export function BegegnungClient({
 
       {/* Header */}
       <div className="flex items-center gap-4 p-4 bg-white border-b border-sand">
-        {/* Back to Discover — only shown on mobile where the bottom nav is hidden */}
-        <Link href="/discover" className="md:hidden p-1 -ml-1 text-text/30 hover:text-text/60 transition-colors flex-shrink-0">
-          <ChevronLeft className="w-5 h-5" />
-        </Link>
         <Link href={`/profile/${otherProfile?.user_id}`} className="w-12 h-12 rounded-xl bg-sand flex items-center justify-center overflow-hidden flex-shrink-0 hover:opacity-90 transition-opacity">
           {photoUrl(otherProfile?.photos?.[0]) ? (
             // eslint-disable-next-line @next/next/no-img-element
@@ -287,6 +287,9 @@ export function BegegnungClient({
           <Send className="w-5 h-5 text-white" />
         </button>
       </form>
+
+      {/* Abstand zur Nav auf Mobile — verschwindet wenn die Tastatur offen ist */}
+      <div className="flex-shrink-0 md:hidden bg-white" style={{ height: 'calc(4rem + env(safe-area-inset-bottom, 0px))' }} />
 
       {/* Bestätigungs-Modal */}
       {showEndConfirm && (
