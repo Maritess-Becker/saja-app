@@ -31,7 +31,7 @@ const BINDUNGSTYP_TEST: ContentItem = {
   title: 'Bindungstyp-Test',
   description: 'Entdecke deinen Bindungsstil und wie er deine Beziehungen prägt.',
   access: 'membership',
-  icon: <Heart className="w-5 h-5" />,
+  icon: <Heart size={22} strokeWidth={1.8} />,
   action: 'modal',
   duration: '5 Min.',
   tag: 'Mitgliedschaft',
@@ -41,7 +41,7 @@ const CONTENT_SECTIONS = [
   {
     id: 'tests',
     label: 'Tests & Selbstreflexion',
-    icon: <BookOpen className="w-5 h-5" />,
+    icon: <BookOpen size={22} strokeWidth={1.8} />,
     items: [
       BINDUNGSTYP_TEST,
       {
@@ -49,7 +49,7 @@ const CONTENT_SECTIONS = [
         title: 'Love Language Test',
         description: 'Welche der 5 Liebessprachen spricht dich am meisten an?',
         access: 'membership',
-        icon: <Heart className="w-5 h-5" />,
+        icon: <Heart size={22} strokeWidth={1.8} />,
         action: 'modal',
         duration: '8 Min.',
         tag: 'Mitgliedschaft',
@@ -59,7 +59,7 @@ const CONTENT_SECTIONS = [
         title: 'Beziehungsmodell-Check',
         description: 'Monogam, ethisch non-monogam, solo-poly? Finde heraus, was wirklich zu dir passt.',
         access: 'membership',
-        icon: <Sparkles className="w-5 h-5" />,
+        icon: <Sparkles size={22} strokeWidth={1.8} />,
         action: 'modal',
         duration: '6 Min.',
         tag: 'Mitgliedschaft',
@@ -69,14 +69,14 @@ const CONTENT_SECTIONS = [
   {
     id: 'audio',
     label: 'Audio & Guides',
-    icon: <Mic className="w-5 h-5" />,
+    icon: <Mic size={22} strokeWidth={1.8} />,
     items: [
       {
         id: 'meditation-audio',
         title: 'Meditations-Audio',
         description: 'Eine geführte Meditation zur Vorbereitung auf deine Begegnung.',
         access: 'premium',
-        icon: <Mic className="w-5 h-5" />,
+        icon: <Mic size={22} strokeWidth={1.8} />,
         action: 'modal',
         duration: '15 Min.',
         tag: 'Premium',
@@ -86,7 +86,7 @@ const CONTENT_SECTIONS = [
         title: 'Guide: Bewusstes erstes Treffen',
         description: 'Wie gestaltest du ein erstes bewusstes Date? Praktische Tipps und Impulse.',
         access: 'premium',
-        icon: <BookOpen className="w-5 h-5" />,
+        icon: <BookOpen size={22} strokeWidth={1.8} />,
         action: 'modal',
         tag: 'Premium',
       },
@@ -95,7 +95,7 @@ const CONTENT_SECTIONS = [
         title: 'Reflexions-Guide',
         description: 'Nach einer Begegnung: Was hast du gelernt? Was nimmst du mit?',
         access: 'premium',
-        icon: <BookOpen className="w-5 h-5" />,
+        icon: <BookOpen size={22} strokeWidth={1.8} />,
         action: 'modal',
         tag: 'Premium',
       },
@@ -104,7 +104,7 @@ const CONTENT_SECTIONS = [
         title: 'Wöchentliche Impulse & Rituale',
         description: 'Jeden Montag ein neues Ritual oder einen Impuls für bewusstes Dating.',
         access: 'premium',
-        icon: <Sparkles className="w-5 h-5" />,
+        icon: <Sparkles size={22} strokeWidth={1.8} />,
         action: 'modal',
         tag: 'Premium',
       },
@@ -113,7 +113,7 @@ const CONTENT_SECTIONS = [
         title: 'Mini-Coaching: Bereit für Liebe',
         description: '5 kompakte Audio-Module von Anna & Yves — direkt in der App.',
         access: 'premium',
-        icon: <Mic className="w-5 h-5" />,
+        icon: <Mic size={22} strokeWidth={1.8} />,
         action: 'modal',
         tag: 'Premium',
       },
@@ -122,14 +122,14 @@ const CONTENT_SECTIONS = [
   {
     id: 'fragebögen',
     label: 'Fragebögen & Tiefenfragen',
-    icon: <MessageSquare className="w-5 h-5" />,
+    icon: <MessageSquare size={22} strokeWidth={1.8} />,
     items: [
       {
         id: '36-fragen',
         title: '36 Fragen',
         description: 'Die wissenschaftlich entwickelten 36 Fragen, die Menschen näherbringen — für die Begegnung.',
         access: 'premium',
-        icon: <MessageSquare className="w-5 h-5" />,
+        icon: <MessageSquare size={22} strokeWidth={1.8} />,
         action: 'modal',
         tag: 'Premium',
       },
@@ -138,7 +138,7 @@ const CONTENT_SECTIONS = [
         title: '50 Tiefen-Fragen',
         description: 'Fragen, die wirklich in die Tiefe gehen. Für mutige Gespräche.',
         access: 'premium',
-        icon: <MessageSquare className="w-5 h-5" />,
+        icon: <MessageSquare size={22} strokeWidth={1.8} />,
         action: 'modal',
         tag: 'Premium',
       },
@@ -147,7 +147,7 @@ const CONTENT_SECTIONS = [
         title: 'Frage des Tages',
         description: 'Täglich eine neue Frage für deine Begegnung.',
         access: 'premium',
-        icon: <Sparkles className="w-5 h-5" />,
+        icon: <Sparkles size={22} strokeWidth={1.8} />,
         action: 'modal',
         tag: 'Premium',
       },
@@ -156,7 +156,7 @@ const CONTENT_SECTIONS = [
         title: 'Werte & Zukunft',
         description: 'Ein Fragebogen über Lebensziele, Werte und gemeinsame Visionen.',
         access: 'purchase',
-        icon: <MessageSquare className="w-5 h-5" />,
+        icon: <MessageSquare size={22} strokeWidth={1.8} />,
         action: 'purchase',
         tag: 'Einmalig kaufbar',
       },
@@ -165,7 +165,7 @@ const CONTENT_SECTIONS = [
         title: 'Intimität & Nähe',
         description: 'Tiefe Fragen zu Intimität, körperlicher Nähe und Vertrauen.',
         access: 'purchase',
-        icon: <Heart className="w-5 h-5" />,
+        icon: <Heart size={22} strokeWidth={1.8} />,
         action: 'purchase',
         tag: 'Einmalig kaufbar',
       },
@@ -174,7 +174,7 @@ const CONTENT_SECTIONS = [
         title: 'Konflikt & Kommunikation',
         description: 'Wie geht ihr als Paar mit Konflikten um? Konstruktive Reflexion.',
         access: 'purchase',
-        icon: <MessageSquare className="w-5 h-5" />,
+        icon: <MessageSquare size={22} strokeWidth={1.8} />,
         action: 'purchase',
         tag: 'Einmalig kaufbar',
       },
@@ -190,7 +190,7 @@ const CONTENT_SECTIONS = [
         title: 'HT-Quiz mit Anna & Yves',
         description: 'Lerne die Grundlagen von Holistic Tantra kennen.',
         access: 'free',
-        icon: <Sparkles className="w-5 h-5" />,
+        icon: <Sparkles size={22} strokeWidth={1.8} />,
         action: 'external',
         externalUrl: 'https://holistic-tantra.com',
         tag: 'Kostenlos',
@@ -200,7 +200,7 @@ const CONTENT_SECTIONS = [
         title: 'Geführte Meditation',
         description: 'Eine Meditation von Anna & Yves für tiefe Erdung.',
         access: 'free',
-        icon: <Mic className="w-5 h-5" />,
+        icon: <Mic size={22} strokeWidth={1.8} />,
         action: 'external',
         externalUrl: 'https://holistic-tantra.com',
         tag: 'Kostenlos',
@@ -210,7 +210,7 @@ const CONTENT_SECTIONS = [
         title: 'Programm: Bewusste Verbindung',
         description: 'Das vollständige Programm von Anna & Yves für tiefe Partnerschaft.',
         access: 'purchase',
-        icon: <Star className="w-5 h-5" />,
+        icon: <Star size={22} strokeWidth={1.8} />,
         action: 'external',
         externalUrl: 'https://holistic-tantra.com',
         tag: 'Kaufbar',
@@ -220,7 +220,7 @@ const CONTENT_SECTIONS = [
         title: 'Tantra für Paare',
         description: 'Tantrasches Wissen und Übungen für Paare — praktisch und tiefgründig.',
         access: 'purchase',
-        icon: <Star className="w-5 h-5" />,
+        icon: <Star size={22} strokeWidth={1.8} />,
         action: 'external',
         externalUrl: 'https://holistic-tantra.com',
         tag: 'Kaufbar',
@@ -498,6 +498,29 @@ const MODAL_CONTENT: Record<string, { title: string; body: React.ReactNode }> = 
   },
 }
 
+// ─── Icon color map ───────────────────────────────────────────────────────────
+
+const ICON_BG: Record<string, string> = {
+  'bindungstyp-test': '#9E6B47',
+  'love-language-test': '#C4603A',
+  'beziehungsmodell-check': '#7864A0',
+  'meditation-audio': '#5A8A6A',
+  'erstes-date-guide': '#4A7A5A',
+  'reflexions-guide': '#6B5A8A',
+  'woechentliche-impulse': '#9E6B47',
+  'mini-coaching': '#C4603A',
+  '36-fragen': '#7864A0',
+  '50-tiefenfragen': '#9E6B47',
+  'frage-des-tages': '#C4603A',
+  'werte-zukunft': '#4A7A5A',
+  'intimität': '#C4603A',
+  'konflikt': '#6B5A8A',
+  'ht-quiz-anna-yves': '#9E6B47',
+  'meditation-anna-yves': '#5A8A6A',
+  'programm-verbindung': '#7864A0',
+  'programm-tantra': '#4A7A5A',
+}
+
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export function ContentClient({ tier, purchasedIds, userId }: Props) {
@@ -579,10 +602,10 @@ export function ContentClient({ tier, purchasedIds, userId }: Props) {
                 style={{ boxShadow: '0 2px 12px rgba(26,20,16,0.08)' }}
               >
                 <div
-                  className="w-[52px] h-[52px] rounded-full flex items-center justify-center flex-shrink-0"
+                  className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"
                   style={{
-                    backgroundColor: accessible ? 'rgba(158,107,71,0.12)' : '#F6F2EC',
-                    color: accessible ? '#9E6B47' : '#A89888',
+                    backgroundColor: accessible ? (ICON_BG[item.id] ?? '#9E6B47') : '#E2DAD0',
+                    color: '#FFFFFF',
                   }}
                 >
                   {item.icon}

@@ -14,9 +14,9 @@ interface Props {
 const GROUPS = [
   {
     id: 'bindungstypen',
-    icon: <Heart className="w-5 h-5" />,
-    iconBg: '#F5E6D8',
-    iconColor: '#9E6B47',
+    icon: <Heart size={22} strokeWidth={1.8} />,
+    iconBg: '#9E6B47',
+    iconColor: '#FFFFFF',
     name: 'Bindungstypen',
     description: 'Austausch rund um ängstliche, vermeidende und sichere Bindungsmuster. Wie prägen sie unsere Beziehungen?',
     members: 142,
@@ -26,9 +26,9 @@ const GROUPS = [
   },
   {
     id: 'bewusste-sexualitaet',
-    icon: <Flame className="w-5 h-5" />,
-    iconBg: '#FAE0D8',
-    iconColor: '#C4603A',
+    icon: <Flame size={22} strokeWidth={1.8} />,
+    iconBg: '#C4603A',
+    iconColor: '#FFFFFF',
     name: 'Bewusste Sexualität',
     description: 'Ein sicherer Raum für Gespräche über gelebte Sexualität, sexuelle Heilung und Verkörperung.',
     members: 89,
@@ -38,9 +38,9 @@ const GROUPS = [
   },
   {
     id: 'tantric-dating',
-    icon: <Sparkles className="w-5 h-5" />,
-    iconBg: '#E8E0F0',
-    iconColor: '#7864A0',
+    icon: <Sparkles size={22} strokeWidth={1.8} />,
+    iconBg: '#7864A0',
+    iconColor: '#FFFFFF',
     name: 'Tantric Dating',
     description: 'Wie bringst du Tantra-Prinzipien in deinen Alltag und dein Dating? Erfahrungen & Impulse.',
     members: 203,
@@ -50,9 +50,9 @@ const GROUPS = [
   },
   {
     id: 'beziehungsmodelle',
-    icon: <Users className="w-5 h-5" />,
-    iconBg: '#DCE8DC',
-    iconColor: '#5A8A6A',
+    icon: <Users size={22} strokeWidth={1.8} />,
+    iconBg: '#4A7A5A',
+    iconColor: '#FFFFFF',
     name: 'Beziehungsmodelle',
     description: 'Monogamie, Polyamorie, Solo-Poly, offene Beziehungen — Erfahrungen, Fragen, ehrliche Reflexion.',
     members: 117,
@@ -62,9 +62,9 @@ const GROUPS = [
   },
   {
     id: 'selbstliebe-heilung',
-    icon: <Leaf className="w-5 h-5" />,
-    iconBg: '#DCE8DC',
-    iconColor: '#5A8A6A',
+    icon: <Leaf size={22} strokeWidth={1.8} />,
+    iconBg: '#5A8A6A',
+    iconColor: '#FFFFFF',
     name: 'Selbstliebe & Heilung',
     description: 'Wachstum beginnt bei dir. Trauma, Heilung, inneres Kind — und was das mit Beziehungen zu tun hat.',
     members: 178,
@@ -74,9 +74,9 @@ const GROUPS = [
   },
   {
     id: 'spiritualitaet-partnerschaft',
-    icon: <Moon className="w-5 h-5" />,
-    iconBg: '#F5E6D8',
-    iconColor: '#9E6B47',
+    icon: <Moon size={22} strokeWidth={1.8} />,
+    iconBg: '#6B5A8A',
+    iconColor: '#FFFFFF',
     name: 'Spiritualität & Partnerschaft',
     description: 'Bewusstsein, Energie und spirituelle Praktiken in Beziehungen. Wie unterstützt Spiritualität echte Verbindung?',
     members: 95,
@@ -121,7 +121,7 @@ export function CommunityClient({ tier }: Props) {
             {GROUPS.slice(0, 3).map((g) => (
               <div key={g.id} className="bg-white rounded-2xl p-5 flex gap-4 items-start" style={{ boxShadow: '0 2px 12px rgba(26,20,16,0.08)' }}>
                 <div
-                  className="w-[52px] h-[52px] rounded-full flex items-center justify-center flex-shrink-0"
+                  className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"
                   style={{ backgroundColor: g.iconBg, color: g.iconColor }}
                 >
                   {g.icon}
@@ -172,7 +172,7 @@ export function CommunityClient({ tier }: Props) {
 
         <div className="flex items-start gap-4 mb-6">
           <div
-            className="w-[52px] h-[52px] rounded-full flex items-center justify-center flex-shrink-0"
+            className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"
             style={{ backgroundColor: group.iconBg, color: group.iconColor }}
           >
             {group.icon}
@@ -240,7 +240,7 @@ export function CommunityClient({ tier }: Props) {
             style={{ boxShadow: '0 2px 12px rgba(26,20,16,0.08)' }}
           >
             <div
-              className="w-[52px] h-[52px] rounded-full flex items-center justify-center flex-shrink-0"
+              className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"
               style={{ backgroundColor: g.iconBg, color: g.iconColor }}
             >
               {g.icon}
