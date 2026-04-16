@@ -265,23 +265,25 @@ export function BegegnungClient({
       {/* Eingabe */}
       <form
         onSubmit={sendMessage}
-        className="p-4 bg-white border-t border-sand flex gap-3"
+        className="px-4 pt-3 pb-3 bg-white border-t border-[#E2DAD0] flex gap-3 flex-shrink-0"
       >
         <input
           type="text"
-          className="input flex-1"
-          placeholder="Schreibe etwas..."
+          className="flex-1 rounded-2xl border border-[#E2DAD0] bg-[#F6F2EC] px-4 py-3 text-sm font-body text-[#1A1410] placeholder:text-[#A89888] focus:outline-none focus:ring-2 focus:ring-[#9E6B47]/30"
+          placeholder="Schreibe etwas…"
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
         <button
           type="submit"
           disabled={sending || !text.trim()}
-          className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center flex-shrink-0 disabled:opacity-40 hover:bg-dark transition-colors"
+          className="w-12 h-12 bg-[#9E6B47] rounded-2xl flex items-center justify-center flex-shrink-0 disabled:opacity-40 hover:bg-[#7A4E30] transition-colors active:scale-95"
         >
           <Send className="w-5 h-5 text-white" />
         </button>
       </form>
+      {/* Spacer so input stays above the fixed bottom nav on mobile */}
+      <div className="flex-shrink-0 md:hidden" style={{ height: 'calc(4rem + env(safe-area-inset-bottom, 0px))' }} />
 
       {/* Bestätigungs-Modal */}
       {showEndConfirm && (
