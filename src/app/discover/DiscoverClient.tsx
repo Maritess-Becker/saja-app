@@ -5,6 +5,7 @@ import {
   Heart, X, MapPin, Briefcase, Sparkles, SlidersHorizontal, RotateCcw,
   Search, ChevronDown, Lock, Mic, Ruler, CornerUpLeft, Play, Pause,
 } from 'lucide-react'
+import { photoUrl } from '@/lib/utils'
 import { createClient } from '@/lib/supabase/client'
 import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion'
 import type { Profile } from '@/types'
@@ -617,10 +618,10 @@ export function DiscoverClient({
               }}
               className="relative mx-3 rounded-3xl overflow-hidden shadow-lg cursor-grab active:cursor-grabbing select-none"
             >
-              {profile.photos?.[0] ? (
+              {photoUrl(profile.photos?.[0]) ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
-                  src={profile.photos[0]}
+                  src={photoUrl(profile.photos[0])}
                   alt={profile.name}
                   className="w-full h-full object-cover pointer-events-none"
                   draggable={false}
@@ -695,11 +696,11 @@ export function DiscoverClient({
               </div>
 
               {/* Photo 2 */}
-              {profile.photos?.[1] && (
+              {photoUrl(profile.photos?.[1]) && (
                 <div className="mx-3 mt-4 rounded-3xl overflow-hidden" style={{ height: '60vh' }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={profile.photos[1]}
+                    src={photoUrl(profile.photos[1])}
                     alt={profile.name}
                     className="w-full h-full object-cover"
                     draggable={false}
@@ -735,11 +736,11 @@ export function DiscoverClient({
               )}
 
               {/* Photo 3 */}
-              {profile.photos?.[2] && (
+              {photoUrl(profile.photos?.[2]) && (
                 <div className="mx-3 mt-1 rounded-3xl overflow-hidden" style={{ height: '60vh' }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={profile.photos[2]}
+                    src={photoUrl(profile.photos[2])}
                     alt={profile.name}
                     className="w-full h-full object-cover"
                     draggable={false}
@@ -756,11 +757,11 @@ export function DiscoverClient({
               )}
 
               {/* Photo 4 */}
-              {profile.photos?.[3] && (
+              {photoUrl(profile.photos?.[3]) && (
                 <div className="mx-3 mt-1 rounded-3xl overflow-hidden" style={{ height: '60vh' }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={profile.photos[3]}
+                    src={photoUrl(profile.photos[3])}
                     alt={profile.name}
                     className="w-full h-full object-cover"
                     draggable={false}

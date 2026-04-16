@@ -15,7 +15,8 @@ const GROUPS = [
   {
     id: 'bindungstypen',
     icon: <Heart className="w-5 h-5" />,
-    color: 'bg-rose-50 text-rose-500',
+    iconBg: 'rgba(158,107,71,0.12)',
+    iconColor: '#9E6B47',
     name: 'Bindungstypen',
     description: 'Austausch rund um ängstliche, vermeidende und sichere Bindungsmuster. Wie prägen sie unsere Beziehungen?',
     members: 142,
@@ -26,7 +27,8 @@ const GROUPS = [
   {
     id: 'bewusste-sexualitaet',
     icon: <Flame className="w-5 h-5" />,
-    color: 'bg-orange-50 text-orange-500',
+    iconBg: 'rgba(180,100,80,0.12)',
+    iconColor: '#B46450',
     name: 'Bewusste Sexualität',
     description: 'Ein sicherer Raum für Gespräche über gelebte Sexualität, sexuelle Heilung und Verkörperung.',
     members: 89,
@@ -37,7 +39,8 @@ const GROUPS = [
   {
     id: 'tantric-dating',
     icon: <Sparkles className="w-5 h-5" />,
-    color: 'bg-violet-50 text-violet-500',
+    iconBg: 'rgba(120,100,160,0.12)',
+    iconColor: '#7864A0',
     name: 'Tantric Dating',
     description: 'Wie bringst du Tantra-Prinzipien in deinen Alltag und dein Dating? Erfahrungen & Impulse.',
     members: 203,
@@ -48,7 +51,8 @@ const GROUPS = [
   {
     id: 'beziehungsmodelle',
     icon: <Users className="w-5 h-5" />,
-    color: 'bg-blue-50 text-blue-500',
+    iconBg: 'rgba(160,130,80,0.12)',
+    iconColor: '#A08250',
     name: 'Beziehungsmodelle',
     description: 'Monogamie, Polyamorie, Solo-Poly, offene Beziehungen — Erfahrungen, Fragen, ehrliche Reflexion.',
     members: 117,
@@ -59,7 +63,8 @@ const GROUPS = [
   {
     id: 'selbstliebe-heilung',
     icon: <Leaf className="w-5 h-5" />,
-    color: 'bg-green-50 text-green-500',
+    iconBg: 'rgba(100,143,124,0.12)',
+    iconColor: '#648F7C',
     name: 'Selbstliebe & Heilung',
     description: 'Wachstum beginnt bei dir. Trauma, Heilung, inneres Kind — und was das mit Beziehungen zu tun hat.',
     members: 178,
@@ -70,7 +75,8 @@ const GROUPS = [
   {
     id: 'spiritualitaet-partnerschaft',
     icon: <Moon className="w-5 h-5" />,
-    color: 'bg-indigo-50 text-indigo-500',
+    iconBg: 'rgba(158,107,71,0.12)',
+    iconColor: '#9E6B47',
     name: 'Spiritualität & Partnerschaft',
     description: 'Bewusstsein, Energie und spirituelle Praktiken in Beziehungen. Wie unterstützt Spiritualität echte Verbindung?',
     members: 95,
@@ -106,21 +112,27 @@ export function CommunityClient({ tier }: Props) {
   if (!isPremium) {
     return (
       <div className="max-w-2xl mx-auto px-4 pt-8 pb-32">
-        <h1 className="font-heading text-3xl text-dark mb-1">Community</h1>
-        <p className="text-text/50 text-sm mb-10">Gruppen zu Bindungstypen, Sexualität, Beziehungsmodellen und mehr.</p>
+        <h1 className="font-heading text-4xl font-light text-[#1A1410] mb-1">Community</h1>
+        <p className="text-[#A89888] font-body text-sm mb-10">Gruppen zu Bindungstypen, Sexualität, Beziehungsmodellen und mehr.</p>
 
         {/* Teaser groups (blurred) */}
         <div className="relative">
           <div className="space-y-3 blur-sm pointer-events-none select-none">
             {GROUPS.slice(0, 3).map((g) => (
-              <div key={g.id} className="card flex gap-4 items-start">
-                <div className={cn('w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0', g.color)}>
+              <div key={g.id} className="bg-[#FDFAF7] rounded-2xl border border-[#E2DAD0] p-5 flex gap-4 items-start">
+                <div
+                  className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                  style={{ backgroundColor: g.iconBg, color: g.iconColor }}
+                >
                   {g.icon}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-heading text-lg text-dark">{g.name}</h3>
-                  <p className="text-text/60 text-sm truncate">{g.description}</p>
-                  <p className="text-text/30 text-xs mt-1">{g.members} Mitglieder · {g.posts} Beiträge</p>
+                  <h3 className="font-heading text-lg" style={{ color: g.iconColor }}>{g.name}</h3>
+                  <p className="text-[#A89888] text-sm truncate">{g.description}</p>
+                  <p className="text-[#A89888]/60 text-xs mt-1">
+                    <span className="font-body font-medium text-[#1A1410]">{g.members}</span>
+                    <span className="text-[#A89888]"> Mitglieder</span>
+                  </p>
                 </div>
               </div>
             ))}
@@ -129,11 +141,11 @@ export function CommunityClient({ tier }: Props) {
           {/* Lock overlay */}
           <div className="absolute inset-0 flex flex-col items-center justify-center">
             <div className="bg-white rounded-3xl shadow-xl px-8 py-8 text-center max-w-xs mx-4">
-              <div className="w-14 h-14 bg-dark rounded-full flex items-center justify-center mx-auto mb-4">
-                <Lock className="w-7 h-7 text-light" />
+              <div className="w-14 h-14 bg-[#7A4E30] rounded-full flex items-center justify-center mx-auto mb-4">
+                <Lock className="w-7 h-7 text-[#F6F2EC]" />
               </div>
-              <h2 className="font-heading text-2xl text-dark mb-2">Nur für Premium</h2>
-              <p className="text-text/60 text-sm leading-relaxed mb-6">
+              <h2 className="font-heading text-2xl text-[#1A1410] mb-2">Nur für Premium</h2>
+              <p className="text-[#A89888] text-sm leading-relaxed mb-6">
                 Die Community ist exklusiv für Premium-Mitglieder — ein geschützter Raum für tiefe Gespräche.
               </p>
               <Link href="/profile" className="btn-primary text-sm py-3 px-6 block text-center">
@@ -152,46 +164,52 @@ export function CommunityClient({ tier }: Props) {
       <div className="max-w-2xl mx-auto px-4 pt-8 pb-32">
         <button
           onClick={() => setSelectedGroup(null)}
-          className="flex items-center gap-2 text-text/50 hover:text-text text-sm mb-6 transition-colors"
+          className="flex items-center gap-2 text-[#A89888] hover:text-[#1A1410] text-sm mb-6 transition-colors font-body"
         >
           <ArrowLeft className="w-4 h-4" />
           Alle Gruppen
         </button>
 
         <div className="flex items-start gap-4 mb-6">
-          <div className={cn('w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0', group.color)}>
+          <div
+            className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
+            style={{ backgroundColor: group.iconBg, color: group.iconColor }}
+          >
             {group.icon}
           </div>
           <div>
-            <h1 className="font-heading text-2xl text-dark">{group.name}</h1>
-            <p className="text-text/50 text-sm">{group.members} Mitglieder · {group.posts} Beiträge</p>
+            <h1 className="font-heading text-2xl text-[#1A1410]">{group.name}</h1>
+            <p className="font-body text-sm text-[#A89888]">
+              <span className="font-medium text-[#1A1410]">{group.members}</span> Mitglieder ·{' '}
+              <span className="font-medium text-[#1A1410]">{group.posts}</span> Beiträge
+            </p>
           </div>
         </div>
 
-        <p className="text-text/60 text-sm leading-relaxed mb-4">{group.description}</p>
+        <p className="text-[#A89888] text-sm leading-relaxed mb-4">{group.description}</p>
 
         <div className="flex flex-wrap gap-1.5 mb-8">
           {group.tags.map((tag) => (
-            <span key={tag} className="text-xs bg-sand text-text/60 px-3 py-1 rounded-full">{tag}</span>
+            <span key={tag} className="text-xs bg-[#EDE8E0] text-[#8B6040] px-3 py-1 rounded-full font-body">{tag}</span>
           ))}
         </div>
 
         <div className="space-y-4 mb-8">
           {posts.map((post, i) => (
-            <div key={i} className="card">
+            <div key={i} className="bg-[#FDFAF7] rounded-2xl border border-[#E2DAD0] p-5">
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full bg-light flex items-center justify-center">
-                    <span className="font-heading text-sm text-primary">{post.author[0]}</span>
+                  <div className="w-8 h-8 rounded-full bg-[#F6F2EC] flex items-center justify-center">
+                    <span className="font-heading text-sm text-[#9E6B47]">{post.author[0]}</span>
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-dark">{post.author}</p>
-                    <p className="text-xs text-text/40">{post.time}</p>
+                    <p className="text-sm font-medium text-[#1A1410] font-body">{post.author}</p>
+                    <p className="text-xs text-[#A89888]">{post.time}</p>
                   </div>
                 </div>
               </div>
-              <p className="text-text/70 text-sm leading-relaxed mb-3">{post.text}</p>
-              <div className="flex gap-4 text-xs text-text/40">
+              <p className="text-[#6E6560] text-sm leading-relaxed mb-3">{post.text}</p>
+              <div className="flex gap-4 text-xs text-[#A89888]">
                 <span className="flex items-center gap-1"><MessageCircle className="w-3.5 h-3.5" /> {post.replies} Antworten</span>
                 <span className="flex items-center gap-1"><Heart className="w-3.5 h-3.5" /> {post.likes}</span>
               </div>
@@ -199,9 +217,9 @@ export function CommunityClient({ tier }: Props) {
           ))}
         </div>
 
-        <div className="card border-2 border-dashed border-sand text-center py-6">
-          <Star className="w-6 h-6 text-text/20 mx-auto mb-2" />
-          <p className="text-text/40 text-sm">Eigene Beiträge kommen in Phase 2.</p>
+        <div className="bg-[#FDFAF7] rounded-2xl border-2 border-dashed border-[#E2DAD0] text-center py-6">
+          <Star className="w-6 h-6 text-[#A89888]/40 mx-auto mb-2" />
+          <p className="text-[#A89888] text-sm">Eigene Beiträge kommen in Phase 2.</p>
         </div>
       </div>
     )
@@ -209,30 +227,34 @@ export function CommunityClient({ tier }: Props) {
 
   // Groups overview
   return (
-    <div className="max-w-2xl mx-auto px-4 pt-8">
-      <h1 className="font-heading text-3xl text-dark mb-1">Community</h1>
-      <p className="text-text/50 text-sm mb-8">Dein geschützter Raum für tiefe Gespräche.</p>
+    <div className="max-w-2xl mx-auto px-4 pt-8 pb-32">
+      <h1 className="font-heading text-4xl font-light text-[#1A1410] mb-1">Community</h1>
+      <p className="text-[#A89888] font-body text-sm mb-8">Dein geschützter Raum für tiefe Gespräche.</p>
 
       <div className="space-y-3">
         {GROUPS.map((g) => (
           <button
             key={g.id}
             onClick={() => setSelectedGroup(g.id)}
-            className="card w-full text-left flex gap-4 items-start hover:shadow-md transition-all"
+            className="bg-[#FDFAF7] rounded-2xl border border-[#E2DAD0] p-5 w-full text-left flex gap-4 items-start hover:shadow-md transition-all active:scale-[0.98] duration-150"
           >
-            <div className={cn('w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0', g.color)}>
+            <div
+              className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+              style={{ backgroundColor: g.iconBg, color: g.iconColor }}
+            >
               {g.icon}
             </div>
             <div className="flex-1 min-w-0">
-              <h3 className="font-heading text-lg text-dark">{g.name}</h3>
-              <p className="text-text/60 text-sm leading-snug mb-1.5">{g.description}</p>
-              <div className="flex items-center gap-3 text-xs text-text/30">
-                <span>{g.members} Mitglieder</span>
-                <span>·</span>
-                <span className="italic truncate">{g.latestPost}</span>
+              <h3 className="font-heading text-lg" style={{ color: g.iconColor }}>{g.name}</h3>
+              <p className="text-[#A89888] text-sm leading-snug mb-1.5">{g.description}</p>
+              <div className="flex items-center gap-1 text-xs">
+                <span className="font-body font-medium text-[#1A1410]">{g.members}</span>
+                <span className="text-[#A89888]"> Mitglieder</span>
+                <span className="text-[#A89888] mx-1">·</span>
+                <span className="italic text-[#A89888] truncate">{g.latestPost}</span>
               </div>
             </div>
-            <ChevronRight className="w-4 h-4 text-text/30 flex-shrink-0 mt-1" />
+            <ChevronRight className="w-4 h-4 text-[#A89888]/40 flex-shrink-0 mt-1" />
           </button>
         ))}
       </div>

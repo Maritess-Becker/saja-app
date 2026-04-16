@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation'
 import { ArrowLeft, MapPin, Briefcase, Sparkles, Mic, Ruler, Heart } from 'lucide-react'
 import type { Profile } from '@/types'
+import { photoUrl } from '@/lib/utils'
 
 function PersonalityBar({ leftLabel, rightLabel, value }: { leftLabel: string; rightLabel: string; value: number }) {
   return (
@@ -53,9 +54,9 @@ export function ProfileDetailClient({ profile }: { profile: Profile }) {
 
       {/* ── Foto 1 — groß, mit Name-Overlay ── */}
       <div className="mx-3 rounded-3xl overflow-hidden shadow-md relative" style={{ height: '78vh' }}>
-        {photos[0] ? (
+        {photoUrl(photos[0]) ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={photos[0]} alt={profile.name} className="w-full h-full object-cover" />
+          <img src={photoUrl(photos[0])} alt={profile.name} className="w-full h-full object-cover" />
         ) : (
           <div className="w-full h-full bg-sand flex items-center justify-center">
             <span className="font-heading text-8xl text-primary/20">{profile.name?.[0]}</span>
@@ -98,9 +99,9 @@ export function ProfileDetailClient({ profile }: { profile: Profile }) {
       </div>
 
       {/* ── Foto 2 ── */}
-      {photos[1] && (
+      {photoUrl(photos[1]) && (
         <div className="mt-5">
-          <ProfilePhoto src={photos[1]} name={profile.name} height="62vh" />
+          <ProfilePhoto src={photoUrl(photos[1])} name={profile.name} height="62vh" />
         </div>
       )}
 
@@ -137,8 +138,8 @@ export function ProfileDetailClient({ profile }: { profile: Profile }) {
       </div>
 
       {/* ── Foto 3 ── */}
-      {photos[2] && (
-        <ProfilePhoto src={photos[2]} name={profile.name} height="62vh" />
+      {photoUrl(photos[2]) && (
+        <ProfilePhoto src={photoUrl(photos[2])} name={profile.name} height="62vh" />
       )}
 
       {/* ── Über mich ── */}

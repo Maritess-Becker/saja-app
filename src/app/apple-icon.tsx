@@ -19,16 +19,12 @@ export default function AppleIcon() {
         }}
       >
         <svg width="160" height="160" viewBox="0 0 512 512" fill="none">
-          <circle
-            cx="256"
-            cy="256"
-            r="200"
-            fill="none"
+          <path
+            d="M 265 134 A 212 212 0 1 1 77 460"
             stroke="#9E6B47"
             strokeWidth="44"
             strokeLinecap="round"
-            strokeDasharray="942 314"
-            transform="rotate(135, 256, 256)"
+            fill="none"
           />
         </svg>
       </div>

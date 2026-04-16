@@ -541,8 +541,8 @@ export function ContentClient({ tier, purchasedIds, userId }: Props) {
 
   return (
     <div className="max-w-2xl mx-auto px-4 pt-8 pb-32">
-      <h1 className="font-heading text-3xl text-dark mb-1">Inhalte</h1>
-      <p className="text-text/50 text-sm mb-6">Tests, Guides, Fragebögen und mehr.</p>
+      <h1 className="font-heading text-4xl font-light text-[#1A1410] mb-1">Inhalte</h1>
+      <p className="text-[#A89888] font-body text-sm mb-6">Tests, Guides, Fragebögen und mehr.</p>
 
       {/* Tabs */}
       <div className="flex gap-2 overflow-x-auto pb-1 mb-6 scrollbar-hide">
@@ -551,17 +551,16 @@ export function ContentClient({ tier, purchasedIds, userId }: Props) {
             key={s.id}
             onClick={() => setActiveTab(s.id)}
             className={cn(
-              'flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all',
+              'flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-body whitespace-nowrap transition-all',
               activeTab === s.id
-                ? 'bg-primary text-white'
-                : 'bg-white border border-sand text-text/60 hover:border-primary hover:text-primary'
+                ? 'bg-[#9E6B47] text-white'
+                : 'border border-[#E2DAD0] text-[#A89888] hover:border-[#9E6B47]/40'
             )}
           >
             {s.icon}
             {s.label}
           </button>
         ))}
-
       </div>
 
       {/* Content items */}
@@ -574,37 +573,40 @@ export function ContentClient({ tier, purchasedIds, userId }: Props) {
                 key={item.id}
                 onClick={() => handleOpen(item)}
                 className={cn(
-                  'card w-full text-left flex gap-4 items-start transition-all hover:shadow-md',
+                  'bg-[#FDFAF7] border border-[#E2DAD0] rounded-2xl p-5 w-full text-left flex gap-4 items-start transition-all hover:shadow-md active:scale-[0.98] duration-150',
                   !accessible && 'opacity-70'
                 )}
               >
-                <div className={cn(
-                  'w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0',
-                  accessible ? 'bg-light text-primary' : 'bg-sand text-text/30'
-                )}>
+                <div
+                  className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                  style={{
+                    backgroundColor: accessible ? 'rgba(158,107,71,0.12)' : '#F6F2EC',
+                    color: accessible ? '#9E6B47' : '#A89888',
+                  }}
+                >
                   {item.icon}
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <h3 className="font-heading text-lg text-dark">{item.title}</h3>
+                    <h3 className="font-heading text-lg text-[#9E6B47]">{item.title}</h3>
                     {item.tag && (
-                      <span className={cn('text-xs px-2 py-0.5 rounded-full font-medium', tagColor(item.access))}>
+                      <span className="bg-[rgba(180,140,110,0.14)] text-[#8B6040] text-xs px-2 py-0.5 rounded-full font-body">
                         {item.tag}
                       </span>
                     )}
                     {item.duration && (
-                      <span className="text-xs text-text/30">{item.duration}</span>
+                      <span className="text-xs text-[#A89888]">{item.duration}</span>
                     )}
                   </div>
-                  <p className="text-text/60 text-sm leading-relaxed">{item.description}</p>
+                  <p className="text-[#6E6560] font-body text-sm leading-relaxed">{item.description}</p>
                 </div>
                 <div className="flex-shrink-0 mt-1">
                   {accessible ? (
                     item.action === 'external'
-                      ? <ExternalLink className="w-4 h-4 text-text/30" />
-                      : <ChevronRight className="w-4 h-4 text-text/30" />
+                      ? <ExternalLink className="w-4 h-4 text-[#A89888]" />
+                      : <ChevronRight className="w-4 h-4 text-[#A89888]" />
                   ) : (
-                    <Lock className="w-4 h-4 text-text/30" />
+                    <Lock className="w-4 h-4 text-[#A89888]" />
                   )}
                 </div>
               </button>

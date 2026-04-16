@@ -69,7 +69,7 @@ export interface Profile {
   hide_age: boolean
   hide_location: boolean
   profile_paused: boolean
-  photos: string[]
+  photos: Array<{ url: string; path: string }>
   profile_quote: string | null
   birth_date: string | null
   smoking: string | null

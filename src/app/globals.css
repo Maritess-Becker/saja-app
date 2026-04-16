@@ -71,6 +71,14 @@
   user-select: none;
 }
 
+/* Tap / press animation for interactive cards */
+.card {
+  transition: transform 150ms ease;
+}
+.card:active {
+  transform: scale(0.98);
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;

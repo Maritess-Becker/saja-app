@@ -2,7 +2,8 @@ import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { AppNav } from '@/components/layout/AppNav'
 import Link from 'next/link'
-import { Heart, Edit, Shield, Star } from 'lucide-react'
+import { Edit, Shield, Star, User, Bell, LogOut, ChevronRight } from 'lucide-react'
+import { photoUrl } from '@/lib/utils'
 
 export default async function ProfilePage() {
   const supabase = createClient()
@@ -29,89 +30,122 @@ export default async function ProfilePage() {
     premium: 'Premium',
   }
 
+  const settingsItems = [
+    { label: 'Konto', icon: User, href: '#' },
+    { label: 'Benachrichtigungen', icon: Bell, href: '#' },
+    { label: 'Abonnement', icon: Star, href: '/pricing' },
+    { label: 'Datenschutz', icon: Shield, href: '/datenschutz' },
+    { label: 'Impressum', icon: Shield, href: '/impressum' },
+    { label: 'Abmelden', icon: LogOut, href: '#', danger: true },
+  ]
+
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[#FAF8F4]">
       <AppNav />
       <main className="md:pl-64 pb-20 md:pb-0">
         <div className="max-w-2xl mx-auto px-4 pt-8 pb-32">
-          <h1 className="font-heading text-3xl text-dark mb-8">Mein Profil</h1>
+          <h1 className="font-heading text-4xl font-light text-[#1A1410] mb-8">Mein Profil</h1>
 
           {/* Profile card */}
-          <div className="card mb-6">
-            <div className="flex items-center gap-4 mb-6">
-              <div className="w-20 h-20 rounded-2xl bg-sand flex items-center justify-center overflow-hidden">
-                {profile?.photos?.[0] ? (
+          <div className="bg-white rounded-2xl border border-[#E2DAD0] p-6 mb-6 relative">
+            {/* Edit button top-right */}
+            <Link
+              href="/onboarding"
+              className="absolute top-4 right-4 flex items-center gap-1.5 border border-[#E2DAD0] text-[#9E6B47] hover:bg-[#9E6B47]/5 rounded-full text-xs py-1.5 px-3 font-body transition-colors duration-200"
+            >
+              <Edit className="w-3.5 h-3.5" /> Bearbeiten
+            </Link>
+
+            {/* Centered avatar */}
+            <div className="flex flex-col items-center text-center mb-5">
+              <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-[#E2DAD0] mx-auto flex items-center justify-center bg-[#F6F2EC]">
+                {photoUrl(profile?.photos?.[0]) ? (
                   // eslint-disable-next-line @next/next/no-img-element
-                  <img src={profile.photos[0]} alt="" className="w-full h-full object-cover" />
+                  <img
+                    src={photoUrl(profile?.photos?.[0])}
+                    alt=""
+                    className="w-full h-full object-cover"
+                  />
                 ) : (
-                  <Heart className="w-10 h-10 text-primary/30" />
+                  <svg viewBox="0 0 512 512" width="40" height="40">
+                    <path
+                      d="M 68 444 A 212 212 0 1 1 444 444"
+                      stroke="#9E6B47"
+                      strokeWidth="44"
+                      strokeLinecap="round"
+                      fill="none"
+                    />
+                  </svg>
                 )}
               </div>
-              <div>
-                <h2 className="font-heading text-2xl text-dark">
-                  {profile?.name ?? 'Kein Name'}
-                  {profile?.age && !profile?.hide_age ? `, ${profile.age}` : ''}
-                </h2>
-                {profile?.location && !profile?.hide_location && (
-                  <p className="text-text/40 text-sm">{profile.location}</p>
-                )}
-                <span className={`inline-block mt-1 text-xs px-2.5 py-1 rounded-full ${
-                  tier === 'premium' ? 'bg-dark text-light' :
-                  tier === 'membership' ? 'bg-primary text-white' :
-                  'bg-sand text-text/60'
-                }`}>
-                  {tierLabel[tier]}
-                </span>
-              </div>
-              <Link href="/onboarding" className="ml-auto btn-ghost text-sm flex items-center gap-1.5 py-2 px-3">
-                <Edit className="w-4 h-4" /> Bearbeiten
-              </Link>
+
+              {/* Name + age */}
+              <h2 className="font-heading text-2xl text-[#1A1410] text-center mt-3">
+                {profile?.name ?? 'Kein Name'}{profile?.age && !profile?.hide_age ? `, ${profile.age}` : ''}
+              </h2>
+
+              {/* Location */}
+              {profile?.location && !profile?.hide_location && (
+                <p className="text-[#A89888] text-sm text-center mt-0.5">{profile.location}</p>
+              )}
+
+              {/* Tier badge */}
+              <p className="text-[#9E6B47] text-xs font-body text-center mt-1">
+                {tier === 'premium' ? '✦ Premium' : tier === 'membership' ? '✦ Mitgliedschaft' : 'Kostenlos'}
+              </p>
             </div>
 
+            {/* Bio */}
             {profile?.bio && (
-              <p className="text-text/60 text-sm leading-relaxed mb-4">{profile.bio}</p>
+              <p className="text-[#6E6560] text-sm leading-relaxed mb-4 text-center">{profile.bio}</p>
             )}
 
+            {/* Interests */}
             {profile?.interests && profile.interests.length > 0 && (
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 justify-center">
                 {profile.interests.map((i: string) => (
-                  <span key={i} className="text-xs bg-sand text-text/60 px-2.5 py-1 rounded-full">{i}</span>
+                  <span key={i} className="bg-[#EDE8E0] text-[#8B6040] text-xs px-2.5 py-1 rounded-full font-body">
+                    {i}
+                  </span>
                 ))}
               </div>
             )}
           </div>
 
-          {/* Upgrade */}
+          {/* Upgrade banner */}
           {tier !== 'premium' && (
-            <div className="bg-dark rounded-2xl p-6 mb-6 text-light">
+            <div className="bg-[#7A4E30] rounded-2xl p-6 mb-6 text-[#F6F2EC]">
               <div className="flex items-center gap-2 mb-3">
-                <Star className="w-5 h-5 text-primary" />
+                <Star className="w-5 h-5 text-[#9E6B47]" />
                 <span className="font-heading text-xl">Premium freischalten</span>
               </div>
-              <p className="text-light/60 text-sm mb-4 leading-relaxed">
+              <p className="text-[#F6F2EC]/60 text-sm mb-4 leading-relaxed">
                 Love Language Test, 36 Fragen, 50 Tiefen-Fragen, Kompatibilitäts-Score und mehr.
               </p>
-              <button className="btn-primary text-sm py-2.5">
+              <Link href="/pricing" className="btn-primary text-sm py-2.5 inline-block">
                 Upgrade — Preise folgen
-              </button>
+              </Link>
             </div>
           )}
 
           {/* Settings */}
-          <div className="card space-y-3">
-            <h3 className="font-heading text-xl text-dark mb-1">Einstellungen</h3>
-            {[
-              { label: 'Datenschutz', icon: Shield, href: '/datenschutz' },
-              { label: 'Impressum', icon: Shield, href: '/impressum' },
-            ].map(({ label, icon: Icon, href }) => (
-              <Link
-                key={label}
-                href={href}
-                className="flex items-center gap-3 text-text/60 hover:text-text transition-colors text-sm py-1"
-              >
-                <Icon className="w-4 h-4" /> {label}
-              </Link>
-            ))}
+          <div className="bg-white rounded-2xl border border-[#E2DAD0] p-6">
+            <h3 className="font-heading text-xl text-[#1A1410] mb-4">Einstellungen</h3>
+            <div className="space-y-1">
+              {settingsItems.map(({ label, icon: Icon, href, danger }) => (
+                <Link
+                  key={label}
+                  href={href}
+                  className={`flex items-center gap-3 py-3 px-1 rounded-xl transition-colors hover:bg-[#FAF8F4] text-sm font-body ${
+                    danger ? 'text-red-400' : 'text-[#6E6560]'
+                  }`}
+                >
+                  <Icon className="w-4 h-4 flex-shrink-0" />
+                  <span className="flex-1">{label}</span>
+                  <ChevronRight className="w-4 h-4 text-[#E2DAD0]" />
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </main>

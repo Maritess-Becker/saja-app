@@ -290,7 +290,15 @@ export default function OnboardingPage() {
         if (data.gender) setGender(data.gender)
         if (data.seeking) setSeeking(data.seeking)
         if (data.location) setLocation(data.location)
-        if (data.photos) setPhotos(data.photos)
+        if (data.photos) {
+          // Handle both old TEXT[] (strings) and new JSONB ({url,path} objects)
+          const rawPhotos = data.photos as any[]
+          setPhotos(rawPhotos.map((p: any) =>
+            typeof p === 'string'
+              ? { url: p, path: p.split('/profile-photos/')[1] ?? p }
+              : p,
+          ))
+        }
         if (data.occupation) setOccupation(data.occupation)
         if (data.height_cm) setHeightCm(data.height_cm)
         if (data.has_children) setHasChildren(data.has_children)
@@ -932,7 +940,7 @@ export default function OnboardingPage() {
             </button>
           ))}
         </div>
-        <div className="pt-6 pb-10">
+        <div className="flex items-center justify-between pt-6 pb-10">
           {step > 1 && (
             <button
               type="button"
@@ -942,6 +950,13 @@ export default function OnboardingPage() {
               Zurück
             </button>
           )}
+          <button
+            type="button"
+            onClick={goNext}
+            className="px-5 py-2.5 rounded-full border border-[#E2DAD0] text-[#1A1410]/50 text-sm font-body hover:border-[#9E6B47]/40 transition-colors"
+          >
+            Überspringen
+          </button>
         </div>
       </StepShell>
     )
@@ -998,7 +1013,7 @@ export default function OnboardingPage() {
             </button>
           ))}
         </div>
-        <div className="pt-6 pb-10">
+        <div className="flex items-center justify-between pt-6 pb-10">
           {step > 1 && (
             <button
               type="button"
@@ -1008,6 +1023,13 @@ export default function OnboardingPage() {
               Zurück
             </button>
           )}
+          <button
+            type="button"
+            onClick={goNext}
+            className="px-5 py-2.5 rounded-full border border-[#E2DAD0] text-[#1A1410]/50 text-sm font-body hover:border-[#9E6B47]/40 transition-colors"
+          >
+            Überspringen
+          </button>
         </div>
       </StepShell>
     )
@@ -1036,7 +1058,7 @@ export default function OnboardingPage() {
         })}
       </div>
       <p className="text-xs font-body text-[#1A1410]/40 mb-6">{werte.length}/5 ausgewählt</p>
-      <NavButtons onNext={goNext} nextDisabled={werte.length === 0} />
+      <NavButtons onNext={goNext} nextDisabled={werte.length === 0} showSkip onSkip={goNext} />
     </StepShell>
   )
 
@@ -1185,19 +1207,28 @@ export default function OnboardingPage() {
           >
             Zurück
           </button>
-          <button
-            type="button"
-            disabled={selectedPrompts.length < 2}
-            onClick={() => setPromptPhase('answer')}
-            className={cn(
-              'px-6 py-2.5 rounded-full text-sm font-body transition-colors',
-              selectedPrompts.length < 2
-                ? 'bg-[#E2DAD0] text-[#1A1410]/30 cursor-not-allowed'
-                : 'bg-[#9E6B47] text-white hover:bg-[#7A4E30]',
-            )}
-          >
-            Weiter
-          </button>
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={goNext}
+              className="px-5 py-2.5 rounded-full border border-[#E2DAD0] text-[#1A1410]/50 text-sm font-body hover:border-[#9E6B47]/40 transition-colors"
+            >
+              Überspringen
+            </button>
+            <button
+              type="button"
+              disabled={selectedPrompts.length < 2}
+              onClick={() => setPromptPhase('answer')}
+              className={cn(
+                'px-6 py-2.5 rounded-full text-sm font-body transition-colors',
+                selectedPrompts.length < 2
+                  ? 'bg-[#E2DAD0] text-[#1A1410]/30 cursor-not-allowed'
+                  : 'bg-[#9E6B47] text-white hover:bg-[#7A4E30]',
+              )}
+            >
+              Weiter
+            </button>
+          </div>
         </div>
       </StepShell>
     )

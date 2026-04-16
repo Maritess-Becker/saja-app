@@ -6,7 +6,7 @@ import { createClient } from '@/lib/supabase/client'
 import type { Profile, Message } from '@/types'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
-import { formatRelativeTime, cn } from '@/lib/utils'
+import { formatRelativeTime, cn, photoUrl } from '@/lib/utils'
 import Link from 'next/link'
 
 const DAILY_QUESTIONS = [
@@ -173,9 +173,9 @@ export function BegegnungClient({
       {/* Header */}
       <div className="flex items-center gap-4 p-4 bg-white border-b border-sand">
         <Link href={`/profile/${otherProfile?.user_id}`} className="w-12 h-12 rounded-xl bg-sand flex items-center justify-center overflow-hidden flex-shrink-0 hover:opacity-90 transition-opacity">
-          {otherProfile?.photos?.[0] ? (
+          {photoUrl(otherProfile?.photos?.[0]) ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={otherProfile.photos[0]} alt="" className="w-full h-full object-cover" />
+            <img src={photoUrl(otherProfile?.photos?.[0])} alt="" className="w-full h-full object-cover" />
           ) : (
             <span className="font-heading text-xl text-primary">
               {otherProfile?.name?.[0]}

@@ -31,6 +31,13 @@ export function formatRelativeTime(date: string): string {
   return then.toLocaleDateString('de-DE')
 }
 
+/** Safely extract a photo URL from either a {url,path} object or a plain string */
+export function photoUrl(photo: unknown): string {
+  if (!photo) return ''
+  if (typeof photo === 'string') return photo
+  return (photo as { url: string }).url ?? ''
+}
+
 export function getInitials(name: string): string {
   return name
     .split(' ')

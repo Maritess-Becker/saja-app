@@ -2,20 +2,43 @@
 
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { Search, Heart, Sparkles, BookOpen, User, LogOut, Users } from 'lucide-react'
+import { Search, Heart, BookOpen, User, LogOut, Users } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { cn } from '@/lib/utils'
 import toast from 'react-hot-toast'
 import { SajaLogo } from '@/components/ui/SajaLogo'
 
 const NAV_ITEMS = [
-  { href: '/discover', icon: Search, label: 'Entdecken' },
-  { href: '/matches', icon: Heart, label: 'Matches' },
-  { href: '/begegnung', icon: Sparkles, label: 'Begegnung' },
-  { href: '/community', icon: Users, label: 'Community' },
-  { href: '/content', icon: BookOpen, label: 'Inhalte' },
-  { href: '/profile', icon: User, label: 'Profil' },
+  { href: '/discover', icon: 'search', label: 'Entdecken' },
+  { href: '/matches', icon: 'heart', label: 'Matches' },
+  { href: '/begegnung', icon: 'saja', label: 'Begegnung' },
+  { href: '/community', icon: 'users', label: 'Community' },
+  { href: '/content', icon: 'book', label: 'Inhalte' },
+  { href: '/profile', icon: 'user', label: 'Profil' },
 ]
+
+function NavIcon({ iconKey, isActive }: { iconKey: string; isActive: boolean }) {
+  const color = isActive ? '#9E6B47' : '#A89888'
+
+  if (iconKey === 'saja') {
+    return (
+      <svg width="28" height="28" viewBox="0 0 512 512" fill="none">
+        <path
+          d="M 68 444 A 212 212 0 1 1 444 444"
+          stroke={color}
+          strokeWidth="44"
+          strokeLinecap="round"
+        />
+      </svg>
+    )
+  }
+  if (iconKey === 'search') return <Search className="w-5 h-5" strokeWidth={1.5} />
+  if (iconKey === 'heart') return <Heart className="w-5 h-5" strokeWidth={1.5} />
+  if (iconKey === 'users') return <Users className="w-5 h-5" strokeWidth={1.5} />
+  if (iconKey === 'book') return <BookOpen className="w-5 h-5" strokeWidth={1.5} />
+  if (iconKey === 'user') return <User className="w-5 h-5" strokeWidth={1.5} />
+  return null
+}
 
 export function AppNav() {
   const pathname = usePathname()
@@ -32,56 +55,67 @@ export function AppNav() {
   return (
     <>
       {/* Desktop sidebar */}
-      <aside className="hidden md:flex flex-col w-64 min-h-screen bg-white border-r border-sand fixed left-0 top-0 px-4 py-6">
+      <aside className="hidden md:flex flex-col w-64 min-h-screen bg-white border-r border-[#E2DAD0] fixed left-0 top-0 px-4 py-6">
         <Link href="/discover" className="mb-10 px-2">
           <SajaLogo size="md" showTagline={true} />
         </Link>
 
         <nav className="flex-1 space-y-1">
-          {NAV_ITEMS.map(({ href, icon: Icon, label }) => (
-            <Link
-              key={href}
-              href={href}
-              className={cn(
-                'flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-body text-sm',
-                pathname.startsWith(href)
-                  ? 'bg-light text-primary font-medium'
-                  : 'text-text/60 hover:bg-sand hover:text-text'
-              )}
-            >
-              <Icon className="w-5 h-5" />
-              {label}
-            </Link>
-          ))}
+          {NAV_ITEMS.map(({ href, icon, label }) => {
+            const isActive = pathname.startsWith(href)
+            return (
+              <Link
+                key={href}
+                href={href}
+                className={cn(
+                  'flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-body text-sm',
+                  isActive
+                    ? 'bg-[#F6F2EC] text-[#9E6B47] font-medium'
+                    : 'text-[#A89888] hover:bg-[#FAF8F4] hover:text-[#1A1410]'
+                )}
+                style={{ color: isActive ? '#9E6B47' : undefined }}
+              >
+                <NavIcon iconKey={icon} isActive={isActive} />
+                {label}
+              </Link>
+            )
+          })}
         </nav>
 
         <button
           onClick={handleLogout}
-          className="flex items-center gap-3 px-4 py-3 text-text/40 hover:text-text transition-colors text-sm font-body"
+          className="flex items-center gap-3 px-4 py-3 text-[#A89888] hover:text-[#1A1410] transition-colors text-sm font-body"
         >
-          <LogOut className="w-5 h-5" />
+          <LogOut className="w-5 h-5" strokeWidth={1.5} />
           Abmelden
         </button>
       </aside>
 
       {/* Mobile bottom bar */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-sand z-50"
+      <nav
+        className="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-t border-[#E2DAD0] z-50"
         style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
       >
         <div className="flex">
-          {NAV_ITEMS.map(({ href, icon: Icon, label }) => (
-            <Link
-              key={href}
-              href={href}
-              title={label}
-              className={cn(
-                'flex-1 flex flex-col items-center justify-center py-3 transition-colors',
-                pathname.startsWith(href) ? 'text-primary' : 'text-text/40'
-              )}
-            >
-              <Icon className="w-5 h-5" />
-            </Link>
-          ))}
+          {NAV_ITEMS.map(({ href, icon, label }) => {
+            const isActive = pathname.startsWith(href)
+            return (
+              <Link
+                key={href}
+                href={href}
+                title={label}
+                className={cn(
+                  'flex-1 flex flex-col items-center justify-center py-3 transition-colors',
+                  isActive ? 'text-[#9E6B47]' : 'text-[#A89888]'
+                )}
+              >
+                <NavIcon iconKey={icon} isActive={isActive} />
+                {isActive && (
+                  <span className="text-[10px] font-body mt-0.5">{label}</span>
+                )}
+              </Link>
+            )
+          })}
         </div>
       </nav>
     </>

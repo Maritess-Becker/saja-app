@@ -6,7 +6,7 @@ import { createClient } from '@/lib/supabase/client'
 import type { Profile, Message } from '@/types'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
-import { formatRelativeTime, cn } from '@/lib/utils'
+import { formatRelativeTime, cn, photoUrl } from '@/lib/utils'
 
 interface Connection {
   id: string
@@ -106,9 +106,9 @@ export function ConnectionClient({ connection, otherProfile, initialMessages, cu
       {/* Header */}
       <div className="flex items-center gap-4 p-4 bg-white border-b border-sand">
         <div className="w-12 h-12 rounded-xl bg-sand flex items-center justify-center overflow-hidden flex-shrink-0">
-          {otherProfile?.photos?.[0] ? (
+          {photoUrl(otherProfile?.photos?.[0]) ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={otherProfile.photos[0]} alt="" className="w-full h-full object-cover" />
+            <img src={photoUrl(otherProfile?.photos?.[0])} alt="" className="w-full h-full object-cover" />
           ) : (
             <span className="font-heading text-xl text-primary">{otherProfile?.name?.[0]}</span>
           )}
