@@ -7,7 +7,7 @@
 @layer base {
   html {
     font-family: 'DM Sans', system-ui, sans-serif;
-    background-color: #FAF8F4;
+    background-color: #F0E8DC;
     color: #1A1410;
   }
 
@@ -55,6 +55,10 @@
 
   .chip-active {
     @apply bg-primary border-primary text-white;
+  }
+
+  .card-shadow {
+    box-shadow: 0 2px 12px rgba(26, 20, 16, 0.08);
   }
 
   /* Accent-Tags (terrakotta getönt) */

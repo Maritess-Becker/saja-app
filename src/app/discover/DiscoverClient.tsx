@@ -537,7 +537,7 @@ export function DiscoverClient({
 
       {/* ── Page header ── */}
       <div className="flex items-center justify-between px-4 pt-6 pb-3 max-w-lg mx-auto">
-        <h1 className="font-heading text-3xl text-[#7A4E30]">Entdecken</h1>
+        <h1 className="font-heading text-[52px] font-light text-[#1A1410] tracking-[-0.5px] leading-none">Entdecken</h1>
         <div className="flex items-center gap-3">
           <span className="text-sm text-[#1A1410]/40">
             {hasProfile ? profiles.length - current : 0} Profile
@@ -867,10 +867,11 @@ export function DiscoverClient({
             {/* Pass / Nope */}
             <button
               onClick={handlePass}
-              className="w-11 h-11 rounded-full bg-white border border-[#E2DAD0] shadow-sm flex items-center justify-center hover:border-red-300 active:scale-95 transition-all"
+              className="w-[52px] h-[52px] rounded-full bg-white flex items-center justify-center hover:border-red-300 active:scale-95 transition-all"
+              style={{ border: '1.5px solid #E2DAD0', boxShadow: '0 2px 8px rgba(26,20,16,0.08)' }}
               aria-label="Ablehnen"
             >
-              <X className="w-5 h-5 text-[#1A1410]/40" />
+              <X className="w-[22px] h-[22px] text-[#1A1410]/40" />
             </button>
 
             {/* Undo */}
@@ -891,10 +892,11 @@ export function DiscoverClient({
             {/* Like */}
             <button
               onClick={handleLike}
-              className="w-14 h-14 rounded-full bg-[#9E6B47] shadow-lg flex items-center justify-center hover:bg-[#7A4E30] active:scale-95 transition-all"
+              className="w-16 h-16 rounded-full bg-[#9E6B47] flex items-center justify-center hover:bg-[#7A4E30] active:scale-95 transition-all"
+              style={{ boxShadow: '0 4px 16px rgba(158,107,71,0.4)' }}
               aria-label="Gefällt mir"
             >
-              <Heart className="w-6 h-6 text-white fill-white" />
+              <Heart className="w-7 h-7 text-white fill-white" />
             </button>
           </div>
         </div>

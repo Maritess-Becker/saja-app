@@ -15,7 +15,7 @@ const GROUPS = [
   {
     id: 'bindungstypen',
     icon: <Heart className="w-5 h-5" />,
-    iconBg: 'rgba(158,107,71,0.12)',
+    iconBg: '#F5E6D8',
     iconColor: '#9E6B47',
     name: 'Bindungstypen',
     description: 'Austausch rund um ängstliche, vermeidende und sichere Bindungsmuster. Wie prägen sie unsere Beziehungen?',
@@ -27,8 +27,8 @@ const GROUPS = [
   {
     id: 'bewusste-sexualitaet',
     icon: <Flame className="w-5 h-5" />,
-    iconBg: 'rgba(180,100,80,0.12)',
-    iconColor: '#B46450',
+    iconBg: '#FAE0D8',
+    iconColor: '#C4603A',
     name: 'Bewusste Sexualität',
     description: 'Ein sicherer Raum für Gespräche über gelebte Sexualität, sexuelle Heilung und Verkörperung.',
     members: 89,
@@ -39,7 +39,7 @@ const GROUPS = [
   {
     id: 'tantric-dating',
     icon: <Sparkles className="w-5 h-5" />,
-    iconBg: 'rgba(120,100,160,0.12)',
+    iconBg: '#E8E0F0',
     iconColor: '#7864A0',
     name: 'Tantric Dating',
     description: 'Wie bringst du Tantra-Prinzipien in deinen Alltag und dein Dating? Erfahrungen & Impulse.',
@@ -51,8 +51,8 @@ const GROUPS = [
   {
     id: 'beziehungsmodelle',
     icon: <Users className="w-5 h-5" />,
-    iconBg: 'rgba(160,130,80,0.12)',
-    iconColor: '#A08250',
+    iconBg: '#DCE8DC',
+    iconColor: '#5A8A6A',
     name: 'Beziehungsmodelle',
     description: 'Monogamie, Polyamorie, Solo-Poly, offene Beziehungen — Erfahrungen, Fragen, ehrliche Reflexion.',
     members: 117,
@@ -63,8 +63,8 @@ const GROUPS = [
   {
     id: 'selbstliebe-heilung',
     icon: <Leaf className="w-5 h-5" />,
-    iconBg: 'rgba(100,143,124,0.12)',
-    iconColor: '#648F7C',
+    iconBg: '#DCE8DC',
+    iconColor: '#5A8A6A',
     name: 'Selbstliebe & Heilung',
     description: 'Wachstum beginnt bei dir. Trauma, Heilung, inneres Kind — und was das mit Beziehungen zu tun hat.',
     members: 178,
@@ -75,7 +75,7 @@ const GROUPS = [
   {
     id: 'spiritualitaet-partnerschaft',
     icon: <Moon className="w-5 h-5" />,
-    iconBg: 'rgba(158,107,71,0.12)',
+    iconBg: '#F5E6D8',
     iconColor: '#9E6B47',
     name: 'Spiritualität & Partnerschaft',
     description: 'Bewusstsein, Energie und spirituelle Praktiken in Beziehungen. Wie unterstützt Spiritualität echte Verbindung?',
@@ -112,26 +112,26 @@ export function CommunityClient({ tier }: Props) {
   if (!isPremium) {
     return (
       <div className="max-w-2xl mx-auto px-4 pt-8 pb-32">
-        <h1 className="font-heading text-4xl font-light text-[#1A1410] mb-1">Community</h1>
+        <h1 className="font-heading text-[52px] font-light text-[#1A1410] tracking-[-0.5px] leading-none mb-1">Community</h1>
         <p className="text-[#A89888] font-body text-sm mb-10">Gruppen zu Bindungstypen, Sexualität, Beziehungsmodellen und mehr.</p>
 
         {/* Teaser groups (blurred) */}
         <div className="relative">
           <div className="space-y-3 blur-sm pointer-events-none select-none">
             {GROUPS.slice(0, 3).map((g) => (
-              <div key={g.id} className="bg-[#FDFAF7] rounded-2xl border border-[#E2DAD0] p-5 flex gap-4 items-start">
+              <div key={g.id} className="bg-white rounded-2xl p-5 flex gap-4 items-start" style={{ boxShadow: '0 2px 12px rgba(26,20,16,0.08)' }}>
                 <div
-                  className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                  className="w-[52px] h-[52px] rounded-full flex items-center justify-center flex-shrink-0"
                   style={{ backgroundColor: g.iconBg, color: g.iconColor }}
                 >
                   {g.icon}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-heading text-lg" style={{ color: g.iconColor }}>{g.name}</h3>
-                  <p className="text-[#A89888] text-sm truncate">{g.description}</p>
+                  <h3 className="font-heading text-[22px]" style={{ color: g.iconColor }}>{g.name}</h3>
+                  <p className="text-[#1A1410]/70 text-sm truncate">{g.description}</p>
                   <p className="text-[#A89888]/60 text-xs mt-1">
-                    <span className="font-body font-medium text-[#1A1410]">{g.members}</span>
-                    <span className="text-[#A89888]"> Mitglieder</span>
+                    <span className="font-body font-semibold text-[#1A1410] text-[15px]">{g.members}</span>
+                    <span className="font-body font-light text-[#A89888] text-[15px]"> Mitglieder</span>
                   </p>
                 </div>
               </div>
@@ -172,7 +172,7 @@ export function CommunityClient({ tier }: Props) {
 
         <div className="flex items-start gap-4 mb-6">
           <div
-            className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
+            className="w-[52px] h-[52px] rounded-full flex items-center justify-center flex-shrink-0"
             style={{ backgroundColor: group.iconBg, color: group.iconColor }}
           >
             {group.icon}
@@ -228,7 +228,7 @@ export function CommunityClient({ tier }: Props) {
   // Groups overview
   return (
     <div className="max-w-2xl mx-auto px-4 pt-8 pb-32">
-      <h1 className="font-heading text-4xl font-light text-[#1A1410] mb-1">Community</h1>
+      <h1 className="font-heading text-[52px] font-light text-[#1A1410] tracking-[-0.5px] leading-none mb-1">Community</h1>
       <p className="text-[#A89888] font-body text-sm mb-8">Dein geschützter Raum für tiefe Gespräche.</p>
 
       <div className="space-y-3">
@@ -236,20 +236,21 @@ export function CommunityClient({ tier }: Props) {
           <button
             key={g.id}
             onClick={() => setSelectedGroup(g.id)}
-            className="bg-[#FDFAF7] rounded-2xl border border-[#E2DAD0] p-5 w-full text-left flex gap-4 items-start hover:shadow-md transition-all active:scale-[0.98] duration-150"
+            className="bg-white rounded-2xl p-5 w-full text-left flex gap-4 items-start transition-all active:scale-[0.98] duration-150"
+            style={{ boxShadow: '0 2px 12px rgba(26,20,16,0.08)' }}
           >
             <div
-              className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+              className="w-[52px] h-[52px] rounded-full flex items-center justify-center flex-shrink-0"
               style={{ backgroundColor: g.iconBg, color: g.iconColor }}
             >
               {g.icon}
             </div>
             <div className="flex-1 min-w-0">
-              <h3 className="font-heading text-lg" style={{ color: g.iconColor }}>{g.name}</h3>
-              <p className="text-[#A89888] text-sm leading-snug mb-1.5">{g.description}</p>
+              <h3 className="font-heading text-[22px]" style={{ color: g.iconColor }}>{g.name}</h3>
+              <p className="text-[#1A1410]/70 text-sm leading-snug mb-1.5">{g.description}</p>
               <div className="flex items-center gap-1 text-xs">
-                <span className="font-body font-medium text-[#1A1410]">{g.members}</span>
-                <span className="text-[#A89888]"> Mitglieder</span>
+                <span className="font-body font-semibold text-[#1A1410] text-[15px]">{g.members}</span>
+                <span className="font-body font-light text-[#A89888] text-[15px]"> Mitglieder</span>
                 <span className="text-[#A89888] mx-1">·</span>
                 <span className="italic text-[#A89888] truncate">{g.latestPost}</span>
               </div>

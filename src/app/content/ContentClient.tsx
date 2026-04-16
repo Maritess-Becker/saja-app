@@ -530,18 +530,18 @@ export function ContentClient({ tier, purchasedIds, userId }: Props) {
   }
 
   function tagColor(access: ContentItem['access']) {
-    if (access === 'free') return 'bg-accent/20 text-accent'
-    if (access === 'membership') return 'bg-primary/10 text-primary'
-    if (access === 'premium') return 'bg-dark/10 text-dark'
-    if (access === 'purchase') return 'bg-primary/10 text-primary'
-    return 'bg-sand text-text/60'
+    if (access === 'free') return 'bg-[rgba(90,138,106,0.15)] text-[#3D6B50]'
+    if (access === 'membership') return 'bg-[rgba(158,107,71,0.15)] text-[#7A4E30]'
+    if (access === 'premium') return 'bg-[rgba(26,20,16,0.10)] text-[#1A1410]'
+    if (access === 'purchase') return 'bg-[rgba(158,107,71,0.15)] text-[#7A4E30]'
+    return 'bg-[#EDE8E0] text-[#6E6560]'
   }
 
   const activeSection = CONTENT_SECTIONS.find((s) => s.id === activeTab)
 
   return (
     <div className="max-w-2xl mx-auto px-4 pt-8 pb-32">
-      <h1 className="font-heading text-4xl font-light text-[#1A1410] mb-1">Inhalte</h1>
+      <h1 className="font-heading text-[52px] font-light text-[#1A1410] tracking-[-0.5px] leading-none mb-1">Inhalte</h1>
       <p className="text-[#A89888] font-body text-sm mb-6">Tests, Guides, Fragebögen und mehr.</p>
 
       {/* Tabs */}
@@ -573,12 +573,13 @@ export function ContentClient({ tier, purchasedIds, userId }: Props) {
                 key={item.id}
                 onClick={() => handleOpen(item)}
                 className={cn(
-                  'bg-[#FDFAF7] border border-[#E2DAD0] rounded-2xl p-5 w-full text-left flex gap-4 items-start transition-all hover:shadow-md active:scale-[0.98] duration-150',
-                  !accessible && 'opacity-70'
+                  'bg-white rounded-2xl p-5 w-full text-left flex gap-4 items-start transition-all active:scale-[0.98] duration-150',
+                  !accessible && 'opacity-60'
                 )}
+                style={{ boxShadow: '0 2px 12px rgba(26,20,16,0.08)' }}
               >
                 <div
-                  className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                  className="w-[52px] h-[52px] rounded-full flex items-center justify-center flex-shrink-0"
                   style={{
                     backgroundColor: accessible ? 'rgba(158,107,71,0.12)' : '#F6F2EC',
                     color: accessible ? '#9E6B47' : '#A89888',
@@ -588,17 +589,17 @@ export function ContentClient({ tier, purchasedIds, userId }: Props) {
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <h3 className="font-heading text-lg text-[#9E6B47]">{item.title}</h3>
+                    <h3 className="font-heading text-[22px] text-[#9E6B47]">{item.title}</h3>
                     {item.tag && (
-                      <span className="bg-[rgba(180,140,110,0.14)] text-[#8B6040] text-xs px-2 py-0.5 rounded-full font-body">
+                      <span className={cn('text-[11px] px-2.5 py-1 rounded-full font-body font-medium', tagColor(item.access))}>
                         {item.tag}
                       </span>
                     )}
                     {item.duration && (
-                      <span className="text-xs text-[#A89888]">{item.duration}</span>
+                      <span className="text-xs text-[#A89888] font-light">{item.duration}</span>
                     )}
                   </div>
-                  <p className="text-[#6E6560] font-body text-sm leading-relaxed">{item.description}</p>
+                  <p className="text-[#1A1410]/70 font-body text-sm leading-relaxed">{item.description}</p>
                 </div>
                 <div className="flex-shrink-0 mt-1">
                   {accessible ? (

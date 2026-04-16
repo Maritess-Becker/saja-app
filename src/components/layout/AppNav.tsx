@@ -93,8 +93,8 @@ export function AppNav() {
 
       {/* Mobile bottom bar */}
       <nav
-        className="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-t border-[#E2DAD0] z-50"
-        style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
+        className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-[#E2DAD0] z-50"
+        style={{ paddingBottom: 'env(safe-area-inset-bottom)', boxShadow: '0 -4px 20px rgba(26,20,16,0.06)' }}
       >
         <div className="flex">
           {NAV_ITEMS.map(({ href, icon, label }) => {
@@ -106,7 +106,7 @@ export function AppNav() {
                 title={label}
                 className={cn(
                   'flex-1 flex flex-col items-center justify-center py-3 transition-colors',
-                  isActive ? 'text-[#9E6B47]' : 'text-[#A89888]'
+                  isActive ? 'text-[#9E6B47]' : 'text-[#C8BDB5]'
                 )}
               >
                 <NavIcon iconKey={icon} isActive={isActive} />

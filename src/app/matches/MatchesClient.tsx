@@ -118,11 +118,11 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
         navigateTo="/begegnung"
       />
       <div className="max-w-2xl mx-auto px-4 pt-8 pb-32">
-        <h1 className="font-heading text-4xl font-light text-[#1A1410] mb-1">Matches</h1>
+        <h1 className="font-heading text-[52px] font-light text-[#1A1410] tracking-[-0.5px] leading-none mb-1">Matches</h1>
         <p className="font-body text-sm text-[#A89888] mb-8">
           {activeMatchId ? (
-            <span className="flex items-center gap-1.5">
-              <Sparkles className="w-4 h-4 text-[#9E6B47]" />
+            <span className="flex items-center gap-2 bg-[#9E6B47] text-white text-[13px] font-body px-4 py-3 rounded-xl -mx-1">
+              <Sparkles className="w-4 h-4 text-white flex-shrink-0" />
               Du bist aktuell in einer Begegnung (One Connection Rule aktiv)
             </span>
           ) : (
@@ -146,22 +146,22 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
               <div
                 key={match.id}
                 className={cn(
-                  'bg-white rounded-2xl overflow-hidden border border-[#E2DAD0] active:scale-[0.98] transition-transform duration-150',
-                  isThisActiveMatch && 'border-2 border-[#9E6B47]',
-                  isRequested && !isRequester && !isActive && 'border-l-4 border-l-[#9E6B47]'
+                  'bg-white rounded-2xl overflow-hidden active:scale-[0.98] transition-transform duration-150',
+                  isThisActiveMatch ? 'ring-2 ring-[#9E6B47]' : ''
                 )}
+                style={{ boxShadow: isRequested && !isRequester && !isActive ? '0 2px 12px rgba(26,20,16,0.08), inset 4px 0 0 #9E6B47' : '0 2px 12px rgba(26,20,16,0.08)' }}
               >
                 {/* Photo area */}
-                <Link href={`/profile/${profile.user_id}`} className="block relative h-[200px] overflow-hidden">
+                <Link href={`/profile/${profile.user_id}`} className="block relative h-[220px] overflow-hidden">
                   {photo ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
                       src={photo}
                       alt={profile.name}
-                      className="w-full h-full object-cover"
+                      className="absolute inset-0 w-full h-full object-cover object-top"
                     />
                   ) : (
-                    <div className="w-full h-full bg-[#F6F2EC] flex items-center justify-center">
+                    <div className="absolute inset-0 bg-[#F6F2EC] flex items-center justify-center">
                       <span className="font-heading text-5xl text-[#9E6B47]/30">
                         {profile.name?.[0]}
                       </span>
@@ -169,11 +169,11 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
                   )}
 
                   {/* Gradient overlay */}
-                  <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/55 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 h-[60%] bg-gradient-to-t from-black/70 to-transparent" />
 
                   {/* Name + city on gradient */}
                   <div className="absolute bottom-3 left-4 right-14">
-                    <p className="font-heading text-xl font-normal text-white leading-tight">
+                    <p className="font-heading text-2xl font-normal text-white leading-tight">
                       {profile.name}{!profile.hide_age && profile.age ? `, ${profile.age}` : ''}
                     </p>
                     {!profile.hide_location && profile.location && (
@@ -231,7 +231,7 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
                         onClick={() => requestConnection(match.id)}
                         disabled={loading === match.id || (!!activeMatchId && !isThisActiveMatch)}
                         className={cn(
-                          'border border-[#9E6B47] text-[#9E6B47] bg-transparent hover:bg-[#9E6B47]/5 rounded-full text-xs py-2 px-4 transition-colors duration-200 disabled:opacity-40 disabled:cursor-not-allowed font-body font-medium'
+                          'w-full border-[1.5px] border-[#9E6B47] text-[#9E6B47] bg-transparent hover:bg-[#9E6B47]/5 rounded-xl text-sm py-3 px-4 transition-colors duration-200 disabled:opacity-40 disabled:cursor-not-allowed font-body font-medium'
                         )}
                       >
                         {loading === match.id ? '...' : 'Begegnung anfragen'}
