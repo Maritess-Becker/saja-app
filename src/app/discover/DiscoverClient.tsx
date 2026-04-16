@@ -554,9 +554,6 @@ export function DiscoverClient({
       <div className="flex items-center justify-between px-4 pt-6 pb-3 max-w-lg mx-auto">
         <h1 className="font-heading text-[52px] font-light text-[#1A1410] tracking-[-0.5px] leading-none">Entdecken</h1>
         <div className="flex items-center gap-3">
-          <span className="text-sm text-[#1A1410]/40">
-            {hasProfile ? profiles.length - current : 0} Profile
-          </span>
           <button
             onClick={() => setShowFilters(true)}
             className={cn(
