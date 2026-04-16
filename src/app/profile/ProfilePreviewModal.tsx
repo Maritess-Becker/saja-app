@@ -75,7 +75,7 @@ function PhotoWithCaption({ photo, alt }: { photo: { url: string; path: string; 
 
 function PromptBlock({ question, answer }: { question: string; answer: string }) {
   return (
-    <div className="px-4 py-4 border-t border-[#F6F2EC]/70">
+    <div className="px-4 py-4 border-t border-[#E2DAD0]/70">
       <div className="bg-[#F6F2EC] rounded-xl px-4 py-4 border-l-[3px] border-[#9E6B47]">
         <p className="text-[11px] text-[#1A1410]/40 uppercase tracking-widest mb-2">{question}</p>
         <p className="font-heading text-xl italic text-[#7A4E30] leading-snug text-justify">{answer}</p>
@@ -194,7 +194,7 @@ export function ProfilePreviewModal({ profile, children }: Props) {
 
             {/* ── Über mich ── */}
             {profile.bio && (
-              <div className="px-5 py-5 border-t border-[#F6F2EC]/70">
+              <div className="px-5 py-5 border-t border-[#E2DAD0]/70">
                 <p className="text-[11px] text-[#1A1410]/35 uppercase tracking-widest mb-3">Über mich</p>
                 <p className="text-[#1A1410]/70 text-sm leading-relaxed text-justify">{profile.bio}</p>
               </div>
@@ -202,12 +202,12 @@ export function ProfilePreviewModal({ profile, children }: Props) {
 
             {/* ── Sprachmemo ── */}
             {profile.audio_prompt_url ? (
-              <div className="px-5 py-5 border-t border-[#F6F2EC]/70">
+              <div className="px-5 py-5 border-t border-[#E2DAD0]/70">
                 <p className="text-[11px] text-[#1A1410]/35 uppercase tracking-widest mb-3">Sprachmemo</p>
                 <AudioPlayer url={profile.audio_prompt_url} />
               </div>
             ) : (
-              <div className="px-5 py-5 border-t border-[#F6F2EC]/70 flex items-center gap-3">
+              <div className="px-5 py-5 border-t border-[#E2DAD0]/70 flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-[#F6F2EC] flex items-center justify-center flex-shrink-0">
                   <Mic className="w-5 h-5 text-[#9E6B47]" />
                 </div>
@@ -229,7 +229,7 @@ export function ProfilePreviewModal({ profile, children }: Props) {
 
             {/* ── Interessen ── */}
             {profile.interests?.length > 0 && (
-              <div className="px-5 py-5 border-t border-[#F6F2EC]/70">
+              <div className="px-5 py-5 border-t border-[#E2DAD0]/70">
                 <p className="text-[11px] text-[#1A1410]/35 uppercase tracking-widest mb-3">Interessen</p>
                 <div className="flex flex-wrap gap-2">
                   {profile.interests.map((item) => (
@@ -241,7 +241,7 @@ export function ProfilePreviewModal({ profile, children }: Props) {
 
             {/* ── Werte ── */}
             {profile.werte?.length > 0 && (
-              <div className="px-5 py-5 border-t border-[#F6F2EC]/70">
+              <div className="px-5 py-5 border-t border-[#E2DAD0]/70">
                 <p className="text-[11px] text-[#1A1410]/35 uppercase tracking-widest mb-3">Werte</p>
                 <div className="flex flex-wrap gap-2">
                   {profile.werte.map((w) => (
@@ -253,7 +253,7 @@ export function ProfilePreviewModal({ profile, children }: Props) {
 
             {/* ── Beziehung & Bindung ── */}
             {(profile.relationship_model || profile.bindungstyp || profile.love_language) && (
-              <div className="px-5 py-5 border-t border-[#F6F2EC]/70 space-y-4">
+              <div className="px-5 py-5 border-t border-[#E2DAD0]/70 space-y-4">
                 <p className="text-[11px] text-[#1A1410]/35 uppercase tracking-widest">Beziehung &amp; Bindung</p>
                 {profile.relationship_model && (
                   <div className="flex items-center justify-between">
@@ -280,7 +280,7 @@ export function ProfilePreviewModal({ profile, children }: Props) {
 
             {/* ── Persönlichkeit ── */}
             {(profile.introvert_extrovert != null || profile.spontan_strukturiert != null || profile.rational_emotional != null) && (
-              <div className="px-5 py-5 border-t border-[#F6F2EC]/70 space-y-4">
+              <div className="px-5 py-5 border-t border-[#E2DAD0]/70 space-y-4">
                 <p className="text-[11px] text-[#1A1410]/35 uppercase tracking-widest">Persönlichkeit</p>
                 {profile.introvert_extrovert != null && (
                   <PersonalityBar leftLabel="Introvertiert" rightLabel="Extravertiert" value={profile.introvert_extrovert} />
@@ -296,7 +296,7 @@ export function ProfilePreviewModal({ profile, children }: Props) {
 
             {/* ── Horoskop ── */}
             {(profile.sun_sign || profile.ascendant || profile.chinese_zodiac) && (
-              <div className="px-5 py-5 border-t border-[#F6F2EC]/70 space-y-3">
+              <div className="px-5 py-5 border-t border-[#E2DAD0]/70 space-y-3">
                 <p className="text-[11px] text-[#1A1410]/35 uppercase tracking-widest">Horoskop</p>
                 <div className="flex flex-wrap gap-2">
                   {profile.sun_sign && (
@@ -320,7 +320,7 @@ export function ProfilePreviewModal({ profile, children }: Props) {
 
             {/* ── Dealbreakers ── */}
             {profile.dealbreakers?.length > 0 && (
-              <div className="px-5 py-5 border-t border-[#F6F2EC]/70">
+              <div className="px-5 py-5 border-t border-[#E2DAD0]/70">
                 <p className="text-[11px] text-[#1A1410]/35 uppercase tracking-widest mb-3">Dealbreaker</p>
                 <div className="flex flex-wrap gap-2">
                   {profile.dealbreakers.map((d) => (
