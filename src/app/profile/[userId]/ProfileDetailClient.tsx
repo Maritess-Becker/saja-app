@@ -1,9 +1,12 @@
 'use client'
 
+import { useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
-import { ArrowLeft, MapPin, Briefcase, Sparkles, Mic, Ruler, Heart } from 'lucide-react'
+import { ArrowLeft, MapPin, Briefcase, Sparkles, Mic, Ruler, Heart, Play, Pause } from 'lucide-react'
 import type { Profile } from '@/types'
 import { photoUrl } from '@/lib/utils'
+
+// ── Sub-components ────────────────────────────────────────────────────────────
 
 function PersonalityBar({ leftLabel, rightLabel, value }: { leftLabel: string; rightLabel: string; value: number }) {
   return (
@@ -19,20 +22,68 @@ function PersonalityBar({ leftLabel, rightLabel, value }: { leftLabel: string; r
   )
 }
 
-function ProfilePhoto({ src, name, height }: { src?: string; name: string; height: string }) {
+function AudioPlayer({ url }: { url: string }) {
+  const audioRef = useRef<HTMLAudioElement>(null)
+  const [playing, setPlaying] = useState(false)
+  function handleToggle() {
+    const el = audioRef.current
+    if (!el) return
+    if (playing) { el.pause(); setPlaying(false) }
+    else { el.play().catch(() => {}); setPlaying(true) }
+  }
   return (
-    <div className="mx-3 rounded-3xl overflow-hidden shadow-sm" style={{ height }}>
-      {src ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img src={src} alt={name} className="w-full h-full object-cover" />
-      ) : (
-        <div className="w-full h-full bg-sand flex items-center justify-center">
-          <span className="font-heading text-8xl text-primary/20">{name?.[0]}</span>
+    <div className="flex items-center gap-3">
+      {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+      <audio ref={audioRef} src={url} onEnded={() => setPlaying(false)} preload="none" />
+      <button
+        onClick={handleToggle}
+        className="w-10 h-10 rounded-full bg-primary flex items-center justify-center shadow flex-shrink-0 hover:bg-[#7A4E30] transition-colors active:scale-95"
+      >
+        {playing ? <Pause className="w-4 h-4 text-white" /> : <Play className="w-4 h-4 text-white translate-x-0.5" />}
+      </button>
+      <div className="flex-1">
+        <p className="text-sm font-medium text-dark mb-1">Sprach-Intro anhören</p>
+        <div className="flex items-end gap-0.5 h-4">
+          {Array.from({ length: 24 }).map((_, i) => (
+            <div key={i}
+              className={`w-0.5 rounded-full transition-all ${playing ? 'bg-primary animate-pulse' : 'bg-primary/30'}`}
+              style={{ height: `${28 + Math.sin(i * 0.85) * 48 + Math.cos(i * 1.3) * 18}%`, animationDelay: `${i * 50}ms` }}
+            />
+          ))}
         </div>
+      </div>
+    </div>
+  )
+}
+
+function PhotoWithCaption({ photo, name, height }: { photo: { url: string; path: string; caption?: string }; name: string; height: string }) {
+  const url = photoUrl(photo)
+  if (!url) return null
+  return (
+    <div className="mt-3">
+      <div className="mx-3 rounded-3xl overflow-hidden shadow-sm" style={{ height }}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={url} alt={name} className="w-full h-full object-cover" />
+      </div>
+      {photo.caption && (
+        <p className="px-5 pt-2.5 text-sm text-text/55 italic leading-relaxed">{photo.caption}</p>
       )}
     </div>
   )
 }
+
+function PromptBlock({ question, answer }: { question: string; answer: string }) {
+  return (
+    <div className="px-4 py-4 border-t border-sand/70">
+      <div className="bg-light rounded-xl px-4 py-4 border-l-[3px] border-primary">
+        <p className="text-[11px] text-text/40 uppercase tracking-widest mb-2">{question}</p>
+        <p className="font-heading text-xl italic text-[#7A4E30] leading-snug">{answer}</p>
+      </div>
+    </div>
+  )
+}
+
+// ── Main component ────────────────────────────────────────────────────────────
 
 export function ProfileDetailClient({ profile }: { profile: Profile }) {
   const router = useRouter()
@@ -76,7 +127,7 @@ export function ProfileDetailClient({ profile }: { profile: Profile }) {
         </div>
       </div>
 
-      {/* ── Kurzinfos ── */}
+      {/* ── Quick-info pills ── */}
       <div className="px-5 pt-5 pb-1 flex flex-wrap gap-2">
         {profile.height_cm && (
           <span className="flex items-center gap-1.5 text-sm text-text/60 bg-sand px-3 py-1.5 rounded-full">
@@ -98,55 +149,38 @@ export function ProfileDetailClient({ profile }: { profile: Profile }) {
         )}
       </div>
 
-      {/* ── Foto 2 ── */}
-      {photoUrl(photos[1]) && (
-        <div className="mt-5">
-          <ProfilePhoto src={photoUrl(photos[1])} name={profile.name} height="62vh" />
-        </div>
-      )}
-
-      {/* ── Zitat ── */}
-      {profile.profile_quote && (
-        <div className="px-5 pt-6 pb-4">
-          <p className="font-heading text-2xl text-dark italic leading-snug">
-            &ldquo;{profile.profile_quote}&rdquo;
-          </p>
-        </div>
-      )}
-
-      {/* ── Sprach-Intro ── */}
-      <div className="px-5 py-5 border-t border-sand/70 flex items-center gap-3">
-        <div className="w-10 h-10 rounded-full bg-light flex items-center justify-center flex-shrink-0">
-          <Mic className="w-5 h-5 text-primary" />
-        </div>
-        <div className="flex-1">
-          <p className="text-sm font-medium text-dark mb-1.5">Sprach-Intro</p>
-          <div className="flex items-center gap-0.5 h-5">
-            {Array.from({ length: 26 }).map((_, i) => (
-              <div
-                key={i}
-                className="w-1 bg-primary/25 rounded-full animate-pulse"
-                style={{
-                  height: `${30 + Math.sin(i * 0.9) * 50 + Math.cos(i * 1.4) * 20}%`,
-                  animationDelay: `${i * 55}ms`,
-                }}
-              />
-            ))}
-          </div>
-        </div>
-        <span className="text-xs text-text/35 flex-shrink-0">Bald verfügbar</span>
-      </div>
-
-      {/* ── Foto 3 ── */}
-      {photoUrl(photos[2]) && (
-        <ProfilePhoto src={photoUrl(photos[2])} name={profile.name} height="62vh" />
-      )}
-
       {/* ── Über mich ── */}
       {profile.bio && (
         <div className="px-5 py-5 border-t border-sand/70">
           <p className="text-[11px] text-text/35 uppercase tracking-widest mb-3">Über mich</p>
           <p className="text-text/70 text-sm leading-relaxed">{profile.bio}</p>
+        </div>
+      )}
+
+      {/* ── Sprachmemo ── */}
+      {profile.audio_prompt_url ? (
+        <div className="px-5 py-5 border-t border-sand/70">
+          <p className="text-[11px] text-text/35 uppercase tracking-widest mb-3">Sprachmemo</p>
+          <AudioPlayer url={profile.audio_prompt_url} />
+        </div>
+      ) : (
+        <div className="px-5 py-5 border-t border-sand/70 flex items-center gap-3">
+          <div className="w-10 h-10 rounded-full bg-light flex items-center justify-center flex-shrink-0">
+            <Mic className="w-5 h-5 text-primary" />
+          </div>
+          <div className="flex-1">
+            <p className="text-sm font-medium text-dark mb-1.5">Sprachmemo</p>
+            <div className="flex items-center gap-0.5 h-5">
+              {Array.from({ length: 26 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="w-1 bg-primary/25 rounded-full"
+                  style={{ height: `${30 + Math.sin(i * 0.9) * 50 + Math.cos(i * 1.4) * 20}%` }}
+                />
+              ))}
+            </div>
+          </div>
+          <span className="text-xs text-text/35 flex-shrink-0">Noch nicht aufgenommen</span>
         </div>
       )}
 
@@ -177,6 +211,7 @@ export function ProfileDetailClient({ profile }: { profile: Profile }) {
       {/* ── Beziehung & Bindung ── */}
       {(profile.relationship_model || profile.bindungstyp || profile.love_language) && (
         <div className="px-5 py-5 border-t border-sand/70 space-y-4">
+          <p className="text-[11px] text-text/35 uppercase tracking-widest">Beziehung &amp; Bindung</p>
           {profile.relationship_model && (
             <div className="flex items-center justify-between">
               <span className="text-sm text-text/40">Beziehungsmodell</span>
@@ -215,6 +250,61 @@ export function ProfileDetailClient({ profile }: { profile: Profile }) {
           )}
         </div>
       )}
+
+      {/* ── Horoskop ── */}
+      {(profile.sun_sign || profile.ascendant || profile.chinese_zodiac) && (
+        <div className="px-5 py-5 border-t border-sand/70 space-y-3">
+          <p className="text-[11px] text-text/35 uppercase tracking-widest">Horoskop</p>
+          <div className="flex flex-wrap gap-2">
+            {profile.sun_sign && (
+              <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(180,140,110,0.14)', color: '#8B6040' }}>
+                {profile.sun_sign}
+              </span>
+            )}
+            {profile.ascendant && (
+              <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(180,140,110,0.14)', color: '#8B6040' }}>
+                ↑ {profile.ascendant.replace(/^[♈♉♊♋♌♍♎♏♐♑♒♓]\s*/, '')}
+              </span>
+            )}
+            {profile.chinese_zodiac && (
+              <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(120,100,160,0.12)', color: '#7864A0' }}>
+                {profile.chinese_zodiac}
+              </span>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* ── Dealbreakers ── */}
+      {profile.dealbreakers?.length > 0 && (
+        <div className="px-5 py-5 border-t border-sand/70">
+          <p className="text-[11px] text-text/35 uppercase tracking-widest mb-3">Dealbreaker</p>
+          <div className="flex flex-wrap gap-2">
+            {profile.dealbreakers.map((d) => (
+              <span key={d} className="text-sm text-red-700/80 bg-red-50 border border-red-200/60 px-3 py-1.5 rounded-full">{d}</span>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* ── Interleaved: Foto 2–6 + Prompts ── */}
+      {photos[1] && <PhotoWithCaption photo={photos[1]} name={profile.name} height="62vh" />}
+      {profile.prompts?.[0]?.answer && (
+        <PromptBlock question={profile.prompts[0].question} answer={profile.prompts[0].answer} />
+      )}
+
+      {photos[2] && <PhotoWithCaption photo={photos[2]} name={profile.name} height="62vh" />}
+      {profile.prompts?.[1]?.answer && (
+        <PromptBlock question={profile.prompts[1].question} answer={profile.prompts[1].answer} />
+      )}
+
+      {photos[3] && <PhotoWithCaption photo={photos[3]} name={profile.name} height="62vh" />}
+      {profile.prompts?.[2]?.answer && (
+        <PromptBlock question={profile.prompts[2].question} answer={profile.prompts[2].answer} />
+      )}
+
+      {photos[4] && <PhotoWithCaption photo={photos[4]} name={profile.name} height="62vh" />}
+      {photos[5] && <PhotoWithCaption photo={photos[5]} name={profile.name} height="62vh" />}
 
     </div>
   )

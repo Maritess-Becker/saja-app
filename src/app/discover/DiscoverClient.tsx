@@ -707,81 +707,136 @@ export function DiscoverClient({
             {/* ── Below-photo content ── */}
             <div className="mt-2">
 
-              {/* ── Info block — directly after hero photo ── */}
-              <div className="px-5 pt-5 space-y-4 pb-2">
-
-                {/* Psychological badges */}
-                {(profile.bindungstyp || profile.love_language) && (
-                  <div className="flex flex-wrap gap-2">
-                    {profile.bindungstyp && (
-                      <span className="rounded-full bg-[#EDE8E0] text-[#7A4E30] text-sm px-3 py-1.5">
-                        {profile.bindungstyp}
-                      </span>
-                    )}
-                    {profile.love_language && (
-                      <span className="rounded-full bg-[#E8EDE0] text-[#3D6B50] text-sm px-3 py-1.5">
-                        {profile.love_language}
-                      </span>
-                    )}
-                  </div>
+              {/* ── Quick-info pills ── */}
+              <div className="px-5 pt-5 pb-1 flex flex-wrap gap-2">
+                {profile.height_cm && (
+                  <span className="flex items-center gap-1.5 text-sm text-[#1A1410]/60 bg-[#F6F2EC] px-3 py-1.5 rounded-full">
+                    <Ruler className="w-3.5 h-3.5" />{profile.height_cm} cm
+                  </span>
                 )}
-
-                {/* Quick-fact pills */}
-                {(profile.occupation || profile.height_cm || profile.has_children ||
-                  profile.relationship_model || profile.intention) && (
-                  <div className="flex flex-wrap gap-2">
-                    {profile.occupation && (
-                      <span className="flex items-center gap-1.5 bg-[#F6F2EC] rounded-full px-3.5 py-2 text-sm text-[#1A1410]/70">
-                        <Briefcase className="w-3.5 h-3.5 text-[#1A1410]/30 flex-shrink-0" />
-                        {profile.occupation}
-                      </span>
-                    )}
-                    {profile.height_cm && (
-                      <span className="flex items-center gap-1.5 bg-[#F6F2EC] rounded-full px-3.5 py-2 text-sm text-[#1A1410]/70">
-                        <Ruler className="w-3.5 h-3.5 text-[#1A1410]/30 flex-shrink-0" />
-                        {profile.height_cm} cm
-                      </span>
-                    )}
-                    {profile.has_children && (
-                      <span className="bg-[#F6F2EC] rounded-full px-3.5 py-2 text-sm text-[#1A1410]/70">
-                        {profile.has_children}
-                      </span>
-                    )}
-                    {profile.relationship_model && (
-                      <span className="bg-[#F6F2EC] rounded-full px-3.5 py-2 text-sm text-[#1A1410]/70">
-                        {profile.relationship_model}
-                      </span>
-                    )}
-                    {profile.intention && (
-                      <span className="bg-[#F6F2EC] rounded-full px-3.5 py-2 text-sm text-[#1A1410]/70">
-                        {profile.intention}
-                      </span>
-                    )}
-                  </div>
+                {profile.occupation && (
+                  <span className="flex items-center gap-1.5 text-sm text-[#1A1410]/60 bg-[#F6F2EC] px-3 py-1.5 rounded-full">
+                    <Briefcase className="w-3.5 h-3.5" />{profile.occupation}
+                  </span>
                 )}
+                {profile.intention && (
+                  <span className="flex items-center gap-1.5 text-sm text-[#9E6B47] bg-[#F6F2EC] px-3 py-1.5 rounded-full">
+                    <Sparkles className="w-3.5 h-3.5" />{profile.intention}
+                  </span>
+                )}
+                {profile.has_children && (
+                  <span className="text-sm text-[#1A1410]/60 bg-[#F6F2EC] px-3 py-1.5 rounded-full">{profile.has_children}</span>
+                )}
+              </div>
 
-                {/* Werte */}
-                {profile.werte?.length > 0 && (
-                  <div>
-                    <p className="text-[11px] text-[#1A1410]/35 uppercase tracking-widest mb-2">Werte</p>
-                    <div className="flex flex-wrap gap-2">
-                      {profile.werte.map((w, i) => (
-                        <span
-                          key={w}
-                          className={cn(
-                            'text-sm px-3 py-1.5 rounded-full',
-                            i % 2 === 0 ? 'bg-[#EDE8E0] text-[#8B6040]' : 'bg-[#E8EDE0] text-[#3D6B50]',
-                          )}
-                        >
-                          {w}
-                        </span>
+              {/* ── Über mich ── */}
+              {profile.bio && (
+                <div className="px-5 py-5 border-t border-[#F6F2EC]/70">
+                  <p className="text-[11px] text-[#1A1410]/35 uppercase tracking-widest mb-3">Über mich</p>
+                  <p className="text-[#1A1410]/70 text-sm leading-relaxed">{profile.bio}</p>
+                </div>
+              )}
+
+              {/* ── Sprachmemo ── */}
+              {profile.audio_prompt_url ? (
+                <div className="px-5 py-5 border-t border-[#F6F2EC]/70">
+                  <p className="text-[11px] text-[#1A1410]/35 uppercase tracking-widest mb-3">Sprachmemo</p>
+                  <AudioPlayer url={profile.audio_prompt_url} />
+                </div>
+              ) : (
+                <div className="px-5 py-5 border-t border-[#F6F2EC]/70 flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-[#F6F2EC] flex items-center justify-center flex-shrink-0">
+                    <Mic className="w-5 h-5 text-[#9E6B47]" />
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-sm font-medium text-[#1A1410] mb-1.5">Sprachmemo</p>
+                    <div className="flex items-center gap-0.5 h-5">
+                      {Array.from({ length: 26 }).map((_, i) => (
+                        <div
+                          key={i}
+                          className="w-1 bg-[#9E6B47]/25 rounded-full"
+                          style={{ height: `${30 + Math.sin(i * 0.9) * 50 + Math.cos(i * 1.4) * 20}%` }}
+                        />
                       ))}
                     </div>
                   </div>
-                )}
+                  <span className="text-xs text-[#1A1410]/35 flex-shrink-0">Noch nicht aufgenommen</span>
+                </div>
+              )}
 
-                {/* Zodiac */}
-                {(profile.sun_sign || profile.ascendant || profile.chinese_zodiac) && (
+              {/* ── Interessen ── */}
+              {profile.interests?.length > 0 && (
+                <div className="px-5 py-5 border-t border-[#F6F2EC]/70">
+                  <p className="text-[11px] text-[#1A1410]/35 uppercase tracking-widest mb-3">Interessen</p>
+                  <div className="flex flex-wrap gap-2">
+                    {profile.interests.map((item) => (
+                      <span key={item} className="text-sm text-[#1A1410]/60 bg-[#F6F2EC] px-3 py-1.5 rounded-full">{item}</span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* ── Werte ── */}
+              {profile.werte?.length > 0 && (
+                <div className="px-5 py-5 border-t border-[#F6F2EC]/70">
+                  <p className="text-[11px] text-[#1A1410]/35 uppercase tracking-widest mb-3">Werte</p>
+                  <div className="flex flex-wrap gap-2">
+                    {profile.werte.map((w) => (
+                      <span key={w} className="text-sm text-[#9E6B47] bg-[#F6F2EC] px-3 py-1.5 rounded-full">{w}</span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* ── Beziehung & Bindung ── */}
+              {(profile.relationship_model || profile.bindungstyp || profile.love_language) && (
+                <div className="px-5 py-5 border-t border-[#F6F2EC]/70 space-y-4">
+                  <p className="text-[11px] text-[#1A1410]/35 uppercase tracking-widest">Beziehung &amp; Bindung</p>
+                  {profile.relationship_model && (
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-[#1A1410]/40">Beziehungsmodell</span>
+                      <span className="text-sm text-[#1A1410] font-medium">{profile.relationship_model}</span>
+                    </div>
+                  )}
+                  {profile.bindungstyp && (
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-[#1A1410]/40">Bindungstyp</span>
+                      <span className="text-sm text-[#1A1410] font-medium">{profile.bindungstyp}</span>
+                    </div>
+                  )}
+                  {profile.love_language && (
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-[#1A1410]/40">Love Language</span>
+                      <span className="text-sm text-[#1A1410] font-medium flex items-center gap-1.5">
+                        <Heart className="w-3.5 h-3.5 text-[#9E6B47]" />{profile.love_language}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* ── Persönlichkeit ── */}
+              {(profile.introvert_extrovert != null ||
+                profile.spontan_strukturiert != null ||
+                profile.rational_emotional != null) && (
+                <div className="px-5 py-5 border-t border-[#F6F2EC]/70 space-y-4">
+                  <p className="text-[11px] text-[#1A1410]/35 uppercase tracking-widest">Persönlichkeit</p>
+                  {profile.introvert_extrovert != null && (
+                    <PersonalityBar leftLabel="Introvertiert" rightLabel="Extravertiert" value={profile.introvert_extrovert} />
+                  )}
+                  {profile.spontan_strukturiert != null && (
+                    <PersonalityBar leftLabel="Spontan" rightLabel="Strukturiert" value={profile.spontan_strukturiert} />
+                  )}
+                  {profile.rational_emotional != null && (
+                    <PersonalityBar leftLabel="Rational" rightLabel="Emotional" value={profile.rational_emotional} />
+                  )}
+                </div>
+              )}
+
+              {/* ── Horoskop ── */}
+              {(profile.sun_sign || profile.ascendant || profile.chinese_zodiac) && (
+                <div className="px-5 py-5 border-t border-[#F6F2EC]/70 space-y-3">
+                  <p className="text-[11px] text-[#1A1410]/35 uppercase tracking-widest">Horoskop</p>
                   <div className="flex flex-wrap gap-2">
                     {profile.sun_sign && (
                       <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(180,140,110,0.14)', color: '#8B6040' }}>
@@ -799,33 +854,22 @@ export function DiscoverClient({
                       </span>
                     )}
                   </div>
-                )}
+                </div>
+              )}
 
-                {/* Bio */}
-                {profile.bio && (
-                  <p className="text-sm text-[#1A1410]/65 leading-relaxed">{profile.bio}</p>
-                )}
-
-                {/* Personality sliders */}
-                {(profile.introvert_extrovert != null ||
-                  profile.spontan_strukturiert != null ||
-                  profile.rational_emotional != null) && (
-                  <div className="pt-1 space-y-3">
-                    <p className="text-[11px] text-[#1A1410]/35 uppercase tracking-widest">Persönlichkeit</p>
-                    {profile.introvert_extrovert != null && (
-                      <PersonalityBar leftLabel="Introvertiert" rightLabel="Extravertiert" value={profile.introvert_extrovert} />
-                    )}
-                    {profile.spontan_strukturiert != null && (
-                      <PersonalityBar leftLabel="Spontan" rightLabel="Strukturiert" value={profile.spontan_strukturiert} />
-                    )}
-                    {profile.rational_emotional != null && (
-                      <PersonalityBar leftLabel="Rational" rightLabel="Emotional" value={profile.rational_emotional} />
-                    )}
+              {/* ── Dealbreakers ── */}
+              {profile.dealbreakers?.length > 0 && (
+                <div className="px-5 py-5 border-t border-[#F6F2EC]/70">
+                  <p className="text-[11px] text-[#1A1410]/35 uppercase tracking-widest mb-3">Dealbreaker</p>
+                  <div className="flex flex-wrap gap-2">
+                    {profile.dealbreakers.map((d) => (
+                      <span key={d} className="text-sm text-red-700/80 bg-red-50 border border-red-200/60 px-3 py-1.5 rounded-full">{d}</span>
+                    ))}
                   </div>
-                )}
-              </div>
+                </div>
+              )}
 
-              {/* ── Interleaved: additional photos (with captions) + prompts ── */}
+              {/* ── Interleaved: Foto 2–6 + Prompts ── */}
               {photoUrl(profile.photos?.[1]) && (
                 <PhotoWithCaption photo={profile.photos[1]} alt={profile.name} />
               )}
@@ -853,11 +897,6 @@ export function DiscoverClient({
 
               {photoUrl(profile.photos?.[5]) && (
                 <PhotoWithCaption photo={profile.photos[5]} alt={profile.name} />
-              )}
-
-              {/* Audio prompt */}
-              {profile.audio_prompt_url && (
-                <AudioPlayer url={profile.audio_prompt_url} />
               )}
             </div>
           </motion.div>
