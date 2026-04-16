@@ -205,9 +205,11 @@ function AudioPlayer({ url }: { url: string }) {
 /** Single prompt block */
 function PromptBlock({ question, answer }: { question: string; answer: string }) {
   return (
-    <div className="px-5 py-5 border-t border-[#F6F2EC]/70">
-      <p className="text-[11px] text-[#1A1410]/35 uppercase tracking-widest mb-2">{question}</p>
-      <p className="font-heading text-xl italic text-[#7A4E30] leading-snug">{answer}</p>
+    <div className="px-4 py-4 border-t border-[#F6F2EC]/70">
+      <div className="bg-[#F6F2EC] rounded-xl px-4 py-4 border-l-[3px] border-[#9E6B47]">
+        <p className="text-[11px] text-[#1A1410]/40 uppercase tracking-widest mb-2">{question}</p>
+        <p className="font-heading text-xl italic text-[#7A4E30] leading-snug">{answer}</p>
+      </div>
     </div>
   )
 }
@@ -624,6 +626,7 @@ export function DiscoverClient({
                   src={photoUrl(profile.photos[0])}
                   alt={profile.name}
                   className="w-full h-full object-cover pointer-events-none"
+                  style={{ objectPosition: 'center 20%' }}
                   draggable={false}
                 />
               ) : (
@@ -683,7 +686,7 @@ export function DiscoverClient({
                   </span>
                 )}
                 {profile.love_language && (
-                  <span className="rounded-full bg-[#EDE8E0] text-[#7A4E30] text-sm px-3 py-1.5">
+                  <span className="rounded-full bg-[#E8EDE0] text-[#3D6B50] text-sm px-3 py-1.5">
                     {profile.love_language}
                   </span>
                 )}
@@ -723,10 +726,15 @@ export function DiscoverClient({
                     Werte
                   </p>
                   <div className="flex flex-wrap gap-2">
-                    {profile.werte.map((w) => (
+                    {profile.werte.map((w, i) => (
                       <span
                         key={w}
-                        className="bg-[#EDE8E0] text-[#8B6040] text-sm px-3 py-1.5 rounded-full"
+                        className={cn(
+                          'text-sm px-3 py-1.5 rounded-full',
+                          i % 2 === 0
+                            ? 'bg-[#EDE8E0] text-[#8B6040]'
+                            : 'bg-[#E8EDE0] text-[#3D6B50]',
+                        )}
                       >
                         {w}
                       </span>
@@ -859,10 +867,10 @@ export function DiscoverClient({
             {/* Pass / Nope */}
             <button
               onClick={handlePass}
-              className="w-14 h-14 rounded-full bg-white border-2 border-[#E2DAD0] shadow flex items-center justify-center hover:border-red-300 active:scale-95 transition-all"
+              className="w-11 h-11 rounded-full bg-white border border-[#E2DAD0] shadow-sm flex items-center justify-center hover:border-red-300 active:scale-95 transition-all"
               aria-label="Ablehnen"
             >
-              <X className="w-6 h-6 text-[#1A1410]/40" />
+              <X className="w-5 h-5 text-[#1A1410]/40" />
             </button>
 
             {/* Undo */}
@@ -883,10 +891,10 @@ export function DiscoverClient({
             {/* Like */}
             <button
               onClick={handleLike}
-              className="w-[72px] h-[72px] rounded-full bg-[#9E6B47] shadow-xl flex items-center justify-center hover:bg-[#7A4E30] active:scale-95 transition-all"
+              className="w-14 h-14 rounded-full bg-[#9E6B47] shadow-lg flex items-center justify-center hover:bg-[#7A4E30] active:scale-95 transition-all"
               aria-label="Gefällt mir"
             >
-              <Heart className="w-8 h-8 text-white fill-white" />
+              <Heart className="w-6 h-6 text-white fill-white" />
             </button>
           </div>
         </div>

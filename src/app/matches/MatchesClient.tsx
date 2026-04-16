@@ -147,7 +147,8 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
                 key={match.id}
                 className={cn(
                   'bg-white rounded-2xl overflow-hidden border border-[#E2DAD0] active:scale-[0.98] transition-transform duration-150',
-                  isThisActiveMatch && 'border-2 border-[#9E6B47]'
+                  isThisActiveMatch && 'border-2 border-[#9E6B47]',
+                  isRequested && !isRequester && !isActive && 'border-l-4 border-l-[#9E6B47]'
                 )}
               >
                 {/* Photo area */}

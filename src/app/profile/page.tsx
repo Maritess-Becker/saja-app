@@ -70,7 +70,7 @@ export default async function ProfilePage() {
                   <svg viewBox="0 0 512 512" width="40" height="40">
                     <path
                       d="M 68 444 A 212 212 0 1 1 444 444"
-                      stroke="#9E6B47"
+                      stroke="#E2DAD0"
                       strokeWidth="44"
                       strokeLinecap="round"
                       fill="none"

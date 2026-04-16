@@ -20,9 +20,9 @@ export default function Icon() {
       >
         <svg width="460" height="460" viewBox="0 0 512 512" fill="none">
           <path
-            d="M 265 134 A 212 212 0 1 1 77 460"
+            d="M 256 115 A 141 141 0 1 1 115 256"
             stroke="#9E6B47"
-            strokeWidth="44"
+            strokeWidth="32"
             strokeLinecap="round"
             fill="none"
           />

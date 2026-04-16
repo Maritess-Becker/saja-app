@@ -22,11 +22,11 @@ function NavIcon({ iconKey, isActive }: { iconKey: string; isActive: boolean }) 
 
   if (iconKey === 'saja') {
     return (
-      <svg width="28" height="28" viewBox="0 0 512 512" fill="none">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style={{ transform: 'rotate(135deg)', transformOrigin: 'center' }}>
         <path
-          d="M 68 444 A 212 212 0 1 1 444 444"
+          d="M 4.8 19.2 A 10.2 10.2 0 1 1 19.2 19.2"
           stroke={color}
-          strokeWidth="44"
+          strokeWidth="1.8"
           strokeLinecap="round"
         />
       </svg>
