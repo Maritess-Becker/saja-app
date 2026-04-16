@@ -34,6 +34,7 @@ const DEMOS = [
     gender: 'Frau', seeking: ['Männer'], height_cm: 168,
     intention: 'Feste Partnerschaft', relationship_model: 'Monogam',
     bindungstyp: 'Sicher gebunden', love_language: 'Quality Time',
+    sun_sign: '♓ Fische', ascendant: '♎ Waage', chinese_zodiac: 'Hase 🐇',
     werte: ['Achtsamkeit', 'Natur', 'Wachstum', 'Stille', 'Körperlichkeit'],
     photos: [
       p('https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=600&fit=crop'),
@@ -53,6 +54,7 @@ const DEMOS = [
     gender: 'Mann', seeking: ['Frauen'], height_cm: 183,
     intention: 'Etwas Ernstes aufbauen', relationship_model: 'Monogam',
     bindungstyp: 'Sicher gebunden', love_language: 'Acts of Service',
+    sun_sign: '♉ Stier', ascendant: '♑ Steinbock', chinese_zodiac: 'Hahn 🐓',
     werte: ['Kreativität', 'Tiefe Gespräche', 'Natur', 'Verlässlichkeit', 'Reisen'],
     photos: [
       p('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=600&fit=crop'),
@@ -72,6 +74,7 @@ const DEMOS = [
     gender: 'Frau', seeking: ['Männer'], height_cm: 162,
     intention: 'Offen schauen', relationship_model: 'Monogam',
     bindungstyp: 'Sicher gebunden', love_language: 'Words of Affirmation',
+    sun_sign: '♏ Skorpion', ascendant: '♋ Krebs', chinese_zodiac: 'Tiger 🐯',
     werte: ['Wachstum', 'Spiritualität', 'Tiefe Gespräche', 'Stille', 'Familie'],
     photos: [
       p('https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=400&h=600&fit=crop'),
@@ -91,6 +94,7 @@ const DEMOS = [
     gender: 'Frau', seeking: ['Männer'], height_cm: 171,
     intention: 'Feste Partnerschaft', relationship_model: 'Monogam',
     bindungstyp: 'Ängstlich gebunden', love_language: 'Physical Touch',
+    sun_sign: '♒ Wassermann', ascendant: '♌ Löwe', chinese_zodiac: 'Schlange 🐍',
     werte: ['Kunst', 'Abenteuer', 'Kreativität', 'Humor', 'Reisen'],
     photos: [
       p('https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&h=600&fit=crop'),
@@ -110,6 +114,7 @@ const DEMOS = [
     gender: 'Mann', seeking: ['Frauen'], height_cm: 178,
     intention: 'Feste Partnerschaft', relationship_model: 'Monogam',
     bindungstyp: 'Vermeidend gebunden', love_language: 'Quality Time',
+    sun_sign: '♈ Widder', ascendant: '♐ Schütze', chinese_zodiac: 'Pferd 🐴',
     werte: ['Wachstum', 'Freiheit', 'Verlässlichkeit', 'Natur', 'Humor'],
     photos: [
       p('https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=600&fit=crop'),
@@ -129,6 +134,7 @@ const DEMOS = [
     gender: 'Frau', seeking: ['Männer'], height_cm: 165,
     intention: 'Etwas Ernstes aufbauen', relationship_model: 'Offen',
     bindungstyp: 'Sicher gebunden', love_language: 'Words of Affirmation',
+    sun_sign: '♋ Krebs', ascendant: '♓ Fische', chinese_zodiac: 'Schwein 🐷',
     werte: ['Familie', 'Achtsamkeit', 'Verlässlichkeit', 'Wachstum', 'Stille'],
     photos: [
       p('https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=600&fit=crop'),
@@ -287,6 +293,9 @@ async function main() {
       relationship_model: demo.relationship_model,
       bindungstyp: demo.bindungstyp,
       love_language: demo.love_language,
+      sun_sign: demo.sun_sign ?? null,
+      ascendant: demo.ascendant ?? null,
+      chinese_zodiac: demo.chinese_zodiac ?? null,
       werte: demo.werte,
       photos: demo.photos,
       prompts: demo.prompts,

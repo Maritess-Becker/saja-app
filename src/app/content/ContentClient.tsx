@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Lock, Star, ExternalLink, ChevronRight, Heart, BookOpen, Mic, MessageSquare, Users, Sparkles } from 'lucide-react'
+import { Lock, Star, ExternalLink, ChevronRight, Heart, BookOpen, Mic, MessageSquare, Users, Sparkles, Moon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import toastLib from 'react-hot-toast'
 import { createClient } from '@/lib/supabase/client'
@@ -227,6 +227,54 @@ const CONTENT_SECTIONS = [
       },
     ] as ContentItem[],
   },
+  {
+    id: 'horoskop',
+    label: 'Horoskop & Liebe',
+    icon: <Star size={22} strokeWidth={1.8} />,
+    items: [
+      {
+        id: 'sternzeichen-liebe',
+        title: 'Dein Sternzeichen & die Liebe',
+        description: 'Was sagt dein Sonnenzeichen über dich in Beziehungen? Ein Überblick über alle 12 Zeichen.',
+        access: 'free',
+        icon: <Star size={22} strokeWidth={1.8} />,
+        action: 'modal',
+        duration: '3 Min.',
+        tag: 'Kostenlos',
+      },
+      {
+        id: 'zeichen-kompatibilitaet',
+        title: 'Welche Zeichen passen zu dir?',
+        description: 'Klassische Kompatibilität nach westlichem Horoskop — welche Zeichen harmonieren mit deinem?',
+        access: 'membership',
+        icon: <Heart size={22} strokeWidth={1.8} />,
+        action: 'modal',
+        duration: '5 Min.',
+        tag: 'Mitgliedschaft',
+      },
+      {
+        id: 'aszendent-berechnen',
+        title: 'Aszendent berechnen',
+        description: 'Gib Geburtszeit und -ort ein und finde deinen Aszendenten — die Seite die andere zuerst sehen.',
+        access: 'free',
+        icon: <Sparkles size={22} strokeWidth={1.8} />,
+        action: 'external',
+        externalUrl: 'https://astro.com',
+        duration: '2 Min.',
+        tag: 'Kostenlos',
+      },
+      {
+        id: 'chinesisches-horoskop',
+        title: 'Chinesisches Horoskop & Liebe',
+        description: 'Welches der 12 Tiere bist du — und welche Tiere ergänzen dich in der Partnerschaft?',
+        access: 'membership',
+        icon: <Moon size={22} strokeWidth={1.8} />,
+        action: 'modal',
+        duration: '4 Min.',
+        tag: 'Mitgliedschaft',
+      },
+    ] as ContentItem[],
+  },
 ]
 
 // ─── Modal content ────────────────────────────────────────────────────────────
@@ -426,6 +474,75 @@ const MODAL_CONTENT: Record<string, { title: string; body: React.ReactNode }> = 
       </div>
     ),
   },
+  'sternzeichen-liebe': {
+    title: 'Dein Sternzeichen & die Liebe',
+    body: (
+      <div className="space-y-3">
+        <p className="text-text/70 text-sm leading-relaxed">Jedes der 12 Zeichen trägt eine eigene Art zu lieben. Ein kurzer Überblick:</p>
+        {[
+          { z: '♈ Widder', t: 'Leidenschaftlich, direkt, mutig in der Liebe.' },
+          { z: '♉ Stier', t: 'Sinnlich, beständig, sucht Sicherheit und Treue.' },
+          { z: '♊ Zwillinge', t: 'Neugierig, kommunikativ, braucht mentale Verbindung.' },
+          { z: '♋ Krebs', t: 'Fürsorglich, tief emotional, sehr loyal.' },
+          { z: '♌ Löwe', t: 'Großzügig, romantisch, braucht Wertschätzung.' },
+          { z: '♍ Jungfrau', t: 'Zuvorkommend, aufmerksam, liebt durch Handlungen.' },
+          { z: '♎ Waage', t: 'Harmonisch, romantisch, sucht Balance.' },
+          { z: '♏ Skorpion', t: 'Intensiv, tief, sucht echte Intimität.' },
+          { z: '♐ Schütze', t: 'Abenteuerlustig, ehrlich, braucht Freiheit.' },
+          { z: '♑ Steinbock', t: 'Verlässlich, geduldig, liebt mit Taten.' },
+          { z: '♒ Wassermann', t: 'Einzigartig, unabhängig, braucht Freundschaft als Basis.' },
+          { z: '♓ Fische', t: 'Empathisch, träumerisch, liebt bedingungslos.' },
+        ].map((item) => (
+          <div key={item.z} className="p-3 bg-sand rounded-xl flex gap-3">
+            <span className="text-primary font-heading text-lg">{item.z}</span>
+            <p className="text-text/70 text-sm">{item.t}</p>
+          </div>
+        ))}
+      </div>
+    ),
+  },
+  'zeichen-kompatibilitaet': {
+    title: 'Welche Zeichen passen zu dir?',
+    body: (
+      <div className="space-y-4">
+        <p className="text-text/70 text-sm leading-relaxed">Klassische Affinitäten nach Element und Qualität:</p>
+        {[
+          { gruppe: 'Feuer ♈♌♐', desc: 'Widder, Löwe und Schütze verstehen einander — leidenschaftlich und direkt.' },
+          { gruppe: 'Erde ♉♍♑', desc: 'Stier, Jungfrau und Steinbock — geerdet, loyal, langfristig denkend.' },
+          { gruppe: 'Luft ♊♎♒', desc: 'Zwillinge, Waage und Wassermann — intellektuell, kommunikativ.' },
+          { gruppe: 'Wasser ♋♏♓', desc: 'Krebs, Skorpion und Fische — tief emotional, intuitiv, fürsorglich.' },
+        ].map((item) => (
+          <div key={item.gruppe} className="p-4 bg-sand rounded-xl">
+            <p className="font-medium text-dark text-sm mb-1">{item.gruppe}</p>
+            <p className="text-text/60 text-xs">{item.desc}</p>
+          </div>
+        ))}
+        <p className="text-xs text-text/40 italic">Kompatibilität ist komplex — das Gesamthoroskop gibt mehr Aufschluss.</p>
+      </div>
+    ),
+  },
+  'chinesisches-horoskop': {
+    title: 'Chinesisches Horoskop & Liebe',
+    body: (
+      <div className="space-y-3">
+        <p className="text-text/70 text-sm leading-relaxed">Die 12 Tiere und ihre Partnerschaftsqualitäten:</p>
+        {[
+          { t: 'Ratte 🐭', d: 'Charmant und klug — passt gut zu Drache und Affe.' },
+          { t: 'Ochse 🐂', d: 'Verlässlich und geduldig — harmoniert mit Schlange und Hahn.' },
+          { t: 'Tiger 🐯', d: 'Mutig und leidenschaftlich — ergänzt sich mit Pferd und Hund.' },
+          { t: 'Hase 🐇', d: 'Sanft und diplomatisch — findet Harmonie mit Ziege und Schwein.' },
+          { t: 'Drache 🐉', d: 'Charismatisch und stark — verbindet sich mit Ratte und Affe.' },
+          { t: 'Schlange 🐍', d: 'Weise und intuitiv — harmoniert mit Ochse und Hahn.' },
+        ].map((item) => (
+          <div key={item.t} className="p-3 bg-sand rounded-xl">
+            <p className="font-medium text-dark text-sm">{item.t}</p>
+            <p className="text-text/60 text-xs mt-0.5">{item.d}</p>
+          </div>
+        ))}
+        <p className="text-xs text-text/40 italic">... + 6 weitere Tiere. Vollständige Übersicht folgt in Phase 2.</p>
+      </div>
+    ),
+  },
   'beziehungsmodell-check': {
     title: 'Beziehungsmodell-Check',
     body: (
@@ -519,6 +636,10 @@ const ICON_BG: Record<string, string> = {
   'meditation-anna-yves': '#5A8A6A',
   'programm-verbindung': '#7864A0',
   'programm-tantra': '#4A7A5A',
+  'sternzeichen-liebe': '#9E6B47',
+  'zeichen-kompatibilitaet': '#C4603A',
+  'aszendent-berechnen': '#7864A0',
+  'chinesisches-horoskop': '#4A7A5A',
 }
 
 // ─── Component ────────────────────────────────────────────────────────────────

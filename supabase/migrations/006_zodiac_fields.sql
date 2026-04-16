@@ -1,0 +1,4 @@
+ALTER TABLE profiles
+  ADD COLUMN IF NOT EXISTS sun_sign TEXT,
+  ADD COLUMN IF NOT EXISTS ascendant TEXT,
+  ADD COLUMN IF NOT EXISTS chinese_zodiac TEXT;

@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils'
 import { SajaLogo } from '@/components/ui/SajaLogo'
 import toast from 'react-hot-toast'
 
-const TOTAL_STEPS = 10
+const TOTAL_STEPS = 11
 
 // ── Attachment types ────────────────────────────────────────────────
 type PhotoItem = { url: string; path: string }
@@ -196,6 +196,19 @@ const PROMPT_CATALOG = {
   ],
 }
 
+// ── Zodiac data ─────────────────────────────────────────────────────
+const STERNZEICHEN = [
+  '♈ Widder', '♉ Stier', '♊ Zwillinge', '♋ Krebs',
+  '♌ Löwe', '♍ Jungfrau', '♎ Waage', '♏ Skorpion',
+  '♐ Schütze', '♑ Steinbock', '♒ Wassermann', '♓ Fische',
+]
+
+function getChineseZodiac(year: number): string {
+  const animals = ['Ratte 🐭', 'Ochse 🐂', 'Tiger 🐯', 'Hase 🐇', 'Drache 🐉', 'Schlange 🐍',
+    'Pferd 🐴', 'Ziege 🐐', 'Affe 🐒', 'Hahn 🐓', 'Hund 🐕', 'Schwein 🐷']
+  return animals[((year - 1900) % 12 + 12) % 12]
+}
+
 // ── Helpers ─────────────────────────────────────────────────────────
 function computeTopKey(answers: string[]): string {
   const counts: Record<string, number> = {}
@@ -261,6 +274,10 @@ export default function OnboardingPage() {
   const [selectedPrompts, setSelectedPrompts] = useState<string[]>([])
   const [promptAnswers, setPromptAnswers] = useState<Record<string, string>>({})
 
+  // Step 4 – Horoskop
+  const [sunSign, setSunSign] = useState('')
+  const [ascendant, setAscendant] = useState('')
+
   // Step 10 – Audio
   const [isRecording, setIsRecording] = useState(false)
   const [audioBlob, setAudioBlob] = useState<Blob | null>(null)
@@ -318,6 +335,8 @@ export default function OnboardingPage() {
           setPromptAnswers(ans)
         }
         if (data.audio_prompt_url) setAudioPromptUrl(data.audio_prompt_url)
+        if (data.sun_sign) setSunSign(data.sun_sign)
+        if (data.ascendant) setAscendant(data.ascendant)
       }
       setLoading(false)
     }
@@ -357,6 +376,8 @@ export default function OnboardingPage() {
       dealbreakers,
       prompts: selectedPrompts.map((q) => ({ question: q, answer: promptAnswers[q] ?? '' })),
       audio_prompt_url: audioPromptUrl,
+      sun_sign: sunSign || null,
+      ascendant: ascendant || null,
     }
   }
 
@@ -550,6 +571,8 @@ export default function OnboardingPage() {
         dealbreakers,
         prompts: selectedPrompts.map((q) => ({ question: q, answer: promptAnswers[q] ?? '' })),
         audio_prompt_url: finalAudioUrl,
+        sun_sign: sunSign || null,
+        ascendant: ascendant || null,
         is_complete: true,
       })
       if (error) throw error
@@ -865,8 +888,68 @@ export default function OnboardingPage() {
     </StepShell>
   )
 
-  // ── Step 4 ──────────────────────────────────────────────────────
-  const renderStep4 = () => (
+  // ── Step 4 – Horoskop ────────────────────────────────────────────
+  const renderStep4 = () => {
+    const birthYear = birthDate ? new Date(birthDate).getFullYear() : null
+    const chineseSign = birthYear ? getChineseZodiac(birthYear) : null
+
+    return (
+      <StepShell title="Dein Horoskop" subtitle="Optional — du kannst diesen Schritt überspringen.">
+        <div className="space-y-6">
+          {/* Sonnenzeichen */}
+          <div>
+            <label className="block font-body text-sm text-[#1A1410]/70 mb-1">Sonnenzeichen</label>
+            <select
+              value={sunSign}
+              onChange={(e) => setSunSign(e.target.value)}
+              className="w-full rounded-xl border border-[#F6F2EC] bg-white px-4 py-3 text-sm font-body text-[#1A1410] focus:outline-none focus:ring-2 focus:ring-[#9E6B47]/30"
+            >
+              <option value="">Bitte wählen…</option>
+              {STERNZEICHEN.map((z) => (
+                <option key={z} value={z}>{z}</option>
+              ))}
+            </select>
+          </div>
+
+          {/* Aszendent */}
+          <div>
+            <label className="block font-body text-sm text-[#1A1410]/70 mb-1">Aszendent <span className="text-[#A89888]">(optional)</span></label>
+            <select
+              value={ascendant}
+              onChange={(e) => setAscendant(e.target.value)}
+              className="w-full rounded-xl border border-[#F6F2EC] bg-white px-4 py-3 text-sm font-body text-[#1A1410] focus:outline-none focus:ring-2 focus:ring-[#9E6B47]/30"
+            >
+              <option value="">Bitte wählen…</option>
+              {STERNZEICHEN.map((z) => (
+                <option key={z} value={z}>{z}</option>
+              ))}
+            </select>
+            <p className="text-xs font-body text-[#1A1410]/40 mt-1.5">
+              Deinen Aszendenten findest du mit deiner genauen Geburtszeit und -ort auf astro.com
+            </p>
+          </div>
+
+          {/* Chinesisches Zeichen */}
+          {chineseSign && (
+            <div className="rounded-2xl bg-[rgba(120,100,160,0.08)] border border-[rgba(120,100,160,0.15)] p-5 text-center">
+              <p className="font-body text-xs text-[#7864A0] uppercase tracking-widest mb-1">Chinesisches Sternzeichen</p>
+              <p className="font-heading text-3xl text-[#1A1410]">Du bist {chineseSign}</p>
+              <p className="font-body text-xs text-[#1A1410]/40 mt-1">Berechnet aus deinem Geburtsjahr {birthYear}</p>
+            </div>
+          )}
+          {!birthYear && (
+            <div className="rounded-2xl bg-[#F6F2EC] p-4 text-center">
+              <p className="font-body text-sm text-[#1A1410]/50">Trage im ersten Schritt dein Geburtsdatum ein, um dein chinesisches Sternzeichen zu sehen.</p>
+            </div>
+          )}
+        </div>
+        <NavButtons onNext={goNext} showSkip onSkip={goNext} />
+      </StepShell>
+    )
+  }
+
+  // ── Step 5 ──────────────────────────────────────────────────────
+  const renderStep5 = () => (
     <StepShell title="Was suchst du?" subtitle="Sei ehrlich — das hilft dir die richtigen Menschen zu finden.">
       <div className="space-y-6">
         <div>
@@ -890,8 +973,8 @@ export default function OnboardingPage() {
     </StepShell>
   )
 
-  // ── Step 5 ──────────────────────────────────────────────────────
-  const renderStep5 = () => {
+  // ── Step 6 ──────────────────────────────────────────────────────
+  const renderStep6 = () => {
     if (bindungsShowResult) {
       const topKey = Object.entries(BINDUNGSTYP_MAP).find(([, v]) => v === bindungsResult)?.[0] ?? 'S'
       return (
@@ -962,8 +1045,8 @@ export default function OnboardingPage() {
     )
   }
 
-  // ── Step 6 ──────────────────────────────────────────────────────
-  const renderStep6 = () => {
+  // ── Step 7 ──────────────────────────────────────────────────────
+  const renderStep7 = () => {
     if (loveShowResult) {
       return (
         <StepShell title="Deine Love Language">
@@ -1035,8 +1118,8 @@ export default function OnboardingPage() {
     )
   }
 
-  // ── Step 7 ──────────────────────────────────────────────────────
-  const renderStep7 = () => (
+  // ── Step 8 ──────────────────────────────────────────────────────
+  const renderStep8 = () => (
     <StepShell title="Deine Werte" subtitle="Wähle bis zu 5 Werte, die dir am wichtigsten sind.">
       <div className="flex flex-wrap gap-2 mb-4">
         {WERTE_OPTIONS.map((w) => {
@@ -1062,8 +1145,8 @@ export default function OnboardingPage() {
     </StepShell>
   )
 
-  // ── Step 8 ──────────────────────────────────────────────────────
-  const renderStep8 = () => (
+  // ── Step 9 ──────────────────────────────────────────────────────
+  const renderStep9 = () => (
     <StepShell title="Dealbreaker" subtitle="Was ist für dich ein absolutes No-Go? Optional, max. 3.">
       <div className="flex flex-wrap gap-2 mb-4">
         {DEALBREAKER_OPTIONS.map((d) => {
@@ -1111,8 +1194,8 @@ export default function OnboardingPage() {
     </StepShell>
   )
 
-  // ── Step 9 ──────────────────────────────────────────────────────
-  const renderStep9 = () => {
+  // ── Step 10 ─────────────────────────────────────────────────────
+  const renderStep10 = () => {
     if (promptPhase === 'answer') {
       return (
         <StepShell title="Deine Antworten" subtitle="Schreib kurz und ehrlich — max. 150 Zeichen.">
@@ -1234,8 +1317,8 @@ export default function OnboardingPage() {
     )
   }
 
-  // ── Step 10 ─────────────────────────────────────────────────────
-  const renderStep10 = () => (
+  // ── Step 11 ─────────────────────────────────────────────────────
+  const renderStep11 = () => (
     <StepShell
       title="Dein Audio-Prompt"
       subtitle="Optional: Lass andere deine Stimme hören."
@@ -1332,6 +1415,7 @@ export default function OnboardingPage() {
       case 8: return renderStep8()
       case 9: return renderStep9()
       case 10: return renderStep10()
+      case 11: return renderStep11()
       default: return null
     }
   }

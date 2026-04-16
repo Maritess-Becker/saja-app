@@ -77,6 +77,9 @@ export interface Profile {
   prompts: Array<{ question: string; answer: string }>
   dealbreakers: string[]
   audio_prompt_url: string | null
+  sun_sign: string | null
+  ascendant: string | null
+  chinese_zodiac: string | null
   is_complete: boolean
   created_at: string
   updated_at: string

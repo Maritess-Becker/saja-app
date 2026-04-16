@@ -110,6 +110,27 @@ export default async function ProfilePage() {
                 ))}
               </div>
             )}
+
+            {/* Zodiac badges */}
+            {(profile?.sun_sign || profile?.ascendant || profile?.chinese_zodiac) && (
+              <div className="flex flex-wrap gap-2 justify-center mt-3">
+                {profile?.sun_sign && (
+                  <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(180,140,110,0.14)', color: '#8B6040' }}>
+                    {profile.sun_sign}
+                  </span>
+                )}
+                {profile?.ascendant && (
+                  <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(180,140,110,0.14)', color: '#8B6040' }}>
+                    ↑ {profile.ascendant.replace(/^[♈♉♊♋♌♍♎♏♐♑♒♓]\s*/, '')}
+                  </span>
+                )}
+                {profile?.chinese_zodiac && (
+                  <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(120,100,160,0.12)', color: '#7864A0' }}>
+                    {profile.chinese_zodiac}
+                  </span>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Upgrade banner */}

@@ -31,6 +31,7 @@ interface Filters {
   locationQuery: string
   intentions: string[]
   relationshipModels: string[]
+  zodiacSigns: string[]
 }
 
 // ─── Constants ────────────────────────────────────────────────────────────────
@@ -65,6 +66,7 @@ const DEFAULT_FILTERS: Filters = {
   locationQuery: '',
   intentions: [],
   relationshipModels: [],
+  zodiacSigns: [],
 }
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -75,6 +77,7 @@ function countActiveFilters(f: Filters): number {
   if (f.distanceKm !== 0 || f.locationQuery.trim()) n++
   if (f.intentions.length) n++
   if (f.relationshipModels.length) n++
+  if (f.zodiacSigns.length) n++
   return n
 }
 
@@ -259,6 +262,8 @@ export function DiscoverClient({
         p.relationship_model &&
         !filters.relationshipModels.includes(p.relationship_model)
       )
+        return false
+      if (filters.zodiacSigns.length && p.sun_sign && !filters.zodiacSigns.includes(p.sun_sign))
         return false
       return true
     })
@@ -522,6 +527,16 @@ export function DiscoverClient({
                     setHistory([])
                   }}
                 />
+                <ChipGroup
+                  label="Sternzeichen"
+                  options={['♈ Widder', '♉ Stier', '♊ Zwillinge', '♋ Krebs', '♌ Löwe', '♍ Jungfrau', '♎ Waage', '♏ Skorpion', '♐ Schütze', '♑ Steinbock', '♒ Wassermann', '♓ Fische']}
+                  selected={filters.zodiacSigns}
+                  onChange={(v) => {
+                    setFilters((f) => ({ ...f, zodiacSigns: v }))
+                    setCurrent(0)
+                    setHistory([])
+                  }}
+                />
               </div>
 
               {/* Drawer footer */}
@@ -694,6 +709,21 @@ export function DiscoverClient({
                   <span className="flex items-center gap-1 rounded-full bg-[#EDE8E0] text-[#7A4E30] text-sm px-3 py-1.5">
                     <MapPin className="w-3.5 h-3.5" />
                     {profile.location}
+                  </span>
+                )}
+                {profile.sun_sign && (
+                  <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(180,140,110,0.14)', color: '#8B6040' }}>
+                    {profile.sun_sign}
+                  </span>
+                )}
+                {profile.ascendant && (
+                  <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(180,140,110,0.14)', color: '#8B6040' }}>
+                    ↑ {profile.ascendant.replace(/^[♈♉♊♋♌♍♎♏♐♑♒♓]\s*/, '')}
+                  </span>
+                )}
+                {profile.chinese_zodiac && (
+                  <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(120,100,160,0.12)', color: '#7864A0' }}>
+                    {profile.chinese_zodiac}
                   </span>
                 )}
               </div>
