@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Users, Lock, MessageCircle, ChevronRight, ArrowLeft, Heart, Sparkles, Flame, Leaf, Star, Moon } from 'lucide-react'
+import { Users, Lock, MessageCircle, ChevronRight, ArrowLeft, Heart, Sparkles, Flame, Leaf, Star, Moon, Search } from 'lucide-react'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
 
@@ -104,10 +104,19 @@ const DEMO_POSTS: Record<string, Array<{ author: string; time: string; text: str
 
 export function CommunityClient({ tier }: Props) {
   const [selectedGroup, setSelectedGroup] = useState<string | null>(null)
+  const [search, setSearch] = useState('')
   const isPremium = tier === 'premium'
 
   const group = GROUPS.find((g) => g.id === selectedGroup)
   const posts = selectedGroup ? (DEMO_POSTS[selectedGroup] ?? DEMO_POSTS['bindungstypen'].slice(0, 2)) : []
+
+  const filteredGroups = search.trim()
+    ? GROUPS.filter((g) =>
+        g.name.toLowerCase().includes(search.toLowerCase()) ||
+        g.description.toLowerCase().includes(search.toLowerCase()) ||
+        g.tags.some((t) => t.toLowerCase().includes(search.toLowerCase()))
+      )
+    : GROUPS
 
   if (!isPremium) {
     return (
@@ -229,10 +238,26 @@ export function CommunityClient({ tier }: Props) {
   return (
     <div className="max-w-2xl mx-auto px-4 pt-8 pb-32">
       <h1 className="font-heading text-[52px] font-light text-[#1A1410] tracking-[-0.5px] leading-none mb-1">Community</h1>
-      <p className="text-[#A89888] font-body text-sm mb-8">Dein geschützter Raum für tiefe Gespräche.</p>
+      <p className="text-[#A89888] font-body text-sm mb-5">Dein geschützter Raum für tiefe Gespräche.</p>
+
+      {/* Search */}
+      <div className="relative mb-6">
+        <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#A89888]" />
+        <input
+          type="text"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Gruppen durchsuchen…"
+          className="w-full pl-10 pr-4 py-3 rounded-xl bg-white text-sm font-body text-[#1A1410] placeholder:text-[#A89888] focus:outline-none focus:ring-2 focus:ring-[#9E6B47]/30"
+          style={{ boxShadow: '0 2px 12px rgba(26,20,16,0.06)' }}
+        />
+      </div>
 
       <div className="space-y-3">
-        {GROUPS.map((g) => (
+        {filteredGroups.length === 0 && (
+          <p className="text-center text-[#A89888] text-sm py-8">Keine Gruppen gefunden.</p>
+        )}
+        {filteredGroups.map((g) => (
           <button
             key={g.id}
             onClick={() => setSelectedGroup(g.id)}

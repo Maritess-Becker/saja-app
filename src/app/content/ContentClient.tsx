@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Lock, Star, ExternalLink, ChevronRight, Heart, BookOpen, Mic, MessageSquare, Users, Sparkles, Moon } from 'lucide-react'
+import { Lock, Star, ExternalLink, ChevronRight, Heart, BookOpen, Mic, MessageSquare, Users, Sparkles, Moon, Search } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import toastLib from 'react-hot-toast'
 import { createClient } from '@/lib/supabase/client'
@@ -648,6 +648,16 @@ export function ContentClient({ tier, purchasedIds, userId }: Props) {
   const supabase = createClient()
   const [activeTab, setActiveTab] = useState('tests')
   const [openModal, setOpenModal] = useState<string | null>(null)
+  const [search, setSearch] = useState('')
+
+  const allItems = CONTENT_SECTIONS.flatMap((s) => s.items)
+  const searchResults = search.trim()
+    ? allItems.filter((item) =>
+        item.title.toLowerCase().includes(search.toLowerCase()) ||
+        item.description.toLowerCase().includes(search.toLowerCase()) ||
+        (item.tag ?? '').toLowerCase().includes(search.toLowerCase())
+      )
+    : null
 
   function canAccess(item: ContentItem): boolean {
     if (item.access === 'free') return true
@@ -686,29 +696,93 @@ export function ContentClient({ tier, purchasedIds, userId }: Props) {
   return (
     <div className="max-w-2xl mx-auto px-4 pt-8 pb-32">
       <h1 className="font-heading text-[52px] font-light text-[#1A1410] tracking-[-0.5px] leading-none mb-1">Inhalte</h1>
-      <p className="text-[#A89888] font-body text-sm mb-6">Tests, Guides, Fragebögen und mehr.</p>
+      <p className="text-[#A89888] font-body text-sm mb-5">Tests, Guides, Fragebögen und mehr.</p>
 
-      {/* Tabs */}
-      <div className="flex gap-2 overflow-x-auto pb-1 mb-6 scrollbar-hide">
-        {CONTENT_SECTIONS.map((s) => (
-          <button
-            key={s.id}
-            onClick={() => setActiveTab(s.id)}
-            className={cn(
-              'flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-body whitespace-nowrap transition-all',
-              activeTab === s.id
-                ? 'bg-[#9E6B47] text-white'
-                : 'border border-[#E2DAD0] text-[#A89888] hover:border-[#9E6B47]/40'
-            )}
-          >
-            {s.icon}
-            {s.label}
-          </button>
-        ))}
+      {/* Search */}
+      <div className="relative mb-5">
+        <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#A89888]" />
+        <input
+          type="text"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Inhalte durchsuchen…"
+          className="w-full pl-10 pr-4 py-3 rounded-xl bg-white text-sm font-body text-[#1A1410] placeholder:text-[#A89888] focus:outline-none focus:ring-2 focus:ring-[#9E6B47]/30"
+          style={{ boxShadow: '0 2px 12px rgba(26,20,16,0.06)' }}
+        />
       </div>
 
-      {/* Content items */}
-      {activeSection && (
+      {/* Tabs — hide when searching */}
+      {!search.trim() && (
+        <div className="flex gap-2 overflow-x-auto pb-1 mb-6 scrollbar-hide">
+          {CONTENT_SECTIONS.map((s) => (
+            <button
+              key={s.id}
+              onClick={() => setActiveTab(s.id)}
+              className={cn(
+                'flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-body whitespace-nowrap transition-all',
+                activeTab === s.id
+                  ? 'bg-[#9E6B47] text-white'
+                  : 'border border-[#E2DAD0] text-[#A89888] hover:border-[#9E6B47]/40'
+              )}
+            >
+              {s.icon}
+              {s.label}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* Search results */}
+      {searchResults !== null && (
+        <div className="space-y-3 mb-6">
+          {searchResults.length === 0 && (
+            <p className="text-center text-[#A89888] text-sm py-8">Keine Inhalte gefunden.</p>
+          )}
+          {searchResults.map((item) => {
+            const accessible = canAccess(item)
+            return (
+              <button
+                key={item.id}
+                onClick={() => handleOpen(item)}
+                className={cn(
+                  'bg-white rounded-2xl p-5 w-full text-left flex gap-4 items-start transition-all active:scale-[0.98] duration-150',
+                  !accessible && 'opacity-60'
+                )}
+                style={{ boxShadow: '0 2px 12px rgba(26,20,16,0.08)' }}
+              >
+                <div
+                  className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"
+                  style={{ backgroundColor: accessible ? (ICON_BG[item.id] ?? '#9E6B47') : '#E2DAD0', color: '#FFFFFF' }}
+                >
+                  {item.icon}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 flex-wrap mb-1">
+                    <h3 className="font-heading text-[22px] text-[#9E6B47]">{item.title}</h3>
+                    {item.tag && (
+                      <span className={cn('text-[11px] px-2.5 py-1 rounded-full font-body font-medium', tagColor(item.access))}>
+                        {item.tag}
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-[#1A1410]/70 font-body text-sm leading-relaxed">{item.description}</p>
+                </div>
+                <div className="flex-shrink-0 mt-1">
+                  {accessible
+                    ? item.action === 'external'
+                      ? <ExternalLink className="w-4 h-4 text-[#A89888]" />
+                      : <ChevronRight className="w-4 h-4 text-[#A89888]" />
+                    : <Lock className="w-4 h-4 text-[#A89888]" />
+                  }
+                </div>
+              </button>
+            )
+          })}
+        </div>
+      )}
+
+      {/* Content items (tab view) */}
+      {searchResults === null && activeSection && (
         <div className="space-y-3">
           {activeSection.items.map((item) => {
             const accessible = canAccess(item)
