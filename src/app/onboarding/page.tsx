@@ -455,7 +455,9 @@ export default function OnboardingPage() {
   async function autoSave() {
     if (!userId) return
     const payload = buildPayload()
-    await supabase.from('profiles').upsert({ user_id: userId, ...payload })
+    await supabase
+      .from('profiles')
+      .upsert({ user_id: userId, ...payload }, { onConflict: 'user_id' })
   }
 
   function buildPayload() {
@@ -655,45 +657,23 @@ export default function OnboardingPage() {
         finalAudioUrl = await uploadAudio()
         setAudioPromptUrl(finalAudioUrl)
       }
-      const age = birthDate
-        ? new Date().getFullYear() - new Date(birthDate).getFullYear()
-        : null
-      const { error } = await supabase.from('profiles').upsert({
-        user_id: userId,
-        name,
-        birth_date: birthDate || null,
-        age,
-        location,
-        gender,
-        seeking,
-        photos,
-        occupation,
-        height_cm: heightCm,
-        has_children: hasChildren,
-        smoking,
-        alcohol,
-        intention,
-        relationship_model: relationshipModel,
-        bindungstyp: bindungsResult,
-        love_language: loveResult,
-        werte,
-        dealbreakers,
-        prompts: selectedPrompts.map((q) => ({ question: q, answer: promptAnswers[q] ?? '' })),
-        audio_prompt_url: finalAudioUrl,
-        sun_sign: sunSign || null,
-        ascendant: ascendant || null,
-        chinese_zodiac: birthDate ? getChineseZodiac(new Date(birthDate).getFullYear()) : null,
-        is_complete: true,
-      })
+      const payload = buildPayload()
+      const { error } = await supabase
+        .from('profiles')
+        .upsert(
+          { user_id: userId, ...payload, audio_prompt_url: finalAudioUrl, is_complete: true },
+          { onConflict: 'user_id' },
+        )
       if (error) {
         console.error('Profile save error:', error)
-        throw error
+        toast.error(`Speichern fehlgeschlagen: ${error.message}`)
+        return
       }
       toast.success('Profil gespeichert!')
       router.push('/discover')
-    } catch (err) {
+    } catch (err: any) {
       console.error('handleFinish error:', err)
-      toast.error('Etwas ist schiefgelaufen.')
+      toast.error(err?.message ? `Fehler: ${err.message}` : 'Etwas ist schiefgelaufen.')
     } finally {
       setSaving(false)
     }
