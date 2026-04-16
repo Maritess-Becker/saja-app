@@ -10,7 +10,7 @@ import toast from 'react-hot-toast'
 const TOTAL_STEPS = 11
 
 // ── Attachment types ────────────────────────────────────────────────
-type PhotoItem = { url: string; path: string }
+type PhotoItem = { url: string; path: string; caption?: string }
 
 // ── Bindungstyp test data ───────────────────────────────────────────
 const BINDUNGSTYP_QUESTIONS = [
@@ -552,6 +552,10 @@ export default function OnboardingPage() {
     dragIndexRef.current = null
   }
 
+  function updateCaption(index: number, caption: string) {
+    setPhotos((prev) => prev.map((p, i) => i === index ? { ...p, caption } : p))
+  }
+
   // ── Step 5 – Bindungstyp ────────────────────────────────────────
   function answerBindung(key: string) {
     const next = [...bindungsAntworten, key]
@@ -817,9 +821,41 @@ export default function OnboardingPage() {
           className="hidden"
         />
         <p className="text-xs font-body text-[#1A1410]/40 text-center">
-          {photos.length}/6 Fotos · Ziehen zum Sortieren
+          {photos.length}/6 Fotos · Erstes Foto = Profilbild · Ziehen zum Sortieren
         </p>
       </div>
+
+      {/* Caption inputs for non-profile photos */}
+      {photos.length > 1 && (
+        <div className="mt-5 space-y-3">
+          <p className="text-xs font-body text-[#1A1410]/50 mb-2">
+            Bildunterschriften für weitere Fotos <span className="text-[#1A1410]/30">(optional, max. 100 Zeichen)</span>
+          </p>
+          {photos.slice(1).map((photo, idx) => {
+            const realIndex = idx + 1
+            return (
+              <div key={photo.path} className="flex items-center gap-3">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={photo.url}
+                  alt={`Foto ${realIndex + 1}`}
+                  className="w-10 h-10 rounded-xl object-cover flex-shrink-0 border border-[#E2DAD0]"
+                />
+                <input
+                  type="text"
+                  value={photo.caption ?? ''}
+                  onChange={(e) => {
+                    if (e.target.value.length <= 100) updateCaption(realIndex, e.target.value)
+                  }}
+                  placeholder={`Foto ${realIndex + 1} beschriften…`}
+                  className="flex-1 rounded-xl border border-[#F6F2EC] bg-white px-3 py-2.5 text-sm font-body text-[#1A1410] placeholder:text-[#1A1410]/30 focus:outline-none focus:ring-2 focus:ring-[#9E6B47]/30"
+                />
+              </div>
+            )
+          })}
+        </div>
+      )}
+
       <NavButtons step={step} goBack={goBack} onNext={goNext} nextDisabled={photos.length < 3} />
     </StepShell>
   )

@@ -56,6 +56,22 @@ function PromptBlock({ question, answer }: { question: string; answer: string })
   )
 }
 
+function PhotoWithCaption({ photo, alt }: { photo: { url: string; path: string; caption?: string }; alt: string }) {
+  const url = photoUrl(photo)
+  if (!url) return null
+  return (
+    <div className="mx-3 mt-3">
+      <div className="rounded-3xl overflow-hidden" style={{ height: '60vh' }}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={url} alt={alt} className="w-full h-full object-cover" />
+      </div>
+      {photo.caption && (
+        <p className="px-2 pt-2.5 text-sm text-[#1A1410]/60 italic leading-relaxed">{photo.caption}</p>
+      )}
+    </div>
+  )
+}
+
 // ── Main component ────────────────────────────────────────────────────────────
 
 interface Props {
@@ -141,127 +157,119 @@ export function ProfilePreviewModal({ profile, children }: Props) {
               </div>
             </div>
 
-            {/* ── Badges row ── */}
-            <div className="px-5 pt-4 flex flex-wrap gap-2">
-              {profile.bindungstyp && (
-                <span className="rounded-full bg-[#EDE8E0] text-[#7A4E30] text-sm px-3 py-1.5">{profile.bindungstyp}</span>
+            {/* ── Info block — directly after hero photo ── */}
+            <div className="px-5 pt-5 space-y-4 pb-2">
+              {/* Psychological badges */}
+              {(profile.bindungstyp || profile.love_language) && (
+                <div className="flex flex-wrap gap-2">
+                  {profile.bindungstyp && (
+                    <span className="rounded-full bg-[#EDE8E0] text-[#7A4E30] text-sm px-3 py-1.5">{profile.bindungstyp}</span>
+                  )}
+                  {profile.love_language && (
+                    <span className="rounded-full bg-[#E8EDE0] text-[#3D6B50] text-sm px-3 py-1.5">{profile.love_language}</span>
+                  )}
+                </div>
               )}
-              {profile.love_language && (
-                <span className="rounded-full bg-[#E8EDE0] text-[#3D6B50] text-sm px-3 py-1.5">{profile.love_language}</span>
+
+              {/* Quick-fact pills */}
+              {(profile.occupation || profile.height_cm || profile.has_children || profile.relationship_model || profile.intention) && (
+                <div className="flex flex-wrap gap-2">
+                  {profile.occupation && (
+                    <span className="flex items-center gap-1.5 bg-[#F6F2EC] rounded-full px-3.5 py-2 text-sm text-[#1A1410]/70">
+                      <Briefcase className="w-3.5 h-3.5 text-[#1A1410]/30 flex-shrink-0" />{profile.occupation}
+                    </span>
+                  )}
+                  {profile.height_cm && (
+                    <span className="flex items-center gap-1.5 bg-[#F6F2EC] rounded-full px-3.5 py-2 text-sm text-[#1A1410]/70">
+                      <Ruler className="w-3.5 h-3.5 text-[#1A1410]/30 flex-shrink-0" />{profile.height_cm} cm
+                    </span>
+                  )}
+                  {profile.has_children && (
+                    <span className="bg-[#F6F2EC] rounded-full px-3.5 py-2 text-sm text-[#1A1410]/70">{profile.has_children}</span>
+                  )}
+                  {profile.relationship_model && (
+                    <span className="bg-[#F6F2EC] rounded-full px-3.5 py-2 text-sm text-[#1A1410]/70">{profile.relationship_model}</span>
+                  )}
+                  {profile.intention && (
+                    <span className="bg-[#F6F2EC] rounded-full px-3.5 py-2 text-sm text-[#1A1410]/70">{profile.intention}</span>
+                  )}
+                </div>
               )}
-              {!profile.hide_location && profile.location && (
-                <span className="flex items-center gap-1 rounded-full bg-[#EDE8E0] text-[#7A4E30] text-sm px-3 py-1.5">
-                  <MapPin className="w-3.5 h-3.5" />{profile.location}
-                </span>
+
+              {/* Werte */}
+              {profile.werte?.length > 0 && (
+                <div>
+                  <p className="text-[11px] text-[#1A1410]/35 uppercase tracking-widest mb-2">Werte</p>
+                  <div className="flex flex-wrap gap-2">
+                    {profile.werte.map((w, i) => (
+                      <span key={w} className={cn('text-sm px-3 py-1.5 rounded-full', i % 2 === 0 ? 'bg-[#EDE8E0] text-[#8B6040]' : 'bg-[#E8EDE0] text-[#3D6B50]')}>
+                        {w}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               )}
-              {profile.sun_sign && (
-                <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(180,140,110,0.14)', color: '#8B6040' }}>
-                  {profile.sun_sign}
-                </span>
+
+              {/* Zodiac */}
+              {(profile.sun_sign || profile.ascendant || profile.chinese_zodiac) && (
+                <div className="flex flex-wrap gap-2">
+                  {profile.sun_sign && (
+                    <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(180,140,110,0.14)', color: '#8B6040' }}>
+                      {profile.sun_sign}
+                    </span>
+                  )}
+                  {profile.ascendant && (
+                    <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(180,140,110,0.14)', color: '#8B6040' }}>
+                      ↑ {profile.ascendant.replace(/^[♈♉♊♋♌♍♎♏♐♑♒♓]\s*/, '')}
+                    </span>
+                  )}
+                  {profile.chinese_zodiac && (
+                    <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(120,100,160,0.12)', color: '#7864A0' }}>
+                      {profile.chinese_zodiac}
+                    </span>
+                  )}
+                </div>
               )}
-              {profile.ascendant && (
-                <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(180,140,110,0.14)', color: '#8B6040' }}>
-                  ↑ {profile.ascendant.replace(/^[♈♉♊♋♌♍♎♏♐♑♒♓]\s*/, '')}
-                </span>
-              )}
-              {profile.chinese_zodiac && (
-                <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(120,100,160,0.12)', color: '#7864A0' }}>
-                  {profile.chinese_zodiac}
-                </span>
+
+              {/* Bio */}
+              {profile.bio && (
+                <p className="text-sm text-[#1A1410]/65 leading-relaxed">{profile.bio}</p>
               )}
             </div>
 
-            {/* ── Photo 2 ── */}
+            {/* ── Interleaved: additional photos (with captions) + prompts ── */}
             {photoUrl(profile.photos?.[1]) && (
-              <div className="mx-3 mt-4 rounded-3xl overflow-hidden" style={{ height: '60vh' }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={photoUrl(profile.photos[1])} alt="" className="w-full h-full object-cover" />
-              </div>
+              <PhotoWithCaption photo={profile.photos[1]} alt={profile.name} />
             )}
-
-            {/* ── Prompt 1 ── */}
             {profile.prompts?.[0]?.answer && (
               <PromptBlock question={profile.prompts[0].question} answer={profile.prompts[0].answer} />
             )}
 
-            {/* ── Werte ── */}
-            {profile.werte?.length > 0 && (
-              <div className="px-5 py-4 border-t border-[#F6F2EC]/70">
-                <p className="text-[11px] text-[#1A1410]/35 uppercase tracking-widest mb-3">Werte</p>
-                <div className="flex flex-wrap gap-2">
-                  {profile.werte.map((w, i) => (
-                    <span
-                      key={w}
-                      className={cn('text-sm px-3 py-1.5 rounded-full', i % 2 === 0 ? 'bg-[#EDE8E0] text-[#8B6040]' : 'bg-[#E8EDE0] text-[#3D6B50]')}
-                    >
-                      {w}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* ── Photo 3 ── */}
             {photoUrl(profile.photos?.[2]) && (
-              <div className="mx-3 mt-1 rounded-3xl overflow-hidden" style={{ height: '60vh' }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={photoUrl(profile.photos[2])} alt="" className="w-full h-full object-cover" />
-              </div>
+              <PhotoWithCaption photo={profile.photos[2]} alt={profile.name} />
             )}
-
-            {/* ── Prompt 2 ── */}
             {profile.prompts?.[1]?.answer && (
               <PromptBlock question={profile.prompts[1].question} answer={profile.prompts[1].answer} />
             )}
 
-            {/* ── Photo 4 ── */}
             {photoUrl(profile.photos?.[3]) && (
-              <div className="mx-3 mt-1 rounded-3xl overflow-hidden" style={{ height: '60vh' }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={photoUrl(profile.photos[3])} alt="" className="w-full h-full object-cover" />
-              </div>
+              <PhotoWithCaption photo={profile.photos[3]} alt={profile.name} />
             )}
-
-            {/* ── Prompt 3 ── */}
             {profile.prompts?.[2]?.answer && (
               <PromptBlock question={profile.prompts[2].question} answer={profile.prompts[2].answer} />
             )}
 
-            {/* ── Audio prompt ── */}
+            {photoUrl(profile.photos?.[4]) && (
+              <PhotoWithCaption photo={profile.photos[4]} alt={profile.name} />
+            )}
+            {photoUrl(profile.photos?.[5]) && (
+              <PhotoWithCaption photo={profile.photos[5]} alt={profile.name} />
+            )}
+
+            {/* Audio prompt */}
             {profile.audio_prompt_url && <AudioPlayer url={profile.audio_prompt_url} />}
 
-            {/* ── Bottom info ── */}
-            <div className="px-5 py-5 border-t border-[#F6F2EC]/70 space-y-3">
-              {profile.occupation && (
-                <div className="flex items-center gap-2 text-sm">
-                  <Briefcase className="w-4 h-4 text-[#1A1410]/30 flex-shrink-0" />
-                  <span className="text-[#1A1410]/70">{profile.occupation}</span>
-                </div>
-              )}
-              {profile.height_cm && (
-                <div className="flex items-center gap-2 text-sm">
-                  <Ruler className="w-4 h-4 text-[#1A1410]/30 flex-shrink-0" />
-                  <span className="text-[#1A1410]/70">{profile.height_cm} cm</span>
-                </div>
-              )}
-              {profile.has_children && (
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-[#1A1410]/40">Kinder</span>
-                  <span className="text-[#1A1410]/70">{profile.has_children}</span>
-                </div>
-              )}
-              {profile.relationship_model && (
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-[#1A1410]/40">Beziehungsmodell</span>
-                  <span className="text-[#1A1410]/70">{profile.relationship_model}</span>
-                </div>
-              )}
-              {profile.bio && (
-                <p className="text-sm text-[#1A1410]/65 leading-relaxed pt-1">{profile.bio}</p>
-              )}
-            </div>
-
-            {/* Bottom padding for nav */}
+            {/* Bottom padding */}
             <div className="h-10" />
           </div>
         </div>
