@@ -228,6 +228,24 @@ export function ProfileSelfView({ profile, tier }: Props) {
         </div>
       )}
 
+      {/* ── Meine Welt ── */}
+      {(profile.my_world?.length ?? 0) > 0 && (
+        <div className="px-5 py-5 border-t border-[#E2DAD0]/70">
+          <p className="text-[11px] text-[#1A1410]/35 uppercase tracking-widest mb-3">Meine Welt</p>
+          <div className="flex flex-wrap gap-2">
+            {profile.my_world!.map((item) => (
+              <span
+                key={item}
+                className="text-[11px] font-body font-light px-3 py-1.5 rounded-full"
+                style={{ background: 'rgba(158,107,71,0.1)', color: '#8B6040' }}
+              >
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* ── Beziehung & Bindung ── */}
       {(profile.relationship_model || profile.bindungstyp || profile.love_language) && (
         <div className="px-5 py-5 border-t border-[#E2DAD0]/70 space-y-4">
@@ -302,6 +320,18 @@ export function ProfileSelfView({ profile, tier }: Props) {
           <div className="flex flex-wrap gap-2">
             {profile.dealbreakers.map((d) => (
               <span key={d} className="text-sm text-red-700/80 bg-red-50 border border-red-200/60 px-3 py-1.5 rounded-full">{d}</span>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* ── Intimität ── */}
+      {profile.sexuality_visible && (profile.sexuality_interests?.length ?? 0) > 0 && (
+        <div className="px-5 py-5 border-t border-[#E2DAD0]/70">
+          <p className="text-[11px] text-[#1A1410]/35 uppercase tracking-widest mb-3">Intimität</p>
+          <div className="flex flex-wrap gap-2">
+            {profile.sexuality_interests!.map((item) => (
+              <span key={item} className="text-sm text-[#1A1410]/60 bg-[#F6F2EC] px-3 py-1.5 rounded-full">{item}</span>
             ))}
           </div>
         </div>

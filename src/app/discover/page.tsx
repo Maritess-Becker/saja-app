@@ -9,10 +9,10 @@ export default async function DiscoverPage() {
 
   if (!user) redirect('/login')
 
-  // Check if profile is complete
+  // Check if profile is complete + fetch viewer settings
   const { data: profile } = await supabase
     .from('profiles')
-    .select('is_complete, name')
+    .select('is_complete, name, sexuality_visible')
     .eq('user_id', user.id)
     .single()
 
@@ -62,6 +62,7 @@ export default async function DiscoverPage() {
           isInConnection={!!activeConnection}
           connectionId={activeConnection?.match_id}
           tier={tier}
+          viewerSexualityVisible={profile?.sexuality_visible ?? false}
         />
       </main>
     </div>

@@ -66,6 +66,9 @@ export interface Profile {
   relationship_model: string | null
   intention_text: string | null
   sexual_interests: string[] | null
+  my_world: string[] | null
+  sexuality_interests: string[] | null
+  sexuality_visible: boolean
   hide_age: boolean
   hide_location: boolean
   profile_paused: boolean

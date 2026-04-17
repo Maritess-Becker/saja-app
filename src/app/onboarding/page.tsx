@@ -20,8 +20,8 @@ type PhotoItem = { url: string; path: string; caption?: string }
 // Phase 6: 0=intro, 1=sunSign, 2=ascendant, 3=chinese
 // Phase 7: 0=photos, 1=prompts, 2=audio
 // Phase 8: 0=loading, 1=bindung, 2=love, 3=personality, 4=profile, 5=compat
-const PHASE_MAX_SUBSTEP = [5, 10, 10, 15, 1, 3, 2, 5]
-const PHASE_TOTAL_STEPS = [6, 11, 11, 16, 2, 4, 3, 6]
+const PHASE_MAX_SUBSTEP = [5, 10, 10, 15, 3, 3, 2, 5]
+const PHASE_TOTAL_STEPS = [6, 11, 11, 16, 4, 4, 3, 6]
 
 // ── Helper functions ─────────────────────────────────────────────────
 const STERNZEICHEN = [
@@ -387,6 +387,9 @@ export default function OnboardingPage() {
   // Phase 5 state
   const [werte, setWerte] = useState<string[]>([])
   const [dealbreakers, setDealbreakers] = useState<string[]>([])
+  const [myWorld, setMyWorld] = useState<string[]>([])
+  const [sexualityInterests, setSexualityInterests] = useState<string[]>([])
+  const [sexualityVisible, setSexualityVisible] = useState(false)
 
   // Phase 6 state
   const [sunSign, setSunSign] = useState('')
@@ -461,6 +464,9 @@ export default function OnboardingPage() {
         if (data.personality_scores) setPersonalityScores(data.personality_scores)
         if (data.werte) setWerte(data.werte)
         if (data.dealbreakers) setDealbreakers(data.dealbreakers)
+        if (data.my_world) setMyWorld(data.my_world)
+        if (data.sexuality_interests) setSexualityInterests(data.sexuality_interests)
+        if (data.sexuality_visible !== undefined) setSexualityVisible(data.sexuality_visible)
         if (data.sun_sign) setSunSign(data.sun_sign)
         if (data.ascendant) setAscendant(data.ascendant)
         if (data.chinese_zodiac) setChineseZodiac(data.chinese_zodiac)
@@ -533,6 +539,9 @@ export default function OnboardingPage() {
       personality_scores: Object.keys(personalityScores).length > 0 ? personalityScores : null,
       werte,
       dealbreakers,
+      my_world: myWorld,
+      sexuality_interests: sexualityVisible ? sexualityInterests : [],
+      sexuality_visible: sexualityVisible,
       prompts: selectedPrompts.map(q => ({ question: q, answer: promptAnswers[q] ?? '' })),
       photos,
       audio_prompt_url: audioPromptUrl || null,
@@ -1323,6 +1332,165 @@ export default function OnboardingPage() {
             className="w-full py-4 rounded-full bg-[#9E6B47] text-white font-body text-[16px] font-medium hover:bg-[#7A4E30] active:scale-[0.98] transition-all"
           >
             Weiter →
+          </button>
+        </div>
+      </div>
+    )
+  }
+
+  // Phase 5, SubStep 2 — Meine Welt
+  if (phase === 5 && subStep === 2) {
+    const MY_WORLD_CATEGORIES = [
+      {
+        label: 'Spiritualität & Bewusstsein',
+        items: ['🧘 Yoga & Meditation', '🌿 Achtsamkeit & Minimalismus', '🔮 Astrologie & Esoterik', '✨ Human Design & Gene Keys', '🌙 Schamanismus & Naturverbundenheit', '☯️ Buddhismus & östliche Philosophie'],
+      },
+      {
+        label: 'Körper & Sexualität',
+        items: ['🔥 Tantra & bewusste Körperlichkeit', '💫 Bewusste Sexualität & sex-positiv', '🌸 Sexuelle Heilung & Embodiment', '⚡ BDSM & Kink (bewusst & konsensual)', '💃 Tanz & somatische Praktiken'],
+      },
+      {
+        label: 'Beziehungen & Wachstum',
+        items: ['💞 Polyamorie & ethische Non-Monogamie', '🤝 Beziehungsanarchie', '🧠 Psychologie & Trauma-Arbeit', '👁️ Inneres Kind & IFS', '🌱 Persönlichkeitsentwicklung'],
+      },
+      {
+        label: 'Gemeinschaft & Werte',
+        items: ['♀️ Female Empowerment & Weiblichkeit', '♂️ Male Empowerment & Männlichkeit', '🌍 Permakultur & Nachhaltigkeit', '🏡 Gemeinschaft & Intentional Living', '🎨 Kreativität & Kunst als Weg'],
+      },
+    ]
+
+    return (
+      <div className="min-h-screen bg-[#FAF8F4]">
+        <ProgressHeader phase={phase} subStep={subStep} />
+        <div className="max-w-lg mx-auto px-5 pt-6 pb-28">
+          {backButton}
+          <h2 className="font-heading text-[32px] font-light text-[#1A1410] leading-tight mb-2">Wo fühlst du dich zuhause?</h2>
+          <p className="font-body text-[13px] font-light text-[#A89888] leading-relaxed mb-6">
+            Wähle die Communities und Szenen die zu deinem Leben gehören — oder lass es offen. Es gibt kein Richtig oder Falsch.
+          </p>
+
+          <div className="space-y-6">
+            {MY_WORLD_CATEGORIES.map((cat) => (
+              <div key={cat.label}>
+                <p className="font-body text-[11px] uppercase tracking-widest text-[#A89888] mb-3">{cat.label}</p>
+                <div className="flex flex-wrap gap-2">
+                  {cat.items.map((item) => (
+                    <button
+                      key={item}
+                      onClick={() => setMyWorld(prev =>
+                        prev.includes(item) ? prev.filter(x => x !== item) : [...prev, item]
+                      )}
+                      className={cn(
+                        'px-3 py-2 rounded-full border transition-all font-body text-[13px]',
+                        myWorld.includes(item)
+                          ? 'bg-[#9E6B47] border-[#9E6B47] text-white'
+                          : 'bg-white border-[#E2DAD0] text-[#1A1410]/70 hover:border-[#9E6B47]/40'
+                      )}
+                    >
+                      {item}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <button
+            onClick={goNext}
+            className="w-full py-4 rounded-full bg-[#9E6B47] text-white font-body text-[16px] font-medium hover:bg-[#7A4E30] active:scale-[0.98] transition-all mt-8"
+          >
+            {myWorld.length > 0 ? `${myWorld.length} Szene${myWorld.length > 1 ? 'n' : ''} gewählt →` : 'Überspringen →'}
+          </button>
+        </div>
+      </div>
+    )
+  }
+
+  // Phase 5, SubStep 3 — Intimität & Sexualität
+  if (phase === 5 && subStep === 3) {
+    const SEXUALITY_CATEGORIES = [
+      {
+        label: 'Sensualität & Verbindung',
+        items: ['Sinnliche Berührung & Körpernähe', 'Tantrische Intimität', 'Slow Sex & bewusste Sexualität', 'Emotionale Tiefe vor körperlicher Nähe', 'Sexuelle Heilung & Embodiment'],
+      },
+      {
+        label: 'Erkundung & Offenheit',
+        items: ['Sex-Positiv & offen für Neues', 'Polyamorös & mehrere Verbindungen', 'Rollenspiel & Fantasien', 'BDSM & Kink (bewusst & konsensual)', 'Fetische (privat besprechen)'],
+      },
+      {
+        label: 'Orientierung & Identität',
+        items: ['Queer', 'Bisexuell', 'Pansexuell', 'Asexuell / Demisexuell', 'Non-Binary / Genderfluid'],
+      },
+    ]
+
+    return (
+      <div className="min-h-screen bg-[#FAF8F4]">
+        <ProgressHeader phase={phase} subStep={subStep} />
+        <div className="max-w-lg mx-auto px-5 pt-6 pb-28">
+          {backButton}
+          <h2 className="font-heading text-[32px] font-light text-[#1A1410] leading-tight mb-2">Was du zeigst siehst du auch.</h2>
+          <p className="font-body text-[14px] font-light text-[#6E6560] leading-relaxed mb-2">
+            Dieser Bereich ist freiwillig und funktioniert nach dem Gegenseitigkeitsprinzip: Du siehst die sexuellen Interessen anderer nur wenn du deine eigenen angibst.
+          </p>
+          <p className="font-body text-[12px] font-light text-[#A89888] leading-relaxed mb-6">
+            Das schafft einen sicheren, respektvollen Raum für alle.
+          </p>
+
+          {/* Toggle: Teilen ja/nein */}
+          <div className="bg-white rounded-2xl border border-[#E2DAD0] p-4 mb-6 flex items-center justify-between">
+            <div>
+              <p className="font-body text-[14px] text-[#1A1410] font-medium">Interessen teilen</p>
+              <p className="font-body text-[12px] text-[#A89888]">Sichtbar für andere die auch geteilt haben</p>
+            </div>
+            <button
+              onClick={() => setSexualityVisible(v => !v)}
+              className={cn(
+                'w-12 h-6 rounded-full transition-colors relative flex-shrink-0',
+                sexualityVisible ? 'bg-[#9E6B47]' : 'bg-[#E2DAD0]'
+              )}
+            >
+              <div className={cn(
+                'absolute top-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform',
+                sexualityVisible ? 'translate-x-6' : 'translate-x-0.5'
+              )} />
+            </button>
+          </div>
+
+          {sexualityVisible && (
+            <div className="space-y-6">
+              {SEXUALITY_CATEGORIES.map((cat) => (
+                <div key={cat.label}>
+                  <p className="font-body text-[11px] uppercase tracking-widest text-[#A89888] mb-3">{cat.label}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {cat.items.map((item) => (
+                      <button
+                        key={item}
+                        onClick={() => setSexualityInterests(prev =>
+                          prev.includes(item) ? prev.filter(x => x !== item) : [...prev, item]
+                        )}
+                        className={cn(
+                          'px-3 py-2 rounded-full border transition-all font-body text-[13px]',
+                          sexualityInterests.includes(item)
+                            ? 'bg-[#1A1410] border-[#1A1410] text-white'
+                            : 'bg-white border-[#E2DAD0] text-[#1A1410]/70 hover:border-[#1A1410]/40'
+                        )}
+                      >
+                        {item}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <button
+            onClick={goNext}
+            className="w-full py-4 rounded-full bg-[#9E6B47] text-white font-body text-[16px] font-medium hover:bg-[#7A4E30] active:scale-[0.98] transition-all mt-8"
+          >
+            {sexualityVisible && sexualityInterests.length > 0
+              ? 'Weiter →'
+              : 'Überspringen →'}
           </button>
         </div>
       </div>
