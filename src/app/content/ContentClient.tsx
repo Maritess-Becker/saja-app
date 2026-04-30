@@ -913,29 +913,29 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
       <div className="sticky top-0 z-20 bg-transparent px-4 pt-5 pb-3 mb-4">
         <h1 className="font-heading text-[52px] font-light text-[#1A1410] tracking-[-0.5px] leading-none mb-3">Inhalte</h1>
 
-        {/* Main tab toggle: Für dich | Dein Journal */}
-        <div className="flex gap-1 bg-[rgba(34,16,128,0.06)] rounded-full p-1 w-fit">
+        {/* Main tab toggle: Journal | Für dich — full width */}
+        <div className="flex gap-1 bg-[rgba(34,16,128,0.06)] rounded-full p-1 w-full">
+          <button
+            onClick={() => setMainTab('journal')}
+            className={cn(
+              'flex-1 px-4 py-2 rounded-full text-sm font-body transition-all',
+              mainTab === 'journal'
+                ? 'bg-[#221080] text-[#FDF8F2]'
+                : 'text-[#6B6058]'
+            )}
+          >
+            Journal
+          </button>
           <button
             onClick={() => setMainTab('content')}
             className={cn(
-              'px-4 py-1.5 rounded-full text-sm font-body transition-all',
+              'flex-1 px-4 py-2 rounded-full text-sm font-body transition-all',
               mainTab === 'content'
                 ? 'bg-[#221080] text-[#FDF8F2]'
                 : 'text-[#6B6058]'
             )}
           >
             Für dich
-          </button>
-          <button
-            onClick={() => setMainTab('journal')}
-            className={cn(
-              'px-4 py-1.5 rounded-full text-sm font-body transition-all',
-              mainTab === 'journal'
-                ? 'bg-[#221080] text-[#FDF8F2]'
-                : 'text-[#6B6058]'
-            )}
-          >
-            Dein Journal
           </button>
         </div>
       </div>

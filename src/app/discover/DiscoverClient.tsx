@@ -1438,58 +1438,60 @@ export function DiscoverClient({
           className="fixed left-0 right-0 z-30"
           style={{ bottom: 'calc(4rem + env(safe-area-inset-bottom))' }}
         >
-          <div className="flex items-center gap-2 max-w-sm mx-auto px-5 pb-3">
-            {/* Gerade nicht (Pass) — ~30% width */}
-            <button
-              onClick={handlePass}
-              className="py-3 rounded-full font-body font-light text-[13px] transition-all active:scale-95"
+          <div className="max-w-sm mx-auto px-4 pb-3">
+            {/* Glass pill container — always readable regardless of bg behind it */}
+            <div
+              className="flex items-center gap-1.5 rounded-2xl p-1.5"
               style={{
-                flex: '0 0 30%',
-                background: 'transparent',
-                border: '1.5px solid rgba(34,16,128,0.3)',
-                color: '#6B6058',
+                background: 'rgba(18,8,80,0.78)',
+                backdropFilter: 'blur(18px)',
+                WebkitBackdropFilter: 'blur(18px)',
+                border: '0.5px solid rgba(253,248,242,0.14)',
               }}
             >
-              Gerade nicht
-            </button>
-
-            {/* Undo */}
-            <button
-              onClick={handleUndo}
-              disabled={history.length === 0}
-              className={cn(
-                'w-9 h-9 rounded-full flex items-center justify-center transition-all flex-shrink-0',
-                history.length === 0
-                  ? 'text-[#1A1410]/15 cursor-not-allowed'
-                  : 'text-[#6B6058] hover:bg-[rgba(34,16,128,0.06)] active:scale-95',
-              )}
-              aria-label="Rückgängig"
-            >
-              <CornerUpLeft className="w-4 h-4" />
-            </button>
-
-            {/* Fühlt sich stimmig an — ~65% width */}
-            <button
-              onClick={handleLike}
-              className="py-3 rounded-full font-body font-normal text-[13px] bg-[#221080] text-[#FDF8F2] active:scale-95 transition-all hover:bg-[#120850]"
-              style={{ flex: '1', letterSpacing: '0.02em' }}
-            >
-              Fühlt sich stimmig an ✦
-            </button>
-          </div>
-
-          {/* Revisit-Mode Button */}
-          {revisitIds.length >= 3 && (
-            <div className="flex justify-center pb-1">
+              {/* Gerade nicht */}
               <button
-                onClick={openRevisitMode}
-                disabled={loadingRevisit}
-                className="text-xs text-[#6B6058] hover:text-[#1A1410] font-body transition-colors"
+                onClick={handlePass}
+                className="flex-1 py-3.5 rounded-xl font-body font-light text-[13px] text-[#FDF8F2]/70 transition-all active:scale-[0.97]"
+                style={{ background: 'rgba(253,248,242,0.08)' }}
               >
-                {loadingRevisit ? '…' : `↩ Nochmal anschauen (${revisitIds.length})`}
+                Gerade nicht
+              </button>
+
+              {/* Undo — square, same height as buttons */}
+              <button
+                onClick={handleUndo}
+                disabled={history.length === 0}
+                className="w-12 h-[50px] rounded-xl flex items-center justify-center flex-shrink-0 transition-all disabled:opacity-20 active:scale-95"
+                style={{ background: 'rgba(253,248,242,0.10)' }}
+                aria-label="Rückgängig"
+              >
+                <CornerUpLeft className="w-5 h-5 text-[#FDF8F2]/80" />
+              </button>
+
+              {/* Fühlt sich stimmig an */}
+              <button
+                onClick={handleLike}
+                className="flex-[1.6] py-3.5 rounded-xl font-body font-normal text-[13px] text-[#FDF8F2] transition-all active:scale-[0.97] hover:opacity-90"
+                style={{ background: 'rgba(253,248,242,0.22)', letterSpacing: '0.01em' }}
+              >
+                Stimmig an ✦
               </button>
             </div>
-          )}
+
+            {/* Revisit-Mode Button */}
+            {revisitIds.length >= 3 && (
+              <div className="flex justify-center pt-1.5">
+                <button
+                  onClick={openRevisitMode}
+                  disabled={loadingRevisit}
+                  className="text-xs text-[#FDF8F2]/40 hover:text-[#FDF8F2]/60 font-body transition-colors"
+                >
+                  {loadingRevisit ? '…' : `↩ Nochmal anschauen (${revisitIds.length})`}
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       )}
 

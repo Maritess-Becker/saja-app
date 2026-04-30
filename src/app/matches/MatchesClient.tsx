@@ -118,16 +118,21 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
         navigateTo="/begegnung"
       />
       <div className="max-w-2xl mx-auto px-4 pb-32">
-        <div className="sticky top-0 z-20 bg-[#221080] -mx-4 px-4 pt-5 pb-4 mb-6">
-          <h1 className="font-heading text-[52px] font-light text-[#FDF8F2] tracking-[-0.5px] leading-none mb-1">Matches</h1>
-          {activeMatchId ? (
-            <span className="flex items-center gap-2 text-[#FDF8F2]/70 text-[13px] font-body">
-              <Sparkles className="w-4 h-4 text-[#FDF8F2]/70 flex-shrink-0" />
-              One Connection Rule aktiv
-            </span>
-          ) : (
-            <p className="font-body text-sm text-[#FDF8F2]/60">{matches.length} gegenseitige Interessen</p>
-          )}
+        {/* Sticky header + gradient fade — one container so they stick together */}
+        <div className="sticky top-0 z-20 -mx-4">
+          <div className="bg-[#221080] px-4 pt-5 pb-4">
+            <h1 className="font-heading text-[52px] font-light text-[#FDF8F2] tracking-[-0.5px] leading-none mb-1">Matches</h1>
+            {activeMatchId ? (
+              <span className="flex items-center gap-2 text-[#FDF8F2]/70 text-[13px] font-body">
+                <Sparkles className="w-4 h-4 text-[#FDF8F2]/70 flex-shrink-0" />
+                One Connection Rule aktiv
+              </span>
+            ) : (
+              <p className="font-body text-sm text-[#FDF8F2]/60">{matches.length} gegenseitige Interessen</p>
+            )}
+          </div>
+          {/* Gradient fade from header to content */}
+          <div className="h-7 bg-gradient-to-b from-[#221080] to-transparent pointer-events-none" />
         </div>
 
         <div className="space-y-4">

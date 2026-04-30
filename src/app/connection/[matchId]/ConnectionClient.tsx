@@ -111,7 +111,7 @@ export function ConnectionClient({ connection, otherProfile, initialMessages, cu
   return (
     <div ref={containerRef} className="flex flex-col w-full max-w-2xl mx-auto overflow-hidden" style={{ height: '100dvh' }}>
       {/* Header */}
-      <div className="flex items-center gap-4 p-4 bg-white border-b border-[rgba(30,20,10,0.08)]">
+      <div className="flex-shrink-0 flex items-center gap-4 p-4 bg-white border-b border-[rgba(30,20,10,0.08)]">
         <Link href={`/profile/${otherProfile?.user_id}`} className="w-12 h-12 rounded-xl bg-[#EDE8E0] flex items-center justify-center overflow-hidden flex-shrink-0 hover:opacity-90 transition-opacity">
           {photoUrl(otherProfile?.photos?.[0]) ? (
             // eslint-disable-next-line @next/next/no-img-element
@@ -143,7 +143,7 @@ export function ConnectionClient({ connection, otherProfile, initialMessages, cu
       </div>
 
       {/* Daily question banner */}
-      <div className="px-4 py-3 bg-[#FDF8F2] border-b border-[rgba(30,20,10,0.08)]">
+      <div className="flex-shrink-0 px-4 py-3 bg-[#FDF8F2] border-b border-[rgba(30,20,10,0.08)]">
         <p className="text-xs text-[#1A1410] font-medium mb-1">Frage des Tages</p>
         <div className="flex items-center justify-between gap-3">
           <p className="text-sm text-[#1A1410] italic">&ldquo;{dailyQuestion}&rdquo;</p>

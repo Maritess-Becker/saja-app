@@ -63,9 +63,9 @@ export default async function BegegnungPage() {
   }
 
   return (
-    <div className="bg-creme">
+    <div className="bg-creme" style={{ height: '100dvh', overflow: 'hidden' }}>
       <AppNav />
-      <main className="md:pl-64 flex flex-col overflow-hidden">
+      <main className="md:pl-64 h-full overflow-hidden">
         <BegegnungClient
           activeMatch={activeMatch}
           activeConnection={activeConnection}

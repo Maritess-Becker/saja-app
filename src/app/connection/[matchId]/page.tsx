@@ -39,9 +39,9 @@ export default async function ConnectionPage({ params }: { params: { matchId: st
     .order('created_at', { ascending: true })
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="bg-creme" style={{ height: '100dvh', overflow: 'hidden' }}>
       <AppNav />
-      <main className="md:pl-64 flex flex-col overflow-hidden">
+      <main className="md:pl-64 h-full overflow-hidden">
         <ConnectionClient
           connection={connection}
           otherProfile={otherProfile}

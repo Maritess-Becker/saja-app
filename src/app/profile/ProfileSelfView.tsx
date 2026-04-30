@@ -211,7 +211,7 @@ export function ProfileSelfView({ profile, tier }: Props) {
     <div className="max-w-lg mx-auto pb-36">
 
       {/* Header with title + Bearbeiten button */}
-      <div className="sticky top-0 z-20 bg-transparent px-4 pt-5 pb-4 flex items-center justify-between">
+      <div className="px-4 pt-5 pb-4 flex items-center justify-between">
         <h1 className="font-heading text-[52px] font-light text-[#1A1410] tracking-[-0.5px] leading-none">Mein Profil</h1>
         <Link
           href="/profile/edit"
