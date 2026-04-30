@@ -1,5 +1,25 @@
 export type SubscriptionTier = 'free' | 'membership' | 'premium'
 
+export type EmotionalCapacity = 'open' | 'selective' | 'light' | 'slow'
+
+export interface EmotionalCheckin {
+  id: string
+  user_id: string
+  trigger: string | null
+  response: string
+  note: string | null
+  created_at: string
+}
+
+export interface JournalEntry {
+  id: string
+  user_id: string
+  prompt: string | null
+  content: string
+  trigger: string
+  created_at: string
+}
+
 export type Gender =
   | 'Frau'
   | 'Mann'
@@ -58,6 +78,7 @@ export interface Profile {
   interests: string[]
   bindungstyp: Bindungstyp | null
   love_language: LoveLanguage | null
+  love_language_secondary: string | null
   werte: string[]
   introvert_extrovert: number
   spontan_strukturiert: number
@@ -67,6 +88,7 @@ export interface Profile {
   intention_text: string | null
   sexual_interests: string[] | null
   my_world: string[] | null
+  communities: string[] | null
   sexuality_interests: string[] | null
   sexuality_visible: boolean
   hide_age: boolean
@@ -86,6 +108,18 @@ export interface Profile {
   is_complete: boolean
   created_at: string
   updated_at: string
+  // New fields
+  emotional_capacity: EmotionalCapacity | null
+  current_moment: string | null
+  daily_discover_count: number
+  daily_discover_date: string | null
+  revisit_profiles: string[]
+  paused_since: string | null
+  // Phased onboarding + trial
+  onboarding_phase: number
+  trial_started_at: string | null
+  trial_active: boolean
+  checkin_pattern: Record<string, number> | null
 }
 
 export interface Match {

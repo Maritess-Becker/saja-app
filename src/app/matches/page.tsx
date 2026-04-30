@@ -44,7 +44,7 @@ export default async function MatchesPage() {
   )
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-mondlicht">
       <AppNav />
       <main className="md:pl-64 pb-20 md:pb-0">
         <MatchesClient

@@ -1,4 +1,4 @@
-import { MetadataRoute } from 'next'
+﻿import { MetadataRoute } from 'next'
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
@@ -7,8 +7,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: 'Bewusstes Dating für echte Verbindung',
     start_url: '/discover',
     display: 'standalone',
-    background_color: '#FAF8F4',
-    theme_color: '#FAF8F4',
+    background_color: '#221080',
+    theme_color: '#221080',
     orientation: 'portrait',
     categories: ['lifestyle', 'social'],
     icons: [

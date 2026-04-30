@@ -55,17 +55,17 @@ export default function LoginPage() {
           <Link href="/" className="inline-flex justify-center mb-6">
             <SajaLogo size="lg" showTagline={true} />
           </Link>
-          <h1 className="font-heading text-4xl font-light text-dark">Willkommen zurück</h1>
-          <p className="text-text/50 mt-2 font-body">Schön, dich wieder zu sehen.</p>
+          <h1 className="font-heading text-4xl font-light text-[#1A1410]">Willkommen zurück</h1>
+          <p className="text-[#6B6058] mt-2 font-body">Schön, dich wieder zu sehen.</p>
         </div>
 
         <div className="card">
           {/* Mode Toggle */}
-          <div className="flex rounded-xl bg-sand p-1 mb-8">
+          <div className="flex rounded-xl bg-[#EDE8E0] p-1 mb-8">
             <button
               onClick={() => setMode('password')}
               className={`flex-1 py-2 rounded-lg text-sm font-medium transition-all ${
-                mode === 'password' ? 'bg-white text-dark shadow-sm' : 'text-text/50'
+                mode === 'password' ? 'bg-white text-[#1A1410] shadow-sm' : 'text-[#6B6058]'
               }`}
             >
               Passwort
@@ -73,7 +73,7 @@ export default function LoginPage() {
             <button
               onClick={() => setMode('magic')}
               className={`flex-1 py-2 rounded-lg text-sm font-medium transition-all ${
-                mode === 'magic' ? 'bg-white text-dark shadow-sm' : 'text-text/50'
+                mode === 'magic' ? 'bg-white text-[#1A1410] shadow-sm' : 'text-[#6B6058]'
               }`}
             >
               Magic Link
@@ -82,11 +82,11 @@ export default function LoginPage() {
 
           {magicSent ? (
             <div className="text-center py-8">
-              <div className="w-16 h-16 bg-light rounded-full flex items-center justify-center mx-auto mb-4">
-                <Heart className="w-8 h-8 text-primary" />
+              <div className="w-16 h-16 bg-[#FDF8F2] rounded-full flex items-center justify-center mx-auto mb-4">
+                <Heart className="w-8 h-8 text-[#221080]" />
               </div>
-              <h3 className="font-heading text-2xl text-dark mb-2">Link gesendet!</h3>
-              <p className="text-text/60 text-sm">
+              <h3 className="font-heading text-2xl text-[#1A1410] mb-2">Link gesendet!</h3>
+              <p className="text-[#6B6058] text-sm">
                 Schau in dein Postfach ({email}) und klicke auf den Link zum Anmelden.
               </p>
             </div>
@@ -135,9 +135,9 @@ export default function LoginPage() {
           )}
         </div>
 
-        <p className="text-center text-text/50 text-sm mt-6">
+        <p className="text-center text-[#6B6058] text-sm mt-6">
           Noch kein Konto?{' '}
-          <Link href="/register" className="text-primary hover:underline">
+          <Link href="/register" className="text-[#221080] hover:underline">
             Jetzt registrieren
           </Link>
         </p>

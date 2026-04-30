@@ -8,9 +8,9 @@ export default function ImpressumPage() {
         <Link href="/"><SajaLogo size="sm" /></Link>
       </nav>
       <main className="max-w-2xl mx-auto px-6 py-12">
-        <h1 className="font-heading text-5xl text-dark mb-8">Impressum</h1>
-        <div className="text-text/70 space-y-4">
-          <p className="text-primary font-medium">Platzhalter — wird vor Launch vervollständigt.</p>
+        <h1 className="font-heading text-5xl text-[#1A1410] mb-8">Impressum</h1>
+        <div className="text-[#1A1410] space-y-4">
+          <p className="text-[#1A1410] font-medium">Platzhalter — wird vor Launch vervollständigt.</p>
           <p>Angaben gemäß § 5 TMG</p>
           <p>[Name]<br />[Straße Hausnummer]<br />[PLZ Ort]</p>
           <p>E-Mail: [folgt]</p>

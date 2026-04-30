@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
@@ -12,13 +12,12 @@ const NAV_ITEMS = [
   { href: '/discover', icon: 'search', label: 'Entdecken' },
   { href: '/matches', icon: 'heart', label: 'Matches' },
   { href: '/begegnung', icon: 'saja', label: 'Begegnung' },
-  { href: '/community', icon: 'users', label: 'Community' },
   { href: '/content', icon: 'book', label: 'Inhalte' },
   { href: '/profile', icon: 'user', label: 'Profil' },
 ]
 
 function NavIcon({ iconKey, isActive }: { iconKey: string; isActive: boolean }) {
-  const color = isActive ? '#9E6B47' : '#A89888'
+  const color = isActive ? '#FDF8F2' : 'rgba(253,248,242,0.28)'
 
   if (iconKey === 'saja') {
     return (
@@ -55,9 +54,9 @@ export function AppNav() {
   return (
     <>
       {/* Desktop sidebar */}
-      <aside className="hidden md:flex flex-col w-64 min-h-screen bg-white border-r border-[#E2DAD0] fixed left-0 top-0 px-4 py-6">
+      <aside className="hidden md:flex flex-col w-64 min-h-screen bg-[#120850] fixed left-0 top-0 px-4 py-6">
         <Link href="/discover" className="mb-10 px-2">
-          <SajaLogo size="md" showTagline={true} />
+          <SajaLogo size="md" showTagline={true} onDark={true} />
         </Link>
 
         <nav className="flex-1 space-y-1">
@@ -70,10 +69,9 @@ export function AppNav() {
                 className={cn(
                   'flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-body text-sm',
                   isActive
-                    ? 'bg-[#F6F2EC] text-[#9E6B47] font-medium'
-                    : 'text-[#A89888] hover:bg-[#FAF8F4] hover:text-[#1A1410]'
+                    ? 'bg-[rgba(253,248,242,0.14)] text-[#FDF8F2] font-normal'
+                    : 'text-[rgba(253,248,242,0.38)] hover:bg-[rgba(253,248,242,0.07)] hover:text-[#FDF8F2]'
                 )}
-                style={{ color: isActive ? '#9E6B47' : undefined }}
               >
                 <NavIcon iconKey={icon} isActive={isActive} />
                 {label}
@@ -84,7 +82,7 @@ export function AppNav() {
 
         <button
           onClick={handleLogout}
-          className="flex items-center gap-3 px-4 py-3 text-[#A89888] hover:text-[#1A1410] transition-colors text-sm font-body"
+          className="flex items-center gap-3 px-4 py-3 text-[rgba(253,248,242,0.35)] hover:text-[#FDF8F2] transition-colors text-sm font-body"
         >
           <LogOut className="w-5 h-5" strokeWidth={1.5} />
           Abmelden
@@ -94,8 +92,12 @@ export function AppNav() {
       {/* Mobile bottom bar */}
       <nav
         data-mobile-nav
-        className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-[#E2DAD0] z-50"
-        style={{ paddingBottom: 'env(safe-area-inset-bottom)', boxShadow: '0 -4px 20px rgba(26,20,16,0.06)' }}
+        className="md:hidden fixed bottom-0 left-0 right-0 z-50"
+        style={{
+          background: 'var(--bg-nav)',
+          borderTop: '0.5px solid rgba(253,248,242,0.08)',
+          paddingBottom: 'env(safe-area-inset-bottom)',
+        }}
       >
         <div className="flex">
           {NAV_ITEMS.map(({ href, icon, label }) => {
@@ -106,14 +108,15 @@ export function AppNav() {
                 href={href}
                 title={label}
                 className={cn(
-                  'flex-1 flex flex-col items-center justify-center py-3 transition-colors',
-                  isActive ? 'text-[#9E6B47]' : 'text-[#C8BDB5]'
+                  'flex-1 flex flex-col items-center justify-center py-3 gap-1 transition-colors',
+                  isActive ? 'text-[#FDF8F2]' : 'text-[rgba(253,248,242,0.28)]'
                 )}
               >
                 <NavIcon iconKey={icon} isActive={isActive} />
-                {isActive && (
-                  <span className="text-[10px] font-body mt-0.5">{label}</span>
-                )}
+                {isActive
+                  ? <span className="text-[8px] font-body font-light tracking-wide text-[#FDF8F2]">{label}</span>
+                  : <div className="h-[8px]" />
+                }
               </Link>
             )
           })}

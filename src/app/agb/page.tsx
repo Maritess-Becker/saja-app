@@ -8,13 +8,13 @@ export default function AgbPage() {
         <Link href="/"><SajaLogo size="sm" /></Link>
       </nav>
       <main className="max-w-2xl mx-auto px-6 py-12">
-        <h1 className="font-heading text-5xl text-dark mb-8">Allgemeine Geschäftsbedingungen</h1>
-        <div className="text-text/70 space-y-4">
-          <p className="text-primary font-medium">Platzhalter — wird vor Launch vervollständigt.</p>
+        <h1 className="font-heading text-5xl text-[#1A1410] mb-8">Allgemeine Geschäftsbedingungen</h1>
+        <div className="text-[#1A1410] space-y-4">
+          <p className="text-[#1A1410] font-medium">Platzhalter — wird vor Launch vervollständigt.</p>
           <p>Diese AGB regeln die Nutzung der Plattform Saja.</p>
-          <h2 className="font-heading text-2xl text-dark">§ 1 Geltungsbereich</h2>
+          <h2 className="font-heading text-2xl text-[#1A1410]">§ 1 Geltungsbereich</h2>
           <p>Diese AGB gelten für alle Nutzer der Plattform Saja.</p>
-          <h2 className="font-heading text-2xl text-dark">§ 2 Leistungen</h2>
+          <h2 className="font-heading text-2xl text-[#1A1410]">§ 2 Leistungen</h2>
           <p>Saja stellt eine Online-Plattform zur Verfügung, die es Nutzern ermöglicht,
           sich kennenzulernen und miteinander zu kommunizieren.</p>
         </div>

@@ -111,31 +111,31 @@ export function ConnectionClient({ connection, otherProfile, initialMessages, cu
   return (
     <div ref={containerRef} className="flex flex-col w-full max-w-2xl mx-auto overflow-hidden" style={{ height: '100dvh' }}>
       {/* Header */}
-      <div className="flex items-center gap-4 p-4 bg-white border-b border-sand">
-        <Link href={`/profile/${otherProfile?.user_id}`} className="w-12 h-12 rounded-xl bg-sand flex items-center justify-center overflow-hidden flex-shrink-0 hover:opacity-90 transition-opacity">
+      <div className="flex items-center gap-4 p-4 bg-white border-b border-[rgba(30,20,10,0.08)]">
+        <Link href={`/profile/${otherProfile?.user_id}`} className="w-12 h-12 rounded-xl bg-[#EDE8E0] flex items-center justify-center overflow-hidden flex-shrink-0 hover:opacity-90 transition-opacity">
           {photoUrl(otherProfile?.photos?.[0]) ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img src={photoUrl(otherProfile?.photos?.[0])} alt="" className="w-full h-full object-cover" />
           ) : (
-            <span className="font-heading text-xl text-primary">{otherProfile?.name?.[0]}</span>
+            <span className="font-heading text-xl text-[#1A1410]">{otherProfile?.name?.[0]}</span>
           )}
         </Link>
         <Link href={`/profile/${otherProfile?.user_id}`} className="flex-1 min-w-0 hover:opacity-70 transition-opacity">
-          <h2 className="font-heading text-xl text-dark">{otherProfile?.name}</h2>
+          <h2 className="font-heading text-xl text-[#1A1410]">{otherProfile?.name}</h2>
           {otherProfile?.location && !otherProfile.hide_location && (
-            <div className="flex items-center gap-1 text-text/40 text-xs">
+            <div className="flex items-center gap-1 text-[#A09888] text-xs">
               <MapPin className="w-3 h-3" />
               {otherProfile.location}
             </div>
           )}
         </Link>
         <div className="flex items-center gap-1">
-          <Heart className="w-4 h-4 text-primary fill-primary" />
-          <span className="text-xs text-primary font-medium">Begegnung</span>
+          <Heart className="w-4 h-4 text-[#1A1410] fill-primary" />
+          <span className="text-xs text-[#1A1410] font-medium">Begegnung</span>
         </div>
         <button
           onClick={() => setShowEndConfirm(true)}
-          className="p-2 text-text/30 hover:text-red-400 transition-colors"
+          className="p-2 text-[#A09888] hover:text-red-400 transition-colors"
           title="Phase beenden"
         >
           <X className="w-5 h-5" />
@@ -143,11 +143,11 @@ export function ConnectionClient({ connection, otherProfile, initialMessages, cu
       </div>
 
       {/* Daily question banner */}
-      <div className="px-4 py-3 bg-light border-b border-sand">
-        <p className="text-xs text-primary font-medium mb-1">Frage des Tages</p>
+      <div className="px-4 py-3 bg-[#FDF8F2] border-b border-[rgba(30,20,10,0.08)]">
+        <p className="text-xs text-[#1A1410] font-medium mb-1">Frage des Tages</p>
         <div className="flex items-center justify-between gap-3">
-          <p className="text-sm text-text/70 italic">&ldquo;{dailyQuestion}&rdquo;</p>
-          <button onClick={sendDailyQuestion} className="text-xs text-primary hover:underline flex-shrink-0">
+          <p className="text-sm text-[#1A1410] italic">&ldquo;{dailyQuestion}&rdquo;</p>
+          <button onClick={sendDailyQuestion} className="text-xs text-[#1A1410] hover:underline flex-shrink-0">
             Senden
           </button>
         </div>
@@ -157,9 +157,9 @@ export function ConnectionClient({ connection, otherProfile, initialMessages, cu
       <div className="flex-1 overflow-y-auto overscroll-contain px-4 py-6 space-y-3">
         {messages.length === 0 && (
           <div className="text-center py-12">
-            <Heart className="w-12 h-12 text-primary/20 mx-auto mb-4" />
-            <p className="text-text/40 font-heading text-xl">Der Anfang von etwas Besonderem</p>
-            <p className="text-text/30 text-sm mt-2">Sende eine erste Nachricht oder nutze die Frage des Tages.</p>
+            <Heart className="w-12 h-12 text-[#6B6058] mx-auto mb-4" />
+            <p className="text-[#A09888] font-heading text-xl">Der Anfang von etwas Besonderem</p>
+            <p className="text-[#A09888] text-sm mt-2">Sende eine erste Nachricht oder nutze die Frage des Tages.</p>
           </div>
         )}
 
@@ -171,10 +171,10 @@ export function ConnectionClient({ connection, otherProfile, initialMessages, cu
                 'max-w-[75%] px-4 py-3 rounded-2xl text-sm leading-relaxed',
                 isMe
                   ? 'bg-primary text-white rounded-br-sm'
-                  : 'bg-white border border-sand text-text rounded-bl-sm'
+                  : 'bg-white border border-[rgba(30,20,10,0.08)] text-[#1A1410] rounded-bl-sm'
               )}>
                 {msg.content}
-                <p className={cn('text-[10px] mt-1.5', isMe ? 'text-white/50' : 'text-text/30')}>
+                <p className={cn('text-[10px] mt-1.5', isMe ? 'text-white/50' : 'text-[#A09888]')}>
                   {formatRelativeTime(msg.created_at)}
                 </p>
               </div>
@@ -187,12 +187,12 @@ export function ConnectionClient({ connection, otherProfile, initialMessages, cu
       {/* Eingabe — bleibt immer unten sichtbar */}
       <form
         onSubmit={sendMessage}
-        className="flex-shrink-0 px-4 pt-3 bg-white border-t border-[#E2DAD0] flex gap-3"
+        className="flex-shrink-0 px-4 pt-3 bg-white border-t border-[rgba(34,16,128,0.12)] flex gap-3"
         style={{ paddingBottom: 'calc(0.75rem + env(safe-area-inset-bottom, 0px))' }}
       >
         <input
           type="text"
-          className="flex-1 rounded-2xl border border-[#E2DAD0] bg-[#F6F2EC] px-4 py-3 text-sm font-body text-[#1A1410] placeholder:text-[#A89888] focus:outline-none focus:ring-2 focus:ring-[#9E6B47]/30"
+          className="flex-1 rounded-2xl border border-[rgba(34,16,128,0.12)] bg-[rgba(34,16,128,0.07)] px-4 py-3 text-sm font-body text-[#1A1410] placeholder:text-[#6B6058] focus:outline-none focus:ring-2 focus:ring-[#221080]/30"
           placeholder="Schreibe etwas…"
           value={text}
           onChange={(e) => setText(e.target.value)}
@@ -200,7 +200,7 @@ export function ConnectionClient({ connection, otherProfile, initialMessages, cu
         <button
           type="submit"
           disabled={sending || !text.trim()}
-          className="w-12 h-12 bg-[#9E6B47] rounded-2xl flex items-center justify-center flex-shrink-0 disabled:opacity-40 hover:bg-[#7A4E30] transition-colors active:scale-95"
+          className="w-12 h-12 bg-[#221080] rounded-2xl flex items-center justify-center flex-shrink-0 disabled:opacity-40 hover:bg-[#120850] transition-colors active:scale-95"
         >
           <Send className="w-5 h-5 text-white" />
         </button>
@@ -213,8 +213,8 @@ export function ConnectionClient({ connection, otherProfile, initialMessages, cu
       {showEndConfirm && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="card max-w-sm w-full">
-            <h3 className="font-heading text-2xl text-dark mb-3">Phase beenden?</h3>
-            <p className="text-text/60 text-sm mb-6 leading-relaxed">
+            <h3 className="font-heading text-2xl text-[#1A1410] mb-3">Phase beenden?</h3>
+            <p className="text-[#6B6058] text-sm mb-6 leading-relaxed">
               Wenn du die Begegnung beendest, sind ihr beide sofort wieder frei —
               neue Matches und Entdecken werden wieder aktiviert.
             </p>

@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState } from 'react'
 import { Heart, MapPin, Sparkles, Clock, CheckCircle, Lock } from 'lucide-react'
@@ -81,18 +81,18 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
 
   if (tier === 'free') {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[80vh] px-6 text-center max-w-sm mx-auto">
-        <div className="w-20 h-20 bg-[#F6F2EC] rounded-full flex items-center justify-center mx-auto mb-6">
-          <Lock className="w-9 h-9 text-[#1A1410]/30" />
+      <div className="flex flex-col items-center justify-center min-h-screen px-6 text-center bg-[#221080]">
+        <div className="w-20 h-20 bg-[rgba(253,248,242,0.12)] rounded-full flex items-center justify-center mx-auto mb-6">
+          <Lock className="w-9 h-9 text-[#FDF8F2]/50" />
         </div>
-        <h2 className="font-heading text-4xl text-[#1A1410] font-light mb-3">Matches sind gesperrt</h2>
-        <p className="text-[#A89888] leading-relaxed mb-8">
+        <h2 className="font-heading text-4xl text-[#FDF8F2] font-light mb-3">Matches sind gesperrt</h2>
+        <p className="text-[#FDF8F2]/60 leading-relaxed mb-8 max-w-sm">
           Mit der Mitgliedschaft (29 €/Monat) siehst du gegenseitige Interessen und kannst Begegnungen anfragen.
         </p>
-        <Link href="/pricing" className="btn-primary px-8 py-3.5">
+        <Link href="/pricing" className="bg-[#FDF8F2] text-[#FDF8F2] px-8 py-3.5 rounded-full font-body font-semibold hover:bg-white transition-colors">
           Mitgliedschaft ansehen
         </Link>
-        <p className="text-xs text-[#1A1410]/30 mt-4">14 Tage Geld-zurück-Garantie</p>
+        <p className="text-xs text-[#FDF8F2]/30 mt-4">14 Tage Geld-zurück-Garantie</p>
       </div>
     )
   }
@@ -100,9 +100,9 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
   if (matches.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[80vh] px-4 text-center">
-        <Heart className="w-16 h-16 text-[#9E6B47]/20 mb-6" />
-        <h2 className="font-heading text-4xl text-[#1A1410] font-light mb-3">Noch keine Matches</h2>
-        <p className="text-[#A89888] max-w-sm mb-8">
+        <Heart className="w-16 h-16 text-[#6B6058] mb-6" />
+        <h2 className="font-heading text-4xl text-[#FDF8F2] font-light mb-3">Noch keine Matches</h2>
+        <p className="text-[#6B6058] max-w-sm mb-8">
           Wenn du jemanden likest und diese Person dich ebenfalls geliked hat, erscheint sie hier.
         </p>
         <Link href="/discover" className="btn-primary">Entdecken starten</Link>
@@ -117,18 +117,18 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
         visible={showBegegnungAnim}
         navigateTo="/begegnung"
       />
-      <div className="max-w-2xl mx-auto px-4 pt-8 pb-32">
-        <h1 className="font-heading text-[52px] font-light text-[#1A1410] tracking-[-0.5px] leading-none mb-1">Matches</h1>
-        <p className="font-body text-sm text-[#A89888] mb-8">
+      <div className="max-w-2xl mx-auto px-4 pb-32">
+        <div className="sticky top-0 z-20 bg-[#221080] -mx-4 px-4 pt-5 pb-4 mb-6">
+          <h1 className="font-heading text-[52px] font-light text-[#FDF8F2] tracking-[-0.5px] leading-none mb-1">Matches</h1>
           {activeMatchId ? (
-            <span className="flex items-center gap-2 bg-[#9E6B47] text-white text-[13px] font-body px-4 py-3 rounded-xl -mx-1">
-              <Sparkles className="w-4 h-4 text-white flex-shrink-0" />
-              Du bist aktuell in einer Begegnung (One Connection Rule aktiv)
+            <span className="flex items-center gap-2 text-[#FDF8F2]/70 text-[13px] font-body">
+              <Sparkles className="w-4 h-4 text-[#FDF8F2]/70 flex-shrink-0" />
+              One Connection Rule aktiv
             </span>
           ) : (
-            `${matches.length} gegenseitige Interessen`
+            <p className="font-body text-sm text-[#FDF8F2]/60">{matches.length} gegenseitige Interessen</p>
           )}
-        </p>
+        </div>
 
         <div className="space-y-4">
           {matches.map((match) => {
@@ -147,9 +147,9 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
                 key={match.id}
                 className={cn(
                   'bg-white rounded-2xl overflow-hidden active:scale-[0.98] transition-transform duration-150',
-                  isThisActiveMatch ? 'ring-2 ring-[#9E6B47]' : ''
+                  isThisActiveMatch ? 'ring-2 ring-[#221080]' : ''
                 )}
-                style={{ boxShadow: isRequested && !isRequester && !isActive ? '0 2px 12px rgba(26,20,16,0.08), inset 4px 0 0 #9E6B47' : '0 2px 12px rgba(26,20,16,0.08)' }}
+                style={{ boxShadow: isRequested && !isRequester && !isActive ? '0 2px 12px rgba(26,20,16,0.08), inset 4px 0 0 #221080' : '0 2px 12px rgba(26,20,16,0.08)' }}
               >
                 {/* Photo area */}
                 <Link href={`/profile/${profile.user_id}`} className="block relative h-[220px] overflow-hidden">
@@ -161,8 +161,8 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
                       className="absolute inset-0 w-full h-full object-cover object-top"
                     />
                   ) : (
-                    <div className="absolute inset-0 bg-[#F6F2EC] flex items-center justify-center">
-                      <span className="font-heading text-5xl text-[#9E6B47]/30">
+                    <div className="absolute inset-0 bg-[rgba(34,16,128,0.07)] flex items-center justify-center">
+                      <span className="font-heading text-5xl text-[#6B6058]">
                         {profile.name?.[0]}
                       </span>
                     </div>
@@ -186,14 +186,14 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
 
                   {/* Bindungstyp badge */}
                   {profile.bindungstyp && (
-                    <span className="absolute bottom-2 right-2 bg-white/85 text-[#9E6B47] font-body text-[10px] px-2 py-0.5 rounded-full">
+                    <span className="absolute bottom-2 right-2 bg-white/85 text-[#FDF8F2] font-body text-[10px] px-2 py-0.5 rounded-full">
                       {profile.bindungstyp}
                     </span>
                   )}
 
                   {/* Active badge */}
                   {isThisActiveMatch && (
-                    <span className="absolute top-2 right-2 flex items-center gap-1 text-xs text-[#9E6B47] bg-white/90 px-2 py-1 rounded-full">
+                    <span className="absolute top-2 right-2 flex items-center gap-1 text-xs text-[#FDF8F2] bg-white/90 px-2 py-1 rounded-full">
                       <CheckCircle className="w-3 h-3" /> Aktiv
                     </span>
                   )}
@@ -203,7 +203,7 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
                 <div className="px-4 pt-3 pb-4">
                   {/* Prompt preview */}
                   {profile.prompts?.[0]?.question && (
-                    <p className="font-heading italic text-sm text-[#9E6B47] truncate mb-3">
+                    <p className="font-heading italic text-sm text-[#FDF8F2] truncate mb-3">
                       „{profile.prompts[0].question}"
                     </p>
                   )}
@@ -223,7 +223,7 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
                         {loading === connection.id ? '...' : 'Anfrage annehmen'}
                       </button>
                     ) : isRequested && isRequester ? (
-                      <span className="flex items-center gap-1.5 text-xs text-[#A89888]">
+                      <span className="flex items-center gap-1.5 text-xs text-[#6B6058]">
                         <Clock className="w-3.5 h-3.5" /> Anfrage gesendet
                       </span>
                     ) : (
@@ -231,7 +231,7 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
                         onClick={() => requestConnection(match.id)}
                         disabled={loading === match.id || (!!activeMatchId && !isThisActiveMatch)}
                         className={cn(
-                          'w-full border-[1.5px] border-[#9E6B47] text-[#9E6B47] bg-transparent hover:bg-[#9E6B47]/5 rounded-xl text-sm py-3 px-4 transition-colors duration-200 disabled:opacity-40 disabled:cursor-not-allowed font-body font-medium'
+                          'w-full border-[1.5px] border-[#221080] text-[#FDF8F2] bg-transparent hover:bg-[#221080]/5 rounded-xl text-sm py-3 px-4 transition-colors duration-200 disabled:opacity-40 disabled:cursor-not-allowed font-body font-medium'
                         )}
                       >
                         {loading === match.id ? '...' : 'Begegnung anfragen'}
@@ -240,7 +240,7 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
                   </div>
 
                   {isRequested && !isRequester && connection?.expires_at && (
-                    <p className="text-xs text-[#A89888]/60 mt-1.5">
+                    <p className="text-xs text-[#6B6058]/60 mt-1.5">
                       Läuft ab am {new Date(connection.expires_at).toLocaleDateString('de-DE')}
                     </p>
                   )}
@@ -253,3 +253,4 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
     </>
   )
 }
+

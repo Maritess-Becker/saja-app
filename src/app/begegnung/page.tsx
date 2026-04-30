@@ -63,7 +63,7 @@ export default async function BegegnungPage() {
   }
 
   return (
-    <div className="bg-background">
+    <div className="bg-creme">
       <AppNav />
       <main className="md:pl-64 flex flex-col overflow-hidden">
         <BegegnungClient

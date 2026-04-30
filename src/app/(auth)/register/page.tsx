@@ -47,11 +47,11 @@ export default function RegisterPage() {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center px-4">
         <div className="text-center max-w-md">
-          <div className="w-20 h-20 bg-light rounded-full flex items-center justify-center mx-auto mb-6">
-            <Heart className="w-10 h-10 text-primary fill-primary" />
+          <div className="w-20 h-20 bg-[#FDF8F2] rounded-full flex items-center justify-center mx-auto mb-6">
+            <Heart className="w-10 h-10 text-[#221080] fill-primary" />
           </div>
-          <h1 className="font-heading text-4xl text-dark mb-4">Fast geschafft!</h1>
-          <p className="text-text/60 leading-relaxed">
+          <h1 className="font-heading text-4xl text-[#1A1410] mb-4">Fast geschafft!</h1>
+          <p className="text-[#6B6058] leading-relaxed">
             Wir haben dir eine Bestätigungs-E-Mail an <strong>{email}</strong> gesendet.
             Bitte bestätige deine Adresse, um mit dem Onboarding zu beginnen.
           </p>
@@ -68,8 +68,8 @@ export default function RegisterPage() {
           <Link href="/" className="inline-flex justify-center mb-6">
             <SajaLogo size="lg" showTagline={true} />
           </Link>
-          <h1 className="font-heading text-4xl font-light text-dark">Konto erstellen</h1>
-          <p className="text-text/50 mt-2 font-body">Kostenlos und unverbindlich starten.</p>
+          <h1 className="font-heading text-4xl font-light text-[#1A1410]">Konto erstellen</h1>
+          <p className="text-[#6B6058] mt-2 font-body">Kostenlos und unverbindlich starten.</p>
         </div>
 
         <div className="card">
@@ -108,10 +108,10 @@ export default function RegisterPage() {
               />
             </div>
 
-            <p className="text-xs text-text/40 leading-relaxed">
+            <p className="text-xs text-[#A09888] leading-relaxed">
               Mit der Registrierung stimmst du unseren{' '}
-              <Link href="/agb" className="text-primary hover:underline">AGB</Link> und der{' '}
-              <Link href="/datenschutz" className="text-primary hover:underline">Datenschutzerklärung</Link> zu.
+              <Link href="/agb" className="text-[#221080] hover:underline">AGB</Link> und der{' '}
+              <Link href="/datenschutz" className="text-[#221080] hover:underline">Datenschutzerklärung</Link> zu.
             </p>
 
             <button type="submit" disabled={loading} className="btn-primary w-full">
@@ -120,9 +120,9 @@ export default function RegisterPage() {
           </form>
         </div>
 
-        <p className="text-center text-text/50 text-sm mt-6">
+        <p className="text-center text-[#6B6058] text-sm mt-6">
           Bereits registriert?{' '}
-          <Link href="/login" className="text-primary hover:underline">
+          <Link href="/login" className="text-[#221080] hover:underline">
             Anmelden
           </Link>
         </p>

@@ -15,7 +15,7 @@ const TIERS = [
     label: 'Einstieg',
     monthlyPrice: 0,
     yearlyPrice: 0,
-    color: 'border-sand/80',
+    color: 'border-[rgba(30,20,10,0.08)]/80',
     highlight: false,
     cta: 'Kostenlos starten',
     ctaHref: '/register',
@@ -128,22 +128,22 @@ export function PricingClient({ isLoggedIn }: { isLoggedIn: boolean }) {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <div className="max-w-5xl mx-auto px-6 pt-16 pb-12 text-center">
-        <Link href="/" className="text-text/40 text-sm hover:text-text mb-8 inline-block">← Zurück</Link>
-        <h1 className="font-heading text-5xl md:text-6xl font-light text-dark mb-4">
+        <Link href="/" className="text-[#A09888] text-sm hover:text-[#1A1410] mb-8 inline-block">← Zurück</Link>
+        <h1 className="font-heading text-5xl md:text-6xl font-light text-[#1A1410] mb-4">
           Transparente Preise.
           <br /><em>Kein Kleingedrucktes.</em>
         </h1>
-        <p className="text-text/50 text-lg max-w-xl mx-auto mb-10">
+        <p className="text-[#6B6058] text-lg max-w-xl mx-auto mb-10">
           Starte kostenlos. Upgrade jederzeit. Kündige jederzeit.
         </p>
 
         {/* Billing toggle */}
-        <div className="inline-flex items-center bg-sand rounded-2xl p-1 gap-1">
+        <div className="inline-flex items-center bg-[#EDE8E0] rounded-2xl p-1 gap-1">
           <button
             onClick={() => setBilling('monthly')}
             className={cn(
               'px-5 py-2.5 rounded-xl text-sm font-medium transition-all',
-              billing === 'monthly' ? 'bg-white shadow text-dark' : 'text-text/50 hover:text-text'
+              billing === 'monthly' ? 'bg-white shadow text-[#1A1410]' : 'text-[#6B6058] hover:text-[#1A1410]'
             )}
           >
             Monatlich
@@ -152,7 +152,7 @@ export function PricingClient({ isLoggedIn }: { isLoggedIn: boolean }) {
             onClick={() => setBilling('yearly')}
             className={cn(
               'px-5 py-2.5 rounded-xl text-sm font-medium transition-all flex items-center gap-2',
-              billing === 'yearly' ? 'bg-white shadow text-dark' : 'text-text/50 hover:text-text'
+              billing === 'yearly' ? 'bg-white shadow text-[#1A1410]' : 'text-[#6B6058] hover:text-[#1A1410]'
             )}
           >
             Jährlich
@@ -188,19 +188,19 @@ export function PricingClient({ isLoggedIn }: { isLoggedIn: boolean }) {
                 )}
 
                 <div className="mb-6">
-                  <p className="text-xs text-text/40 uppercase tracking-widest mb-1">{tier.label}</p>
-                  <h2 className="font-heading text-3xl text-dark">{tier.name}</h2>
+                  <p className="text-xs text-[#A09888] uppercase tracking-widest mb-1">{tier.label}</p>
+                  <h2 className="font-heading text-3xl text-[#1A1410]">{tier.name}</h2>
 
                   {tier.monthlyPrice === 0 ? (
-                    <p className="mt-3 font-heading text-4xl text-dark">0 €</p>
+                    <p className="mt-3 font-heading text-4xl text-[#1A1410]">0 €</p>
                   ) : (
                     <div className="mt-3">
-                      <span className="font-heading text-4xl text-dark">
+                      <span className="font-heading text-4xl text-[#1A1410]">
                         {billing === 'yearly'
                           ? `${Math.round(price / 12)} €`
                           : `${price} €`}
                       </span>
-                      <span className="text-text/40 text-sm ml-1">/ Monat</span>
+                      <span className="text-[#A09888] text-sm ml-1">/ Monat</span>
                       {billing === 'yearly' && price > 0 && (
                         <div className="mt-1">
                           <span className="text-xs text-accent font-medium">
@@ -209,7 +209,7 @@ export function PricingClient({ isLoggedIn }: { isLoggedIn: boolean }) {
                         </div>
                       )}
                       {billing === 'monthly' && (
-                        <p className="text-xs text-text/30 mt-0.5">
+                        <p className="text-xs text-[#A09888] mt-0.5">
                           Jährlich: {tier.yearlyPrice} € (2 Monate gratis)
                         </p>
                       )}
@@ -223,7 +223,7 @@ export function PricingClient({ isLoggedIn }: { isLoggedIn: boolean }) {
                       key={f.text}
                       className={cn(
                         'flex items-start gap-2.5 text-sm',
-                        f.included ? 'text-text/70' : 'text-text/25'
+                        f.included ? 'text-[#1A1410]' : 'text-[#1A1410]/25'
                       )}
                     >
                       {f.included ? (
@@ -241,10 +241,10 @@ export function PricingClient({ isLoggedIn }: { isLoggedIn: boolean }) {
                   className={cn(
                     'w-full text-center py-3.5 rounded-2xl text-sm font-medium transition-all',
                     tier.highlight
-                      ? 'bg-primary text-white hover:bg-dark'
+                      ? 'bg-primary text-white hover:bg-[#221080]'
                       : tier.monthlyPrice === 0
-                      ? 'border-2 border-sand text-text/60 hover:border-primary hover:text-primary'
-                      : 'border-2 border-primary text-primary hover:bg-primary hover:text-white'
+                      ? 'border-2 border-[rgba(30,20,10,0.08)] text-[#6B6058] hover:border-primary hover:text-[#221080]'
+                      : 'border-2 border-primary text-[#221080] hover:bg-primary hover:text-white'
                   )}
                 >
                   {tier.cta}
@@ -255,37 +255,37 @@ export function PricingClient({ isLoggedIn }: { isLoggedIn: boolean }) {
         </div>
 
         {/* Guarantee */}
-        <div className="flex items-center justify-center gap-3 mt-10 text-text/50">
+        <div className="flex items-center justify-center gap-3 mt-10 text-[#6B6058]">
           <ShieldCheck className="w-5 h-5 text-accent" />
           <p className="text-sm">
-            <strong className="text-text/70">14 Tage Geld-zurück-Garantie</strong> auf alle Abonnements. Keine Fragen gestellt.
+            <strong className="text-[#1A1410]">14 Tage Geld-zurück-Garantie</strong> auf alle Abonnements. Keine Fragen gestellt.
           </p>
         </div>
       </div>
 
       {/* One-time purchases */}
-      <div className="bg-sand py-20 px-6">
+      <div className="bg-[#EDE8E0] py-20 px-6">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
-            <p className="text-xs text-text/40 uppercase tracking-widest mb-2">Einmalig kaufbar</p>
-            <h2 className="font-heading text-4xl font-light text-dark mb-3">Für immer verfügbar</h2>
-            <p className="text-text/50 max-w-xl mx-auto">
+            <p className="text-xs text-[#A09888] uppercase tracking-widest mb-2">Einmalig kaufbar</p>
+            <h2 className="font-heading text-4xl font-light text-[#1A1410] mb-3">Für immer verfügbar</h2>
+            <p className="text-[#6B6058] max-w-xl mx-auto">
               Kein Abo. Einmal kaufen — für immer in deinem Konto verfügbar.
             </p>
           </div>
 
           {/* Saja Guides */}
-          <h3 className="font-heading text-2xl text-dark mb-5">Saja Guides</h3>
+          <h3 className="font-heading text-2xl text-[#1A1410] mb-5">Saja Guides</h3>
           <div className="grid md:grid-cols-3 gap-4 mb-14">
             {SAJA_GUIDES.map((guide) => (
-              <div key={guide.id} className="card border border-sand/80">
-                <div className="inline-block bg-light text-primary text-xs px-2.5 py-1 rounded-full mb-3 font-medium">
+              <div key={guide.id} className="card border border-[rgba(30,20,10,0.08)]/80">
+                <div className="inline-block bg-[#FDF8F2] text-[#221080] text-xs px-2.5 py-1 rounded-full mb-3 font-medium">
                   Saja Guide
                 </div>
-                <h4 className="font-heading text-xl text-dark mb-2">{guide.title}</h4>
-                <p className="text-text/55 text-sm leading-relaxed mb-5">{guide.desc}</p>
+                <h4 className="font-heading text-xl text-[#1A1410] mb-2">{guide.title}</h4>
+                <p className="text-[#1A1410]/55 text-sm leading-relaxed mb-5">{guide.desc}</p>
                 <div className="flex items-center justify-between">
-                  <span className="font-heading text-2xl text-dark">{guide.price} €</span>
+                  <span className="font-heading text-2xl text-[#1A1410]">{guide.price} €</span>
                   <button
                     onClick={() => handleGuidePurchase(guide.id, guide.title)}
                     className="btn-primary text-xs py-2 px-5"
@@ -302,7 +302,7 @@ export function PricingClient({ isLoggedIn }: { isLoggedIn: boolean }) {
 
       {/* FAQ */}
       <div className="max-w-2xl mx-auto px-6 py-20">
-        <h2 className="font-heading text-4xl font-light text-dark text-center mb-10">Häufige Fragen</h2>
+        <h2 className="font-heading text-4xl font-light text-[#1A1410] text-center mb-10">Häufige Fragen</h2>
         <div className="space-y-6">
           {[
             { q: 'Kann ich jederzeit kündigen?', a: 'Ja — du kannst dein Abo jederzeit kündigen. Der Zugang bleibt bis zum Ende des bezahlten Zeitraums aktiv.' },
@@ -311,9 +311,9 @@ export function PricingClient({ isLoggedIn }: { isLoggedIn: boolean }) {
             { q: 'Sind die Saja Guides wirklich für immer?', a: 'Ja. Einmalig gekaufte Guides bleiben dauerhaft in deinem Konto — unabhängig vom Abo-Status.' },
             { q: 'Gibt es versteckte Kosten?', a: 'Nein. Der Preis auf dieser Seite ist alles, was du zahlst.' },
           ].map((item) => (
-            <div key={item.q} className="border-b border-sand pb-6">
-              <p className="font-medium text-dark mb-2">{item.q}</p>
-              <p className="text-text/60 text-sm leading-relaxed">{item.a}</p>
+            <div key={item.q} className="border-b border-[rgba(30,20,10,0.08)] pb-6">
+              <p className="font-medium text-[#1A1410] mb-2">{item.q}</p>
+              <p className="text-[#6B6058] text-sm leading-relaxed">{item.a}</p>
             </div>
           ))}
         </div>

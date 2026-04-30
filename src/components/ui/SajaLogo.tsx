@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useEffect } from 'react'
 import { motion, useAnimation } from 'framer-motion'
@@ -10,6 +10,7 @@ interface Props {
   className?: string
   variant?: 'default' | 'match' | 'begegnung'
   animate?: boolean
+  onDark?: boolean
 }
 
 export function SajaLogo({
@@ -18,6 +19,7 @@ export function SajaLogo({
   className,
   variant = 'default',
   animate: shouldAnimate = false,
+  onDark = false,
 }: Props) {
   const arcSize = size === 'sm' ? 22 : size === 'lg' ? 36 : 28
   const textSize = size === 'sm' ? 'text-xl' : size === 'lg' ? 'text-3xl' : 'text-2xl'
@@ -47,7 +49,7 @@ export function SajaLogo({
   const svgRotateControls = useAnimation()
 
   const matchColor   = '#C4A882'
-  const defaultColor = '#9E6B47'
+  const defaultColor = onDark ? '#FDF8F2' : '#221080'
   const mainColor    = variant === 'match' ? matchColor : defaultColor
   const gapColor     = variant === 'match' ? matchColor : defaultColor
 
@@ -133,14 +135,17 @@ export function SajaLogo({
 
         <span
           className={cn('font-heading font-semibold leading-none', textSize)}
-          style={{ color: '#1A1410' }}
+          style={{ color: onDark ? '#FDF8F2' : '#221080' }}
         >
           Saja
         </span>
       </div>
 
       {showTagline && (
-        <p className="text-[10px] text-text/40 tracking-widest uppercase mt-1">
+        <p
+          className="text-[10px] tracking-widest uppercase mt-1"
+          style={{ color: onDark ? 'rgba(253,248,242,0.45)' : 'rgba(26,16,64,0.4)' }}
+        >
           Bewusstes Dating
         </p>
       )}

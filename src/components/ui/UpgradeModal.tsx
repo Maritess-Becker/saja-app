@@ -15,8 +15,8 @@ const TIER_INFO = {
   membership: {
     name: 'Mitgliedschaft',
     price: '29€ / Monat',
-    color: 'text-primary',
-    badge: 'bg-light text-primary',
+    color: 'text-[#221080]',
+    badge: 'bg-[#FDF8F2] text-[#221080]',
     features: [
       'Swipen & Profile entdecken',
       'Matches & Begegnung',
@@ -28,8 +28,8 @@ const TIER_INFO = {
   premium: {
     name: 'Premium',
     price: '69€ / Monat',
-    color: 'text-dark',
-    badge: 'bg-dark/10 text-dark',
+    color: 'text-[#1A1410]',
+    badge: 'bg-[#221080]/10 text-[#1A1410]',
     features: [
       'Frage des Tages im Chat',
       '36 Fragen der Nähe',
@@ -50,14 +50,14 @@ export function UpgradeModal({ tier, feature, onClose }: Props) {
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="bg-dark px-6 pt-6 pb-5 relative">
+        <div className="bg-[#221080] px-6 pt-6 pb-5 relative">
           <button
             onClick={onClose}
             className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white/60 hover:text-white transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
-          <Sparkles className="w-6 h-6 text-primary mb-3" />
+          <Sparkles className="w-6 h-6 text-[#221080] mb-3" />
           <p className="text-white/60 text-xs uppercase tracking-widest mb-1">
             {feature ? `Für diesen Inhalt` : 'Upgrade erforderlich'}
           </p>
@@ -71,10 +71,10 @@ export function UpgradeModal({ tier, feature, onClose }: Props) {
 
         {/* Features */}
         <div className="px-6 py-5">
-          <p className="text-text/50 text-xs uppercase tracking-widest mb-3">Enthält u.a.</p>
+          <p className="text-[#6B6058] text-xs uppercase tracking-widest mb-3">Enthält u.a.</p>
           <ul className="space-y-2 mb-6">
             {info.features.map((f) => (
-              <li key={f} className="flex items-center gap-2.5 text-sm text-text/70">
+              <li key={f} className="flex items-center gap-2.5 text-sm text-[#1A1410]">
                 <Check className="w-4 h-4 text-accent flex-shrink-0" />
                 {f}
               </li>
@@ -90,7 +90,7 @@ export function UpgradeModal({ tier, feature, onClose }: Props) {
           </Link>
           <button
             onClick={onClose}
-            className="w-full text-center text-text/40 text-xs mt-3 hover:text-text/60 transition-colors"
+            className="w-full text-center text-[#A09888] text-xs mt-3 hover:text-[#6B6058] transition-colors"
           >
             Vielleicht später
           </button>

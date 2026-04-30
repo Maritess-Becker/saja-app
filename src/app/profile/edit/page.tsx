@@ -1,9 +1,9 @@
 ﻿import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { AppNav } from '@/components/layout/AppNav'
-import { ProfileSelfView } from './ProfileSelfView'
+import { EditProfileClient } from './EditProfileClient'
 
-export default async function ProfilePage() {
+export default async function EditProfilePage() {
   const supabase = createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) redirect('/login')
@@ -14,23 +14,13 @@ export default async function ProfilePage() {
     .eq('user_id', user.id)
     .single()
 
-  const { data: userData } = await supabase
-    .from('users')
-    .select('subscription_tier')
-    .eq('id', user.id)
-    .single()
-
-  const tier = userData?.subscription_tier ?? 'free'
-
   if (!profile) redirect('/onboarding')
 
   return (
-    <div className="min-h-screen bg-mondweiss">
+    <div className="min-h-screen bg-[#221080]">
       <AppNav />
       <main className="md:pl-64 pb-20 md:pb-0">
-        <div className="max-w-lg mx-auto pb-32">
-          <ProfileSelfView profile={profile} tier={tier} />
-        </div>
+        <EditProfileClient profile={profile} userId={user.id} />
       </main>
     </div>
   )

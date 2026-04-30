@@ -20,15 +20,15 @@ export default function LandingPage() {
 
       {/* Hero */}
       <section className="max-w-4xl mx-auto px-6 pt-20 pb-32 text-center">
-        <p className="text-primary font-body text-sm uppercase tracking-widest mb-6">
+        <p className="text-[#221080] font-body text-sm uppercase tracking-widest mb-6">
           Bewusstes Dating
         </p>
-        <h1 className="font-heading text-6xl md:text-7xl font-light text-dark leading-tight mb-8">
+        <h1 className="font-heading text-6xl md:text-7xl font-light text-[#1A1410] leading-tight mb-8">
           Bewusstes Dating
           <br />
           <em>für echte Verbindung</em>
         </h1>
-        <p className="font-body text-lg text-text/60 max-w-2xl mx-auto mb-12 leading-relaxed">
+        <p className="font-body text-lg text-[#6B6058] max-w-2xl mx-auto mb-12 leading-relaxed">
           Saja bringt bewusste Menschen zusammen —
           für tiefe Begegnungen, die wirklich zählen. Keine unendlichen Swipes,
           keine oberflächlichen Matches.
@@ -41,18 +41,18 @@ export default function LandingPage() {
             Wie es funktioniert
           </Link>
         </div>
-        <p className="text-text/30 text-xs mt-10">Saja · Bewusstes Dating</p>
+        <p className="text-[#A09888] text-xs mt-10">Saja · Bewusstes Dating</p>
       </section>
 
       {/* One Connection Rule */}
-      <section className="bg-dark text-light py-20 px-6">
+      <section className="bg-[#221080] text-[#FDF8F2] py-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <Sparkles className="w-8 h-8 text-primary mx-auto mb-6" />
+          <Sparkles className="w-8 h-8 text-[#221080] mx-auto mb-6" />
           <h2 className="font-heading text-5xl font-light mb-6">
             The One Connection Rule
           </h2>
-          <p className="font-body text-light/70 text-lg max-w-2xl mx-auto leading-relaxed">
-            Bei Saja bist du immer nur mit <strong className="text-primary">einer Person gleichzeitig</strong> in
+          <p className="font-body text-[#FDF8F2]/70 text-lg max-w-2xl mx-auto leading-relaxed">
+            Bei Saja bist du immer nur mit <strong className="text-[#221080]">einer Person gleichzeitig</strong> in
             der Begegnung. Volle Aufmerksamkeit, echte Präsenz — so entstehen
             tiefe Verbindungen.
           </p>
@@ -62,31 +62,31 @@ export default function LandingPage() {
       {/* Features */}
       <section id="wie-es-funktioniert" className="py-24 px-6">
         <div className="max-w-5xl mx-auto">
-          <h2 className="font-heading text-5xl font-light text-center text-dark mb-16">
+          <h2 className="font-heading text-5xl font-light text-center text-[#1A1410] mb-16">
             Wie es funktioniert
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                icon: <Users className="w-8 h-8 text-primary" />,
+                icon: <Users className="w-8 h-8 text-[#221080]" />,
                 title: 'Profil erstellen',
                 desc: 'Teile deine Werte, deinen Bindungstyp und was du wirklich suchst. Tiefgang statt Oberfläche.',
               },
               {
-                icon: <Heart className="w-8 h-8 text-primary" />,
+                icon: <Heart className="w-8 h-8 text-[#221080]" />,
                 title: 'Bewusst swipen',
                 desc: 'Entdecke Profile, die wirklich zu dir passen. Bei gegenseitigem Interesse entsteht ein Match.',
               },
               {
-                icon: <Sparkles className="w-8 h-8 text-primary" />,
+                icon: <Sparkles className="w-8 h-8 text-[#221080]" />,
                 title: 'Begegnung starten',
                 desc: 'Taucht gemeinsam in die Begegnung ein — mit Tiefenfragen, Frage des Tages und vollem Fokus.',
               },
             ].map((f) => (
               <div key={f.title} className="card text-center">
                 <div className="flex justify-center mb-5">{f.icon}</div>
-                <h3 className="font-heading text-2xl text-dark mb-3">{f.title}</h3>
-                <p className="font-body text-text/60 leading-relaxed">{f.desc}</p>
+                <h3 className="font-heading text-2xl text-[#1A1410] mb-3">{f.title}</h3>
+                <p className="font-body text-[#6B6058] leading-relaxed">{f.desc}</p>
               </div>
             ))}
           </div>
@@ -94,25 +94,25 @@ export default function LandingPage() {
       </section>
 
       {/* Tiers */}
-      <section className="bg-sand py-24 px-6">
+      <section className="bg-[#EDE8E0] py-24 px-6">
         <div className="max-w-5xl mx-auto">
-          <h2 className="font-heading text-5xl font-light text-center text-dark mb-4">
+          <h2 className="font-heading text-5xl font-light text-center text-[#1A1410] mb-4">
             Dein Zugang
           </h2>
-          <p className="text-center text-text/50 font-body mb-16 max-w-xl mx-auto">
+          <p className="text-center text-[#6B6058] font-body mb-16 max-w-xl mx-auto">
             Starte kostenlos und entscheide selbst, wie tief du eintauchen möchtest.
           </p>
 
           <div className="grid md:grid-cols-3 gap-6 items-start">
 
             {/* KOSTENLOS */}
-            <div className="card border-2 border-sand/80">
-              <p className="text-xs text-text/40 uppercase tracking-widest mb-2">Einstieg</p>
-              <h3 className="font-heading text-3xl text-dark mb-1">Kostenlos</h3>
+            <div className="card border-2 border-[rgba(30,20,10,0.08)]/80">
+              <p className="text-xs text-[#A09888] uppercase tracking-widest mb-2">Einstieg</p>
+              <h3 className="font-heading text-3xl text-[#1A1410] mb-1">Kostenlos</h3>
               <div className="mb-1">
-                <span className="font-heading text-4xl text-dark">0 €</span>
+                <span className="font-heading text-4xl text-[#1A1410]">0 €</span>
               </div>
-              <p className="text-text/50 text-sm mb-6">Lerne dich selbst kennen — bevor du jemand anderen kennenlernst.</p>
+              <p className="text-[#6B6058] text-sm mb-6">Lerne dich selbst kennen — bevor du jemand anderen kennenlernst.</p>
 
               <ul className="space-y-3 mb-8">
                 {[
@@ -123,7 +123,7 @@ export default function LandingPage() {
                   { text: 'Begegnung & Chat', included: false },
                   { text: 'Tests & Guides', included: false },
                 ].map((item) => (
-                  <li key={item.text} className={`flex items-start gap-2.5 text-sm ${item.included ? 'text-text/70' : 'text-text/30'}`}>
+                  <li key={item.text} className={`flex items-start gap-2.5 text-sm ${item.included ? 'text-[#1A1410]' : 'text-[#A09888]'}`}>
                     {item.included
                       ? <Check className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
                       : <Lock className="w-4 h-4 flex-shrink-0 mt-0.5" />
@@ -140,14 +140,14 @@ export default function LandingPage() {
 
             {/* MITGLIEDSCHAFT */}
             <div className="card border-2 border-primary shadow-xl scale-[1.03] relative">
-              <p className="text-xs text-primary font-medium uppercase tracking-widest mb-2">Empfohlen</p>
-              <h3 className="font-heading text-3xl text-dark mb-1">Mitgliedschaft</h3>
+              <p className="text-xs text-[#221080] font-medium uppercase tracking-widest mb-2">Empfohlen</p>
+              <h3 className="font-heading text-3xl text-[#1A1410] mb-1">Mitgliedschaft</h3>
               <div className="mb-1 flex items-end gap-1.5">
-                <span className="font-heading text-4xl text-dark">29 €</span>
-                <span className="text-text/40 text-sm mb-1">/Monat</span>
+                <span className="font-heading text-4xl text-[#1A1410]">29 €</span>
+                <span className="text-[#A09888] text-sm mb-1">/Monat</span>
               </div>
-              <p className="text-xs text-text/40 mb-4">oder 290 €/Jahr — spare 2 Monate</p>
-              <p className="text-text/50 text-sm mb-6">Alle App-Funktionen plus das Wissen, das echte Verbindung ermöglicht.</p>
+              <p className="text-xs text-[#A09888] mb-4">oder 290 €/Jahr — spare 2 Monate</p>
+              <p className="text-[#6B6058] text-sm mb-6">Alle App-Funktionen plus das Wissen, das echte Verbindung ermöglicht.</p>
 
               <ul className="space-y-3 mb-8">
                 {[
@@ -159,8 +159,8 @@ export default function LandingPage() {
                   'Beziehungsmodell-Check',
                   'Alles aus Kostenlos',
                 ].map((f) => (
-                  <li key={f} className="flex items-start gap-2.5 text-sm text-text/70">
-                    <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                  <li key={f} className="flex items-start gap-2.5 text-sm text-[#1A1410]">
+                    <Check className="w-4 h-4 text-[#221080] flex-shrink-0 mt-0.5" />
                     {f}
                   </li>
                 ))}
@@ -173,14 +173,14 @@ export default function LandingPage() {
 
             {/* PREMIUM */}
             <div className="card border-2 border-dark/20">
-              <p className="text-xs text-primary font-medium uppercase tracking-widest mb-2">Empfohlen</p>
-              <h3 className="font-heading text-3xl text-dark mb-1">Premium</h3>
+              <p className="text-xs text-[#221080] font-medium uppercase tracking-widest mb-2">Empfohlen</p>
+              <h3 className="font-heading text-3xl text-[#1A1410] mb-1">Premium</h3>
               <div className="mb-1 flex items-end gap-1.5">
-                <span className="font-heading text-4xl text-dark">69 €</span>
-                <span className="text-text/40 text-sm mb-1">/Monat</span>
+                <span className="font-heading text-4xl text-[#1A1410]">69 €</span>
+                <span className="text-[#A09888] text-sm mb-1">/Monat</span>
               </div>
-              <p className="text-xs text-text/40 mb-4">oder 690 €/Jahr — spare 2 Monate</p>
-              <p className="text-text/50 text-sm mb-6">Coaching, Community & Tiefgang — für alle, die bewusstes Dating wirklich leben wollen.</p>
+              <p className="text-xs text-[#A09888] mb-4">oder 690 €/Jahr — spare 2 Monate</p>
+              <p className="text-[#6B6058] text-sm mb-6">Coaching, Community & Tiefgang — für alle, die bewusstes Dating wirklich leben wollen.</p>
 
               <ul className="space-y-3 mb-8">
                 {[
@@ -193,8 +193,8 @@ export default function LandingPage() {
                   { text: 'Community-Gruppen', highlight: true },
                   { text: 'Alles aus Mitgliedschaft' },
                 ].map((f) => (
-                  <li key={f.text} className={`flex items-start gap-2.5 text-sm ${f.highlight ? 'text-dark font-medium' : 'text-text/70'}`}>
-                    <Check className={`w-4 h-4 flex-shrink-0 mt-0.5 ${f.highlight ? 'text-primary' : 'text-dark/50'}`} />
+                  <li key={f.text} className={`flex items-start gap-2.5 text-sm ${f.highlight ? 'text-[#1A1410] font-medium' : 'text-[#1A1410]'}`}>
+                    <Check className={`w-4 h-4 flex-shrink-0 mt-0.5 ${f.highlight ? 'text-[#221080]' : 'text-[#1A1410]/50'}`} />
                     {f.text}
                   </li>
                 ))}
@@ -208,10 +208,10 @@ export default function LandingPage() {
           </div>
 
           {/* Jahresabo Hinweis */}
-          <div className="mt-10 bg-light rounded-2xl px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="mt-10 bg-[#FDF8F2] rounded-2xl px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>
-              <p className="font-medium text-dark text-sm">Jährlich zahlen — 2 Monate gratis</p>
-              <p className="text-text/50 text-sm mt-0.5">
+              <p className="font-medium text-[#1A1410] text-sm">Jährlich zahlen — 2 Monate gratis</p>
+              <p className="text-[#6B6058] text-sm mt-0.5">
                 Mitgliedschaft: 290 €/Jahr (statt 348 €) · Premium: 690 €/Jahr (statt 828 €)
               </p>
             </div>
@@ -220,9 +220,9 @@ export default function LandingPage() {
             </Link>
           </div>
 
-          <p className="text-center mt-6 text-sm text-text/40">
+          <p className="text-center mt-6 text-sm text-[#A09888]">
             14 Tage Geld-zurück-Garantie · Keine versteckten Kosten ·{' '}
-            <Link href="/pricing" className="text-primary hover:underline">Alle Pakete & Preise ansehen</Link>
+            <Link href="/pricing" className="text-[#221080] hover:underline">Alle Pakete & Preise ansehen</Link>
           </p>
         </div>
       </section>
@@ -231,27 +231,27 @@ export default function LandingPage() {
       <section className="py-20 px-6">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
-            <p className="text-xs text-text/40 uppercase tracking-widest mb-2">Ohne Abo-Bindung</p>
-            <h2 className="font-heading text-4xl font-light text-dark mb-3">Einmalig kaufbar</h2>
-            <p className="text-text/50 max-w-lg mx-auto">
+            <p className="text-xs text-[#A09888] uppercase tracking-widest mb-2">Ohne Abo-Bindung</p>
+            <h2 className="font-heading text-4xl font-light text-[#1A1410] mb-3">Einmalig kaufbar</h2>
+            <p className="text-[#6B6058] max-w-lg mx-auto">
               Einmal kaufen — für immer in deinem Konto verfügbar. Unabhängig vom Abo.
             </p>
           </div>
 
           {/* Saja Guides */}
-          <h3 className="font-heading text-2xl text-dark mb-5">Saja Guides</h3>
+          <h3 className="font-heading text-2xl text-[#1A1410] mb-5">Saja Guides</h3>
           <div className="grid md:grid-cols-3 gap-4 mb-12">
             {[
               { title: 'Werte & Zukunft abgleichen', desc: 'Wie passen eure Lebensziele und Werte zusammen? Ein tiefer Selbst- und Paarcheck.', price: '49 €' },
               { title: 'Bedürfnisse & Grenzen', desc: 'Lerne, deine Bedürfnisse klar zu benennen und Grenzen liebevoll zu setzen.', price: '49 €' },
               { title: 'Konflikt als Wachstum', desc: 'Wie ihr als Paar aus Konflikten gestärkt hervorgeht — konkrete Tools und Reflexionen.', price: '49 €' },
             ].map((g) => (
-              <div key={g.title} className="card border border-sand/80">
-                <span className="inline-block bg-light text-primary text-xs px-2.5 py-1 rounded-full mb-3 font-medium">Saja Guide</span>
-                <h4 className="font-heading text-xl text-dark mb-2">{g.title}</h4>
-                <p className="text-text/55 text-sm leading-relaxed mb-5">{g.desc}</p>
+              <div key={g.title} className="card border border-[rgba(30,20,10,0.08)]/80">
+                <span className="inline-block bg-[#FDF8F2] text-[#221080] text-xs px-2.5 py-1 rounded-full mb-3 font-medium">Saja Guide</span>
+                <h4 className="font-heading text-xl text-[#1A1410] mb-2">{g.title}</h4>
+                <p className="text-[#1A1410]/55 text-sm leading-relaxed mb-5">{g.desc}</p>
                 <div className="flex items-center justify-between">
-                  <span className="font-heading text-2xl text-dark">{g.price}</span>
+                  <span className="font-heading text-2xl text-[#1A1410]">{g.price}</span>
                   <Link href="/pricing" className="btn-primary text-xs py-2 px-4">Kaufen</Link>
                 </div>
               </div>
@@ -263,10 +263,10 @@ export default function LandingPage() {
 
       {/* CTA */}
       <section className="py-24 px-6 text-center">
-        <h2 className="font-heading text-5xl font-light text-dark mb-6">
+        <h2 className="font-heading text-5xl font-light text-[#1A1410] mb-6">
           Bereit für echte Verbindung?
         </h2>
-        <p className="font-body text-text/60 mb-10 max-w-lg mx-auto">
+        <p className="font-body text-[#6B6058] mb-10 max-w-lg mx-auto">
           Starte kostenlos und erlebe, wie bewusstes Dating sich anfühlt.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -280,21 +280,21 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-sand py-8 px-6">
+      <footer className="border-t border-[rgba(30,20,10,0.08)] py-8 px-6">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <SajaLogo size="sm" />
-          <div className="flex gap-6 text-sm text-text/50">
-            <Link href="/datenschutz" className="hover:text-primary transition-colors">
+          <div className="flex gap-6 text-sm text-[#6B6058]">
+            <Link href="/datenschutz" className="hover:text-[#221080] transition-colors">
               Datenschutz
             </Link>
-            <Link href="/impressum" className="hover:text-primary transition-colors">
+            <Link href="/impressum" className="hover:text-[#221080] transition-colors">
               Impressum
             </Link>
-            <Link href="/agb" className="hover:text-primary transition-colors">
+            <Link href="/agb" className="hover:text-[#221080] transition-colors">
               AGB
             </Link>
           </div>
-          <p className="text-xs" style={{ color: '#9C9088' }}>© 2025 Saja</p>
+          <p className="text-xs" style={{ color: '#9C9088' }}>© 2026 Saja</p>
         </div>
       </footer>
     </div>
