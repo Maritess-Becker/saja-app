@@ -157,7 +157,7 @@ export function CommunityClient({ tier }: Props) {
               <p className="text-[#6B6058] text-sm leading-relaxed mb-6">
                 Die Community ist exklusiv für Premium-Mitglieder — ein geschützter Raum für tiefe Gespräche.
               </p>
-              <Link href="/profile" className="btn-primary text-sm py-3 px-6 block text-center">
+              <Link href="/profile" className="btn-primary-dark text-sm py-3 px-6 block text-center">
                 Auf Premium upgraden
               </Link>
             </div>

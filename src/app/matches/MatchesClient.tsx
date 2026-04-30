@@ -218,7 +218,7 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
                       <button
                         onClick={() => acceptConnection(connection.id, match.id)}
                         disabled={loading === connection.id}
-                        className="btn-primary text-xs py-2 px-4"
+                        className="btn-primary-dark text-xs py-2 px-4"
                       >
                         {loading === connection.id ? '...' : 'Anfrage annehmen'}
                       </button>
