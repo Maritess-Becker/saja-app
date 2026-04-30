@@ -472,7 +472,7 @@ export function ProfileSelfView({ profile, tier }: Props) {
           <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Meine Communities</p>
           <div className="flex flex-wrap gap-2">
             {profile.communities!.map((c) => (
-              <span key={c} className="text-[12px] font-body px-3 py-1.5 rounded-full border border-[#221080]/30 text-[#1A1410] bg-[#221080]/8">
+              <span key={c} className="text-[12px] font-body px-3 py-1.5 rounded-full border border-[rgba(34,16,128,0.30)] text-[#1A1410] bg-[rgba(34,16,128,0.08)]">
                 {c}
               </span>
             ))}
@@ -619,7 +619,7 @@ export function ProfileSelfView({ profile, tier }: Props) {
               <div
                 key={item.label}
                 className={`rounded-xl px-2 py-2 text-center flex flex-col items-center gap-1 ${
-                  item.done ? 'bg-[#FDF8F2]/20' : 'bg-[#FDF8F2]/08 border border-[#FDF8F2]/15'
+                  item.done ? 'bg-[rgba(253,248,242,0.20)]' : 'bg-[rgba(253,248,242,0.06)] border border-[rgba(253,248,242,0.12)]'
                 }`}
               >
                 <span className="text-sm">{item.done ? '✓' : '·'}</span>

@@ -148,7 +148,7 @@ export function PaywallClient({
               <div className="flex items-center gap-3 mb-3">
                 <div
                   className="w-9 h-9 rounded-full flex items-center justify-center"
-                  style={{ backgroundColor: selected === plan.id ? plan.color : 'rgba(255,255,255,0.12)', color: selected === plan.id ? '#FDF8F2' : '#FDF8F2' }}
+                  style={{ backgroundColor: selected === plan.id ? plan.color : 'rgba(253,248,242,0.12)', color: '#FDF8F2' }}
                 >
                   {plan.icon}
                 </div>

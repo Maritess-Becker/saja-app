@@ -74,7 +74,7 @@ function PhotoWithCaption({ photo, name, height }: { photo: { url: string; path:
 
 function PromptBlock({ question, answer }: { question: string; answer: string }) {
   return (
-    <div className="px-4 py-4 border-t border-[rgba(30,20,10,0.08)]/70">
+    <div className="px-4 py-4 border-t border-[rgba(34,16,128,0.10)]">
       <div className="bg-[#FDF8F2] rounded-xl px-4 py-4 border-l-[3px] border-primary">
         <p className="text-[11px] text-[#A09888] uppercase tracking-widest mb-2">{question}</p>
         <p className="font-heading text-xl italic text-[#120850] leading-snug text-justify">{answer}</p>
@@ -186,20 +186,20 @@ export function ProfileDetailClient({
 
       {/* ── Über mich ── */}
       {profile.bio && (
-        <div className="px-5 py-5 border-t border-[rgba(30,20,10,0.08)]/70">
-          <p className="text-[11px] text-[#1A1410]/35 uppercase tracking-widest mb-3">Über mich</p>
+        <div className="px-5 py-5 border-t border-[rgba(34,16,128,0.10)]">
+          <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Über mich</p>
           <p className="text-[#1A1410] text-sm leading-relaxed text-justify">{profile.bio}</p>
         </div>
       )}
 
       {/* ── Sprachmemo ── */}
       {profile.audio_prompt_url ? (
-        <div className="px-5 py-5 border-t border-[rgba(30,20,10,0.08)]/70">
-          <p className="text-[11px] text-[#1A1410]/35 uppercase tracking-widest mb-3">Sprachmemo</p>
+        <div className="px-5 py-5 border-t border-[rgba(34,16,128,0.10)]">
+          <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Sprachmemo</p>
           <AudioPlayer url={profile.audio_prompt_url} />
         </div>
       ) : (
-        <div className="px-5 py-5 border-t border-[rgba(30,20,10,0.08)]/70 flex items-center gap-3">
+        <div className="px-5 py-5 border-t border-[rgba(34,16,128,0.10)] flex items-center gap-3">
           <div className="w-10 h-10 rounded-full bg-[#FDF8F2] flex items-center justify-center flex-shrink-0">
             <Mic className="w-5 h-5 text-[#1A1410]" />
           </div>
@@ -215,7 +215,7 @@ export function ProfileDetailClient({
               ))}
             </div>
           </div>
-          <span className="text-xs text-[#1A1410]/35 flex-shrink-0">Noch nicht aufgenommen</span>
+          <span className="text-xs text-[#6B6058] flex-shrink-0">Noch nicht aufgenommen</span>
         </div>
       )}
 
@@ -230,8 +230,8 @@ export function ProfileDetailClient({
 
       {/* ── Interessen ── */}
       {layer2Visible && profile.interests?.length > 0 && (
-        <div className="px-5 py-5 border-t border-[rgba(30,20,10,0.08)]/70">
-          <p className="text-[11px] text-[#1A1410]/35 uppercase tracking-widest mb-3">Interessen</p>
+        <div className="px-5 py-5 border-t border-[rgba(34,16,128,0.10)]">
+          <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Interessen</p>
           <div className="flex flex-wrap gap-2">
             {profile.interests.map((item) => (
               <span key={item} className="text-sm text-[#6B6058] bg-[#EDE8E0] px-3 py-1.5 rounded-full">{item}</span>
@@ -242,8 +242,8 @@ export function ProfileDetailClient({
 
       {/* ── Werte ── */}
       {layer2Visible && profile.werte?.length > 0 && (
-        <div className="px-5 py-5 border-t border-[rgba(30,20,10,0.08)]/70">
-          <p className="text-[11px] text-[#1A1410]/35 uppercase tracking-widest mb-3">Werte</p>
+        <div className="px-5 py-5 border-t border-[rgba(34,16,128,0.10)]">
+          <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Werte</p>
           <div className="flex flex-wrap gap-2">
             {profile.werte.map((w) => (
               <span key={w} className="text-sm text-[#1A1410] bg-[#FDF8F2] px-3 py-1.5 rounded-full">{w}</span>
@@ -276,7 +276,7 @@ export function ProfileDetailClient({
           <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Meine Communities</p>
           <div className="flex flex-wrap gap-2">
             {profile.communities!.map((c) => (
-              <span key={c} className="text-[12px] font-body px-3 py-1.5 rounded-full border border-[#221080]/30 text-[#1A1410] bg-[#221080]/8">
+              <span key={c} className="text-[12px] font-body px-3 py-1.5 rounded-full border border-[rgba(34,16,128,0.30)] text-[#1A1410] bg-[rgba(34,16,128,0.08)]">
                 {c}
               </span>
             ))}
@@ -297,8 +297,8 @@ export function ProfileDetailClient({
 
       {/* ── Beziehung & Bindung ── */}
       {layer3Visible && (profile.relationship_model || profile.bindungstyp || profile.love_language) && (
-        <div className="px-5 py-5 border-t border-[rgba(30,20,10,0.08)]/70 space-y-4">
-          <p className="text-[11px] text-[#1A1410]/35 uppercase tracking-widest">Beziehung &amp; Bindung</p>
+        <div className="px-5 py-5 border-t border-[rgba(34,16,128,0.10)] space-y-4">
+          <p className="text-[11px] text-[#6B6058] uppercase tracking-widest">Beziehung &amp; Bindung</p>
           {profile.relationship_model && (
             <div className="flex items-center justify-between">
               <span className="text-sm text-[#A09888]">Beziehungsmodell</span>
@@ -324,8 +324,8 @@ export function ProfileDetailClient({
 
       {/* ── Persönlichkeit (Layer 2) ── */}
       {layer2Visible && (profile.introvert_extrovert != null || profile.spontan_strukturiert != null || profile.rational_emotional != null) && (
-        <div className="px-5 py-5 border-t border-[rgba(30,20,10,0.08)]/70 space-y-4">
-          <p className="text-[11px] text-[#1A1410]/35 uppercase tracking-widest">Persönlichkeit</p>
+        <div className="px-5 py-5 border-t border-[rgba(34,16,128,0.10)] space-y-4">
+          <p className="text-[11px] text-[#6B6058] uppercase tracking-widest">Persönlichkeit</p>
           {profile.introvert_extrovert != null && (
             <PersonalityBar leftLabel="Introvertiert" rightLabel="Extrovertiert" value={profile.introvert_extrovert} />
           )}
@@ -340,8 +340,8 @@ export function ProfileDetailClient({
 
       {/* ── Horoskop (Layer 3) ── */}
       {layer3Visible && (profile.sun_sign || profile.ascendant || profile.chinese_zodiac) && (
-        <div className="px-5 py-5 border-t border-[rgba(30,20,10,0.08)]/70 space-y-3">
-          <p className="text-[11px] text-[#1A1410]/35 uppercase tracking-widest">Horoskop</p>
+        <div className="px-5 py-5 border-t border-[rgba(34,16,128,0.10)] space-y-3">
+          <p className="text-[11px] text-[#6B6058] uppercase tracking-widest">Horoskop</p>
           <div className="flex flex-wrap gap-2">
             {profile.sun_sign && (
               <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(34,16,128,0.08)', color: '#1A1410' }}>
@@ -364,8 +364,8 @@ export function ProfileDetailClient({
 
       {/* ── Dealbreakers (Layer 3) ── */}
       {layer3Visible && profile.dealbreakers?.length > 0 && (
-        <div className="px-5 py-5 border-t border-[rgba(30,20,10,0.08)]/70">
-          <p className="text-[11px] text-[#1A1410]/35 uppercase tracking-widest mb-3">Dealbreaker</p>
+        <div className="px-5 py-5 border-t border-[rgba(34,16,128,0.10)]">
+          <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Dealbreaker</p>
           <div className="flex flex-wrap gap-2">
             {profile.dealbreakers.map((d) => (
               <span key={d} className="text-sm text-red-700/80 bg-red-50 border border-red-200/60 px-3 py-1.5 rounded-full">{d}</span>

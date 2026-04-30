@@ -186,14 +186,14 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
 
                   {/* Bindungstyp badge */}
                   {profile.bindungstyp && (
-                    <span className="absolute bottom-2 right-2 bg-white/85 text-[#FDF8F2] font-body text-[10px] px-2 py-0.5 rounded-full">
+                    <span className="absolute bottom-2 right-2 bg-white/90 text-[#221080] font-body text-[10px] px-2 py-0.5 rounded-full">
                       {profile.bindungstyp}
                     </span>
                   )}
 
                   {/* Active badge */}
                   {isThisActiveMatch && (
-                    <span className="absolute top-2 right-2 flex items-center gap-1 text-xs text-[#FDF8F2] bg-white/90 px-2 py-1 rounded-full">
+                    <span className="absolute top-2 right-2 flex items-center gap-1 text-xs text-[#221080] bg-white px-2 py-1 rounded-full">
                       <CheckCircle className="w-3 h-3" /> Aktiv
                     </span>
                   )}
@@ -203,7 +203,7 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
                 <div className="px-4 pt-3 pb-4">
                   {/* Prompt preview */}
                   {profile.prompts?.[0]?.question && (
-                    <p className="font-heading italic text-sm text-[#FDF8F2] truncate mb-3">
+                    <p className="font-heading italic text-sm text-[#6B6058] truncate mb-3">
                       „{profile.prompts[0].question}"
                     </p>
                   )}
@@ -211,7 +211,7 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
                   {/* Actions */}
                   <div className="flex gap-2 flex-wrap">
                     {isActive ? (
-                      <Link href={`/connection/${match.id}`} className="btn-primary text-xs py-2 px-4">
+                      <Link href={`/connection/${match.id}`} className="btn-primary-dark text-xs py-2 px-4">
                         Zum Chat
                       </Link>
                     ) : isRequested && !isRequester ? (
@@ -231,7 +231,7 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
                         onClick={() => requestConnection(match.id)}
                         disabled={loading === match.id || (!!activeMatchId && !isThisActiveMatch)}
                         className={cn(
-                          'w-full border-[1.5px] border-[#221080] text-[#FDF8F2] bg-transparent hover:bg-[#221080]/5 rounded-xl text-sm py-3 px-4 transition-colors duration-200 disabled:opacity-40 disabled:cursor-not-allowed font-body font-medium'
+                          'w-full border-[1.5px] border-[#221080] text-[#221080] bg-transparent hover:bg-[#221080]/5 rounded-xl text-sm py-3 px-4 transition-colors duration-200 disabled:opacity-40 disabled:cursor-not-allowed font-body font-medium'
                         )}
                       >
                         {loading === match.id ? '...' : 'Begegnung anfragen'}

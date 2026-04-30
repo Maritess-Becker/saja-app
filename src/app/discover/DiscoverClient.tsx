@@ -1010,7 +1010,7 @@ export function DiscoverClient({
 
               {/* Drawer footer */}
               <div className="px-6 py-5 border-t border-[rgba(34,16,128,0.12)]">
-                <button onClick={() => setShowFilters(false)} className="w-full btn-primary py-3.5">
+                <button onClick={() => setShowFilters(false)} className="w-full btn-primary-dark py-3.5">
                   {profiles.length} {profiles.length === 1 ? 'Profil' : 'Profile'} anzeigen
                 </button>
               </div>
@@ -1048,11 +1048,11 @@ export function DiscoverClient({
       {/* ── Empty state ── */}
       {!hasProfile ? (
         <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
-          <Heart className="w-16 h-16 text-[#6B6058] mb-6" />
+          <Heart className="w-16 h-16 text-[#FDF8F2]/30 mb-6" />
           {activeFilterCount > 0 ? (
             <>
-              <h2 className="font-heading text-4xl text-[#120850] mb-3">Keine Treffer</h2>
-              <p className="text-[#6B6058] max-w-sm mb-6">
+              <h2 className="font-heading text-4xl text-[#FDF8F2] mb-3">Keine Treffer</h2>
+              <p className="text-[#FDF8F2]/60 max-w-sm mb-6">
                 Passe die Filter an oder setze sie zurück.
               </p>
               <button
@@ -1068,8 +1068,8 @@ export function DiscoverClient({
             </>
           ) : (
             <>
-              <h2 className="font-heading text-4xl text-[#120850] mb-3">Das war's erstmal</h2>
-              <p className="text-[#6B6058] max-w-sm">
+              <h2 className="font-heading text-4xl text-[#FDF8F2] mb-3">Das war's erstmal</h2>
+              <p className="text-[#FDF8F2]/60 max-w-sm">
                 Schau später wieder vorbei — neue Menschen kommen täglich dazu.
               </p>
             </>
@@ -1292,7 +1292,7 @@ export function DiscoverClient({
                   <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Meine Communities</p>
                   <div className="flex flex-wrap gap-2">
                     {profile.communities!.map((c) => (
-                      <span key={c} className="text-[12px] font-body px-3 py-1.5 rounded-full border border-[#221080]/30 text-[#1A1410] bg-[#221080]/8">
+                      <span key={c} className="text-[12px] font-body px-3 py-1.5 rounded-full border border-[rgba(34,16,128,0.30)] text-[#1A1410] bg-[rgba(34,16,128,0.08)]">
                         {c}
                       </span>
                     ))}
