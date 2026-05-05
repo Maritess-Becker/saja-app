@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect, useRef } from 'react'
 import { Send, Heart, X, MapPin } from 'lucide-react'
@@ -143,7 +143,7 @@ export function ConnectionClient({ connection, otherProfile, initialMessages, cu
       </div>
 
       {/* Daily question banner */}
-      <div className="flex-shrink-0 px-4 py-3 bg-[#FDF8F2] border-b border-[rgba(30,20,10,0.08)]">
+      <div className="flex-shrink-0 px-4 py-3 bg-[#FDF5E8] border-b border-[rgba(30,20,10,0.08)]">
         <p className="text-xs text-[#1A1410] font-medium mb-1">Frage des Tages</p>
         <div className="flex items-center justify-between gap-3">
           <p className="text-sm text-[#1A1410] italic">&ldquo;{dailyQuestion}&rdquo;</p>
@@ -187,12 +187,12 @@ export function ConnectionClient({ connection, otherProfile, initialMessages, cu
       {/* Eingabe — bleibt immer unten sichtbar */}
       <form
         onSubmit={sendMessage}
-        className="flex-shrink-0 px-4 pt-3 bg-white border-t border-[rgba(34,16,128,0.12)] flex gap-3"
+        className="flex-shrink-0 px-4 pt-3 bg-white border-t border-[rgba(59,31,10,0.12)] flex gap-3"
         style={{ paddingBottom: 'calc(0.75rem + env(safe-area-inset-bottom, 0px))' }}
       >
         <input
           type="text"
-          className="flex-1 rounded-2xl border border-[rgba(34,16,128,0.12)] bg-[rgba(34,16,128,0.07)] px-4 py-3 text-sm font-body text-[#1A1410] placeholder:text-[#6B6058] focus:outline-none focus:ring-2 focus:ring-[#221080]/30"
+          className="flex-1 rounded-2xl border border-[rgba(59,31,10,0.12)] bg-[rgba(59,31,10,0.07)] px-4 py-3 text-sm font-body text-[#1A1410] placeholder:text-[#6B6058] focus:outline-none focus:ring-2 focus:ring-[#3B1F0A]/30"
           placeholder="Schreibe etwas…"
           value={text}
           onChange={(e) => setText(e.target.value)}
@@ -200,7 +200,7 @@ export function ConnectionClient({ connection, otherProfile, initialMessages, cu
         <button
           type="submit"
           disabled={sending || !text.trim()}
-          className="w-12 h-12 bg-[#221080] rounded-2xl flex items-center justify-center flex-shrink-0 disabled:opacity-40 hover:bg-[#120850] transition-colors active:scale-95"
+          className="w-12 h-12 bg-[#3B1F0A] rounded-2xl flex items-center justify-center flex-shrink-0 disabled:opacity-40 hover:bg-[#240E04] transition-colors active:scale-95"
         >
           <Send className="w-5 h-5 text-white" />
         </button>

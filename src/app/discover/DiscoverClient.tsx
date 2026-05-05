@@ -156,7 +156,7 @@ function ChipGroup({
               'px-3 py-1.5 rounded-full text-sm border transition-all',
               selected.includes(opt)
                 ? 'bg-primary border-primary text-white'
-                : 'bg-white border-[rgba(34,16,128,0.12)] text-[#6B6058] hover:border-[#221080]/50',
+                : 'bg-white border-[rgba(59,31,10,0.12)] text-[#6B6058] hover:border-[#3B1F0A]/50',
             )}
           >
             {opt}
@@ -182,9 +182,9 @@ function PersonalityBar({
         <span>{leftLabel}</span>
         <span>{rightLabel}</span>
       </div>
-      <div className="h-2 bg-[rgba(34,16,128,0.07)] rounded-full overflow-hidden">
+      <div className="h-2 bg-[rgba(59,31,10,0.07)] rounded-full overflow-hidden">
         <div
-          className="h-full bg-[#221080]/60 rounded-full transition-all"
+          className="h-full bg-[#3B1F0A]/60 rounded-full transition-all"
           style={{ width: `${value}%` }}
         />
       </div>
@@ -210,7 +210,7 @@ function AudioPlayer({ url }: { url: string }) {
   }
 
   return (
-    <div className="flex items-center gap-3 px-5 py-4 border-t border-[rgba(34,16,128,0.10)]">
+    <div className="flex items-center gap-3 px-5 py-4 border-t border-[rgba(59,31,10,0.10)]">
       {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
       <audio
         ref={audioRef}
@@ -220,7 +220,7 @@ function AudioPlayer({ url }: { url: string }) {
       />
       <button
         onClick={handleToggle}
-        className="w-10 h-10 rounded-full bg-[#221080] flex items-center justify-center shadow flex-shrink-0 hover:bg-[#120850] transition-colors active:scale-95"
+        className="w-10 h-10 rounded-full bg-[#3B1F0A] flex items-center justify-center shadow flex-shrink-0 hover:bg-[#240E04] transition-colors active:scale-95"
       >
         {playing ? (
           <Pause className="w-4 h-4 text-white" />
@@ -236,7 +236,7 @@ function AudioPlayer({ url }: { url: string }) {
               key={i}
               className={cn(
                 'w-0.5 rounded-full transition-all',
-                playing ? 'bg-[#221080] animate-pulse' : 'bg-[#221080]/30',
+                playing ? 'bg-[#3B1F0A] animate-pulse' : 'bg-[#3B1F0A]/30',
               )}
               style={{
                 height: `${28 + Math.sin(i * 0.85) * 48 + Math.cos(i * 1.3) * 18}%`,
@@ -254,10 +254,10 @@ function AudioPlayer({ url }: { url: string }) {
 /** Single prompt block */
 function PromptBlock({ question, answer }: { question: string; answer: string }) {
   return (
-    <div className="px-4 py-4 border-t border-[rgba(34,16,128,0.10)]">
-      <div className="bg-[rgba(34,16,128,0.07)] rounded-xl px-4 py-4 border-l-[3px] border-[#221080]">
+    <div className="px-4 py-4 border-t border-[rgba(59,31,10,0.10)]">
+      <div className="bg-[rgba(59,31,10,0.07)] rounded-xl px-4 py-4 border-l-[3px] border-[#3B1F0A]">
         <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-2">{question}</p>
-        <p className="font-heading text-xl italic text-[#120850] leading-snug text-justify">{answer}</p>
+        <p className="font-heading text-xl italic text-[#240E04] leading-snug text-justify">{answer}</p>
       </div>
     </div>
   )
@@ -326,12 +326,12 @@ function Phase2Overlay({ userId, onComplete, onDismiss }: { userId: string; onCo
       {/* Header */}
       <div className="flex items-center justify-between px-5 pt-5 pb-3">
         {step !== 'intro' && (
-          <button onClick={() => setStep(step === 1 ? 'intro' : (step as number) - 1 as any)} className="text-[#FDF8F2]/50 hover:text-[#FDF8F2] transition-colors">
+          <button onClick={() => setStep(step === 1 ? 'intro' : (step as number) - 1 as any)} className="text-[#FDF5E8]/50 hover:text-[#FDF5E8] transition-colors">
             ← Zurück
           </button>
         )}
         {step === 'intro' && <div />}
-        <button onClick={onDismiss} className="text-[#FDF8F2]/30 hover:text-[#FDF8F2]/60 transition-colors text-sm">
+        <button onClick={onDismiss} className="text-[#FDF5E8]/30 hover:text-[#FDF5E8]/60 transition-colors text-sm">
           Später
         </button>
       </div>
@@ -339,8 +339,8 @@ function Phase2Overlay({ userId, onComplete, onDismiss }: { userId: string; onCo
       {/* Progress */}
       {step !== 'intro' && (
         <div className="px-5 mb-4">
-          <div className="h-0.5 bg-[rgba(253,248,242,0.12)] rounded-full overflow-hidden">
-            <div className="h-full bg-[#FDF8F2] rounded-full transition-all duration-500" style={{ width: `${((step as number) / totalSteps) * 100}%` }} />
+          <div className="h-0.5 bg-[rgba(253,245,232,0.12)] rounded-full overflow-hidden">
+            <div className="h-full bg-[#FDF5E8] rounded-full transition-all duration-500" style={{ width: `${((step as number) / totalSteps) * 100}%` }} />
           </div>
         </div>
       )}
@@ -350,10 +350,10 @@ function Phase2Overlay({ userId, onComplete, onDismiss }: { userId: string; onCo
         {step === 'intro' && (
           <div className="flex flex-col items-center justify-center min-h-full text-center py-16">
             <div className="text-4xl mb-6">✦</div>
-            <h2 className="font-heading text-[36px] font-light text-[#FDF8F2] leading-tight mb-4">
+            <h2 className="font-heading text-[36px] font-light text-[#FDF5E8] leading-tight mb-4">
               Vervollständige dein Profil um diese Person wirklich zu sehen.
             </h2>
-            <p className="font-body font-light text-[#FDF8F2]/60 text-base leading-relaxed max-w-sm mb-10">
+            <p className="font-body font-light text-[#FDF5E8]/60 text-base leading-relaxed max-w-sm mb-10">
               Ein paar Minuten mehr — und du wirst sichtbar für Menschen die wirklich zu dir passen.
             </p>
             <button onClick={() => setStep(1)} className="btn-primary px-10 py-4">
@@ -365,13 +365,13 @@ function Phase2Overlay({ userId, onComplete, onDismiss }: { userId: string; onCo
         {/* Step 1: Werte */}
         {step === 1 && (
           <div className="pt-6">
-            <h2 className="font-heading text-[32px] font-light text-[#FDF8F2] mb-2">Deine Werte.</h2>
-            <p className="text-[#FDF8F2]/50 text-sm font-body mb-6">Wähle 2–5 Werte die dich wirklich beschreiben.</p>
+            <h2 className="font-heading text-[32px] font-light text-[#FDF5E8] mb-2">Deine Werte.</h2>
+            <p className="text-[#FDF5E8]/50 text-sm font-body mb-6">Wähle 2–5 Werte die dich wirklich beschreiben.</p>
             <div className="flex flex-wrap gap-2">
               {WERTE_OPTIONS.map((w) => (
                 <button key={w} onClick={() => setWerte(prev => prev.includes(w) ? prev.filter(x => x !== w) : prev.length < 5 ? [...prev, w] : prev)}
                   className={cn('px-4 py-2 rounded-full text-sm font-body border transition-all',
-                    werte.includes(w) ? 'bg-[#FDF8F2] text-[#221080] border-[#FDF8F2]' : 'border-[rgba(253,248,242,0.2)] text-[#FDF8F2]/70'
+                    werte.includes(w) ? 'bg-[#FDF5E8] text-[#3B1F0A] border-[#FDF5E8]' : 'border-[rgba(253,245,232,0.2)] text-[#FDF5E8]/70'
                   )}>
                   {w}
                 </button>
@@ -383,8 +383,8 @@ function Phase2Overlay({ userId, onComplete, onDismiss }: { userId: string; onCo
         {/* Step 2: Bio */}
         {step === 2 && (
           <div className="pt-6">
-            <h2 className="font-heading text-[32px] font-light text-[#FDF8F2] mb-2">Über dich.</h2>
-            <p className="text-[#FDF8F2]/50 text-sm font-body mb-6">Was sollen Menschen über dich wissen? (optional)</p>
+            <h2 className="font-heading text-[32px] font-light text-[#FDF5E8] mb-2">Über dich.</h2>
+            <p className="text-[#FDF5E8]/50 text-sm font-body mb-6">Was sollen Menschen über dich wissen? (optional)</p>
             <textarea
               value={bio}
               onChange={(e) => setBio(e.target.value.slice(0, 400))}
@@ -392,20 +392,20 @@ function Phase2Overlay({ userId, onComplete, onDismiss }: { userId: string; onCo
               rows={5}
               className="input resize-none"
             />
-            <span className="text-[#FDF8F2]/30 text-xs block text-right mt-1">{bio.length}/400</span>
+            <span className="text-[#FDF5E8]/30 text-xs block text-right mt-1">{bio.length}/400</span>
           </div>
         )}
 
         {/* Step 3: Interessen */}
         {step === 3 && (
           <div className="pt-6">
-            <h2 className="font-heading text-[32px] font-light text-[#FDF8F2] mb-2">Deine Interessen.</h2>
-            <p className="text-[#FDF8F2]/50 text-sm font-body mb-6">Was beschäftigt dich?</p>
+            <h2 className="font-heading text-[32px] font-light text-[#FDF5E8] mb-2">Deine Interessen.</h2>
+            <p className="text-[#FDF5E8]/50 text-sm font-body mb-6">Was beschäftigt dich?</p>
             <div className="flex flex-wrap gap-2">
               {INTEREST_OPTIONS.map((i) => (
                 <button key={i} onClick={() => setInterests(prev => prev.includes(i) ? prev.filter(x => x !== i) : [...prev, i])}
                   className={cn('px-4 py-2 rounded-full text-sm font-body border transition-all',
-                    interests.includes(i) ? 'bg-[#FDF8F2] text-[#221080] border-[#FDF8F2]' : 'border-[rgba(253,248,242,0.2)] text-[#FDF8F2]/70'
+                    interests.includes(i) ? 'bg-[#FDF5E8] text-[#3B1F0A] border-[#FDF5E8]' : 'border-[rgba(253,245,232,0.2)] text-[#FDF5E8]/70'
                   )}>
                   {i}
                 </button>
@@ -417,13 +417,13 @@ function Phase2Overlay({ userId, onComplete, onDismiss }: { userId: string; onCo
         {/* Step 4: Meine Welt */}
         {step === 4 && (
           <div className="pt-6">
-            <h2 className="font-heading text-[32px] font-light text-[#FDF8F2] mb-2">Meine Welt.</h2>
-            <p className="text-[#FDF8F2]/50 text-sm font-body mb-6">Was gehört zu deiner Welt?</p>
+            <h2 className="font-heading text-[32px] font-light text-[#FDF5E8] mb-2">Meine Welt.</h2>
+            <p className="text-[#FDF5E8]/50 text-sm font-body mb-6">Was gehört zu deiner Welt?</p>
             <div className="flex flex-wrap gap-2">
               {MY_WORLD_OPTIONS.map((w) => (
                 <button key={w} onClick={() => setMyWorld(prev => prev.includes(w) ? prev.filter(x => x !== w) : [...prev, w])}
                   className={cn('px-4 py-2 rounded-full text-sm font-body border transition-all',
-                    myWorld.includes(w) ? 'bg-[#FDF8F2] text-[#221080] border-[#FDF8F2]' : 'border-[rgba(253,248,242,0.2)] text-[#FDF8F2]/70'
+                    myWorld.includes(w) ? 'bg-[#FDF5E8] text-[#3B1F0A] border-[#FDF5E8]' : 'border-[rgba(253,245,232,0.2)] text-[#FDF5E8]/70'
                   )}>
                   {w}
                 </button>
@@ -436,8 +436,8 @@ function Phase2Overlay({ userId, onComplete, onDismiss }: { userId: string; onCo
         {step === 5 && (
           <div className="pt-6 space-y-8">
             <div>
-              <h2 className="font-heading text-[32px] font-light text-[#FDF8F2] mb-2">Persönlichkeit.</h2>
-              <p className="text-[#FDF8F2]/50 text-sm font-body mb-6">Wo siehst du dich auf diesen Spektren?</p>
+              <h2 className="font-heading text-[32px] font-light text-[#FDF5E8] mb-2">Persönlichkeit.</h2>
+              <p className="text-[#FDF5E8]/50 text-sm font-body mb-6">Wo siehst du dich auf diesen Spektren?</p>
             </div>
             {[
               { label1: 'Introvertiert', label2: 'Extrovertiert', val: introvert, set: setIntrovert },
@@ -445,12 +445,12 @@ function Phase2Overlay({ userId, onComplete, onDismiss }: { userId: string; onCo
               { label1: 'Rational', label2: 'Emotional', val: rational, set: setRational },
             ].map((slider) => (
               <div key={slider.label1} className="space-y-2">
-                <div className="flex justify-between text-xs text-[#FDF8F2]/50 font-body">
+                <div className="flex justify-between text-xs text-[#FDF5E8]/50 font-body">
                   <span>{slider.label1}</span>
                   <span>{slider.label2}</span>
                 </div>
                 <input type="range" min={0} max={100} value={slider.val} onChange={(e) => slider.set(Number(e.target.value))}
-                  className="w-full" style={{ accentColor: '#FDF8F2' }} />
+                  className="w-full" style={{ accentColor: '#FDF5E8' }} />
               </div>
             ))}
           </div>
@@ -460,18 +460,18 @@ function Phase2Overlay({ userId, onComplete, onDismiss }: { userId: string; onCo
         {step === 6 && (
           <div className="pt-6 space-y-5">
             <div>
-              <h2 className="font-heading text-[32px] font-light text-[#FDF8F2] mb-2">Deine Antworten.</h2>
-              <p className="text-[#FDF8F2]/50 text-sm font-body mb-6">Beantworte mindestens 2 Fragen in deinen eigenen Worten.</p>
+              <h2 className="font-heading text-[32px] font-light text-[#FDF5E8] mb-2">Deine Antworten.</h2>
+              <p className="text-[#FDF5E8]/50 text-sm font-body mb-6">Beantworte mindestens 2 Fragen in deinen eigenen Worten.</p>
             </div>
             {prompts.map((p, i) => (
-              <div key={i} className="bg-[rgba(253,248,242,0.06)] rounded-2xl p-4 border border-[rgba(253,248,242,0.1)]">
-                <p className="text-[#FDF8F2]/60 text-xs uppercase tracking-widest font-body mb-2">{p.question}</p>
+              <div key={i} className="bg-[rgba(253,245,232,0.06)] rounded-2xl p-4 border border-[rgba(253,245,232,0.1)]">
+                <p className="text-[#FDF5E8]/60 text-xs uppercase tracking-widest font-body mb-2">{p.question}</p>
                 <textarea
                   value={p.answer}
                   onChange={(e) => setPrompts(prev => prev.map((x, j) => j === i ? { ...x, answer: e.target.value.slice(0, 200) } : x))}
                   placeholder="Deine Antwort..."
                   rows={3}
-                  className="w-full bg-transparent text-[#FDF8F2] text-sm font-body font-light resize-none focus:outline-none placeholder:text-[#FDF8F2]/25"
+                  className="w-full bg-transparent text-[#FDF5E8] text-sm font-body font-light resize-none focus:outline-none placeholder:text-[#FDF5E8]/25"
                 />
               </div>
             ))}
@@ -480,7 +480,7 @@ function Phase2Overlay({ userId, onComplete, onDismiss }: { userId: string; onCo
       </div>
 
       {/* CTA */}
-      <div className="fixed bottom-0 left-0 right-0 px-5 pb-8 pt-4 bg-gradient-to-t from-[#221080] to-transparent">
+      <div className="fixed bottom-0 left-0 right-0 px-5 pb-8 pt-4 bg-gradient-to-t from-[#3B1F0A] to-transparent">
         {step === 'intro' ? null : (
           <button
             onClick={() => {
@@ -710,8 +710,8 @@ export function DiscoverClient({
     return (
       <div className="flex flex-col items-center justify-center min-h-screen px-6 text-center">
         <div className="text-5xl mb-6">🌙</div>
-        <h2 className="font-heading text-4xl text-[#FDF8F2] mb-4">Du bist gerade in der Stille.</h2>
-        <p className="text-[#FDF8F2]/60 leading-relaxed mb-8 max-w-sm font-body font-light">
+        <h2 className="font-heading text-4xl text-[#FDF5E8] mb-4">Du bist gerade in der Stille.</h2>
+        <p className="text-[#FDF5E8]/60 leading-relaxed mb-8 max-w-sm font-body font-light">
           Dein Profil ist pausiert. Niemand sieht dich gerade im Entdecken.
           Komm zurück wenn es sich richtig anfühlt.
         </p>
@@ -727,11 +727,11 @@ export function DiscoverClient({
   if (showDailyLimit) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen px-6 text-center">
-        <div className="w-16 h-16 bg-[rgba(253,248,242,0.12)] rounded-full flex items-center justify-center mx-auto mb-6">
-          <Search className="w-8 h-8 text-[#FDF8F2]/50" />
+        <div className="w-16 h-16 bg-[rgba(253,245,232,0.12)] rounded-full flex items-center justify-center mx-auto mb-6">
+          <Search className="w-8 h-8 text-[#FDF5E8]/50" />
         </div>
-        <h2 className="font-heading text-4xl text-[#FDF8F2] mb-4">Du hast heute bewusst geschaut.</h2>
-        <p className="text-[#FDF8F2]/60 leading-relaxed mb-8 max-w-sm font-body font-light">
+        <h2 className="font-heading text-4xl text-[#FDF5E8] mb-4">Du hast heute bewusst geschaut.</h2>
+        <p className="text-[#FDF5E8]/60 leading-relaxed mb-8 max-w-sm font-body font-light">
           10 Begegnungen für heute. Morgen gibt es neue Menschen zu entdecken.
           Nimm dir Zeit mit dem was du gesehen hast.
         </p>
@@ -741,7 +741,7 @@ export function DiscoverClient({
         >
           Zum Revisit-Modus →
         </button>
-        <Link href="/profile" className="text-[#FDF8F2]/50 text-sm font-body hover:text-[#FDF8F2] transition-colors">
+        <Link href="/profile" className="text-[#FDF5E8]/50 text-sm font-body hover:text-[#FDF5E8] transition-colors">
           Zum Profil
         </Link>
       </div>
@@ -752,19 +752,19 @@ export function DiscoverClient({
 
   if (tier === 'free') {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen px-6 text-center bg-[#221080]">
-        <div className="w-20 h-20 bg-[rgba(253,248,242,0.12)] rounded-full flex items-center justify-center mx-auto mb-6">
-          <Lock className="w-9 h-9 text-[#FDF8F2]/50" />
+      <div className="flex flex-col items-center justify-center min-h-screen px-6 text-center bg-[#3B1F0A]">
+        <div className="w-20 h-20 bg-[rgba(253,245,232,0.12)] rounded-full flex items-center justify-center mx-auto mb-6">
+          <Lock className="w-9 h-9 text-[#FDF5E8]/50" />
         </div>
-        <h2 className="font-heading text-4xl text-[#FDF8F2] mb-3">Entdecken ist gesperrt</h2>
-        <p className="text-[#FDF8F2]/60 leading-relaxed mb-8 max-w-sm">
+        <h2 className="font-heading text-4xl text-[#FDF5E8] mb-3">Entdecken ist gesperrt</h2>
+        <p className="text-[#FDF5E8]/60 leading-relaxed mb-8 max-w-sm">
           Mit der Mitgliedschaft (29&nbsp;€/Monat) kannst du Profile entdecken, swipen und Matches
           aufbauen.
         </p>
-        <Link href="/pricing" className="bg-[#FDF8F2] text-[#1A1410] px-8 py-3.5 rounded-full font-body font-semibold hover:bg-white transition-colors">
+        <Link href="/pricing" className="bg-[#FDF5E8] text-[#1A1410] px-8 py-3.5 rounded-full font-body font-semibold hover:bg-white transition-colors">
           Mitgliedschaft ansehen
         </Link>
-        <p className="text-xs text-[#FDF8F2]/30 mt-4">14 Tage Geld-zurück-Garantie</p>
+        <p className="text-xs text-[#FDF5E8]/30 mt-4">14 Tage Geld-zurück-Garantie</p>
       </div>
     )
   }
@@ -773,15 +773,15 @@ export function DiscoverClient({
 
   if (isInConnection) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen px-4 text-center bg-[#221080]">
-        <div className="w-20 h-20 bg-[rgba(253,248,242,0.12)] rounded-full flex items-center justify-center mx-auto mb-6">
-          <Sparkles className="w-10 h-10 text-[#FDF8F2]" />
+      <div className="flex flex-col items-center justify-center min-h-screen px-4 text-center bg-[#3B1F0A]">
+        <div className="w-20 h-20 bg-[rgba(253,245,232,0.12)] rounded-full flex items-center justify-center mx-auto mb-6">
+          <Sparkles className="w-10 h-10 text-[#FDF5E8]" />
         </div>
-        <h2 className="font-heading text-4xl text-[#FDF8F2] mb-4">Du bist in einer Begegnung</h2>
-        <p className="text-[#FDF8F2]/60 max-w-md leading-relaxed mb-8">
+        <h2 className="font-heading text-4xl text-[#FDF5E8] mb-4">Du bist in einer Begegnung</h2>
+        <p className="text-[#FDF5E8]/60 max-w-md leading-relaxed mb-8">
           Die One Connection Rule bedeutet: volle Aufmerksamkeit für eine Person.
         </p>
-        <Link href={`/connection/${connectionId}`} className="bg-[#FDF8F2] text-[#1A1410] px-8 py-3.5 rounded-full font-body font-semibold hover:bg-white transition-colors">
+        <Link href={`/connection/${connectionId}`} className="bg-[#FDF5E8] text-[#1A1410] px-8 py-3.5 rounded-full font-body font-semibold hover:bg-white transition-colors">
           Zur Begegnung
         </Link>
       </div>
@@ -796,9 +796,9 @@ export function DiscoverClient({
 
       {/* ── Trial expired banner ── */}
       {!trialActive && (
-        <div className="sticky top-0 z-30 bg-[#221080] px-4 py-2 flex items-center justify-between">
-          <p className="text-[#FDF8F2]/80 text-xs font-body">Dein Zugang ist abgelaufen.</p>
-          <Link href="/pricing" className="text-[#FDF8F2] text-xs font-body font-medium underline underline-offset-2">
+        <div className="sticky top-0 z-30 bg-[#3B1F0A] px-4 py-2 flex items-center justify-between">
+          <p className="text-[#FDF5E8]/80 text-xs font-body">Dein Zugang ist abgelaufen.</p>
+          <Link href="/pricing" className="text-[#FDF5E8] text-xs font-body font-medium underline underline-offset-2">
             Jetzt Mitglied werden →
           </Link>
         </div>
@@ -806,9 +806,9 @@ export function DiscoverClient({
 
       {/* ── Trial active hint ── */}
       {trialActive && trialDaysLeft <= 3 && trialDaysLeft > 0 && (
-        <div className="sticky top-0 z-30 bg-[rgba(34,16,128,0.85)] backdrop-blur-sm px-4 py-2 flex items-center justify-between">
-          <p className="text-[#FDF8F2]/80 text-xs font-body">✦ Du bist im Vollzugang — noch {trialDaysLeft} {trialDaysLeft === 1 ? 'Tag' : 'Tage'}</p>
-          <Link href="/pricing" className="text-[#FDF8F2] text-xs font-body font-medium underline underline-offset-2">
+        <div className="sticky top-0 z-30 bg-[rgba(59,31,10,0.85)] backdrop-blur-sm px-4 py-2 flex items-center justify-between">
+          <p className="text-[#FDF5E8]/80 text-xs font-body">✦ Du bist im Vollzugang — noch {trialDaysLeft} {trialDaysLeft === 1 ? 'Tag' : 'Tage'}</p>
+          <Link href="/pricing" className="text-[#FDF5E8] text-xs font-body font-medium underline underline-offset-2">
             Mitglied werden
           </Link>
         </div>
@@ -843,11 +843,11 @@ export function DiscoverClient({
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 28, stiffness: 280 }}
-              className="fixed top-0 right-0 h-full w-full max-w-sm bg-[#FDF8F2] z-50 shadow-2xl flex flex-col"
+              className="fixed top-0 right-0 h-full w-full max-w-sm bg-[#FDF5E8] z-50 shadow-2xl flex flex-col"
             >
               {/* Drawer header */}
-              <div className="flex items-center justify-between px-6 py-5 border-b border-[rgba(34,16,128,0.12)]">
-                <h2 className="font-heading text-2xl text-[#120850]">Filter</h2>
+              <div className="flex items-center justify-between px-6 py-5 border-b border-[rgba(59,31,10,0.12)]">
+                <h2 className="font-heading text-2xl text-[#240E04]">Filter</h2>
                 <div className="flex items-center gap-3">
                   {activeFilterCount > 0 && (
                     <button
@@ -863,7 +863,7 @@ export function DiscoverClient({
                   )}
                   <button
                     onClick={() => setShowFilters(false)}
-                    className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[rgba(34,16,128,0.07)] transition-colors"
+                    className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[rgba(59,31,10,0.07)] transition-colors"
                   >
                     <X className="w-5 h-5 text-[#6B6058]" />
                   </button>
@@ -899,7 +899,7 @@ export function DiscoverClient({
                           setCurrent(0)
                           setHistory([])
                         }}
-                        className="w-full accent-[#221080]"
+                        className="w-full accent-[#3B1F0A]"
                       />
                     </div>
                     <div>
@@ -918,7 +918,7 @@ export function DiscoverClient({
                           setCurrent(0)
                           setHistory([])
                         }}
-                        className="w-full accent-[#221080]"
+                        className="w-full accent-[#3B1F0A]"
                       />
                     </div>
                   </div>
@@ -941,8 +941,8 @@ export function DiscoverClient({
                         className={cn(
                           'px-3 py-1.5 rounded-full text-sm border transition-all',
                           filters.distanceKm === opt.value
-                            ? 'bg-[#221080] border-[#221080] text-white'
-                            : 'bg-white border-[rgba(34,16,128,0.12)] text-[#6B6058] hover:border-[#221080]/50',
+                            ? 'bg-[#3B1F0A] border-[#3B1F0A] text-white'
+                            : 'bg-white border-[rgba(59,31,10,0.12)] text-[#6B6058] hover:border-[#3B1F0A]/50',
                         )}
                       >
                         {opt.label}
@@ -960,7 +960,7 @@ export function DiscoverClient({
                         setCurrent(0)
                         setHistory([])
                       }}
-                      className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-[rgba(34,16,128,0.12)] bg-white text-sm text-[#1A1410] placeholder:text-[#6B6058] focus:outline-none focus:border-[#221080]/50"
+                      className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-[rgba(59,31,10,0.12)] bg-white text-sm text-[#1A1410] placeholder:text-[#6B6058] focus:outline-none focus:border-[#3B1F0A]/50"
                     />
                   </div>
                   <p className="text-xs text-[#6B6058] mt-1.5">Filtert nach Stadtname im Profil</p>
@@ -1009,7 +1009,7 @@ export function DiscoverClient({
               </div>
 
               {/* Drawer footer */}
-              <div className="px-6 py-5 border-t border-[rgba(34,16,128,0.12)]">
+              <div className="px-6 py-5 border-t border-[rgba(59,31,10,0.12)]">
                 <button onClick={() => setShowFilters(false)} className="w-full btn-primary-dark py-3.5">
                   {profiles.length} {profiles.length === 1 ? 'Profil' : 'Profile'} anzeigen
                 </button>
@@ -1029,14 +1029,14 @@ export function DiscoverClient({
               className={cn(
                 'relative flex items-center gap-2 px-4 py-2 rounded-2xl border-2 text-sm font-medium transition-all',
                 activeFilterCount > 0
-                  ? 'border-[#FDF8F2] bg-[rgba(253,248,242,0.15)] text-[#FDF8F2]'
-                  : 'border-[rgba(253,248,242,0.35)] text-[rgba(253,248,242,0.6)] hover:border-[rgba(253,248,242,0.6)]',
+                  ? 'border-[#FDF5E8] bg-[rgba(253,245,232,0.15)] text-[#FDF5E8]'
+                  : 'border-[rgba(253,245,232,0.35)] text-[rgba(253,245,232,0.6)] hover:border-[rgba(253,245,232,0.6)]',
               )}
             >
               <SlidersHorizontal className="w-4 h-4" />
               Filter
               {activeFilterCount > 0 && (
-                <span className="w-5 h-5 rounded-full bg-[#FDF8F2] text-[#1A1410] text-xs flex items-center justify-center font-semibold">
+                <span className="w-5 h-5 rounded-full bg-[#FDF5E8] text-[#1A1410] text-xs flex items-center justify-center font-semibold">
                   {activeFilterCount}
                 </span>
               )}
@@ -1048,11 +1048,11 @@ export function DiscoverClient({
       {/* ── Empty state ── */}
       {!hasProfile ? (
         <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
-          <Heart className="w-16 h-16 text-[#FDF8F2]/30 mb-6" />
+          <Heart className="w-16 h-16 text-[#FDF5E8]/30 mb-6" />
           {activeFilterCount > 0 ? (
             <>
-              <h2 className="font-heading text-4xl text-[#FDF8F2] mb-3">Keine Treffer</h2>
-              <p className="text-[#FDF8F2]/60 max-w-sm mb-6">
+              <h2 className="font-heading text-4xl text-[#FDF5E8] mb-3">Keine Treffer</h2>
+              <p className="text-[#FDF5E8]/60 max-w-sm mb-6">
                 Passe die Filter an oder setze sie zurück.
               </p>
               <button
@@ -1068,8 +1068,8 @@ export function DiscoverClient({
             </>
           ) : (
             <>
-              <h2 className="font-heading text-4xl text-[#FDF8F2] mb-3">Das war's erstmal</h2>
-              <p className="text-[#FDF8F2]/60 max-w-sm">
+              <h2 className="font-heading text-4xl text-[#FDF5E8] mb-3">Das war's erstmal</h2>
+              <p className="text-[#FDF5E8]/60 max-w-sm">
                 Schau später wieder vorbei — neue Menschen kommen täglich dazu.
               </p>
             </>
@@ -1113,7 +1113,7 @@ export function DiscoverClient({
                   draggable={false}
                 />
               ) : (
-                <div className="w-full h-full bg-[rgba(34,16,128,0.07)] flex items-center justify-center">
+                <div className="w-full h-full bg-[rgba(59,31,10,0.07)] flex items-center justify-center">
                   <span className="font-heading text-8xl text-[#6B6058]">
                     {profile.name?.[0]}
                   </span>
@@ -1137,7 +1137,7 @@ export function DiscoverClient({
               </motion.div>
 
               {/* Name / location gradient overlay */}
-              <div className="absolute bottom-0 left-0 right-0 h-56 bg-gradient-to-t from-[rgba(18,8,80,0.88)] to-transparent pointer-events-none z-10" />
+              <div className="absolute bottom-0 left-0 right-0 h-56 bg-gradient-to-t from-[rgba(36,14,4,0.88)] to-transparent pointer-events-none z-10" />
               <div className="absolute bottom-5 left-5 text-white pointer-events-none z-10">
                 <h2 className="font-heading text-4xl drop-shadow">
                   {profile.name}
@@ -1153,8 +1153,8 @@ export function DiscoverClient({
 
               {/* Serendipity badge */}
               {serendipityIds.includes(profile.user_id) && (
-                <div className="absolute top-4 right-4 z-20 bg-[rgba(18,8,80,0.75)] backdrop-blur-sm px-3 py-1.5 rounded-full flex items-center gap-1.5">
-                  <span className="text-[#FDF8F2] text-xs font-body">✦ Überraschung</span>
+                <div className="absolute top-4 right-4 z-20 bg-[rgba(36,14,4,0.75)] backdrop-blur-sm px-3 py-1.5 rounded-full flex items-center gap-1.5">
+                  <span className="text-[#FDF5E8] text-xs font-body">✦ Überraschung</span>
                 </div>
               )}
 
@@ -1166,11 +1166,22 @@ export function DiscoverClient({
             </motion.div>
 
             {/* ── Below-photo content ── */}
-            <div className="mt-2 mx-3 bg-[#FDF8F2] rounded-3xl overflow-hidden">
+            {(() => {
+              const INTENTION_AURA: Record<string, string> = {
+                'Ernsthafte Beziehung': '#7EB89A',
+                'Freundschaft & mehr':  '#6BAED6',
+                'Bewusstes Dating':     '#A78BC4',
+                'Offenes Erkunden':     '#E8C96B',
+              }
+              const stripeColor = profile.intention ? (INTENTION_AURA[profile.intention] ?? 'transparent') : 'transparent'
+              return (
+            <div className="mt-2 mx-3 bg-[#FDF5E8] rounded-3xl overflow-hidden"
+              style={{ boxShadow: stripeColor !== 'transparent' ? `inset 4px 0 0 ${stripeColor}` : undefined }}
+            >
 
               {/* ── Emotionale Kapazität ── */}
               {profile.emotional_capacity && (() => {
-                const CAP = { open: { dot: '#22C55E', label: 'Offen für Tiefe & Nähe' }, selective: { dot: '#EAB308', label: 'Selektiv & vorsichtig' }, light: { dot: '#3B82F6', label: 'Gerade eher leicht & locker' }, slow: { dot: '#9CA3AF', label: 'Slow Mode' } }
+                const CAP = { open: { dot: '#7EB89A', label: 'Offen für Tiefe & Nähe' }, selective: { dot: '#E8C96B', label: 'Selektiv & vorsichtig' }, light: { dot: '#6BAED6', label: 'Gerade eher leicht & locker' }, slow: { dot: '#D4845A', label: 'Slow Mode' } }
                 const c = CAP[profile.emotional_capacity as keyof typeof CAP]
                 return c ? (
                   <div className="px-5 pt-4 pb-1 flex items-center gap-2">
@@ -1190,28 +1201,28 @@ export function DiscoverClient({
               {/* ── Quick-info pills ── */}
               <div className="px-5 pt-5 pb-1 flex flex-wrap gap-2">
                 {profile.height_cm && (
-                  <span className="flex items-center gap-1.5 text-sm text-[#6B6058] bg-[rgba(34,16,128,0.07)] px-3 py-1.5 rounded-full">
+                  <span className="flex items-center gap-1.5 text-sm text-[#6B6058] bg-[rgba(59,31,10,0.07)] px-3 py-1.5 rounded-full">
                     <Ruler className="w-3.5 h-3.5" />{profile.height_cm} cm
                   </span>
                 )}
                 {profile.occupation && (
-                  <span className="flex items-center gap-1.5 text-sm text-[#6B6058] bg-[rgba(34,16,128,0.07)] px-3 py-1.5 rounded-full">
+                  <span className="flex items-center gap-1.5 text-sm text-[#6B6058] bg-[rgba(59,31,10,0.07)] px-3 py-1.5 rounded-full">
                     <Briefcase className="w-3.5 h-3.5" />{profile.occupation}
                   </span>
                 )}
                 {profile.intention && (
-                  <span className="flex items-center gap-1.5 text-sm text-[#1A1410] bg-[rgba(34,16,128,0.07)] px-3 py-1.5 rounded-full">
+                  <span className="flex items-center gap-1.5 text-sm text-[#1A1410] bg-[rgba(59,31,10,0.07)] px-3 py-1.5 rounded-full">
                     <Sparkles className="w-3.5 h-3.5" />{profile.intention}
                   </span>
                 )}
                 {profile.has_children && (
-                  <span className="text-sm text-[#6B6058] bg-[rgba(34,16,128,0.07)] px-3 py-1.5 rounded-full">{profile.has_children}</span>
+                  <span className="text-sm text-[#6B6058] bg-[rgba(59,31,10,0.07)] px-3 py-1.5 rounded-full">{profile.has_children}</span>
                 )}
               </div>
 
               {/* ── Über mich ── */}
               {profile.bio && (
-                <div className="px-5 py-5 border-t border-[rgba(34,16,128,0.10)]">
+                <div className="px-5 py-5 border-t border-[rgba(59,31,10,0.10)]">
                   <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Über mich</p>
                   <p className="text-[#1A1410] text-sm leading-relaxed text-justify">{profile.bio}</p>
                 </div>
@@ -1219,13 +1230,13 @@ export function DiscoverClient({
 
               {/* ── Sprachmemo ── */}
               {profile.audio_prompt_url ? (
-                <div className="px-5 py-5 border-t border-[rgba(34,16,128,0.10)]">
+                <div className="px-5 py-5 border-t border-[rgba(59,31,10,0.10)]">
                   <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Sprachmemo</p>
                   <AudioPlayer url={profile.audio_prompt_url} />
                 </div>
               ) : (
-                <div className="px-5 py-5 border-t border-[rgba(34,16,128,0.10)] flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[rgba(34,16,128,0.07)] flex items-center justify-center flex-shrink-0">
+                <div className="px-5 py-5 border-t border-[rgba(59,31,10,0.10)] flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-[rgba(59,31,10,0.07)] flex items-center justify-center flex-shrink-0">
                     <Mic className="w-5 h-5 text-[#1A1410]" />
                   </div>
                   <div className="flex-1">
@@ -1234,7 +1245,7 @@ export function DiscoverClient({
                       {Array.from({ length: 26 }).map((_, i) => (
                         <div
                           key={i}
-                          className="w-1 bg-[#221080]/25 rounded-full"
+                          className="w-1 bg-[#3B1F0A]/25 rounded-full"
                           style={{ height: `${30 + Math.sin(i * 0.9) * 50 + Math.cos(i * 1.4) * 20}%` }}
                         />
                       ))}
@@ -1246,11 +1257,11 @@ export function DiscoverClient({
 
               {/* ── Interessen ── */}
               {profile.interests?.length > 0 && (
-                <div className="px-5 py-5 border-t border-[rgba(34,16,128,0.10)]">
+                <div className="px-5 py-5 border-t border-[rgba(59,31,10,0.10)]">
                   <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Interessen</p>
                   <div className="flex flex-wrap gap-2">
                     {profile.interests.map((item) => (
-                      <span key={item} className="text-sm text-[#6B6058] bg-[rgba(34,16,128,0.07)] px-3 py-1.5 rounded-full">{item}</span>
+                      <span key={item} className="text-sm text-[#6B6058] bg-[rgba(59,31,10,0.07)] px-3 py-1.5 rounded-full">{item}</span>
                     ))}
                   </div>
                 </div>
@@ -1258,11 +1269,11 @@ export function DiscoverClient({
 
               {/* ── Werte ── */}
               {profile.werte?.length > 0 && (
-                <div className="px-5 py-5 border-t border-[rgba(34,16,128,0.10)]">
+                <div className="px-5 py-5 border-t border-[rgba(59,31,10,0.10)]">
                   <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Werte</p>
                   <div className="flex flex-wrap gap-2">
                     {profile.werte.map((w) => (
-                      <span key={w} className="text-sm text-[#1A1410] bg-[rgba(34,16,128,0.07)] px-3 py-1.5 rounded-full">{w}</span>
+                      <span key={w} className="text-sm text-[#1A1410] bg-[rgba(59,31,10,0.07)] px-3 py-1.5 rounded-full">{w}</span>
                     ))}
                   </div>
                 </div>
@@ -1270,14 +1281,14 @@ export function DiscoverClient({
 
               {/* ── Meine Welt ── */}
               {(profile.my_world?.length ?? 0) > 0 && (
-                <div className="px-5 py-5 border-t border-[rgba(34,16,128,0.10)]">
+                <div className="px-5 py-5 border-t border-[rgba(59,31,10,0.10)]">
                   <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Meine Welt</p>
                   <div className="flex flex-wrap gap-2">
                     {profile.my_world!.map((item) => (
                       <span
                         key={item}
                         className="text-[11px] font-body font-light px-3 py-1.5 rounded-full"
-                        style={{ background: 'rgba(34,16,128,0.08)', color: '#1A1410' }}
+                        style={{ background: 'rgba(59,31,10,0.08)', color: '#1A1410' }}
                       >
                         {item}
                       </span>
@@ -1288,11 +1299,11 @@ export function DiscoverClient({
 
               {/* ── Meine Communities ── */}
               {(profile.communities?.length ?? 0) > 0 && (
-                <div className="px-5 py-5 border-t border-[rgba(34,16,128,0.10)]">
+                <div className="px-5 py-5 border-t border-[rgba(59,31,10,0.10)]">
                   <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Meine Communities</p>
                   <div className="flex flex-wrap gap-2">
                     {profile.communities!.map((c) => (
-                      <span key={c} className="text-[12px] font-body px-3 py-1.5 rounded-full border border-[rgba(34,16,128,0.30)] text-[#1A1410] bg-[rgba(34,16,128,0.08)]">
+                      <span key={c} className="text-[12px] font-body px-3 py-1.5 rounded-full border border-[rgba(59,31,10,0.30)] text-[#1A1410] bg-[rgba(59,31,10,0.08)]">
                         {c}
                       </span>
                     ))}
@@ -1302,7 +1313,7 @@ export function DiscoverClient({
 
               {/* ── Beziehung & Bindung ── */}
               {(profile.relationship_model || profile.bindungstyp || profile.love_language) && (
-                <div className="px-5 py-5 border-t border-[rgba(34,16,128,0.10)] space-y-4">
+                <div className="px-5 py-5 border-t border-[rgba(59,31,10,0.10)] space-y-4">
                   <p className="text-[11px] text-[#6B6058] uppercase tracking-widest">Beziehung &amp; Bindung</p>
                   {profile.relationship_model && (
                     <div className="flex items-center justify-between">
@@ -1331,7 +1342,7 @@ export function DiscoverClient({
               {(profile.introvert_extrovert != null ||
                 profile.spontan_strukturiert != null ||
                 profile.rational_emotional != null) && (
-                <div className="px-5 py-5 border-t border-[rgba(34,16,128,0.10)] space-y-4">
+                <div className="px-5 py-5 border-t border-[rgba(59,31,10,0.10)] space-y-4">
                   <p className="text-[11px] text-[#6B6058] uppercase tracking-widest">Persönlichkeit</p>
                   {profile.introvert_extrovert != null && (
                     <PersonalityBar leftLabel="Introvertiert" rightLabel="Extrovertiert" value={profile.introvert_extrovert} />
@@ -1347,21 +1358,21 @@ export function DiscoverClient({
 
               {/* ── Horoskop ── */}
               {(profile.sun_sign || profile.ascendant || profile.chinese_zodiac) && (
-                <div className="px-5 py-5 border-t border-[rgba(34,16,128,0.10)] space-y-3">
+                <div className="px-5 py-5 border-t border-[rgba(59,31,10,0.10)] space-y-3">
                   <p className="text-[11px] text-[#6B6058] uppercase tracking-widest">Horoskop</p>
                   <div className="flex flex-wrap gap-2">
                     {profile.sun_sign && (
-                      <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(34,16,128,0.08)', color: '#1A1410' }}>
+                      <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(59,31,10,0.08)', color: '#1A1410' }}>
                         {profile.sun_sign}
                       </span>
                     )}
                     {profile.ascendant && (
-                      <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(34,16,128,0.08)', color: '#1A1410' }}>
+                      <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(59,31,10,0.08)', color: '#1A1410' }}>
                         ↑ {profile.ascendant.replace(/^[♈♉♊♋♌♍♎♏♐♑♒♓]\s*/, '')}
                       </span>
                     )}
                     {profile.chinese_zodiac && (
-                      <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(34,16,128,0.10)', color: '#1A1410' }}>
+                      <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(59,31,10,0.10)', color: '#1A1410' }}>
                         {profile.chinese_zodiac}
                       </span>
                     )}
@@ -1371,7 +1382,7 @@ export function DiscoverClient({
 
               {/* ── Dealbreakers ── */}
               {profile.dealbreakers?.length > 0 && (
-                <div className="px-5 py-5 border-t border-[rgba(34,16,128,0.10)]">
+                <div className="px-5 py-5 border-t border-[rgba(59,31,10,0.10)]">
                   <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Dealbreaker</p>
                   <div className="flex flex-wrap gap-2">
                     {profile.dealbreakers.map((d) => (
@@ -1383,16 +1394,16 @@ export function DiscoverClient({
 
               {/* ── Intimität ── */}
               {profile.sexuality_visible && viewerSexualityVisible && (profile.sexuality_interests?.length ?? 0) > 0 ? (
-                <div className="px-5 py-5 border-t border-[rgba(34,16,128,0.10)]">
+                <div className="px-5 py-5 border-t border-[rgba(59,31,10,0.10)]">
                   <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Intimität</p>
                   <div className="flex flex-wrap gap-2">
                     {profile.sexuality_interests!.map((item) => (
-                      <span key={item} className="text-sm text-[#6B6058] bg-[rgba(34,16,128,0.07)] px-3 py-1.5 rounded-full">{item}</span>
+                      <span key={item} className="text-sm text-[#6B6058] bg-[rgba(59,31,10,0.07)] px-3 py-1.5 rounded-full">{item}</span>
                     ))}
                   </div>
                 </div>
               ) : (!viewerSexualityVisible && profile.sexuality_visible) ? (
-                <div className="px-5 py-5 border-t border-[rgba(34,16,128,0.10)]">
+                <div className="px-5 py-5 border-t border-[rgba(59,31,10,0.10)]">
                   <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Intimität</p>
                   <p className="text-sm text-[#6B6058] italic">Teile deine Interessen im Profil um diese Informationen zu sehen.</p>
                 </div>
@@ -1428,6 +1439,8 @@ export function DiscoverClient({
                 <PhotoWithCaption photo={profile.photos[5]} alt={profile.name} />
               )}
             </div>
+              )
+            })()}
           </motion.div>
         </AnimatePresence>
       )}
@@ -1443,17 +1456,17 @@ export function DiscoverClient({
             <div
               className="flex items-center gap-1.5 rounded-2xl p-1.5"
               style={{
-                background: 'rgba(18,8,80,0.78)',
+                background: 'rgba(36,14,4,0.78)',
                 backdropFilter: 'blur(18px)',
                 WebkitBackdropFilter: 'blur(18px)',
-                border: '0.5px solid rgba(253,248,242,0.14)',
+                border: '0.5px solid rgba(253,245,232,0.14)',
               }}
             >
               {/* Gerade nicht */}
               <button
                 onClick={handlePass}
-                className="flex-1 py-3.5 rounded-xl font-body font-light text-[13px] text-[#FDF8F2]/70 transition-all active:scale-[0.97]"
-                style={{ background: 'rgba(253,248,242,0.08)' }}
+                className="flex-1 py-3.5 rounded-xl font-body font-light text-[13px] text-[#FDF5E8]/70 transition-all active:scale-[0.97]"
+                style={{ background: 'rgba(253,245,232,0.08)' }}
               >
                 Gerade nicht
               </button>
@@ -1463,17 +1476,17 @@ export function DiscoverClient({
                 onClick={handleUndo}
                 disabled={history.length === 0}
                 className="w-12 h-[50px] rounded-xl flex items-center justify-center flex-shrink-0 transition-all disabled:opacity-20 active:scale-95"
-                style={{ background: 'rgba(253,248,242,0.10)' }}
+                style={{ background: 'rgba(253,245,232,0.10)' }}
                 aria-label="Rückgängig"
               >
-                <CornerUpLeft className="w-5 h-5 text-[#FDF8F2]/80" />
+                <CornerUpLeft className="w-5 h-5 text-[#FDF5E8]/80" />
               </button>
 
               {/* Fühlt sich stimmig an */}
               <button
                 onClick={handleLike}
-                className="flex-[1.6] py-3.5 rounded-xl font-body font-normal text-[13px] text-[#FDF8F2] transition-all active:scale-[0.97] hover:opacity-90"
-                style={{ background: 'rgba(253,248,242,0.22)', letterSpacing: '0.01em' }}
+                className="flex-[1.6] py-3.5 rounded-xl font-body font-normal text-[13px] text-[#FDF5E8] transition-all active:scale-[0.97] hover:opacity-90"
+                style={{ background: 'rgba(253,245,232,0.22)', letterSpacing: '0.01em' }}
               >
                 Stimmig an ✦
               </button>
@@ -1485,7 +1498,7 @@ export function DiscoverClient({
                 <button
                   onClick={openRevisitMode}
                   disabled={loadingRevisit}
-                  className="text-xs text-[#FDF8F2]/40 hover:text-[#FDF8F2]/60 font-body transition-colors"
+                  className="text-xs text-[#FDF5E8]/40 hover:text-[#FDF5E8]/60 font-body transition-colors"
                 >
                   {loadingRevisit ? '…' : `↩ Nochmal anschauen (${revisitIds.length})`}
                 </button>
@@ -1500,22 +1513,22 @@ export function DiscoverClient({
         <div className="fixed inset-0 z-50 flex flex-col" style={{ background: 'var(--bg-indigo)', backgroundAttachment: 'fixed' }}>
           <div className="flex items-center justify-between px-5 pt-6 pb-4">
             <div>
-              <h2 className="font-heading text-3xl text-[#FDF8F2]">Nochmal anschauen</h2>
-              <p className="text-xs text-[#FDF8F2]/40 font-body mt-0.5">{revisitProfiles.length} Profile</p>
+              <h2 className="font-heading text-3xl text-[#FDF5E8]">Nochmal anschauen</h2>
+              <p className="text-xs text-[#FDF5E8]/40 font-body mt-0.5">{revisitProfiles.length} Profile</p>
             </div>
-            <button onClick={() => setShowRevisit(false)} className="w-8 h-8 flex items-center justify-center text-[#FDF8F2]/50 hover:text-[#FDF8F2]">
+            <button onClick={() => setShowRevisit(false)} className="w-8 h-8 flex items-center justify-center text-[#FDF5E8]/50 hover:text-[#FDF5E8]">
               <X className="w-5 h-5" />
             </button>
           </div>
 
           {revisitProfiles.length === 0 ? (
-            <div className="flex-1 flex items-center justify-center text-[#FDF8F2]/40 text-center px-8">
+            <div className="flex-1 flex items-center justify-center text-[#FDF5E8]/40 text-center px-8">
               <p className="font-heading text-2xl">Keine Profile mehr in der Liste.</p>
             </div>
           ) : revisitIdx >= revisitProfiles.length ? (
             <div className="flex-1 flex flex-col items-center justify-center px-6 text-center">
-              <p className="font-heading text-3xl text-[#FDF8F2] mb-4">Das war's.</p>
-              <p className="text-[#FDF8F2]/50 font-body mb-6">Du hast alle Revisit-Profile gesehen.</p>
+              <p className="font-heading text-3xl text-[#FDF5E8] mb-4">Das war's.</p>
+              <p className="text-[#FDF5E8]/50 font-body mb-6">Du hast alle Revisit-Profile gesehen.</p>
               <button onClick={() => setShowRevisit(false)} className="btn-primary px-8">Zurück zum Entdecken</button>
             </div>
           ) : (() => {
@@ -1527,17 +1540,17 @@ export function DiscoverClient({
                     // eslint-disable-next-line @next/next/no-img-element
                     <img src={photoUrl(rp.photos[0])} alt={rp.name} className="w-full h-full object-cover" />
                   ) : (
-                    <div className="w-full h-full bg-[rgba(253,248,242,0.08)] flex items-center justify-center">
-                      <span className="font-heading text-8xl text-[#FDF8F2]/20">{rp.name?.[0]}</span>
+                    <div className="w-full h-full bg-[rgba(253,245,232,0.08)] flex items-center justify-center">
+                      <span className="font-heading text-8xl text-[#FDF5E8]/20">{rp.name?.[0]}</span>
                     </div>
                   )}
-                  <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-[rgba(18,8,80,0.88)] to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-[rgba(36,14,4,0.88)] to-transparent" />
                   <div className="absolute bottom-5 left-5 text-white">
                     <h3 className="font-heading text-3xl">{rp.name}{rp.age ? `, ${rp.age}` : ''}</h3>
                     {rp.location && !rp.hide_location && <p className="text-white/70 text-sm">{rp.location}</p>}
                   </div>
                 </div>
-                <div className="mt-2 mx-3 bg-[#FDF8F2] rounded-3xl p-5">
+                <div className="mt-2 mx-3 bg-[#FDF5E8] rounded-3xl p-5">
                   {rp.bio && <p className="text-[#1A1410] text-sm leading-relaxed">{rp.bio}</p>}
                   {rp.intention && <p className="mt-3 text-xs text-[#6B6058] uppercase tracking-wider">{rp.intention}</p>}
                 </div>
@@ -1547,7 +1560,7 @@ export function DiscoverClient({
 
           {/* Revisit Action Bar */}
           {revisitProfiles.length > 0 && revisitIdx < revisitProfiles.length && (
-            <div className="fixed bottom-0 left-0 right-0 px-5 pb-6 pt-3" style={{ background: 'rgba(34,16,128,0.9)', backdropFilter: 'blur(16px)' }}>
+            <div className="fixed bottom-0 left-0 right-0 px-5 pb-6 pt-3" style={{ background: 'rgba(59,31,10,0.9)', backdropFilter: 'blur(16px)' }}>
               <div className="flex gap-3 max-w-sm mx-auto">
                 <button
                   onClick={async () => {
@@ -1558,7 +1571,7 @@ export function DiscoverClient({
                     setRevisitIdx(i => i + 1)
                   }}
                   className="flex-1 py-3.5 rounded-full font-body text-sm transition-all"
-                  style={{ background: 'transparent', border: '0.5px solid rgba(253,248,242,0.3)', color: 'rgba(253,248,242,0.5)' }}
+                  style={{ background: 'transparent', border: '0.5px solid rgba(253,245,232,0.3)', color: 'rgba(253,245,232,0.5)' }}
                 >
                   Nicht mein Weg
                 </button>
@@ -1571,7 +1584,7 @@ export function DiscoverClient({
                     toast('Interesse gesendet!')
                     setRevisitIdx(i => i + 1)
                   }}
-                  className="flex-1 py-3.5 rounded-full font-body text-sm bg-[#FDF8F2] text-[#1A1410] font-normal active:scale-95 transition-all"
+                  className="flex-1 py-3.5 rounded-full font-body text-sm bg-[#FDF5E8] text-[#1A1410] font-normal active:scale-95 transition-all"
                 >
                   Fühlt sich stimmig an ✦
                 </button>
@@ -1584,19 +1597,19 @@ export function DiscoverClient({
       {/* ── Burnout Hint ── */}
       {showBurnout && (
         <div className="fixed bottom-24 left-4 right-4 z-40 md:left-auto md:right-6 md:max-w-sm">
-          <div className="rounded-2xl p-5" style={{ background: 'rgba(18,8,80,0.95)', border: '0.5px solid rgba(253,248,242,0.12)', backdropFilter: 'blur(20px)' }}>
+          <div className="rounded-2xl p-5" style={{ background: 'rgba(36,14,4,0.95)', border: '0.5px solid rgba(253,245,232,0.12)', backdropFilter: 'blur(20px)' }}>
             <div className="flex items-start gap-3">
               <span className="text-xl flex-shrink-0">🌙</span>
               <div className="flex-1">
-                <h4 className="font-heading text-lg text-[#FDF8F2] mb-1">Eine kurze Beobachtung</h4>
-                <p className="text-xs text-[#FDF8F2]/55 font-body font-light leading-relaxed mb-3">
+                <h4 className="font-heading text-lg text-[#FDF5E8] mb-1">Eine kurze Beobachtung</h4>
+                <p className="text-xs text-[#FDF5E8]/55 font-body font-light leading-relaxed mb-3">
                   Du scheinst gerade viel Energie ins Dating zu stecken. Manchmal ist eine Pause das Bewussteste was man tun kann.
                 </p>
                 <div className="flex gap-2">
-                  <Link href="/profile" className="flex-1 py-2 text-center rounded-full text-xs font-body bg-[#FDF8F2] text-[#1A1410]">
+                  <Link href="/profile" className="flex-1 py-2 text-center rounded-full text-xs font-body bg-[#FDF5E8] text-[#1A1410]">
                     Pause einlegen
                   </Link>
-                  <button onClick={() => setShowBurnout(false)} className="flex-1 py-2 text-center rounded-full text-xs font-body text-[#FDF8F2]/50" style={{ border: '0.5px solid rgba(253,248,242,0.2)' }}>
+                  <button onClick={() => setShowBurnout(false)} className="flex-1 py-2 text-center rounded-full text-xs font-body text-[#FDF5E8]/50" style={{ border: '0.5px solid rgba(253,245,232,0.2)' }}>
                     Alles gut, danke
                   </button>
                 </div>

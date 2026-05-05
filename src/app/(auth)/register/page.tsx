@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState } from 'react'
 import Link from 'next/link'
@@ -47,13 +47,13 @@ export default function RegisterPage() {
     return (
       <div className="min-h-screen flex items-center justify-center px-4" style={{ background: 'var(--bg-indigo)' }}>
         <div className="text-center max-w-md">
-          <div className="w-20 h-20 bg-[rgba(253,248,242,0.10)] rounded-full flex items-center justify-center mx-auto mb-6">
-            <Mail className="w-10 h-10 text-[#FDF8F2]/70" />
+          <div className="w-20 h-20 bg-[rgba(253,245,232,0.10)] rounded-full flex items-center justify-center mx-auto mb-6">
+            <Mail className="w-10 h-10 text-[#FDF5E8]/70" />
           </div>
-          <h1 className="font-heading text-4xl text-[#FDF8F2] mb-4">Fast geschafft!</h1>
-          <p className="text-[#FDF8F2]/50 leading-relaxed font-body text-sm">
+          <h1 className="font-heading text-4xl text-[#FDF5E8] mb-4">Fast geschafft!</h1>
+          <p className="text-[#FDF5E8]/50 leading-relaxed font-body text-sm">
             Wir haben dir eine Bestätigungs-E-Mail an{' '}
-            <strong className="text-[#FDF8F2]/80">{email}</strong> gesendet.
+            <strong className="text-[#FDF5E8]/80">{email}</strong> gesendet.
             Bitte bestätige deine Adresse, um mit dem Onboarding zu beginnen.
           </p>
         </div>
@@ -69,8 +69,8 @@ export default function RegisterPage() {
           <Link href="/" className="inline-flex justify-center mb-6">
             <SajaLogo size="lg" showTagline={true} />
           </Link>
-          <h1 className="font-heading text-4xl font-light text-[#FDF8F2]">Konto erstellen</h1>
-          <p className="text-[#FDF8F2]/50 mt-2 font-body text-sm">Kostenlos und unverbindlich starten.</p>
+          <h1 className="font-heading text-4xl font-light text-[#FDF5E8]">Konto erstellen</h1>
+          <p className="text-[#FDF5E8]/50 mt-2 font-body text-sm">Kostenlos und unverbindlich starten.</p>
         </div>
 
         <div className="card">
@@ -109,10 +109,10 @@ export default function RegisterPage() {
               />
             </div>
 
-            <p className="text-xs text-[#FDF8F2]/30 leading-relaxed font-body">
+            <p className="text-xs text-[#FDF5E8]/30 leading-relaxed font-body">
               Mit der Registrierung stimmst du unseren{' '}
-              <Link href="/agb" className="text-[#FDF8F2]/60 hover:text-[#FDF8F2]/80 underline underline-offset-2 transition-colors">AGB</Link> und der{' '}
-              <Link href="/datenschutz" className="text-[#FDF8F2]/60 hover:text-[#FDF8F2]/80 underline underline-offset-2 transition-colors">Datenschutzerklärung</Link> zu.
+              <Link href="/agb" className="text-[#FDF5E8]/60 hover:text-[#FDF5E8]/80 underline underline-offset-2 transition-colors">AGB</Link> und der{' '}
+              <Link href="/datenschutz" className="text-[#FDF5E8]/60 hover:text-[#FDF5E8]/80 underline underline-offset-2 transition-colors">Datenschutzerklärung</Link> zu.
             </p>
 
             <button type="submit" disabled={loading} className="btn-primary w-full">
@@ -121,9 +121,9 @@ export default function RegisterPage() {
           </form>
         </div>
 
-        <p className="text-center text-[#FDF8F2]/40 text-sm mt-6 font-body">
+        <p className="text-center text-[#FDF5E8]/40 text-sm mt-6 font-body">
           Bereits registriert?{' '}
-          <Link href="/login" className="text-[#FDF8F2]/80 hover:text-[#FDF8F2] underline underline-offset-2 transition-colors">
+          <Link href="/login" className="text-[#FDF5E8]/80 hover:text-[#FDF5E8] underline underline-offset-2 transition-colors">
             Anmelden
           </Link>
         </p>

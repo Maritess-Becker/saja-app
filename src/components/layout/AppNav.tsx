@@ -17,7 +17,7 @@ const NAV_ITEMS = [
 ]
 
 function NavIcon({ iconKey, isActive }: { iconKey: string; isActive: boolean }) {
-  const color = isActive ? '#FDF8F2' : 'rgba(253,248,242,0.28)'
+  const color = isActive ? '#FDF5E8' : 'rgba(253,245,232,0.28)'
 
   if (iconKey === 'saja') {
     return (
@@ -54,7 +54,7 @@ export function AppNav() {
   return (
     <>
       {/* Desktop sidebar */}
-      <aside className="hidden md:flex flex-col w-64 min-h-screen bg-[#120850] fixed left-0 top-0 px-4 py-6">
+      <aside className="hidden md:flex flex-col w-64 min-h-screen bg-[#240E04] fixed left-0 top-0 px-4 py-6">
         <Link href="/discover" className="mb-10 px-2">
           <SajaLogo size="md" showTagline={true} onDark={true} />
         </Link>
@@ -69,8 +69,8 @@ export function AppNav() {
                 className={cn(
                   'flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-body text-sm',
                   isActive
-                    ? 'bg-[rgba(253,248,242,0.14)] text-[#FDF8F2] font-normal'
-                    : 'text-[rgba(253,248,242,0.38)] hover:bg-[rgba(253,248,242,0.07)] hover:text-[#FDF8F2]'
+                    ? 'bg-[rgba(253,245,232,0.14)] text-[#FDF5E8] font-normal'
+                    : 'text-[rgba(253,245,232,0.38)] hover:bg-[rgba(253,245,232,0.07)] hover:text-[#FDF5E8]'
                 )}
               >
                 <NavIcon iconKey={icon} isActive={isActive} />
@@ -82,7 +82,7 @@ export function AppNav() {
 
         <button
           onClick={handleLogout}
-          className="flex items-center gap-3 px-4 py-3 text-[rgba(253,248,242,0.35)] hover:text-[#FDF8F2] transition-colors text-sm font-body"
+          className="flex items-center gap-3 px-4 py-3 text-[rgba(253,245,232,0.35)] hover:text-[#FDF5E8] transition-colors text-sm font-body"
         >
           <LogOut className="w-5 h-5" strokeWidth={1.5} />
           Abmelden
@@ -95,7 +95,7 @@ export function AppNav() {
         className="md:hidden fixed bottom-0 left-0 right-0 z-50"
         style={{
           background: 'var(--bg-nav)',
-          borderTop: '0.5px solid rgba(253,248,242,0.08)',
+          borderTop: '0.5px solid rgba(253,245,232,0.08)',
           paddingBottom: 'env(safe-area-inset-bottom)',
         }}
       >
@@ -109,12 +109,12 @@ export function AppNav() {
                 title={label}
                 className={cn(
                   'flex-1 flex flex-col items-center justify-center py-3 gap-1 transition-colors',
-                  isActive ? 'text-[#FDF8F2]' : 'text-[rgba(253,248,242,0.28)]'
+                  isActive ? 'text-[#FDF5E8]' : 'text-[rgba(253,245,232,0.28)]'
                 )}
               >
                 <NavIcon iconKey={icon} isActive={isActive} />
                 {isActive
-                  ? <span className="text-[8px] font-body font-light tracking-wide text-[#FDF8F2]">{label}</span>
+                  ? <span className="text-[8px] font-body font-light tracking-wide text-[#FDF5E8]">{label}</span>
                   : <div className="h-[8px]" />
                 }
               </Link>

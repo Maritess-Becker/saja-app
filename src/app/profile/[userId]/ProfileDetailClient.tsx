@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
@@ -37,7 +37,7 @@ function AudioPlayer({ url }: { url: string }) {
       <audio ref={audioRef} src={url} onEnded={() => setPlaying(false)} preload="none" />
       <button
         onClick={handleToggle}
-        className="w-10 h-10 rounded-full bg-primary flex items-center justify-center shadow flex-shrink-0 hover:bg-[#120850] transition-colors active:scale-95"
+        className="w-10 h-10 rounded-full bg-primary flex items-center justify-center shadow flex-shrink-0 hover:bg-[#240E04] transition-colors active:scale-95"
       >
         {playing ? <Pause className="w-4 h-4 text-white" /> : <Play className="w-4 h-4 text-white translate-x-0.5" />}
       </button>
@@ -74,10 +74,10 @@ function PhotoWithCaption({ photo, name, height }: { photo: { url: string; path:
 
 function PromptBlock({ question, answer }: { question: string; answer: string }) {
   return (
-    <div className="px-4 py-4 border-t border-[rgba(34,16,128,0.10)]">
-      <div className="bg-[#FDF8F2] rounded-xl px-4 py-4 border-l-[3px] border-primary">
+    <div className="px-4 py-4 border-t border-[rgba(59,31,10,0.10)]">
+      <div className="bg-[#FDF5E8] rounded-xl px-4 py-4 border-l-[3px] border-primary">
         <p className="text-[11px] text-[#A09888] uppercase tracking-widest mb-2">{question}</p>
-        <p className="font-heading text-xl italic text-[#120850] leading-snug text-justify">{answer}</p>
+        <p className="font-heading text-xl italic text-[#240E04] leading-snug text-justify">{answer}</p>
       </div>
     </div>
   )
@@ -109,10 +109,10 @@ export function ProfileDetailClient({
     <div className="max-w-lg mx-auto pb-36">
 
       {/* Back button */}
-      <div className="sticky top-0 z-20 bg-[#221080] px-4 pt-5 pb-4">
+      <div className="sticky top-0 z-20 bg-[#3B1F0A] px-4 pt-5 pb-4">
         <button
           onClick={() => router.back()}
-          className="flex items-center gap-2 text-[#FDF8F2]/70 hover:text-[#FDF8F2] transition-colors"
+          className="flex items-center gap-2 text-[#FDF5E8]/70 hover:text-[#FDF5E8] transition-colors"
         >
           <ArrowLeft className="w-5 h-5" />
           <span className="text-sm">Zurück</span>
@@ -129,7 +129,7 @@ export function ProfileDetailClient({
             <span className="font-heading text-8xl text-[#6B6058]">{profile.name?.[0]}</span>
           </div>
         )}
-        <div className="absolute bottom-0 left-0 right-0 h-52 bg-gradient-to-t from-[rgba(18,8,80,0.88)] to-transparent pointer-events-none" />
+        <div className="absolute bottom-0 left-0 right-0 h-52 bg-gradient-to-t from-[rgba(36,14,4,0.88)] to-transparent pointer-events-none" />
         <div className="absolute bottom-5 left-5 text-white">
           <h1 className="font-heading text-4xl drop-shadow">
             {profile.name}{!profile.hide_age && profile.birth_date ? `, ${calculateAge(profile.birth_date)}` : !profile.hide_age && profile.age ? `, ${profile.age}` : ''}
@@ -145,7 +145,7 @@ export function ProfileDetailClient({
 
       {/* ── Emotionale Kapazität ── */}
       {profile.emotional_capacity && (() => {
-        const CAP = { open: { dot: '#22C55E', label: 'Offen für Tiefe & Nähe' }, selective: { dot: '#EAB308', label: 'Selektiv & vorsichtig' }, light: { dot: '#3B82F6', label: 'Gerade eher leicht & locker' }, slow: { dot: '#9CA3AF', label: 'Slow Mode' } }
+        const CAP = { open: { dot: '#7EB89A', label: 'Offen für Tiefe & Nähe' }, selective: { dot: '#E8C96B', label: 'Selektiv & vorsichtig' }, light: { dot: '#6BAED6', label: 'Gerade eher leicht & locker' }, slow: { dot: '#D4845A', label: 'Slow Mode' } }
         const c = CAP[profile.emotional_capacity as keyof typeof CAP]
         return c ? (
           <div className="px-5 pt-4 pb-1 flex items-center gap-2">
@@ -175,7 +175,7 @@ export function ProfileDetailClient({
           </span>
         )}
         {profile.intention && (
-          <span className="flex items-center gap-1.5 text-sm text-[#1A1410] bg-[#FDF8F2] px-3 py-1.5 rounded-full">
+          <span className="flex items-center gap-1.5 text-sm text-[#1A1410] bg-[#FDF5E8] px-3 py-1.5 rounded-full">
             <Sparkles className="w-3.5 h-3.5" />{profile.intention}
           </span>
         )}
@@ -186,7 +186,7 @@ export function ProfileDetailClient({
 
       {/* ── Über mich ── */}
       {profile.bio && (
-        <div className="px-5 py-5 border-t border-[rgba(34,16,128,0.10)]">
+        <div className="px-5 py-5 border-t border-[rgba(59,31,10,0.10)]">
           <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Über mich</p>
           <p className="text-[#1A1410] text-sm leading-relaxed text-justify">{profile.bio}</p>
         </div>
@@ -194,13 +194,13 @@ export function ProfileDetailClient({
 
       {/* ── Sprachmemo ── */}
       {profile.audio_prompt_url ? (
-        <div className="px-5 py-5 border-t border-[rgba(34,16,128,0.10)]">
+        <div className="px-5 py-5 border-t border-[rgba(59,31,10,0.10)]">
           <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Sprachmemo</p>
           <AudioPlayer url={profile.audio_prompt_url} />
         </div>
       ) : (
-        <div className="px-5 py-5 border-t border-[rgba(34,16,128,0.10)] flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-[#FDF8F2] flex items-center justify-center flex-shrink-0">
+        <div className="px-5 py-5 border-t border-[rgba(59,31,10,0.10)] flex items-center gap-3">
+          <div className="w-10 h-10 rounded-full bg-[#FDF5E8] flex items-center justify-center flex-shrink-0">
             <Mic className="w-5 h-5 text-[#1A1410]" />
           </div>
           <div className="flex-1">
@@ -221,7 +221,7 @@ export function ProfileDetailClient({
 
       {/* ── LAYER 2 CONTENT (after match) ── */}
       {!layer2Visible && (
-        <div className="mx-5 my-4 px-4 py-3 rounded-xl bg-[rgba(34,16,128,0.05)] border border-[rgba(34,16,128,0.1)] text-center">
+        <div className="mx-5 my-4 px-4 py-3 rounded-xl bg-[rgba(59,31,10,0.05)] border border-[rgba(59,31,10,0.1)] text-center">
           <p className="text-[#A09888] text-xs font-body leading-relaxed">
             Weitere Details werden nach einem gegenseitigen Like sichtbar.
           </p>
@@ -230,7 +230,7 @@ export function ProfileDetailClient({
 
       {/* ── Interessen ── */}
       {layer2Visible && profile.interests?.length > 0 && (
-        <div className="px-5 py-5 border-t border-[rgba(34,16,128,0.10)]">
+        <div className="px-5 py-5 border-t border-[rgba(59,31,10,0.10)]">
           <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Interessen</p>
           <div className="flex flex-wrap gap-2">
             {profile.interests.map((item) => (
@@ -242,11 +242,11 @@ export function ProfileDetailClient({
 
       {/* ── Werte ── */}
       {layer2Visible && profile.werte?.length > 0 && (
-        <div className="px-5 py-5 border-t border-[rgba(34,16,128,0.10)]">
+        <div className="px-5 py-5 border-t border-[rgba(59,31,10,0.10)]">
           <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Werte</p>
           <div className="flex flex-wrap gap-2">
             {profile.werte.map((w) => (
-              <span key={w} className="text-sm text-[#1A1410] bg-[#FDF8F2] px-3 py-1.5 rounded-full">{w}</span>
+              <span key={w} className="text-sm text-[#1A1410] bg-[#FDF5E8] px-3 py-1.5 rounded-full">{w}</span>
             ))}
           </div>
         </div>
@@ -254,14 +254,14 @@ export function ProfileDetailClient({
 
       {/* ── Meine Welt ── */}
       {layer2Visible && (profile.my_world?.length ?? 0) > 0 && (
-        <div className="px-5 py-5 border-t border-[rgba(34,16,128,0.10)]">
+        <div className="px-5 py-5 border-t border-[rgba(59,31,10,0.10)]">
           <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Meine Welt</p>
           <div className="flex flex-wrap gap-2">
             {profile.my_world!.map((item) => (
               <span
                 key={item}
                 className="text-[11px] font-body font-light px-3 py-1.5 rounded-full"
-                style={{ background: 'rgba(34,16,128,0.08)', color: '#1A1410' }}
+                style={{ background: 'rgba(59,31,10,0.08)', color: '#1A1410' }}
               >
                 {item}
               </span>
@@ -272,11 +272,11 @@ export function ProfileDetailClient({
 
       {/* ── Meine Communities ── */}
       {layer2Visible && (profile.communities?.length ?? 0) > 0 && (
-        <div className="px-5 py-5 border-t border-[rgba(34,16,128,0.10)]">
+        <div className="px-5 py-5 border-t border-[rgba(59,31,10,0.10)]">
           <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Meine Communities</p>
           <div className="flex flex-wrap gap-2">
             {profile.communities!.map((c) => (
-              <span key={c} className="text-[12px] font-body px-3 py-1.5 rounded-full border border-[rgba(34,16,128,0.30)] text-[#1A1410] bg-[rgba(34,16,128,0.08)]">
+              <span key={c} className="text-[12px] font-body px-3 py-1.5 rounded-full border border-[rgba(59,31,10,0.30)] text-[#1A1410] bg-[rgba(59,31,10,0.08)]">
                 {c}
               </span>
             ))}
@@ -286,7 +286,7 @@ export function ProfileDetailClient({
 
       {/* ── LAYER 3 CONTENT (both phase 3 complete) ── */}
       {layer2Visible && !layer3Visible && (
-        <div className="mx-5 my-4 px-4 py-3 rounded-xl bg-[rgba(34,16,128,0.05)] border border-[rgba(34,16,128,0.1)] text-center">
+        <div className="mx-5 my-4 px-4 py-3 rounded-xl bg-[rgba(59,31,10,0.05)] border border-[rgba(59,31,10,0.1)] text-center">
           <p className="text-[#A09888] text-xs font-body leading-relaxed">
             {!profilePhase3Complete
               ? 'Diese Person vervollständigt noch ihr Profil.'
@@ -297,7 +297,7 @@ export function ProfileDetailClient({
 
       {/* ── Beziehung & Bindung ── */}
       {layer3Visible && (profile.relationship_model || profile.bindungstyp || profile.love_language) && (
-        <div className="px-5 py-5 border-t border-[rgba(34,16,128,0.10)] space-y-4">
+        <div className="px-5 py-5 border-t border-[rgba(59,31,10,0.10)] space-y-4">
           <p className="text-[11px] text-[#6B6058] uppercase tracking-widest">Beziehung &amp; Bindung</p>
           {profile.relationship_model && (
             <div className="flex items-center justify-between">
@@ -305,12 +305,24 @@ export function ProfileDetailClient({
               <span className="text-sm text-[#1A1410] font-medium">{profile.relationship_model}</span>
             </div>
           )}
-          {profile.bindungstyp && (
+          {profile.bindungstyp && (() => {
+            const BINDUNG_AURA: Record<string, string> = {
+              'Sicher':                 '#7EB89A',
+              'Ängstlich-präoccupiert': '#D4849A',
+              'Vermeidend-distanziert': '#6BAED6',
+              'Desorganisiert':         '#A78BC4',
+            }
+            const aura = BINDUNG_AURA[profile.bindungstyp] ?? '#D4845A'
+            return (
             <div className="flex items-center justify-between">
               <span className="text-sm text-[#A09888]">Bindungstyp</span>
-              <span className="text-sm text-[#1A1410] font-medium">{profile.bindungstyp}</span>
+              <span
+                className="text-xs font-body px-2.5 py-1 rounded-full text-white font-medium"
+                style={{ backgroundColor: aura }}
+              >{profile.bindungstyp}</span>
             </div>
-          )}
+            )
+          })()}
           {profile.love_language && (
             <div className="flex items-center justify-between">
               <span className="text-sm text-[#A09888]">Love Language</span>
@@ -324,7 +336,7 @@ export function ProfileDetailClient({
 
       {/* ── Persönlichkeit (Layer 2) ── */}
       {layer2Visible && (profile.introvert_extrovert != null || profile.spontan_strukturiert != null || profile.rational_emotional != null) && (
-        <div className="px-5 py-5 border-t border-[rgba(34,16,128,0.10)] space-y-4">
+        <div className="px-5 py-5 border-t border-[rgba(59,31,10,0.10)] space-y-4">
           <p className="text-[11px] text-[#6B6058] uppercase tracking-widest">Persönlichkeit</p>
           {profile.introvert_extrovert != null && (
             <PersonalityBar leftLabel="Introvertiert" rightLabel="Extrovertiert" value={profile.introvert_extrovert} />
@@ -340,21 +352,21 @@ export function ProfileDetailClient({
 
       {/* ── Horoskop (Layer 3) ── */}
       {layer3Visible && (profile.sun_sign || profile.ascendant || profile.chinese_zodiac) && (
-        <div className="px-5 py-5 border-t border-[rgba(34,16,128,0.10)] space-y-3">
+        <div className="px-5 py-5 border-t border-[rgba(59,31,10,0.10)] space-y-3">
           <p className="text-[11px] text-[#6B6058] uppercase tracking-widest">Horoskop</p>
           <div className="flex flex-wrap gap-2">
             {profile.sun_sign && (
-              <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(34,16,128,0.08)', color: '#1A1410' }}>
+              <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(59,31,10,0.08)', color: '#1A1410' }}>
                 {profile.sun_sign}
               </span>
             )}
             {profile.ascendant && (
-              <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(34,16,128,0.08)', color: '#1A1410' }}>
+              <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(59,31,10,0.08)', color: '#1A1410' }}>
                 ↑ {profile.ascendant.replace(/^[♈♉♊♋♌♍♎♏♐♑♒♓]\s*/, '')}
               </span>
             )}
             {profile.chinese_zodiac && (
-              <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(34,16,128,0.10)', color: '#3D1F9E' }}>
+              <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(59,31,10,0.10)', color: '#6B3018' }}>
                 {profile.chinese_zodiac}
               </span>
             )}
@@ -364,7 +376,7 @@ export function ProfileDetailClient({
 
       {/* ── Dealbreakers (Layer 3) ── */}
       {layer3Visible && profile.dealbreakers?.length > 0 && (
-        <div className="px-5 py-5 border-t border-[rgba(34,16,128,0.10)]">
+        <div className="px-5 py-5 border-t border-[rgba(59,31,10,0.10)]">
           <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Dealbreaker</p>
           <div className="flex flex-wrap gap-2">
             {profile.dealbreakers.map((d) => (
@@ -376,11 +388,11 @@ export function ProfileDetailClient({
 
       {/* ── Intimität (Layer 3) ── */}
       {layer3Visible && profile.sexuality_visible && viewerSexualityVisible && (profile.sexuality_interests?.length ?? 0) > 0 && (
-        <div className="px-5 py-5 border-t border-[rgba(34,16,128,0.10)]">
+        <div className="px-5 py-5 border-t border-[rgba(59,31,10,0.10)]">
           <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Intimität</p>
           <div className="flex flex-wrap gap-2">
             {profile.sexuality_interests!.map((item) => (
-              <span key={item} className="text-sm text-[#6B6058] bg-[rgba(34,16,128,0.07)] px-3 py-1.5 rounded-full">{item}</span>
+              <span key={item} className="text-sm text-[#6B6058] bg-[rgba(59,31,10,0.07)] px-3 py-1.5 rounded-full">{item}</span>
             ))}
           </div>
         </div>

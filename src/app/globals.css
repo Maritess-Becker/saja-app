@@ -7,33 +7,42 @@
 /* ── Background Gradients ───────────────────────────────────────────────── */
 :root {
   --bg-indigo:
-    radial-gradient(ellipse 200% 120% at 95% -5%,  rgba(210,60,100,0.32) 0%, transparent 60%),
-    radial-gradient(ellipse 160% 100% at -5% 40%,  rgba(253,248,242,0.07) 0%, transparent 65%),
-    radial-gradient(ellipse 150% 130% at 50% 105%, rgba(18,8,80,0.60) 0%, transparent 60%),
-    radial-gradient(ellipse 120% 80%  at 85% 60%,  rgba(210,60,100,0.10) 0%, transparent 55%),
-    radial-gradient(ellipse 100% 120% at 10% 85%,  rgba(253,248,242,0.06) 0%, transparent 60%),
-    radial-gradient(ellipse 80%  60%  at 45% 40%,  rgba(34,16,128,0.25) 0%, transparent 55%),
-    #221080;
+    radial-gradient(ellipse 200% 120% at 95% -5%,  rgba(196,96,58,0.32) 0%, transparent 60%),
+    radial-gradient(ellipse 160% 100% at -5% 40%,  rgba(253,245,232,0.07) 0%, transparent 65%),
+    radial-gradient(ellipse 150% 130% at 50% 105%, rgba(36,14,4,0.60) 0%, transparent 60%),
+    radial-gradient(ellipse 120% 80%  at 85% 60%,  rgba(196,96,58,0.10) 0%, transparent 55%),
+    radial-gradient(ellipse 100% 120% at 10% 85%,  rgba(253,245,232,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 80%  60%  at 45% 40%,  rgba(59,31,10,0.25) 0%, transparent 55%),
+    #3B1F0A;
 
   --bg-creme:
-    radial-gradient(ellipse 200% 100% at 100% 0%,  rgba(210,60,100,0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 180% 120% at 0% 100%,  rgba(34,16,128,0.08) 0%, transparent 65%),
-    radial-gradient(ellipse 150% 100% at 50% 45%,  rgba(34,16,128,0.03) 0%, transparent 65%),
-    radial-gradient(ellipse 120% 100% at 90% 75%,  rgba(210,60,100,0.05) 0%, transparent 60%),
-    radial-gradient(ellipse 100% 80%  at 20% 30%,  rgba(34,16,128,0.02) 0%, transparent 60%),
-    #FDF8F2;
+    radial-gradient(ellipse 200% 100% at 100% 0%,  rgba(196,96,58,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 180% 120% at 0% 100%,  rgba(59,31,10,0.08) 0%, transparent 65%),
+    radial-gradient(ellipse 150% 100% at 50% 45%,  rgba(59,31,10,0.03) 0%, transparent 65%),
+    radial-gradient(ellipse 120% 100% at 90% 75%,  rgba(196,96,58,0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 100% 80%  at 20% 30%,  rgba(59,31,10,0.02) 0%, transparent 60%),
+    #FDF5E8;
 
   --bg-violett:
-    radial-gradient(ellipse 200% 120% at 95% -5%,  rgba(210,60,100,0.38) 0%, transparent 58%),
-    radial-gradient(ellipse 160% 100% at -5% 45%,  rgba(253,248,242,0.07) 0%, transparent 62%),
-    radial-gradient(ellipse 150% 130% at 50% 105%, rgba(18,8,80,0.50) 0%, transparent 58%),
-    radial-gradient(ellipse 100% 80%  at 80% 60%,  rgba(210,60,100,0.12) 0%, transparent 55%),
-    #3D1F9E;
+    radial-gradient(ellipse 200% 120% at 95% -5%,  rgba(196,96,58,0.38) 0%, transparent 58%),
+    radial-gradient(ellipse 160% 100% at -5% 45%,  rgba(253,245,232,0.07) 0%, transparent 62%),
+    radial-gradient(ellipse 150% 130% at 50% 105%, rgba(36,14,4,0.50) 0%, transparent 58%),
+    radial-gradient(ellipse 100% 80%  at 80% 60%,  rgba(196,96,58,0.12) 0%, transparent 55%),
+    #6B3018;
 
   --bg-nav:
-    radial-gradient(ellipse 250% 150% at 95% 0%,  rgba(210,60,100,0.18) 0%, transparent 60%),
-    radial-gradient(ellipse 200% 150% at 5% 100%, rgba(253,248,242,0.05) 0%, transparent 60%),
-    #221080;
+    radial-gradient(ellipse 250% 150% at 95% 0%,  rgba(196,96,58,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 200% 150% at 5% 100%, rgba(253,245,232,0.05) 0%, transparent 60%),
+    #3B1F0A;
+
+  /* ── Aura / Chakra accent colors ── */
+  --aura-heart:   #7EB89A;   /* Herzchakra — salbeigrün */
+  --aura-sacral:  #D4845A;   /* Sakralchakra — warmes Terrakotta */
+  --aura-crown:   #A78BC4;   /* Kronenchakra — sanftes Lavendel */
+  --aura-throat:  #6BAED6;   /* Kehlchakra — klares Himmelblau */
+  --aura-solar:   #E8C96B;   /* Solarplexus — goldenes Gelb */
+  --aura-root:    #B05C4A;   /* Wurzelchakra — tiefes Rot-Braun */
+  --aura-rose:    #D4849A;   /* Herzaura — zartes Rosenrot */
 }
 
 /* ── Base ───────────────────────────────────────────────────────────────── */
@@ -42,7 +51,7 @@
     font-family: 'Outfit', system-ui, sans-serif;
     font-weight: 300;
     background: var(--bg-indigo);
-    color: #FDF8F2;
+    color: #FDF5E8;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -98,8 +107,8 @@
 
   /* Primary — auf Indigo/Match (cremefarbener Button) */
   .btn-primary {
-    background-color: #FDF8F2;
-    color: #221080;
+    background-color: #FDF5E8;
+    color: #3B1F0A;
     letter-spacing: 0.06em;
     @apply px-6 py-3.5 rounded-full font-body font-normal
            transition-colors duration-200
@@ -107,16 +116,16 @@
   }
   .btn-primary:hover { background-color: white; }
 
-  /* Primary — auf Creme (Indigo-Button) */
+  /* Primary — auf Creme (Dunkel-Button) */
   .btn-primary-dark {
-    background-color: #221080;
-    color: #FDF8F2;
+    background-color: #3B1F0A;
+    color: #FDF5E8;
     letter-spacing: 0.06em;
     @apply px-6 py-3.5 rounded-full font-body font-normal
            transition-colors duration-200
            disabled:opacity-50 disabled:cursor-not-allowed;
   }
-  .btn-primary-dark:hover { background-color: #120850; }
+  .btn-primary-dark:hover { background-color: #240E04; }
 
   /* Ghost — auf Indigo */
   .btn-secondary {
@@ -151,7 +160,7 @@
   /* Auf Creme */
   .card-light {
     background: white;
-    border: 0.5px solid rgba(34,16,128,0.10);
+    border: 0.5px solid rgba(59,31,10,0.10);
     @apply rounded-2xl p-6;
     transition: transform 150ms ease;
   }
@@ -177,17 +186,17 @@
   /* Auf Creme */
   .input-light {
     background: white;
-    border: 0.5px solid rgba(34,16,128,0.15);
-    color: #221080;
+    border: 0.5px solid rgba(59,31,10,0.15);
+    color: #3B1F0A;
     font-weight: 300;
     @apply w-full px-4 py-3 rounded-xl font-body
            transition-all duration-200;
   }
   .input-light:focus {
     outline: none;
-    border: 1px solid #221080;
+    border: 1px solid #3B1F0A;
   }
-  .input-light::placeholder { color: rgba(34,16,128,0.35); }
+  .input-light::placeholder { color: rgba(59,31,10,0.35); }
 
   /* ── Label ── */
   .label {
@@ -215,9 +224,9 @@
     color: #FDF8F2;
   }
   .chip-active {
-    background: #FDF8F2 !important;
-    border: 0.5px solid #FDF8F2 !important;
-    color: #221080 !important;
+    background: #FDF5E8 !important;
+    border: 0.5px solid #FDF5E8 !important;
+    color: #3B1F0A !important;
   }
 
   /* ── Tag-Accent — auf Indigo ── */
@@ -231,7 +240,7 @@
 
   /* ── Schatten ── */
   .card-shadow {
-    box-shadow: 0 4px 24px rgba(18,8,80,0.4);
+    box-shadow: 0 4px 24px rgba(36,14,4,0.4);
   }
 }
 

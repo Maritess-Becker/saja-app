@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState } from 'react'
 import { Check, ExternalLink, ShieldCheck, Sparkles, Lock } from 'lucide-react'
@@ -241,10 +241,10 @@ export function PricingClient({ isLoggedIn }: { isLoggedIn: boolean }) {
                   className={cn(
                     'w-full text-center py-3.5 rounded-2xl text-sm font-medium transition-all',
                     tier.highlight
-                      ? 'bg-primary text-white hover:bg-[#221080]'
+                      ? 'bg-primary text-white hover:bg-[#3B1F0A]'
                       : tier.monthlyPrice === 0
-                      ? 'border-2 border-[rgba(30,20,10,0.08)] text-[#6B6058] hover:border-primary hover:text-[#221080]'
-                      : 'border-2 border-primary text-[#221080] hover:bg-primary hover:text-white'
+                      ? 'border-2 border-[rgba(30,20,10,0.08)] text-[#6B6058] hover:border-primary hover:text-[#3B1F0A]'
+                      : 'border-2 border-primary text-[#3B1F0A] hover:bg-primary hover:text-white'
                   )}
                 >
                   {tier.cta}
@@ -279,7 +279,7 @@ export function PricingClient({ isLoggedIn }: { isLoggedIn: boolean }) {
           <div className="grid md:grid-cols-3 gap-4 mb-14">
             {SAJA_GUIDES.map((guide) => (
               <div key={guide.id} className="card border border-[rgba(30,20,10,0.08)]/80">
-                <div className="inline-block bg-[#FDF8F2] text-[#221080] text-xs px-2.5 py-1 rounded-full mb-3 font-medium">
+                <div className="inline-block bg-[#FDF5E8] text-[#3B1F0A] text-xs px-2.5 py-1 rounded-full mb-3 font-medium">
                   Saja Guide
                 </div>
                 <h4 className="font-heading text-xl text-[#1A1410] mb-2">{guide.title}</h4>

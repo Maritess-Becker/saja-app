@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { X, Check, Sparkles } from 'lucide-react'
 import Link from 'next/link'
@@ -15,8 +15,8 @@ const TIER_INFO = {
   membership: {
     name: 'Mitgliedschaft',
     price: '29€ / Monat',
-    color: 'text-[#221080]',
-    badge: 'bg-[#FDF8F2] text-[#221080]',
+    color: 'text-[#3B1F0A]',
+    badge: 'bg-[#FDF5E8] text-[#3B1F0A]',
     features: [
       'Swipen & Profile entdecken',
       'Matches & Begegnung',
@@ -29,7 +29,7 @@ const TIER_INFO = {
     name: 'Premium',
     price: '69€ / Monat',
     color: 'text-[#1A1410]',
-    badge: 'bg-[#221080]/10 text-[#1A1410]',
+    badge: 'bg-[#3B1F0A]/10 text-[#1A1410]',
     features: [
       'Frage des Tages im Chat',
       '36 Fragen der Nähe',
@@ -50,14 +50,14 @@ export function UpgradeModal({ tier, feature, onClose }: Props) {
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="bg-[#221080] px-6 pt-6 pb-5 relative">
+        <div className="bg-[#3B1F0A] px-6 pt-6 pb-5 relative">
           <button
             onClick={onClose}
             className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white/60 hover:text-white transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
-          <Sparkles className="w-6 h-6 text-[#221080] mb-3" />
+          <Sparkles className="w-6 h-6 text-[#3B1F0A] mb-3" />
           <p className="text-white/60 text-xs uppercase tracking-widest mb-1">
             {feature ? `Für diesen Inhalt` : 'Upgrade erforderlich'}
           </p>

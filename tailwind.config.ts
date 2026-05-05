@@ -9,20 +9,20 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary:    '#221080',
-        medium:     '#3D1F9E',
-        deep:       '#120850',
-        cream:      '#FFF6E8',
-        moon:       '#FFF6E8',   // alias
-        background: '#221080',
+        primary:    '#3B1F0A',
+        medium:     '#6B3018',
+        deep:       '#240E04',
+        cream:      '#FDF5E8',
+        moon:       '#FDF5E8',   // alias
+        background: '#3B1F0A',
         // compatibility aliases
-        dark:       '#120850',
-        light:      '#FFF6E8',
-        sand:       '#221080',
-        surface:    '#3D1F9E',
-        text:       '#221080',
-        muted:      '#7070A8',
-        'on-primary': '#FFF6E8',
+        dark:       '#240E04',
+        light:      '#FDF5E8',
+        sand:       '#3B1F0A',
+        surface:    '#6B3018',
+        text:       '#3B1F0A',
+        muted:      '#907060',
+        'on-primary': '#FDF5E8',
       },
       fontFamily: {
         heading:    ['Cormorant Garamond', 'Georgia', 'serif'],

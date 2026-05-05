@@ -15,7 +15,7 @@ const GROUPS = [
   {
     id: 'bindungstypen',
     icon: <Heart size={22} strokeWidth={1.8} />,
-    iconBg: '#221080',
+    iconBg: '#7EB89A',
     iconColor: '#FFFFFF',
     name: 'Bindungstypen',
     description: 'Austausch rund um ängstliche, vermeidende und sichere Bindungsmuster. Wie prägen sie unsere Beziehungen?',
@@ -27,7 +27,7 @@ const GROUPS = [
   {
     id: 'bewusste-sexualitaet',
     icon: <Flame size={22} strokeWidth={1.8} />,
-    iconBg: '#C4603A',
+    iconBg: '#D4845A',
     iconColor: '#FFFFFF',
     name: 'Bewusste Sexualität',
     description: 'Ein sicherer Raum für Gespräche über gelebte Sexualität, sexuelle Heilung und Verkörperung.',
@@ -39,7 +39,7 @@ const GROUPS = [
   {
     id: 'tantric-dating',
     icon: <Sparkles size={22} strokeWidth={1.8} />,
-    iconBg: '#221080',
+    iconBg: '#A78BC4',
     iconColor: '#FFFFFF',
     name: 'Tantric Dating',
     description: 'Wie bringst du Tantra-Prinzipien in deinen Alltag und dein Dating? Erfahrungen & Impulse.',
@@ -51,7 +51,7 @@ const GROUPS = [
   {
     id: 'beziehungsmodelle',
     icon: <Users size={22} strokeWidth={1.8} />,
-    iconBg: '#4A7A5A',
+    iconBg: '#6BAED6',
     iconColor: '#FFFFFF',
     name: 'Beziehungsmodelle',
     description: 'Monogamie, Polyamorie, Solo-Poly, offene Beziehungen — Erfahrungen, Fragen, ehrliche Reflexion.',
@@ -63,7 +63,7 @@ const GROUPS = [
   {
     id: 'selbstliebe-heilung',
     icon: <Leaf size={22} strokeWidth={1.8} />,
-    iconBg: '#5A8A6A',
+    iconBg: '#7EB89A',
     iconColor: '#FFFFFF',
     name: 'Selbstliebe & Heilung',
     description: 'Wachstum beginnt bei dir. Trauma, Heilung, inneres Kind — und was das mit Beziehungen zu tun hat.',
@@ -75,7 +75,7 @@ const GROUPS = [
   {
     id: 'spiritualitaet-partnerschaft',
     icon: <Moon size={22} strokeWidth={1.8} />,
-    iconBg: '#3D1F9E',
+    iconBg: '#A78BC4',
     iconColor: '#FFFFFF',
     name: 'Spiritualität & Partnerschaft',
     description: 'Bewusstsein, Energie und spirituelle Praktiken in Beziehungen. Wie unterstützt Spiritualität echte Verbindung?',
@@ -150,7 +150,7 @@ export function CommunityClient({ tier }: Props) {
           {/* Lock overlay */}
           <div className="absolute inset-0 flex flex-col items-center justify-center">
             <div className="bg-white rounded-3xl shadow-xl px-8 py-8 text-center max-w-xs mx-4">
-              <div className="w-14 h-14 bg-[#120850] rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-14 h-14 bg-[#240E04] rounded-full flex items-center justify-center mx-auto mb-4">
                 <Lock className="w-7 h-7 text-[#EDE8F8]" />
               </div>
               <h2 className="font-heading text-2xl text-[#1A1410] mb-2">Nur für Premium</h2>
@@ -199,16 +199,16 @@ export function CommunityClient({ tier }: Props) {
 
         <div className="flex flex-wrap gap-1.5 mb-8">
           {group.tags.map((tag) => (
-            <span key={tag} className="text-xs bg-[rgba(34,16,128,0.07)] text-[#8B6040] px-3 py-1 rounded-full font-body">{tag}</span>
+            <span key={tag} className="text-xs bg-[rgba(59,31,10,0.07)] text-[#8B6040] px-3 py-1 rounded-full font-body">{tag}</span>
           ))}
         </div>
 
         <div className="space-y-4 mb-8">
           {posts.map((post, i) => (
-            <div key={i} className="bg-[#FDFAF7] rounded-2xl border border-[rgba(34,16,128,0.12)] p-5">
+            <div key={i} className="bg-[#FDFAF7] rounded-2xl border border-[rgba(59,31,10,0.12)] p-5">
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full bg-[rgba(34,16,128,0.07)] flex items-center justify-center">
+                  <div className="w-8 h-8 rounded-full bg-[rgba(59,31,10,0.07)] flex items-center justify-center">
                     <span className="font-heading text-sm text-[#1A1410]">{post.author[0]}</span>
                   </div>
                   <div>
@@ -226,7 +226,7 @@ export function CommunityClient({ tier }: Props) {
           ))}
         </div>
 
-        <div className="bg-[#FDFAF7] rounded-2xl border-2 border-dashed border-[rgba(34,16,128,0.12)] text-center py-6">
+        <div className="bg-[#FDFAF7] rounded-2xl border-2 border-dashed border-[rgba(59,31,10,0.12)] text-center py-6">
           <Star className="w-6 h-6 text-[#6B6058]/40 mx-auto mb-2" />
           <p className="text-[#6B6058] text-sm">Eigene Beiträge kommen in Phase 2.</p>
         </div>
@@ -248,7 +248,7 @@ export function CommunityClient({ tier }: Props) {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Gruppen durchsuchen…"
-          className="w-full pl-10 pr-4 py-3 rounded-xl bg-white text-sm font-body text-[#1A1410] placeholder:text-[#6B6058] focus:outline-none focus:ring-2 focus:ring-[#221080]/30"
+          className="w-full pl-10 pr-4 py-3 rounded-xl bg-white text-sm font-body text-[#1A1410] placeholder:text-[#6B6058] focus:outline-none focus:ring-2 focus:ring-[#3B1F0A]/30"
           style={{ boxShadow: '0 2px 12px rgba(26,20,16,0.06)' }}
         />
       </div>

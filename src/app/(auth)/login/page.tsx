@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState } from 'react'
 import Link from 'next/link'
@@ -55,19 +55,19 @@ export default function LoginPage() {
           <Link href="/" className="inline-flex justify-center mb-6">
             <SajaLogo size="lg" showTagline={true} />
           </Link>
-          <h1 className="font-heading text-4xl font-light text-[#FDF8F2]">Willkommen zurück</h1>
-          <p className="text-[#FDF8F2]/50 mt-2 font-body text-sm">Schön, dich wieder zu sehen.</p>
+          <h1 className="font-heading text-4xl font-light text-[#FDF5E8]">Willkommen zurück</h1>
+          <p className="text-[#FDF5E8]/50 mt-2 font-body text-sm">Schön, dich wieder zu sehen.</p>
         </div>
 
         <div className="card">
           {/* Mode Toggle */}
-          <div className="flex rounded-xl bg-[rgba(253,248,242,0.08)] p-1 mb-8">
+          <div className="flex rounded-xl bg-[rgba(253,245,232,0.08)] p-1 mb-8">
             <button
               onClick={() => setMode('password')}
               className={`flex-1 py-2 rounded-lg text-sm font-medium transition-all font-body ${
                 mode === 'password'
-                  ? 'bg-[rgba(253,248,242,0.15)] text-[#FDF8F2]'
-                  : 'text-[#FDF8F2]/40'
+                  ? 'bg-[rgba(253,245,232,0.15)] text-[#FDF5E8]'
+                  : 'text-[#FDF5E8]/40'
               }`}
             >
               Passwort
@@ -76,8 +76,8 @@ export default function LoginPage() {
               onClick={() => setMode('magic')}
               className={`flex-1 py-2 rounded-lg text-sm font-medium transition-all font-body ${
                 mode === 'magic'
-                  ? 'bg-[rgba(253,248,242,0.15)] text-[#FDF8F2]'
-                  : 'text-[#FDF8F2]/40'
+                  ? 'bg-[rgba(253,245,232,0.15)] text-[#FDF5E8]'
+                  : 'text-[#FDF5E8]/40'
               }`}
             >
               Magic Link
@@ -86,11 +86,11 @@ export default function LoginPage() {
 
           {magicSent ? (
             <div className="text-center py-8">
-              <div className="w-16 h-16 bg-[rgba(253,248,242,0.10)] rounded-full flex items-center justify-center mx-auto mb-4">
-                <Mail className="w-8 h-8 text-[#FDF8F2]/70" />
+              <div className="w-16 h-16 bg-[rgba(253,245,232,0.10)] rounded-full flex items-center justify-center mx-auto mb-4">
+                <Mail className="w-8 h-8 text-[#FDF5E8]/70" />
               </div>
-              <h3 className="font-heading text-2xl text-[#FDF8F2] mb-2">Link gesendet!</h3>
-              <p className="text-[#FDF8F2]/50 text-sm font-body leading-relaxed">
+              <h3 className="font-heading text-2xl text-[#FDF5E8] mb-2">Link gesendet!</h3>
+              <p className="text-[#FDF5E8]/50 text-sm font-body leading-relaxed">
                 Schau in dein Postfach ({email}) und klicke auf den Link zum Anmelden.
               </p>
             </div>
@@ -139,9 +139,9 @@ export default function LoginPage() {
           )}
         </div>
 
-        <p className="text-center text-[#FDF8F2]/40 text-sm mt-6 font-body">
+        <p className="text-center text-[#FDF5E8]/40 text-sm mt-6 font-body">
           Noch kein Konto?{' '}
-          <Link href="/register" className="text-[#FDF8F2]/80 hover:text-[#FDF8F2] underline underline-offset-2 transition-colors">
+          <Link href="/register" className="text-[#FDF5E8]/80 hover:text-[#FDF5E8] underline underline-offset-2 transition-colors">
             Jetzt registrieren
           </Link>
         </p>

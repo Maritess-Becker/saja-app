@@ -49,7 +49,7 @@ export function SajaLogo({
   const svgRotateControls = useAnimation()
 
   const matchColor   = '#C4A882'
-  const defaultColor = onDark ? '#FDF8F2' : '#221080'
+  const defaultColor = onDark ? '#FDF5E8' : '#3B1F0A'
   const mainColor    = variant === 'match' ? matchColor : defaultColor
   const gapColor     = variant === 'match' ? matchColor : defaultColor
 
@@ -135,7 +135,7 @@ export function SajaLogo({
 
         <span
           className={cn('font-heading font-semibold leading-none', textSize)}
-          style={{ color: onDark ? '#FDF8F2' : '#221080' }}
+          style={{ color: onDark ? '#FDF5E8' : '#3B1F0A' }}
         >
           Saja
         </span>
@@ -144,7 +144,7 @@ export function SajaLogo({
       {showTagline && (
         <p
           className="text-[10px] tracking-widest uppercase mt-1"
-          style={{ color: onDark ? 'rgba(253,248,242,0.45)' : 'rgba(26,16,64,0.4)' }}
+          style={{ color: onDark ? 'rgba(253,245,232,0.45)' : 'rgba(26,16,64,0.4)' }}
         >
           Bewusstes Dating
         </p>
