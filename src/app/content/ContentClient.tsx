@@ -1,12 +1,11 @@
-﻿'use client'
+'use client'
 
 import { useState, useEffect } from 'react'
-import { Lock, Star, ExternalLink, ChevronRight, Heart, BookOpen, Mic, MessageSquare, Users, Sparkles, Moon, Search, Plus, ChevronLeft, Check } from 'lucide-react'
+import { Lock, Star, ChevronRight, Heart, BookOpen, Mic, MessageSquare, Sparkles, Moon, Search, Plus, ChevronLeft, Check, User, Compass, Lightbulb } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import toastLib from 'react-hot-toast'
 import { createClient } from '@/lib/supabase/client'
 import type { JournalEntry } from '@/types'
-import { useSearchParams } from 'next/navigation'
 
 type Tier = 'free' | 'membership' | 'premium'
 
@@ -19,7 +18,7 @@ interface Props {
 
 // ─── Journal helpers ──────────────────────────────────────────────────────────
 
-const DAILY_PROMPTS = [
+const JOURNAL_DAILY_PROMPTS = [
   'Was wünschst du dir gerade von einer Verbindung?',
   'Was hast du heute über dich gelernt?',
   'Wann hast du dich zuletzt wirklich gesehen gefühlt?',
@@ -30,639 +29,639 @@ const DAILY_PROMPTS = [
 ]
 
 function getDailyPrompt() {
-  return DAILY_PROMPTS[Math.floor(Date.now() / 86_400_000) % DAILY_PROMPTS.length]
+  return JOURNAL_DAILY_PROMPTS[Math.floor(Date.now() / 86_400_000) % JOURNAL_DAILY_PROMPTS.length]
+}
+
+// ─── Täglicher Impuls Pool (Begleitung) ──────────────────────────────────────
+
+const TAEGLICHE_IMPULSE = [
+  'Was macht eine echte Begegnung für dich aus?',
+  'Wann hast du dich zuletzt wirklich gesehen gefühlt?',
+  'Was würdest du dir trauen wenn du wüsstest dass es okay ist?',
+  'Welche Qualität wünschst du dir heute in einer Verbindung?',
+  'Was schützt du gerade — und warum?',
+  'Was bedeutet dir Nähe heute?',
+  'Wofür bist du in deinem Dating-Leben gerade dankbar?',
+  'Was lernst du gerade über dich selbst?',
+  'Welche Begegnung hat dich zuletzt wirklich berührt?',
+  'Was brauchst du um dich sicher zu fühlen?',
+  'Was wünschst du dir von der nächsten Begegnung?',
+  'Was hältst du gerade fest, das du loslassen könntest?',
+  'Wann warst du zuletzt vollständig präsent mit jemandem?',
+  'Was zeigt dir gerade dein Körper, das dein Kopf noch nicht versteht?',
+  'Was bedeutet Verbindung für dich — heute, in diesem Moment?',
+  'Welcher Teil von dir darf heute gesehen werden?',
+  'Was ist der Unterschied zwischen Nähe und Verschmelzung für dich?',
+  'Was brauchst du um wirklich ankommen zu können?',
+  'Welcher Gedanke über Liebe hält dich gerade zurück?',
+  'Was wäre möglich wenn du dir selbst wirklich vertrauen würdest?',
+  'Wie fühlt sich Sicherheit in deinem Körper an?',
+  'Was darf kleiner werden damit Verbindung größer werden kann?',
+  'Was hoffst du dass jemand eines Tages über dich versteht?',
+  'Wann bist du zuletzt einer Person wirklich begegnet — nicht nur konversiert?',
+  'Was trägst du, das nicht mehr deins ist?',
+  'Welche Frage über Liebe stellst du dir gerade heimlich?',
+  'Was wäre anders wenn du dich selbst so wählst wie du gewählt werden möchtest?',
+  'Was gibt dir Kraft wenn Dating sich schwer anfühlt?',
+  'Was bedeutet Authentizität für dich in einer frühen Begegnung?',
+  'Was darf heute ein bisschen leichter sein?',
+]
+
+function getDailyImpuls() {
+  return TAEGLICHE_IMPULSE[Math.floor(Date.now() / 86_400_000) % TAEGLICHE_IMPULSE.length]
 }
 
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' })
 }
 
+// ─── Content types ────────────────────────────────────────────────────────────
+
 interface ContentItem {
   id: string
   title: string
   description: string
-  access: 'free' | 'membership' | 'premium' | 'purchase'
+  format: string
+  access: 'free' | 'membership' | 'premium'
   icon: React.ReactNode
-  action?: 'modal' | 'external' | 'purchase'
-  externalUrl?: string
-  duration?: string
   tag?: string
 }
 
-const BINDUNGSTYP_TEST: ContentItem = {
-  id: 'bindungstyp-test',
-  title: 'Bindungstyp-Test',
-  description: 'Entdecke deinen Bindungsstil und wie er deine Beziehungen prägt.',
-  access: 'membership',
-  icon: <Heart size={22} strokeWidth={1.8} />,
-  action: 'modal',
-  duration: '5 Min.',
-  tag: 'Mitgliedschaft',
-}
+// ─── Content sections ─────────────────────────────────────────────────────────
 
 const CONTENT_SECTIONS = [
   {
-    id: 'tests',
-    label: 'Tests & Selbstreflexion',
-    icon: <BookOpen size={22} strokeWidth={1.8} />,
+    id: 'kenne-dich-selbst',
+    label: 'Kenne dich selbst',
+    icon: <User size={16} strokeWidth={1.8} />,
     items: [
-      BINDUNGSTYP_TEST,
       {
-        id: 'love-language-test',
-        title: 'Love Language Test',
-        description: 'Welche der 5 Liebessprachen spricht dich am meisten an?',
+        id: 'was-mein-bindungstyp-bedeutet',
+        title: 'Was mein Bindungstyp bedeutet',
+        description: 'Nicht der Test nochmal — sondern eine tiefe Erklärung was das Ergebnis im Alltag und im Dating wirklich bedeutet. Für alle vier Typen separat.',
+        format: 'Guide',
         access: 'membership',
-        icon: <Heart size={22} strokeWidth={1.8} />,
-        action: 'modal',
-        duration: '8 Min.',
+        icon: <Heart size={20} strokeWidth={1.8} />,
         tag: 'Mitgliedschaft',
       },
       {
-        id: 'beziehungsmodell-check',
-        title: 'Beziehungsmodell-Check',
-        description: 'Monogam, ethisch non-monogam, solo-poly? Finde heraus, was wirklich zu dir passt.',
+        id: 'love-language-leben',
+        title: 'Meine Love Language leben',
+        description: 'Wie man seine Love Language im Dating aktiv kommuniziert — und die des anderen erkennt, bevor man es ausspricht.',
+        format: 'Guide',
         access: 'membership',
-        icon: <Sparkles size={22} strokeWidth={1.8} />,
-        action: 'modal',
-        duration: '6 Min.',
-        tag: 'Mitgliedschaft',
-      },
-    ] as ContentItem[],
-  },
-  {
-    id: 'audio',
-    label: 'Audio & Guides',
-    icon: <Mic size={22} strokeWidth={1.8} />,
-    items: [
-      {
-        id: 'meditation-audio',
-        title: 'Meditations-Audio',
-        description: 'Eine geführte Meditation zur Vorbereitung auf deine Begegnung.',
-        access: 'premium',
-        icon: <Mic size={22} strokeWidth={1.8} />,
-        action: 'modal',
-        duration: '15 Min.',
-        tag: 'Premium',
-      },
-      {
-        id: 'erstes-date-guide',
-        title: 'Guide: Bewusstes erstes Treffen',
-        description: 'Wie gestaltest du ein erstes bewusstes Date? Praktische Tipps und Impulse.',
-        access: 'premium',
-        icon: <BookOpen size={22} strokeWidth={1.8} />,
-        action: 'modal',
-        tag: 'Premium',
-      },
-      {
-        id: 'reflexions-guide',
-        title: 'Reflexions-Guide',
-        description: 'Nach einer Begegnung: Was hast du gelernt? Was nimmst du mit?',
-        access: 'premium',
-        icon: <BookOpen size={22} strokeWidth={1.8} />,
-        action: 'modal',
-        tag: 'Premium',
-      },
-      {
-        id: 'woechentliche-impulse',
-        title: 'Wöchentliche Impulse & Rituale',
-        description: 'Jeden Montag ein neues Ritual oder einen Impuls für bewusstes Dating.',
-        access: 'premium',
-        icon: <Sparkles size={22} strokeWidth={1.8} />,
-        action: 'modal',
-        tag: 'Premium',
-      },
-      {
-        id: 'mini-coaching',
-        title: 'Mini-Coaching: Bereit für Liebe',
-        description: '5 kompakte Audio-Module von Anna & Yves — direkt in der App.',
-        access: 'premium',
-        icon: <Mic size={22} strokeWidth={1.8} />,
-        action: 'modal',
-        tag: 'Premium',
-      },
-    ] as ContentItem[],
-  },
-  {
-    id: 'fragebögen',
-    label: 'Fragebögen & Tiefenfragen',
-    icon: <MessageSquare size={22} strokeWidth={1.8} />,
-    items: [
-      {
-        id: '36-fragen',
-        title: '36 Fragen',
-        description: 'Die wissenschaftlich entwickelten 36 Fragen, die Menschen näherbringen — für die Begegnung.',
-        access: 'premium',
-        icon: <MessageSquare size={22} strokeWidth={1.8} />,
-        action: 'modal',
-        tag: 'Premium',
-      },
-      {
-        id: '50-tiefenfragen',
-        title: '50 Tiefen-Fragen',
-        description: 'Fragen, die wirklich in die Tiefe gehen. Für mutige Gespräche.',
-        access: 'premium',
-        icon: <MessageSquare size={22} strokeWidth={1.8} />,
-        action: 'modal',
-        tag: 'Premium',
-      },
-      {
-        id: 'frage-des-tages',
-        title: 'Frage des Tages',
-        description: 'Täglich eine neue Frage für deine Begegnung.',
-        access: 'premium',
-        icon: <Sparkles size={22} strokeWidth={1.8} />,
-        action: 'modal',
-        tag: 'Premium',
-      },
-      {
-        id: 'werte-zukunft',
-        title: 'Werte & Zukunft',
-        description: 'Ein Fragebogen über Lebensziele, Werte und gemeinsame Visionen.',
-        access: 'purchase',
-        icon: <MessageSquare size={22} strokeWidth={1.8} />,
-        action: 'purchase',
-        tag: 'Einmalig kaufbar',
-      },
-      {
-        id: 'intimität',
-        title: 'Intimität & Nähe',
-        description: 'Tiefe Fragen zu Intimität, körperlicher Nähe und Vertrauen.',
-        access: 'purchase',
-        icon: <Heart size={22} strokeWidth={1.8} />,
-        action: 'purchase',
-        tag: 'Einmalig kaufbar',
-      },
-      {
-        id: 'konflikt',
-        title: 'Konflikt & Kommunikation',
-        description: 'Wie geht ihr als Paar mit Konflikten um? Konstruktive Reflexion.',
-        access: 'purchase',
-        icon: <MessageSquare size={22} strokeWidth={1.8} />,
-        action: 'purchase',
-        tag: 'Einmalig kaufbar',
-      },
-    ] as ContentItem[],
-  },
-  {
-    id: 'anna-yves',
-    label: 'Anna & Yves · powered by Holistic Tantra',
-    icon: <Users className="w-5 h-5" />,
-    items: [
-      {
-        id: 'ht-quiz-anna-yves',
-        title: 'HT-Quiz mit Anna & Yves',
-        description: 'Lerne die Grundlagen von Holistic Tantra kennen.',
-        access: 'free',
-        icon: <Sparkles size={22} strokeWidth={1.8} />,
-        action: 'external',
-        externalUrl: 'https://holistic-tantra.com',
-        tag: 'Kostenlos',
-      },
-      {
-        id: 'meditation-anna-yves',
-        title: 'Geführte Meditation',
-        description: 'Eine Meditation von Anna & Yves für tiefe Erdung.',
-        access: 'free',
-        icon: <Mic size={22} strokeWidth={1.8} />,
-        action: 'external',
-        externalUrl: 'https://holistic-tantra.com',
-        tag: 'Kostenlos',
-      },
-      {
-        id: 'programm-verbindung',
-        title: 'Programm: Bewusste Verbindung',
-        description: 'Das vollständige Programm von Anna & Yves für tiefe Partnerschaft.',
-        access: 'purchase',
-        icon: <Star size={22} strokeWidth={1.8} />,
-        action: 'external',
-        externalUrl: 'https://holistic-tantra.com',
-        tag: 'Kaufbar',
-      },
-      {
-        id: 'programm-tantra',
-        title: 'Tantra für Paare',
-        description: 'Tantrasches Wissen und Übungen für Paare — praktisch und tiefgründig.',
-        access: 'purchase',
-        icon: <Star size={22} strokeWidth={1.8} />,
-        action: 'external',
-        externalUrl: 'https://holistic-tantra.com',
-        tag: 'Kaufbar',
-      },
-    ] as ContentItem[],
-  },
-  {
-    id: 'horoskop',
-    label: 'Horoskop & Liebe',
-    icon: <Star size={22} strokeWidth={1.8} />,
-    items: [
-      {
-        id: 'sternzeichen-liebe',
-        title: 'Dein Sternzeichen & die Liebe',
-        description: 'Was sagt dein Sonnenzeichen über dich in Beziehungen? Ein Überblick über alle 12 Zeichen.',
-        access: 'free',
-        icon: <Star size={22} strokeWidth={1.8} />,
-        action: 'modal',
-        duration: '3 Min.',
-        tag: 'Kostenlos',
-      },
-      {
-        id: 'zeichen-kompatibilitaet',
-        title: 'Welche Zeichen passen zu dir?',
-        description: 'Klassische Kompatibilität nach westlichem Horoskop — welche Zeichen harmonieren mit deinem?',
-        access: 'membership',
-        icon: <Heart size={22} strokeWidth={1.8} />,
-        action: 'modal',
-        duration: '5 Min.',
+        icon: <Heart size={20} strokeWidth={1.8} />,
         tag: 'Mitgliedschaft',
       },
       {
-        id: 'aszendent-berechnen',
-        title: 'Aszendent berechnen',
-        description: 'Gib Geburtszeit und -ort ein und finde deinen Aszendenten — die Seite die andere zuerst sehen.',
+        id: 'beziehungsmuster',
+        title: 'Meine Beziehungsmuster',
+        description: 'Kurze Fragen die helfen wiederkehrende Themen in vergangenen Beziehungen zu erkennen. 5–7 Reflexionsfragen, Antworten werden privat gespeichert.',
+        format: 'Geführte Reflexion',
+        access: 'premium',
+        icon: <MessageSquare size={20} strokeWidth={1.8} />,
+        tag: 'Premium',
+      },
+      {
+        id: 'was-ich-wirklich-suche',
+        title: 'Was ich wirklich suche',
+        description: 'Tiefere Fragen zur eigenen Intention — über das Onboarding hinaus. Was brauche ich wirklich? Was habe ich mir bisher nicht erlaubt zu wollen?',
+        format: 'Geführte Reflexion',
+        access: 'membership',
+        icon: <Sparkles size={20} strokeWidth={1.8} />,
+        tag: 'Mitgliedschaft',
+      },
+      {
+        id: 'grenzen-kennen',
+        title: 'Meine Grenzen kennen',
+        description: 'Ein kurzer Check zu eigenen Bedürfnissen und Grenzen in Beziehungen. Was ist mir nicht verhandelbar? Was brauche ich um mich sicher zu fühlen?',
+        format: 'Reflexion',
+        access: 'premium',
+        icon: <User size={20} strokeWidth={1.8} />,
+        tag: 'Premium',
+      },
+    ] as ContentItem[],
+  },
+  {
+    id: 'begleitung',
+    label: 'Begleitung',
+    icon: <Compass size={16} strokeWidth={1.8} />,
+    items: [
+      {
+        id: 'taeglicher-impuls',
+        title: 'Täglicher Impuls',
+        description: 'Jeden Tag ein kurzer Gedanke oder eine Frage zum bewussten Dating — rotierend aus einem Pool von 30+ Impulsen.',
+        format: 'Tägliche Karte',
         access: 'free',
-        icon: <Sparkles size={22} strokeWidth={1.8} />,
-        action: 'external',
-        externalUrl: 'https://astro.com',
-        duration: '2 Min.',
+        icon: <Sparkles size={20} strokeWidth={1.8} />,
         tag: 'Kostenlos',
       },
       {
-        id: 'chinesisches-horoskop',
-        title: 'Chinesisches Horoskop & Liebe',
-        description: 'Welches der 12 Tiere bist du — und welche Tiere ergänzen dich in der Partnerschaft?',
+        id: 'nach-der-begegnung',
+        title: 'Nach der Begegnung',
+        description: 'Kurze Reflexionshilfe nach einem Gespräch oder Date. Was hat resoniert? Was hat sich komisch angefühlt? Wie war meine Energie danach?',
+        format: 'Situativer Guide',
         access: 'membership',
-        icon: <Moon size={22} strokeWidth={1.8} />,
-        action: 'modal',
-        duration: '4 Min.',
+        icon: <Moon size={20} strokeWidth={1.8} />,
+        tag: 'Mitgliedschaft',
+      },
+      {
+        id: 'wenn-es-schwer-wird',
+        title: 'Wenn es schwer wird',
+        description: 'Für Momente wie Ablehnung, Unsicherheit, Dating-Müdigkeit oder wenn man sich fragt ob es sich lohnt. Ehrlich, warm, ohne falsche Aufheiterung.',
+        format: 'Guide',
+        access: 'free',
+        icon: <Heart size={20} strokeWidth={1.8} />,
+        tag: 'Kostenlos',
+      },
+      {
+        id: 'zwischen-zwei-begegnungen',
+        title: 'Zwischen zwei Begegnungen',
+        description: 'Was man in der Pause tun kann statt sofort weiterzusuchen. Über das Warten, die Stille und was sie uns sagen kann.',
+        format: 'Guide',
+        access: 'membership',
+        icon: <Moon size={20} strokeWidth={1.8} />,
+        tag: 'Mitgliedschaft',
+      },
+      {
+        id: 'pause-bewusst-nutzen',
+        title: 'Pause bewusst nutzen',
+        description: 'Wenn der Pause-Modus aktiv ist — wie man diese Zeit wirklich für sich nutzt. Erscheint automatisch wenn der Pause-Modus aktiviert ist.',
+        format: 'Kurzguide',
+        access: 'free',
+        icon: <Sparkles size={20} strokeWidth={1.8} />,
+        tag: 'Kostenlos',
+      },
+    ] as ContentItem[],
+  },
+  {
+    id: 'wissen',
+    label: 'Wissen',
+    icon: <BookOpen size={16} strokeWidth={1.8} />,
+    items: [
+      {
+        id: 'bindungstypen-im-dating',
+        title: 'Bindungstypen im Dating',
+        description: 'Wie sich die vier Bindungstypen im Dating konkret verhalten — was man erkennen kann und wie man damit umgeht.',
+        format: 'Artikel',
+        access: 'membership',
+        icon: <Heart size={20} strokeWidth={1.8} />,
+        tag: 'Mitgliedschaft',
+      },
+      {
+        id: 'gleiche-menschen',
+        title: 'Warum ich immer die gleichen Menschen anziehe',
+        description: 'Über Muster, Projektionen und unbewusste Anziehung. Ehrlich und ohne Schuld — aber klar.',
+        format: 'Artikel',
+        access: 'premium',
+        icon: <Sparkles size={20} strokeWidth={1.8} />,
+        tag: 'Premium',
+      },
+      {
+        id: 'kunst-des-ersten-gesprächs',
+        title: 'Die Kunst des ersten Gesprächs',
+        description: 'Was bewusstes Kennenlernen bedeutet. Wie man präsent bleibt, echte Fragen stellt und sich selbst nicht verliert.',
+        format: 'Guide',
+        access: 'membership',
+        icon: <MessageSquare size={20} strokeWidth={1.8} />,
+        tag: 'Mitgliedschaft',
+      },
+      {
+        id: 'koerper-und-intuition',
+        title: 'Körper und Intuition',
+        description: 'Über körperliche Intelligenz im Dating — was der Körper spürt bevor der Kopf es versteht.',
+        format: 'Artikel',
+        access: 'premium',
+        icon: <Lightbulb size={20} strokeWidth={1.8} />,
+        tag: 'Premium',
+      },
+      {
+        id: 'conscious-dating',
+        title: 'Conscious Dating — was es wirklich bedeutet',
+        description: 'Was bewusstes Dating ist und was es nicht ist. Keine Perfektion — sondern Präsenz.',
+        format: 'Einführungsartikel',
+        access: 'free',
+        icon: <BookOpen size={20} strokeWidth={1.8} />,
+        tag: 'Kostenlos',
+      },
+      {
+        id: 'von-coaches',
+        title: 'Von Coaches',
+        description: 'Kurze Inhalte von Community-Coaches — Holistic Tantra und anderen Partnern. Mit Coach-Name und Community-Badge.',
+        format: 'Gastbeiträge',
+        access: 'membership',
+        icon: <Star size={20} strokeWidth={1.8} />,
         tag: 'Mitgliedschaft',
       },
     ] as ContentItem[],
   },
 ]
 
-// ─── Modal content ────────────────────────────────────────────────────────────
+// ─── Icon background colors ───────────────────────────────────────────────────
+
+const ICON_BG: Record<string, string> = {
+  // Kenne dich selbst — Herz & Rose
+  'was-mein-bindungstyp-bedeutet': '#2D7A5F',
+  'love-language-leben':           '#C08080',
+  'beziehungsmuster':              '#7B4FA6',
+  'was-ich-wirklich-suche':        '#2D7A5F',
+  'grenzen-kennen':                '#C4603A',
+  // Begleitung — Solar & Sacral
+  'taeglicher-impuls':             '#BF9B30',
+  'nach-der-begegnung':            '#A05830',
+  'wenn-es-schwer-wird':           '#C08080',
+  'zwischen-zwei-begegnungen':     '#A05830',
+  'pause-bewusst-nutzen':          '#BF9B30',
+  // Wissen — Throat & Crown
+  'bindungstypen-im-dating':       '#2D7A5F',
+  'gleiche-menschen':              '#7B4FA6',
+  'kunst-des-ersten-gesprächs':    '#3A5F8A',
+  'koerper-und-intuition':         '#C4603A',
+  'conscious-dating':              '#3A5F8A',
+  'von-coaches':                   '#7B4FA6',
+}
+
+// ─── Modal placeholder content ────────────────────────────────────────────────
 
 const MODAL_CONTENT: Record<string, { title: string; body: React.ReactNode }> = {
-  'bindungstyp-test': {
-    title: 'Bindungstyp-Test',
+  'was-mein-bindungstyp-bedeutet': {
+    title: 'Was mein Bindungstyp bedeutet',
     body: (
       <div className="space-y-4">
-        <p className="text-[#1A1410] leading-relaxed">
-          Der Bindungstyp beschreibt, wie du emotionale Nähe und Beziehungen erlebst.
-          Er entsteht in der frühen Kindheit und beeinflusst, wie du liebst.
+        <p className="font-heading text-xl italic text-[#1A1410] leading-snug">
+          &ldquo;Dein Bindungstyp ist kein Urteil — er ist eine Landkarte.&rdquo;
         </p>
-        <div className="space-y-3">
-          {[
-            { type: 'Sicher', desc: 'Du kannst Nähe und Distanz gut regulieren. Vertraust dir und anderen.' },
-            { type: 'Ängstlich-präoccupiert', desc: 'Du sehnst dich nach Nähe, hast aber Angst vor Ablehnung.' },
-            { type: 'Vermeidend-distanziert', desc: 'Du schätzt Unabhängigkeit, tust dich schwer mit tiefer Nähe.' },
-            { type: 'Desorganisiert', desc: 'Nähe löst gleichzeitig Sehnsucht und Angst aus.' },
-          ].map((b) => (
-            <div key={b.type} className="p-3 bg-[#EDE8E0] rounded-xl">
-              <p className="font-medium text-[#1A1410] text-sm">{b.type}</p>
-              <p className="text-[#6B6058] text-xs mt-0.5">{b.desc}</p>
-            </div>
-          ))}
-        </div>
-        <p className="text-xs text-[#A09888] italic">
-          Vollständiger interaktiver Test folgt in Phase 2.
-        </p>
-      </div>
-    ),
-  },
-  'ht-quiz': {
-    title: 'HT-Quiz',
-    body: (
-      <div className="space-y-4">
-        <p className="text-[#1A1410]">Was ist Holistic Tantra? Teste dein Wissen mit 5 Fragen.</p>
-        {[
-          { q: 'Was ist der Kern von Holistic Tantra?', a: 'Bewusstes Verbinden von Körper, Geist und Seele.' },
-          { q: 'Was bedeutet "Tantra" ursprünglich?', a: 'Das Wort kommt aus dem Sanskrit und bedeutet "weben" oder "ausdehnen".' },
-          { q: 'Was unterscheidet Holistic Tantra von Neo-Tantra?', a: 'Holistic Tantra integriert ganzheitliche Aspekte von Körperarbeit, Spiritualität und Psychologie.' },
-        ].map((item, i) => (
-          <div key={i} className="p-4 bg-[#EDE8E0] rounded-xl">
-            <p className="font-medium text-[#1A1410] text-sm mb-1">Frage {i + 1}: {item.q}</p>
-            <p className="text-[#6B6058] text-xs">{item.a}</p>
-          </div>
-        ))}
-        <p className="text-xs text-[#A09888] italic">Vollständiger interaktiver Quiz folgt in Phase 2.</p>
-      </div>
-    ),
-  },
-  'love-language-test': {
-    title: 'Love Language Test',
-    body: (
-      <div className="space-y-4">
-        <p className="text-[#1A1410] leading-relaxed">
-          Die 5 Liebessprachen nach Gary Chapman helfen dir zu verstehen,
-          wie du Liebe gibst und empfängst.
-        </p>
-        {[
-          { lang: 'Worte der Wertschätzung', desc: 'Komplimente, Ermutigung, Dankbarkeit aussprechen.' },
-          { lang: 'Quality Time', desc: 'Ungeteilte, bewusste Aufmerksamkeit schenken.' },
-          { lang: 'Geschenke', desc: 'Durchdachte Gesten zeigen: "Ich denke an dich."' },
-          { lang: 'Hilfsbereitschaft', desc: 'Durch Taten Fürsorge ausdrücken.' },
-          { lang: 'Körperliche Berührung', desc: 'Nähe durch Umarmungen, Berühren, Körperkontakt.' },
-        ].map((l) => (
-          <div key={l.lang} className="p-3 bg-[#EDE8E0] rounded-xl">
-            <p className="font-medium text-[#1A1410] text-sm">{l.lang}</p>
-            <p className="text-[#6B6058] text-xs mt-0.5">{l.desc}</p>
-          </div>
-        ))}
-        <p className="text-xs text-[#A09888] italic">Interaktiver Test folgt in Phase 2.</p>
-      </div>
-    ),
-  },
-  'meditation-audio': {
-    title: 'Meditations-Audio',
-    body: (
-      <div className="space-y-4">
-        <div className="bg-[#7A3E1E] rounded-2xl p-6 text-center">
-          <Mic className="w-10 h-10 text-[#1A1410] mx-auto mb-3" />
-          <p className="font-heading text-xl text-[#FDF5E8] mb-1">Ankommen im Moment</p>
-          <p className="text-[#FDF5E8]/50 text-sm">15 Minuten • Geführte Meditation</p>
-        </div>
         <p className="text-[#6B6058] text-sm leading-relaxed">
-          Diese Meditation begleitet dich darin, dich selbst zu spüren, anzukommen
-          und Verbindung von innen heraus zu erleben.
-        </p>
-        <div className="bg-[#FDF5E8] rounded-xl p-4 text-center">
-          <p className="text-[#1A1410] text-sm font-medium">Audio-Datei folgt in Phase 2</p>
-          <p className="text-[#A09888] text-xs mt-1">Hier wird ein Audio-Player integriert.</p>
-        </div>
-      </div>
-    ),
-  },
-  'erstes-date-guide': {
-    title: '„Erstes Date" Guide',
-    body: (
-      <div className="space-y-4">
-        <p className="text-[#1A1410] font-heading text-xl italic">
-          &ldquo;Ein bewusstes erstes Date beginnt, bevor du ankommst.&rdquo;
-        </p>
-        <div className="space-y-3">
-          {[
-            { title: 'Vor dem Date', tips: ['Komm geerdet an — mach vorher eine kurze Atemübung.', 'Lass Erwartungen los. Neugier statt Bewertung.'] },
-            { title: 'Beim Date', tips: ['Stelle echte Fragen. Höre wirklich zu.', 'Teile etwas von dir — Verletzlichkeit schafft Verbindung.', 'Spüre in deinen Körper — was nimmst du wahr?'] },
-            { title: 'Nach dem Date', tips: ['Reflektiere: Was hat dich berührt? Was nicht gestimmt?', 'Kommuniziere ehrlich, ob du weitergehen möchtest.'] },
-          ].map((s) => (
-            <div key={s.title}>
-              <p className="font-medium text-[#1A1410] text-sm mb-2">{s.title}</p>
-              <ul className="space-y-1">
-                {s.tips.map((t) => (
-                  <li key={t} className="text-[#6B6058] text-sm flex gap-2">
-                    <span className="text-[#1A1410] mt-0.5">•</span>{t}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </div>
-    ),
-  },
-  'reflexions-guide': {
-    title: 'Reflexions-Guide',
-    body: (
-      <div className="space-y-4">
-        <p className="text-[#1A1410] leading-relaxed">
-          Jede Begegnung ist ein Spiegel. Nutze diese Fragen nach einer Begegnung.
+          Nicht der Test nochmal. Dieser Guide erklärt was dein Ergebnis im echten Leben bedeutet —
+          im Dating, im ersten Gespräch, wenn es eng wird.
         </p>
         {[
-          'Was hat mich an dieser Person wirklich berührt?',
-          'Wo habe ich mich authentisch gezeigt — und wo nicht?',
-          'Was habe ich über meine eigenen Bedürfnisse gelernt?',
-          'Was nehme ich aus dieser Begegnung mit in mein Leben?',
-          'Was möchte ich beim nächsten Mal anders machen?',
+          { typ: 'Sicher', color: '#2D7A5F', text: 'Du kannst Nähe zulassen ohne dich zu verlieren. Im Dating bist du präsent, klar und wenig reaktiv.' },
+          { typ: 'Ängstlich-präoccupiert', color: '#C08080', text: 'Du sehnst dich tief nach Verbindung und bist sehr feinfühlig für Signale. Wichtig: Unterscheide Intuition von Angst.' },
+          { typ: 'Vermeidend-distanziert', color: '#3A5F8A', text: 'Du schätzt Autonomie und tust dich schwer wenn Nähe zu schnell kommt. Echte Verbindung braucht dein eigenes Tempo.' },
+          { typ: 'Desorganisiert', color: '#7B4FA6', text: 'Nähe löst gleichzeitig Sehnsucht und Alarm aus. Heilung beginnt mit Sicherheit — in dir selbst.' },
+        ].map((b) => (
+          <div key={b.typ} className="p-4 bg-[#F5F0E8] rounded-2xl border-l-[3px]" style={{ borderLeftColor: b.color }}>
+            <p className="font-body font-medium text-[#1A1410] text-sm mb-1">{b.typ}</p>
+            <p className="text-[#6B6058] text-xs leading-relaxed">{b.text}</p>
+          </div>
+        ))}
+        <p className="text-xs text-[#A09888] italic">Vollständiger interaktiver Guide folgt.</p>
+      </div>
+    ),
+  },
+  'love-language-leben': {
+    title: 'Meine Love Language leben',
+    body: (
+      <div className="space-y-4">
+        <p className="font-heading text-xl italic text-[#1A1410]">&ldquo;Nicht jeder liebt so wie du liebst.&rdquo;</p>
+        <p className="text-[#6B6058] text-sm leading-relaxed">
+          Den eigenen Liebesstil zu kennen ist nur der erste Schritt. Dieser Guide zeigt wie man
+          ihn im Dating aktiv kommuniziert — und den des anderen erkennt.
+        </p>
+        {[
+          { l: 'Worte der Wertschätzung', tip: 'Sag konkret was dir gefällt. Nicht nur „schön" — sondern warum.' },
+          { l: 'Quality Time', tip: 'Handy weg. Wirklich zuhören. Das ist dein Geschenk.' },
+          { l: 'Geschenke', tip: 'Es geht um Aufmerksamkeit, nicht um Wert. Was hast du wahrgenommen?' },
+          { l: 'Hilfsbereitschaft', tip: 'Handlungen sprechen. Frag: Was würde dir gerade helfen?' },
+          { l: 'Körperliche Berührung', tip: 'Frag nach Erlaubnis. Kleine Gesten bedeuten oft mehr als große.' },
+        ].map((l) => (
+          <div key={l.l} className="p-3 bg-[#F5F0E8] rounded-xl">
+            <p className="font-medium text-[#1A1410] text-sm">{l.l}</p>
+            <p className="text-[#6B6058] text-xs mt-0.5">{l.tip}</p>
+          </div>
+        ))}
+        <p className="text-xs text-[#A09888] italic">Vollständiger Guide folgt.</p>
+      </div>
+    ),
+  },
+  'beziehungsmuster': {
+    title: 'Meine Beziehungsmuster',
+    body: (
+      <div className="space-y-4">
+        <p className="font-heading text-xl italic text-[#1A1410]">&ldquo;Was sich wiederholt, will gesehen werden.&rdquo;</p>
+        <p className="text-[#6B6058] text-sm leading-relaxed">
+          Diese Reflexionsfragen helfen dir wiederkehrende Themen zu erkennen.
+          Deine Antworten werden privat gespeichert.
+        </p>
+        {[
+          'Was endet in meinen Beziehungen immer auf ähnliche Weise?',
+          'Welche Art von Menschen zieht mich immer wieder an — und warum?',
+          'Wann fühle ich mich in Beziehungen am meisten sicher?',
+          'Wann ziehe ich mich zurück — und was löst das aus?',
+          'Was habe ich von meinen Eltern über Liebe gelernt?',
+          'Was möchte ich diesmal anders machen?',
         ].map((q, i) => (
-          <div key={i} className="flex gap-3 p-3 bg-[#EDE8E0] rounded-xl">
-            <span className="text-[#1A1410] font-heading text-lg">{i + 1}.</span>
+          <div key={i} className="p-3 bg-[#F5F0E8] rounded-xl flex gap-3">
+            <span className="font-heading text-[#A09888] text-base">{i + 1}.</span>
             <p className="text-[#1A1410] text-sm leading-relaxed">{q}</p>
           </div>
         ))}
+        <p className="text-xs text-[#A09888] italic">Antworten werden privat gespeichert. Folgt in Phase 2.</p>
       </div>
     ),
   },
-  '36-fragen': {
-    title: '36 Fragen',
+  'was-ich-wirklich-suche': {
+    title: 'Was ich wirklich suche',
     body: (
       <div className="space-y-4">
-        <p className="text-[#6B6058] text-sm">Von Arthur Aron — wissenschaftlich belegt als Weg zu emotionaler Nähe.</p>
-        <div className="space-y-2">
-          <p className="font-medium text-[#1A1410] text-sm">Set I — Einstieg</p>
-          {['Wenn du dir aussuchen könntest, wen du zum Abendessen einlädst — wen würdest du wählen?',
-            'Möchtest du berühmt sein? Wofür?',
-            'Probst du einen Anruf, bevor du telefonierst? Warum?',
-            'Was wäre für dich ein perfekter Tag?',
-            'Wann hast du das letzte Mal für dich gesungen? Für jemand anderen?'].map((q, i) => (
-            <div key={i} className="p-3 bg-[#EDE8E0] rounded-xl text-sm text-[#1A1410]">{i + 1}. {q}</div>
-          ))}
-          <p className="text-xs text-[#A09888] italic mt-2">... + 31 weitere Fragen in Sets II & III</p>
-        </div>
-      </div>
-    ),
-  },
-  '50-tiefenfragen': {
-    title: '50 Tiefen-Fragen',
-    body: (
-      <div className="space-y-3">
-        <p className="text-[#6B6058] text-sm">Fragen, die echte Verbindung schaffen.</p>
+        <p className="font-heading text-xl italic text-[#1A1410]">&ldquo;Was du wirklich willst, liegt oft tiefer als du denkst.&rdquo;</p>
+        <p className="text-[#6B6058] text-sm leading-relaxed">
+          Über das Onboarding hinaus. Diese Fragen gehen dorthin wo Antworten nicht sofort kommen.
+        </p>
         {[
-          'Was gibt deinem Leben den tiefsten Sinn?',
-          'Wann hast du dich zuletzt wirklich gesehen gefühlt?',
-          'Was ist deine größte Angst in einer Beziehung?',
-          'Welcher Moment hat dich am stärksten verändert?',
-          'Was trägst du in dir, das die meisten Menschen nicht sehen?',
-          'Welche Version von dir liebst du am meisten?',
-          'Was würdest du tun, wenn du wüsstest, dass du nicht scheitern kannst?',
+          'Was fehlt mir in meinem Leben, das ich von einem Menschen erhoffe?',
+          'Was wäre anders wenn ich bekäme was ich mir wünsche?',
+          'Was habe ich mir in Beziehungen bisher nicht erlaubt zu wollen?',
+          'Was bin ich bereit zu geben — wirklich?',
+          'Was suche ich in jemandem, das ich auch in mir selbst brauche?',
         ].map((q, i) => (
-          <div key={i} className="p-3 bg-[#EDE8E0] rounded-xl text-sm text-[#1A1410]">
-            <span className="text-[#1A1410] font-medium">{i + 1}. </span>{q}
+          <div key={i} className="p-3 bg-[#F5F0E8] rounded-xl flex gap-3">
+            <span className="font-heading text-[#A09888] text-base">{i + 1}.</span>
+            <p className="text-[#1A1410] text-sm leading-relaxed">{q}</p>
           </div>
         ))}
-        <p className="text-xs text-[#A09888] italic">... + 43 weitere Fragen</p>
+        <p className="text-xs text-[#A09888] italic">Vollständige Reflexion folgt.</p>
       </div>
     ),
   },
-  'frage-des-tages': {
-    title: 'Frage des Tages',
-    body: (
-      <div className="text-center py-6">
-        <Sparkles className="w-10 h-10 text-[#1A1410] mx-auto mb-4" />
-        <p className="text-[#6B6058] text-sm mb-4">Heute, {new Date().toLocaleDateString('de-DE', { weekday: 'long', day: 'numeric', month: 'long' })}</p>
-        <blockquote className="font-heading text-2xl text-[#1A1410] italic leading-relaxed">
-          &ldquo;Was macht dich neugierig auf das Leben?&rdquo;
-        </blockquote>
-        <p className="text-[#A09888] text-xs mt-6">Eine neue Frage erscheint täglich. In der Begegnung kannst du sie direkt an dein Match senden.</p>
-      </div>
-    ),
-  },
-  'sternzeichen-liebe': {
-    title: 'Dein Sternzeichen & die Liebe',
-    body: (
-      <div className="space-y-3">
-        <p className="text-[#1A1410] text-sm leading-relaxed">Jedes der 12 Zeichen trägt eine eigene Art zu lieben. Ein kurzer Überblick:</p>
-        {[
-          { z: '♈ Widder', t: 'Leidenschaftlich, direkt, mutig in der Liebe.' },
-          { z: '♉ Stier', t: 'Sinnlich, beständig, sucht Sicherheit und Treue.' },
-          { z: '♊ Zwillinge', t: 'Neugierig, kommunikativ, braucht mentale Verbindung.' },
-          { z: '♋ Krebs', t: 'Fürsorglich, tief emotional, sehr loyal.' },
-          { z: '♌ Löwe', t: 'Großzügig, romantisch, braucht Wertschätzung.' },
-          { z: '♍ Jungfrau', t: 'Zuvorkommend, aufmerksam, liebt durch Handlungen.' },
-          { z: '♎ Waage', t: 'Harmonisch, romantisch, sucht Balance.' },
-          { z: '♏ Skorpion', t: 'Intensiv, tief, sucht echte Intimität.' },
-          { z: '♐ Schütze', t: 'Abenteuerlustig, ehrlich, braucht Freiheit.' },
-          { z: '♑ Steinbock', t: 'Verlässlich, geduldig, liebt mit Taten.' },
-          { z: '♒ Wassermann', t: 'Einzigartig, unabhängig, braucht Freundschaft als Basis.' },
-          { z: '♓ Fische', t: 'Empathisch, träumerisch, liebt bedingungslos.' },
-        ].map((item) => (
-          <div key={item.z} className="p-3 bg-[#EDE8E0] rounded-xl flex gap-3">
-            <span className="text-[#1A1410] font-heading text-lg">{item.z}</span>
-            <p className="text-[#1A1410] text-sm">{item.t}</p>
-          </div>
-        ))}
-      </div>
-    ),
-  },
-  'zeichen-kompatibilitaet': {
-    title: 'Welche Zeichen passen zu dir?',
+  'grenzen-kennen': {
+    title: 'Meine Grenzen kennen',
     body: (
       <div className="space-y-4">
-        <p className="text-[#1A1410] text-sm leading-relaxed">Klassische Affinitäten nach Element und Qualität:</p>
-        {[
-          { gruppe: 'Feuer ♈♌♐', desc: 'Widder, Löwe und Schütze verstehen einander — leidenschaftlich und direkt.' },
-          { gruppe: 'Erde ♉♍♑', desc: 'Stier, Jungfrau und Steinbock — geerdet, loyal, langfristig denkend.' },
-          { gruppe: 'Luft ♊♎♒', desc: 'Zwillinge, Waage und Wassermann — intellektuell, kommunikativ.' },
-          { gruppe: 'Wasser ♋♏♓', desc: 'Krebs, Skorpion und Fische — tief emotional, intuitiv, fürsorglich.' },
-        ].map((item) => (
-          <div key={item.gruppe} className="p-4 bg-[#EDE8E0] rounded-xl">
-            <p className="font-medium text-[#1A1410] text-sm mb-1">{item.gruppe}</p>
-            <p className="text-[#6B6058] text-xs">{item.desc}</p>
-          </div>
-        ))}
-        <p className="text-xs text-[#A09888] italic">Kompatibilität ist komplex — das Gesamthoroskop gibt mehr Aufschluss.</p>
-      </div>
-    ),
-  },
-  'chinesisches-horoskop': {
-    title: 'Chinesisches Horoskop & Liebe',
-    body: (
-      <div className="space-y-3">
-        <p className="text-[#1A1410] text-sm leading-relaxed">Die 12 Tiere und ihre Partnerschaftsqualitäten:</p>
-        {[
-          { t: 'Ratte 🐭', d: 'Charmant und klug — passt gut zu Drache und Affe.' },
-          { t: 'Ochse 🐂', d: 'Verlässlich und geduldig — harmoniert mit Schlange und Hahn.' },
-          { t: 'Tiger 🐯', d: 'Mutig und leidenschaftlich — ergänzt sich mit Pferd und Hund.' },
-          { t: 'Hase 🐇', d: 'Sanft und diplomatisch — findet Harmonie mit Ziege und Schwein.' },
-          { t: 'Drache 🐉', d: 'Charismatisch und stark — verbindet sich mit Ratte und Affe.' },
-          { t: 'Schlange 🐍', d: 'Weise und intuitiv — harmoniert mit Ochse und Hahn.' },
-        ].map((item) => (
-          <div key={item.t} className="p-3 bg-[#EDE8E0] rounded-xl">
-            <p className="font-medium text-[#1A1410] text-sm">{item.t}</p>
-            <p className="text-[#6B6058] text-xs mt-0.5">{item.d}</p>
-          </div>
-        ))}
-        <p className="text-xs text-[#A09888] italic">... + 6 weitere Tiere. Vollständige Übersicht folgt in Phase 2.</p>
-      </div>
-    ),
-  },
-  'beziehungsmodell-check': {
-    title: 'Beziehungsmodell-Check',
-    body: (
-      <div className="space-y-4">
-        <p className="text-[#1A1410] leading-relaxed">
-          Es gibt viele Wege, Liebe zu leben. Dieser Check hilft dir zu verstehen, welches Modell
-          wirklich zu dir und deinen Werten passt.
+        <p className="font-heading text-xl italic text-[#1A1410]">&ldquo;Grenzen sind kein Mauer — sie sind ein Einlass.&rdquo;</p>
+        <p className="text-[#6B6058] text-sm leading-relaxed">
+          Wer seine Grenzen kennt, kann wirklich präsent sein. Dieser Check hilft dir zu verstehen
+          was dir nicht verhandelbar ist.
         </p>
         {[
-          { model: 'Monogamie', desc: 'Eine romantische und sexuelle Partnerschaft zur selben Zeit. Klarheit durch Exklusivität.' },
-          { model: 'Ethische Non-Monogamie', desc: 'Mehrere liebevolle Verbindungen mit Wissen und Zustimmung aller Beteiligten.' },
-          { model: 'Solo-Polyamorie', desc: 'Tiefe Verbindungen, aber die eigene Unabhängigkeit bleibt im Mittelpunkt.' },
-          { model: 'Relationship Anarchy', desc: 'Verbindungen jenseits von Kategorien — jede Beziehung gestaltet sich neu.' },
-        ].map((m) => (
-          <div key={m.model} className="p-3 bg-[#EDE8E0] rounded-xl">
-            <p className="font-medium text-[#1A1410] text-sm">{m.model}</p>
-            <p className="text-[#6B6058] text-xs mt-0.5">{m.desc}</p>
+          { q: 'Was ist mir in einer Beziehung absolut nicht verhandelbar?', hint: 'Denk an Werte, Verhalten, Kommunikation.' },
+          { q: 'Was brauche ich um mich emotional sicher zu fühlen?', hint: 'Verlässlichkeit, Tempo, Ehrlichkeit, Raum?' },
+          { q: 'Wann habe ich früher meine eigenen Grenzen überschritten?', hint: 'Ohne Urteil — nur Wahrnehmung.' },
+          { q: 'Wie kommuniziere ich eine Grenze — jetzt, in diesem Moment?', hint: 'Klar, ruhig, direkt.' },
+        ].map((item, i) => (
+          <div key={i} className="p-3 bg-[#F5F0E8] rounded-xl">
+            <p className="text-[#1A1410] text-sm font-medium leading-relaxed">{item.q}</p>
+            <p className="text-[#A09888] text-xs mt-1 italic">{item.hint}</p>
           </div>
         ))}
-        <p className="text-xs text-[#A09888] italic">Interaktiver Check folgt in Phase 2.</p>
+        <p className="text-xs text-[#A09888] italic">Vollständige Reflexion folgt.</p>
       </div>
     ),
   },
-  'woechentliche-impulse': {
-    title: 'Wöchentliche Impulse & Rituale',
+  'taeglicher-impuls': {
+    title: 'Täglicher Impuls',
     body: (
-      <div className="space-y-4">
-        <p className="text-[#1A1410] leading-relaxed">
-          Jeden Montag erwartet dich ein neues Ritual oder ein Impuls für bewusstes Dating.
-        </p>
-        <div className="bg-[#FDF5E8] rounded-2xl p-5 text-center">
-          <Sparkles className="w-8 h-8 text-[#1A1410] mx-auto mb-3" />
-          <p className="font-heading text-lg text-[#1A1410] mb-1">Diese Woche</p>
-          <p className="text-[#1A1410] font-medium text-sm mb-3">Impuls: Die 5-Minuten-Stille</p>
-          <p className="text-[#6B6058] text-sm leading-relaxed">
-            Bevor du heute Abend dein Handy nimmst — sitze 5 Minuten in Stille.
-            Was wünschst du dir wirklich in einer Verbindung?
+      <div className="text-center py-4 space-y-4">
+        <p className="text-[#6B6058] text-sm">{new Date().toLocaleDateString('de-DE', { weekday: 'long', day: 'numeric', month: 'long' })}</p>
+        <div className="bg-[#F5F0E8] rounded-2xl p-6">
+          <p className="font-heading text-[22px] italic text-[#1A1410] leading-snug">
+            &ldquo;{getDailyImpuls()}&rdquo;
           </p>
         </div>
-        <p className="text-xs text-[#A09888] italic">Neue Impulse erscheinen wöchentlich.</p>
+        <p className="text-xs text-[#A09888] leading-relaxed">
+          Jeden Tag ein neuer Impuls — rotierend aus einem Pool von 30+ Fragen und Gedanken
+          zum bewussten Dating.
+        </p>
       </div>
     ),
   },
-  'mini-coaching': {
-    title: 'Mini-Coaching: Bereit für Liebe',
+  'nach-der-begegnung': {
+    title: 'Nach der Begegnung',
     body: (
       <div className="space-y-4">
-        <p className="text-[#1A1410] leading-relaxed">
-          5 kompakte Audio-Module von Anna & Yves — direkt in der App. Jedes Modul 10–15 Minuten.
+        <p className="font-heading text-xl italic text-[#1A1410]">&ldquo;Was du nach einer Begegnung spürst, sagt mehr als du denkst.&rdquo;</p>
+        <p className="text-[#6B6058] text-sm leading-relaxed">
+          Eine kurze Reflexionshilfe — direkt danach, wenn der Eindruck noch frisch ist.
         </p>
         {[
-          { num: '01', title: 'Was hält mich wirklich zurück?', duration: '12 Min.' },
-          { num: '02', title: 'Bindungswunden erkennen & heilen', duration: '15 Min.' },
-          { num: '03', title: 'Anziehung vs. echte Passung', duration: '11 Min.' },
-          { num: '04', title: 'Verletzlichkeit als Stärke', duration: '13 Min.' },
-          { num: '05', title: 'Bereit für tiefe Liebe', duration: '14 Min.' },
-        ].map((m) => (
-          <div key={m.num} className="flex items-center gap-4 p-3 bg-[#EDE8E0] rounded-xl">
-            <span className="font-heading text-2xl text-[#6B6058]">{m.num}</span>
-            <div className="flex-1">
-              <p className="font-medium text-[#1A1410] text-sm">{m.title}</p>
-              <p className="text-[#A09888] text-xs">{m.duration}</p>
-            </div>
-            <Mic className="w-4 h-4 text-[#A09888]" />
+          { q: 'Was hat resoniert?', hint: 'Was hat dich wirklich berührt oder überrascht?' },
+          { q: 'Was hat sich komisch angefühlt?', hint: 'Kein Urteil — nur beobachten.' },
+          { q: 'Wie war meine Energie danach?', hint: 'Aufgeladen, erschöpft, offen, geschlossen?' },
+          { q: 'Was möchte ich davon mitnehmen?', hint: 'Eine Erkenntnis, eine Frage, eine Qualität.' },
+        ].map((item, i) => (
+          <div key={i} className="p-3 bg-[#F5F0E8] rounded-xl">
+            <p className="text-[#1A1410] text-sm font-medium">{item.q}</p>
+            <p className="text-[#A09888] text-xs mt-0.5 italic">{item.hint}</p>
           </div>
         ))}
-        <p className="text-xs text-[#A09888] italic">Audio-Dateien folgen in Phase 2.</p>
+        <p className="text-xs text-[#A09888] italic">Vollständiger Guide folgt.</p>
       </div>
     ),
   },
-}
-
-// ─── Icon color map ───────────────────────────────────────────────────────────
-
-const ICON_BG: Record<string, string> = {
-  'bindungstyp-test': '#7A3E1E',
-  'love-language-test': '#C4603A',
-  'beziehungsmodell-check': '#7A3E1E',
-  'meditation-audio': '#5A8A6A',
-  'erstes-date-guide': '#4A7A5A',
-  'reflexions-guide': '#A05830',
-  'woechentliche-impulse': '#7A3E1E',
-  'mini-coaching': '#C4603A',
-  '36-fragen': '#7A3E1E',
-  '50-tiefenfragen': '#7A3E1E',
-  'frage-des-tages': '#C4603A',
-  'werte-zukunft': '#4A7A5A',
-  'intimität': '#C4603A',
-  'konflikt': '#A05830',
-  'ht-quiz-anna-yves': '#7A3E1E',
-  'meditation-anna-yves': '#5A8A6A',
-  'programm-verbindung': '#7A3E1E',
-  'programm-tantra': '#4A7A5A',
-  'sternzeichen-liebe': '#7A3E1E',
-  'zeichen-kompatibilitaet': '#C4603A',
-  'aszendent-berechnen': '#7A3E1E',
-  'chinesisches-horoskop': '#4A7A5A',
+  'wenn-es-schwer-wird': {
+    title: 'Wenn es schwer wird',
+    body: (
+      <div className="space-y-4">
+        <p className="font-heading text-xl italic text-[#1A1410]">&ldquo;Es darf schwer sein. Das bedeutet nicht, dass es falsch ist.&rdquo;</p>
+        <p className="text-[#6B6058] text-sm leading-relaxed">
+          Für Ablehnung, Unsicherheit, Dating-Müdigkeit. Ehrlich, warm, ohne falsche Aufheiterung.
+        </p>
+        {[
+          { titel: 'Wenn du abgelehnt wurdest', text: 'Ablehnung sagt nichts über deinen Wert. Sie sagt: nicht jetzt, nicht hier, nicht diese Person. Das darf trotzdem wehtun.' },
+          { titel: 'Wenn du nicht mehr weißt warum', text: 'Dating kann sich sinnlos anfühlen. Das ist kein Zeichen dass du aufgeben sollst — es ist ein Zeichen dass du eine Pause brauchst.' },
+          { titel: 'Wenn Müdigkeit kommt', text: 'Chronische Dating-Müdigkeit ist real. Der Körper sendet ein Signal. Hör hin, bevor er lauter werden muss.' },
+          { titel: 'Wenn du dich fragst ob es sich lohnt', text: 'Das lohnt sich, weil du dir lohnst. Nicht weil es einfach ist.' },
+        ].map((item) => (
+          <div key={item.titel} className="p-4 bg-[#F5F0E8] rounded-2xl">
+            <p className="font-body font-medium text-[#1A1410] text-sm mb-1.5">{item.titel}</p>
+            <p className="text-[#6B6058] text-xs leading-relaxed">{item.text}</p>
+          </div>
+        ))}
+      </div>
+    ),
+  },
+  'zwischen-zwei-begegnungen': {
+    title: 'Zwischen zwei Begegnungen',
+    body: (
+      <div className="space-y-4">
+        <p className="font-heading text-xl italic text-[#1A1410]">&ldquo;Was du in der Stille findest, bringst du in jede Begegnung mit.&rdquo;</p>
+        <p className="text-[#6B6058] text-sm leading-relaxed">
+          Über das Warten, die Pause und was sie dir sagen kann — wenn du ihr zuhörst.
+        </p>
+        {[
+          'Statt sofort weiterzusuchen: Was hat die letzte Begegnung in dir bewegt?',
+          'Nutze die Stille um zu spüren, was du wirklich willst — nicht was du glaubst suchen zu müssen.',
+          'Tue etwas das dir gut tut. Dating beginnt bei dir.',
+          'Schreib ins Journal. Was ist gerade echt?',
+        ].map((tip, i) => (
+          <div key={i} className="flex gap-3 p-3 bg-[#F5F0E8] rounded-xl items-start">
+            <span className="text-[#BF9B30] text-base leading-none mt-0.5">✦</span>
+            <p className="text-[#1A1410] text-sm leading-relaxed">{tip}</p>
+          </div>
+        ))}
+        <p className="text-xs text-[#A09888] italic">Vollständiger Guide folgt.</p>
+      </div>
+    ),
+  },
+  'pause-bewusst-nutzen': {
+    title: 'Pause bewusst nutzen',
+    body: (
+      <div className="space-y-4">
+        <p className="font-heading text-xl italic text-[#1A1410]">&ldquo;Pause ist keine Niederlage. Sie ist eine Entscheidung.&rdquo;</p>
+        <p className="text-[#6B6058] text-sm leading-relaxed">
+          Wenn der Pause-Modus aktiv ist — wie du diese Zeit wirklich für dich nutzt.
+        </p>
+        {[
+          { titel: 'Spür erstmal nach', text: 'Was hat dazu geführt? Müdigkeit, ein bestimmtes Erlebnis, ein inneres Signal?' },
+          { titel: 'Ohne Schuldgefühle', text: 'Eine Pause ist kein Versagen. Sie ist bewusstes Selbst-Management.' },
+          { titel: 'Was jetzt helfen kann', text: 'Journal schreiben. Einen der Reflexions-Guides nutzen. Dein echtes Leben leben.' },
+          { titel: 'Wann du zurückkommst', text: 'Wenn du es willst — nicht wenn du es glaubst zu müssen.' },
+        ].map((item) => (
+          <div key={item.titel} className="p-3 bg-[#F5F0E8] rounded-xl">
+            <p className="font-medium text-[#1A1410] text-sm mb-1">{item.titel}</p>
+            <p className="text-[#6B6058] text-xs leading-relaxed">{item.text}</p>
+          </div>
+        ))}
+      </div>
+    ),
+  },
+  'bindungstypen-im-dating': {
+    title: 'Bindungstypen im Dating',
+    body: (
+      <div className="space-y-4">
+        <p className="font-heading text-xl italic text-[#1A1410]">&ldquo;Wie man liebt, lässt sich erkennen — wenn man weiß, wonach man schaut.&rdquo;</p>
+        <p className="text-[#6B6058] text-sm leading-relaxed">
+          Wie sich die vier Typen im Dating konkret verhalten — und was das für dich bedeutet.
+        </p>
+        {[
+          { typ: 'Sicher', color: '#2D7A5F', verhalten: 'Kommuniziert klar, lässt Nähe zu, gibt Raum ohne Distanz zu schaffen.' },
+          { typ: 'Ängstlich-präoccupiert', color: '#C08080', verhalten: 'Sehr feinfühlig, liest Signale intensiv, braucht Bestätigung um sich sicher zu fühlen.' },
+          { typ: 'Vermeidend-distanziert', color: '#3A5F8A', verhalten: 'Wirkt unabhängig, zieht sich bei zu viel Nähe zurück, öffnet sich langsam.' },
+          { typ: 'Desorganisiert', color: '#7B4FA6', verhalten: 'Wechselt zwischen Nähe und Distanz, schwer vorhersehbar, oft tiefes Trauma zugrunde.' },
+        ].map((b) => (
+          <div key={b.typ} className="p-4 bg-[#F5F0E8] rounded-2xl border-l-[3px]" style={{ borderLeftColor: b.color }}>
+            <p className="font-body font-medium text-[#1A1410] text-sm mb-1">{b.typ}</p>
+            <p className="text-[#6B6058] text-xs leading-relaxed">{b.verhalten}</p>
+          </div>
+        ))}
+        <p className="text-xs text-[#A09888] italic">Vollständiger Artikel folgt.</p>
+      </div>
+    ),
+  },
+  'gleiche-menschen': {
+    title: 'Warum ich immer die gleichen Menschen anziehe',
+    body: (
+      <div className="space-y-4">
+        <p className="font-heading text-xl italic text-[#1A1410]">&ldquo;Muster wiederholen sich bis sie gesehen werden.&rdquo;</p>
+        <p className="text-[#6B6058] text-sm leading-relaxed">
+          Über Muster, Projektionen und unbewusste Anziehung. Ehrlich, ohne Schuld — aber klar.
+        </p>
+        <div className="p-4 bg-[#F5F0E8] rounded-2xl">
+          <p className="text-[#1A1410] text-sm leading-relaxed">
+            Wir ziehen an, was vertraut ist — nicht was gut für uns ist. Das Nervensystem
+            kennt Vertrautheit als Sicherheit, auch wenn sie es nicht ist.
+          </p>
+        </div>
+        <div className="p-4 bg-[#F5F0E8] rounded-2xl">
+          <p className="font-medium text-[#1A1410] text-sm mb-1">Was hilft</p>
+          <p className="text-[#6B6058] text-xs leading-relaxed">
+            Muster benennen ohne sich zu verurteilen. Therapie oder Coaching. Langsamer werden —
+            Anziehung hinterfragen bevor man ihr folgt.
+          </p>
+        </div>
+        <p className="text-xs text-[#A09888] italic">Vollständiger Artikel folgt.</p>
+      </div>
+    ),
+  },
+  'kunst-des-ersten-gesprächs': {
+    title: 'Die Kunst des ersten Gesprächs',
+    body: (
+      <div className="space-y-4">
+        <p className="font-heading text-xl italic text-[#1A1410]">&ldquo;Ein gutes Gespräch beginnt mit echter Neugier.&rdquo;</p>
+        {[
+          { titel: 'Präsent sein', text: 'Nicht in Bewertungsmodus — sondern wirklich da. Was nimmst du an dieser Person wahr?' },
+          { titel: 'Echte Fragen stellen', text: 'Nicht „was machst du so?" — sondern was dich wirklich interessiert.' },
+          { titel: 'Sich selbst zeigen', text: 'Verletzlichkeit schafft Verbindung. Teile etwas von dir — authentisch, nicht performativ.' },
+          { titel: 'Pausen zulassen', text: 'Stille ist kein Problem. Sie ist Raum.' },
+        ].map((item) => (
+          <div key={item.titel} className="p-3 bg-[#F5F0E8] rounded-xl">
+            <p className="font-medium text-[#1A1410] text-sm mb-1">{item.titel}</p>
+            <p className="text-[#6B6058] text-xs">{item.text}</p>
+          </div>
+        ))}
+        <p className="text-xs text-[#A09888] italic">Vollständiger Guide folgt.</p>
+      </div>
+    ),
+  },
+  'koerper-und-intuition': {
+    title: 'Körper und Intuition',
+    body: (
+      <div className="space-y-4">
+        <p className="font-heading text-xl italic text-[#1A1410]">&ldquo;Dein Körper weiß mehr als du glaubst.&rdquo;</p>
+        <p className="text-[#6B6058] text-sm leading-relaxed">
+          Körperliche Intelligenz im Dating — was der Körper spürt bevor der Kopf es benennt.
+        </p>
+        {[
+          { signal: 'Weitung im Brustkorb', bedeutung: 'Offenheit, Sicherheit, Resonanz.' },
+          { signal: 'Enge im Bauch', bedeutung: 'Alarm, Dissonanz, etwas stimmt nicht.' },
+          { signal: 'Erschöpfung nach Begegnungen', bedeutung: 'Energetische Inkompatibilität oder emotionale Anstrengung.' },
+          { signal: 'Leichtigkeit', bedeutung: 'Echt, stimmig, sicher.' },
+        ].map((item) => (
+          <div key={item.signal} className="p-3 bg-[#F5F0E8] rounded-xl flex gap-3">
+            <span className="text-[#C4603A] text-lg leading-none mt-0.5">○</span>
+            <div>
+              <p className="font-medium text-[#1A1410] text-sm">{item.signal}</p>
+              <p className="text-[#6B6058] text-xs">{item.bedeutung}</p>
+            </div>
+          </div>
+        ))}
+        <p className="text-xs text-[#A09888] italic">Vollständiger Artikel folgt.</p>
+      </div>
+    ),
+  },
+  'conscious-dating': {
+    title: 'Conscious Dating — was es wirklich bedeutet',
+    body: (
+      <div className="space-y-4">
+        <p className="font-heading text-xl italic text-[#1A1410]">&ldquo;Bewusstes Dating ist keine Perfektion. Es ist Präsenz.&rdquo;</p>
+        <p className="text-[#6B6058] text-sm leading-relaxed">
+          Was bewusstes Dating ist — und was es nicht ist.
+        </p>
+        {[
+          { titel: 'Was es ist', punkte: ['Sich selbst kennen lernen während man andere kennenlernt.', 'Ehrlichkeit — mit sich und anderen.', 'Präsenz statt Performance.', 'Langsam genug um wirklich zu spüren.'] },
+          { titel: 'Was es nicht ist', punkte: ['Perfekt sein oder perfekte Partner finden.', 'Jede Begegnung analysieren.', 'Keine negativen Gefühle haben.', 'Immer "entwickelt" wirken.'] },
+        ].map((item) => (
+          <div key={item.titel} className="p-4 bg-[#F5F0E8] rounded-2xl">
+            <p className="font-body font-medium text-[#1A1410] text-sm mb-2">{item.titel}</p>
+            <ul className="space-y-1">
+              {item.punkte.map((p) => (
+                <li key={p} className="text-[#6B6058] text-xs flex gap-2">
+                  <span className="text-[#3A5F8A] mt-0.5">•</span>{p}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    ),
+  },
+  'von-coaches': {
+    title: 'Von Coaches',
+    body: (
+      <div className="space-y-4">
+        <p className="text-[#6B6058] text-sm leading-relaxed">
+          Kurze Inhalte von Community-Coaches — Holistic Tantra und anderen Partnern.
+          Erscheinen mit Coach-Name und Community-Badge.
+        </p>
+        <div className="p-5 bg-[#F5F0E8] rounded-2xl">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="w-10 h-10 rounded-full bg-[#7B4FA6] flex items-center justify-center">
+              <Star className="w-5 h-5 text-white" />
+            </div>
+            <div>
+              <p className="font-body font-medium text-[#1A1410] text-sm">Anna & Yves</p>
+              <p className="text-[#A09888] text-xs">Holistic Tantra</p>
+            </div>
+          </div>
+          <p className="text-[#6B6058] text-sm leading-relaxed italic">
+            &ldquo;Erste Gastbeiträge erscheinen mit dem nächsten Update.&rdquo;
+          </p>
+        </div>
+        <p className="text-xs text-[#A09888] italic">Coach-Beiträge folgen in Phase 2.</p>
+      </div>
+    ),
+  },
 }
 
 // ─── Pattern Feedback config ─────────────────────────────────────────────────
@@ -720,9 +719,8 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
   const supabase = createClient()
 
   // ── Content state ──
-  const [activeTab, setActiveTab] = useState('tests')
+  const [activeTab, setActiveTab] = useState('kenne-dich-selbst')
   const [openModal, setOpenModal] = useState<string | null>(null)
-  const [search, setSearch] = useState('')
 
   // ── Main tab: content vs journal ──
   const [mainTab, setMainTab] = useState<'content' | 'journal'>('content')
@@ -735,6 +733,7 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
   const [saving, setSaving] = useState(false)
   const [openEntry, setOpenEntry] = useState<JournalEntry | null>(null)
   const dailyPrompt = getDailyPrompt()
+  const dailyImpuls = getDailyImpuls()
 
   // ── Pattern Feedback state ──
   const [patternFeedback, setPatternFeedback] = useState<string | null>(null)
@@ -742,26 +741,14 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
     const val = localStorage.getItem('show_pattern_feedback')
     if (val) {
       setPatternFeedback(val)
-      // Auto-switch to journal tab to show it
       setMainTab('journal')
     }
   }, [])
-
-  // ── Content helpers ──
-  const allItems = CONTENT_SECTIONS.flatMap((s) => s.items)
-  const searchResults = search.trim()
-    ? allItems.filter((item) =>
-        item.title.toLowerCase().includes(search.toLowerCase()) ||
-        item.description.toLowerCase().includes(search.toLowerCase()) ||
-        (item.tag ?? '').toLowerCase().includes(search.toLowerCase())
-      )
-    : null
 
   function canAccess(item: ContentItem): boolean {
     if (item.access === 'free') return true
     if (item.access === 'membership') return tier !== 'free'
     if (item.access === 'premium') return tier === 'premium'
-    if (item.access === 'purchase') return purchasedIds.includes(item.id)
     return false
   }
 
@@ -770,22 +757,13 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
       toastLib('Upgrade erforderlich')
       return
     }
-    if (item.action === 'external' && item.externalUrl) {
-      window.open(item.externalUrl, '_blank')
-      return
-    }
-    if (item.action === 'purchase') {
-      toastLib('Kaufoption folgt mit Stripe-Integration.')
-      return
-    }
     setOpenModal(item.id)
   }
 
   function tagColor(access: ContentItem['access']) {
-    if (access === 'free') return 'bg-[rgba(90,138,106,0.15)] text-[#3D6B50]'
-    if (access === 'membership') return 'bg-[rgba(158,107,71,0.15)] text-[#4A2010]'
-    if (access === 'premium') return 'bg-[rgba(26,20,16,0.10)] text-[#1A1410]'
-    if (access === 'purchase') return 'bg-[rgba(158,107,71,0.15)] text-[#4A2010]'
+    if (access === 'free') return 'bg-[rgba(45,122,95,0.12)] text-[#2D7A5F]'
+    if (access === 'membership') return 'bg-[rgba(122,62,30,0.12)] text-[#4A2010]'
+    if (access === 'premium') return 'bg-[rgba(123,79,166,0.12)] text-[#5B3A8A]'
     return 'bg-[rgba(122,62,30,0.07)] text-[#6B6058]'
   }
 
@@ -824,7 +802,6 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
   if (writingMode) {
     return (
       <div className="max-w-2xl mx-auto min-h-screen bg-[#FDF5E8] flex flex-col">
-        {/* Header */}
         <div className="flex items-center gap-3 px-4 pt-5 pb-4">
           <button
             onClick={() => { setWritingMode(false); setDraft('') }}
@@ -834,8 +811,6 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
           </button>
           <span className="text-[#6B6058] font-body text-sm">Dein Journal</span>
         </div>
-
-        {/* Prompt */}
         {draftPrompt && (
           <div className="mx-4 mb-5 rounded-2xl p-5" style={{ background: 'var(--bg-indigo)' }}>
             <p className="font-heading text-lg italic text-[#FDF5E8]/80 leading-snug">
@@ -843,8 +818,6 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
             </p>
           </div>
         )}
-
-        {/* Textarea */}
         <div className="flex-1 px-4">
           <textarea
             autoFocus
@@ -856,22 +829,13 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
           />
           <p className="text-right text-xs text-[#A09888] mt-2 font-body">{draft.length} Zeichen</p>
         </div>
-
-        {/* Save button */}
         <div className="px-4 pb-10 pt-4">
           <button
             onClick={saveEntry}
             disabled={!draft.trim() || saving}
             className="w-full py-4 rounded-full bg-[#7A3E1E] text-[#FDF5E8] font-body text-[14px] tracking-wide flex items-center justify-center gap-2 disabled:opacity-40 transition-opacity"
           >
-            {saving ? (
-              <span className="opacity-60">Speichern…</span>
-            ) : (
-              <>
-                <Check className="w-4 h-4" />
-                Eintrag speichern
-              </>
-            )}
+            {saving ? <span className="opacity-60">Speichern…</span> : <><Check className="w-4 h-4" />Eintrag speichern</>}
           </button>
         </div>
       </div>
@@ -913,15 +877,13 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
       <div className="sticky top-0 z-20 bg-transparent px-4 pt-5 pb-3 mb-4">
         <h1 className="font-heading text-[52px] font-light text-[#1A1410] tracking-[-0.5px] leading-none mb-3">Inhalte</h1>
 
-        {/* Main tab toggle: Journal | Für dich — full width */}
+        {/* Main tab toggle: Journal | Für dich */}
         <div className="flex gap-1 bg-[rgba(122,62,30,0.06)] rounded-full p-1 w-full">
           <button
             onClick={() => setMainTab('journal')}
             className={cn(
               'flex-1 px-4 py-2 rounded-full text-sm font-body transition-all',
-              mainTab === 'journal'
-                ? 'bg-[#7A3E1E] text-[#FDF5E8]'
-                : 'text-[#6B6058]'
+              mainTab === 'journal' ? 'bg-[#7A3E1E] text-[#FDF5E8]' : 'text-[#6B6058]'
             )}
           >
             Journal
@@ -930,9 +892,7 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
             onClick={() => setMainTab('content')}
             className={cn(
               'flex-1 px-4 py-2 rounded-full text-sm font-body transition-all',
-              mainTab === 'content'
-                ? 'bg-[#7A3E1E] text-[#FDF5E8]'
-                : 'text-[#6B6058]'
+              mainTab === 'content' ? 'bg-[#7A3E1E] text-[#FDF5E8]' : 'text-[#6B6058]'
             )}
           >
             Für dich
@@ -951,41 +911,25 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
               setPatternFeedback(null)
             }
             return (
-              <div
-                className="rounded-2xl p-5 mb-6 bg-white"
-                style={{ boxShadow: '0 4px 24px rgba(26,20,16,0.10)' }}
-              >
+              <div className="rounded-2xl p-5 mb-6 bg-white" style={{ boxShadow: '0 4px 24px rgba(26,20,16,0.10)' }}>
                 <div className="flex items-start gap-4 mb-4">
                   <span className="text-3xl leading-none mt-0.5">{cfg.icon}</span>
                   <div className="flex-1">
-                    <p
-                      className="text-[#1A1410] leading-snug mb-2"
-                      style={{ fontFamily: 'var(--font-heading)', fontWeight: 300, fontSize: '20px' }}
-                    >
+                    <p className="text-[#1A1410] leading-snug mb-2" style={{ fontFamily: 'var(--font-heading)', fontWeight: 300, fontSize: '20px' }}>
                       {cfg.title}
                     </p>
-                    <p
-                      className="text-[#6B6058] text-sm leading-relaxed"
-                      style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}
-                    >
+                    <p className="text-[#6B6058] text-sm leading-relaxed" style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}>
                       {cfg.body}
                     </p>
                   </div>
                 </div>
                 <div className="flex gap-2 flex-wrap">
-                  <button
-                    onClick={() => {
-                      dismiss()
-                      startWriting(cfg.journalPrompt)
-                    }}
-                    className="flex-1 py-2.5 rounded-full bg-[#7A3E1E] text-[#FDF5E8] font-body text-[13px] transition-opacity hover:opacity-90"
-                  >
+                  <button onClick={() => { dismiss(); startWriting(cfg.journalPrompt) }}
+                    className="flex-1 py-2.5 rounded-full bg-[#7A3E1E] text-[#FDF5E8] font-body text-[13px] transition-opacity hover:opacity-90">
                     {cfg.positive ? 'Das freut mich ✦' : 'Im Journal erforschen →'}
                   </button>
-                  <button
-                    onClick={dismiss}
-                    className="px-4 py-2.5 rounded-full border border-[rgba(122,62,30,0.20)] text-[#6B6058] font-body text-[13px] transition-colors hover:border-[#7A3E1E]/40"
-                  >
+                  <button onClick={dismiss}
+                    className="px-4 py-2.5 rounded-full border border-[rgba(122,62,30,0.20)] text-[#6B6058] font-body text-[13px] transition-colors hover:border-[#7A3E1E]/40">
                     Danke, ich weiß
                   </button>
                 </div>
@@ -994,18 +938,13 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
           })()}
 
           {/* Daily prompt card */}
-          <div
-            className="rounded-2xl p-6 mb-6 relative overflow-hidden"
-            style={{ background: 'var(--bg-indigo)' }}
-          >
+          <div className="rounded-2xl p-6 mb-6 relative overflow-hidden" style={{ background: 'var(--bg-indigo)' }}>
             <p className="font-body text-[11px] uppercase tracking-[0.14em] text-[#FDF5E8]/45 mb-3">Tagesimpuls</p>
             <p className="font-heading text-[22px] italic text-[#FDF5E8] leading-snug mb-5">
               &ldquo;{dailyPrompt}&rdquo;
             </p>
-            <button
-              onClick={() => startWriting(dailyPrompt)}
-              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-[#FDF5E8] text-[#7A3E1E] font-body text-[13px] transition-opacity hover:opacity-90"
-            >
+            <button onClick={() => startWriting(dailyPrompt)}
+              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-[#FDF5E8] text-[#7A3E1E] font-body text-[13px] transition-opacity hover:opacity-90">
               Jetzt schreiben →
             </button>
           </div>
@@ -1020,34 +959,25 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
           ) : (
             <div className="space-y-3">
               {journalEntries.map((entry) => (
-                <button
-                  key={entry.id}
-                  onClick={() => setOpenEntry(entry)}
+                <button key={entry.id} onClick={() => setOpenEntry(entry)}
                   className="w-full text-left bg-white rounded-2xl px-5 py-4 transition-all active:scale-[0.98]"
-                  style={{ boxShadow: '0 2px 12px rgba(26,20,16,0.07)' }}
-                >
+                  style={{ boxShadow: '0 2px 12px rgba(26,20,16,0.07)' }}>
                   <p className="text-[#6B6058] font-body text-[11px] uppercase tracking-[0.12em] mb-1.5">
                     {formatDate(entry.created_at)}
                   </p>
                   {entry.prompt && (
-                    <p className="font-heading text-base italic text-[#A09888] mb-1 leading-snug line-clamp-1">
-                      {entry.prompt}
-                    </p>
+                    <p className="font-heading text-base italic text-[#A09888] mb-1 leading-snug line-clamp-1">{entry.prompt}</p>
                   )}
-                  <p className="font-heading text-[18px] text-[#1A1410] leading-snug line-clamp-2">
-                    {entry.content}
-                  </p>
+                  <p className="font-heading text-[18px] text-[#1A1410] leading-snug line-clamp-2">{entry.content}</p>
                 </button>
               ))}
             </div>
           )}
 
           {/* FAB */}
-          <button
-            onClick={() => startWriting('')}
+          <button onClick={() => startWriting('')}
             className="fixed bottom-24 right-5 md:bottom-8 md:right-8 w-14 h-14 rounded-full bg-[#7A3E1E] flex items-center justify-center z-30 transition-transform active:scale-95"
-            style={{ boxShadow: '0 4px 20px rgba(122,62,30,0.35)' }}
-          >
+            style={{ boxShadow: '0 4px 20px rgba(122,62,30,0.35)' }}>
             <Plus className="w-6 h-6 text-[#FDF5E8]" />
           </button>
         </div>
@@ -1057,139 +987,102 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
       {mainTab === 'content' && (
         <div className="px-4">
 
-          {/* Search */}
-          <div className="relative mb-5">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6B6058]" />
-            <input
-              type="text"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Inhalte durchsuchen…"
-              className="w-full pl-10 pr-4 py-3 rounded-xl bg-white text-sm font-body text-[#1A1410] placeholder:text-[#6B6058] focus:outline-none focus:ring-2 focus:ring-[#7A3E1E]/30"
-              style={{ boxShadow: '0 2px 12px rgba(26,20,16,0.06)' }}
-            />
+          {/* Category pills */}
+          <div className="flex gap-2 overflow-x-auto pb-1 mb-6 scrollbar-hide">
+            {CONTENT_SECTIONS.map((s) => (
+              <button
+                key={s.id}
+                onClick={() => setActiveTab(s.id)}
+                className={cn(
+                  'flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-body whitespace-nowrap transition-all',
+                  activeTab === s.id
+                    ? 'bg-[#7A3E1E] text-[#FDF5E8]'
+                    : 'border border-[rgba(122,62,30,0.15)] text-[#6B6058] hover:border-[#7A3E1E]/40'
+                )}
+              >
+                {s.icon}
+                {s.label}
+              </button>
+            ))}
           </div>
 
-          {/* Category tabs — hide when searching */}
-          {!search.trim() && (
-            <div className="flex gap-2 overflow-x-auto pb-1 mb-6 scrollbar-hide">
-              {CONTENT_SECTIONS.map((s) => (
-                <button
-                  key={s.id}
-                  onClick={() => setActiveTab(s.id)}
-                  className={cn(
-                    'flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-body whitespace-nowrap transition-all',
-                    activeTab === s.id
-                      ? 'bg-[#7A3E1E] text-white'
-                      : 'border border-[rgba(122,62,30,0.12)] text-[#6B6058] hover:border-[#7A3E1E]/40'
-                  )}
-                >
-                  {s.icon}
-                  {s.label}
-                </button>
-              ))}
-            </div>
-          )}
-
-          {/* Search results */}
-          {searchResults !== null && (
-            <div className="space-y-3 mb-6">
-              {searchResults.length === 0 && (
-                <p className="text-center text-[#6B6058] text-sm py-8">Keine Inhalte gefunden.</p>
-              )}
-              {searchResults.map((item) => {
-                const accessible = canAccess(item)
-                return (
-                  <button
-                    key={item.id}
-                    onClick={() => handleOpen(item)}
-                    className={cn(
-                      'bg-white rounded-2xl p-5 w-full text-left flex gap-4 items-start transition-all active:scale-[0.98] duration-150',
-                      !accessible && 'opacity-60'
-                    )}
-                    style={{ boxShadow: '0 2px 12px rgba(26,20,16,0.08)' }}
-                  >
-                    <div
-                      className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"
-                      style={{ backgroundColor: accessible ? (ICON_BG[item.id] ?? '#7A3E1E') : 'rgba(122,62,30,0.12)', color: '#FFFFFF' }}
-                    >
-                      {item.icon}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 flex-wrap mb-1">
-                        <h3 className="font-heading text-[22px] text-[#1A1410]">{item.title}</h3>
-                        {item.tag && (
-                          <span className={cn('text-[11px] px-2.5 py-1 rounded-full font-body font-medium', tagColor(item.access))}>
-                            {item.tag}
-                          </span>
-                        )}
-                      </div>
-                      <p className="text-[#1A1410] font-body text-sm leading-relaxed">{item.description}</p>
-                    </div>
-                    <div className="flex-shrink-0 mt-1">
-                      {accessible
-                        ? item.action === 'external'
-                          ? <ExternalLink className="w-4 h-4 text-[#6B6058]" />
-                          : <ChevronRight className="w-4 h-4 text-[#6B6058]" />
-                        : <Lock className="w-4 h-4 text-[#6B6058]" />
-                      }
-                    </div>
-                  </button>
-                )
-              })}
-            </div>
-          )}
-
-          {/* Content items (tab view) */}
-          {searchResults === null && activeSection && (
+          {/* Content items */}
+          {activeSection && (
             <div className="space-y-3">
-              {activeSection.items.map((item) => {
-                const accessible = canAccess(item)
-                return (
-                  <button
-                    key={item.id}
-                    onClick={() => handleOpen(item)}
-                    className={cn(
-                      'bg-white rounded-2xl p-5 w-full text-left flex gap-4 items-start transition-all active:scale-[0.98] duration-150',
-                      !accessible && 'opacity-60'
-                    )}
-                    style={{ boxShadow: '0 2px 12px rgba(26,20,16,0.08)' }}
-                  >
-                    <div
-                      className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"
-                      style={{
-                        backgroundColor: accessible ? (ICON_BG[item.id] ?? '#7A3E1E') : 'rgba(122,62,30,0.12)',
-                        color: '#FFFFFF',
-                      }}
-                    >
-                      {item.icon}
+
+              {/* Special: Täglicher Impuls featured card (Begleitung only) */}
+              {activeTab === 'begleitung' && (
+                <button
+                  onClick={() => handleOpen(activeSection.items.find(i => i.id === 'taeglicher-impuls')!)}
+                  className="w-full text-left rounded-2xl overflow-hidden active:scale-[0.98] transition-transform duration-150"
+                  style={{ background: 'var(--bg-indigo)' }}
+                >
+                  <div className="p-5">
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="text-[#BF9B30] text-base">✦</span>
+                      <p className="font-body text-[11px] uppercase tracking-[0.14em] text-[#FDF5E8]/50">Täglicher Impuls</p>
+                      <span className="ml-auto text-[10px] font-body px-2 py-0.5 rounded-full bg-[rgba(45,122,95,0.25)] text-[#7EB89A]">Kostenlos</span>
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 flex-wrap mb-1">
-                        <h3 className="font-heading text-[22px] text-[#1A1410]">{item.title}</h3>
-                        {item.tag && (
-                          <span className={cn('text-[11px] px-2.5 py-1 rounded-full font-body font-medium', tagColor(item.access))}>
-                            {item.tag}
-                          </span>
-                        )}
-                        {item.duration && (
-                          <span className="text-xs text-[#6B6058] font-light">{item.duration}</span>
-                        )}
-                      </div>
-                      <p className="text-[#1A1410] font-body text-sm leading-relaxed">{item.description}</p>
-                    </div>
-                    <div className="flex-shrink-0 mt-1">
-                      {accessible ? (
-                        item.action === 'external'
-                          ? <ExternalLink className="w-4 h-4 text-[#6B6058]" />
-                          : <ChevronRight className="w-4 h-4 text-[#6B6058]" />
-                      ) : (
-                        <Lock className="w-4 h-4 text-[#6B6058]" />
+                    <p className="font-heading text-[22px] italic text-[#FDF5E8] leading-snug mb-4">
+                      &ldquo;{dailyImpuls}&rdquo;
+                    </p>
+                    <p className="text-[#FDF5E8]/40 font-body text-xs">Täglich wechselnd · 30+ Impulse</p>
+                  </div>
+                </button>
+              )}
+
+              {/* Regular content cards */}
+              {activeSection.items
+                .filter(item => !(activeTab === 'begleitung' && item.id === 'taeglicher-impuls'))
+                .map((item) => {
+                  const accessible = canAccess(item)
+                  return (
+                    <button
+                      key={item.id}
+                      onClick={() => handleOpen(item)}
+                      className={cn(
+                        'bg-white rounded-2xl p-5 w-full text-left flex gap-4 items-start transition-all active:scale-[0.98] duration-150',
+                        !accessible && 'opacity-60'
                       )}
-                    </div>
-                  </button>
-                )
-              })}
+                      style={{ boxShadow: '0 2px 12px rgba(26,20,16,0.07)' }}
+                    >
+                      {/* Icon */}
+                      <div
+                        className="w-11 h-11 rounded-full flex items-center justify-center flex-shrink-0"
+                        style={{
+                          backgroundColor: accessible ? (ICON_BG[item.id] ?? '#7A3E1E') : 'rgba(122,62,30,0.10)',
+                          color: '#FFFFFF',
+                        }}
+                      >
+                        {item.icon}
+                      </div>
+
+                      {/* Text */}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-start gap-2 flex-wrap mb-0.5">
+                          <h3 className="font-heading text-[20px] text-[#1A1410] leading-tight">{item.title}</h3>
+                        </div>
+                        <div className="flex items-center gap-2 mb-2 flex-wrap">
+                          <span className="text-[10px] font-body text-[#A09888] uppercase tracking-wide">{item.format}</span>
+                          {item.tag && (
+                            <span className={cn('text-[10px] px-2 py-0.5 rounded-full font-body font-medium', tagColor(item.access))}>
+                              {item.tag}
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-[#6B6058] font-body text-sm leading-relaxed">{item.description}</p>
+                      </div>
+
+                      {/* Action icon */}
+                      <div className="flex-shrink-0 mt-1">
+                        {accessible
+                          ? <ChevronRight className="w-4 h-4 text-[#A09888]" />
+                          : <Lock className="w-4 h-4 text-[#C0B0A0]" />
+                        }
+                      </div>
+                    </button>
+                  )
+                })}
             </div>
           )}
 
@@ -1217,4 +1110,3 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
     </div>
   )
 }
-
