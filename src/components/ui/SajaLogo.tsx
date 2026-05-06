@@ -49,7 +49,7 @@ export function SajaLogo({
   const svgRotateControls = useAnimation()
 
   const matchColor   = '#C4A882'
-  const defaultColor = onDark ? '#FDF5E8' : '#3B1F0A'
+  const defaultColor = onDark ? '#FDF5E8' : '#7A3E1E'
   const mainColor    = variant === 'match' ? matchColor : defaultColor
   const gapColor     = variant === 'match' ? matchColor : defaultColor
 
@@ -135,7 +135,7 @@ export function SajaLogo({
 
         <span
           className={cn('font-heading font-semibold leading-none', textSize)}
-          style={{ color: onDark ? '#FDF5E8' : '#3B1F0A' }}
+          style={{ color: onDark ? '#FDF5E8' : '#7A3E1E' }}
         >
           Saja
         </span>

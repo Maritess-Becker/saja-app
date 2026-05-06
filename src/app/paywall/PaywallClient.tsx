@@ -21,7 +21,7 @@ const PLANS = [
     price: '29',
     period: 'Monat',
     icon: <Heart className="w-5 h-5" />,
-    color: '#3B1F0A',
+    color: '#7A3E1E',
     features: [
       'Unbegrenzt liken & matchen',
       'Alle Tests (Bindungstyp, Love Language, …)',
@@ -36,7 +36,7 @@ const PLANS = [
     price: '69',
     period: 'Monat',
     icon: <Star className="w-5 h-5" />,
-    color: '#240E04',
+    color: '#4A2010',
     features: [
       'Alles aus Mitgliedschaft',
       'Audio-Meditationen & Guides',
@@ -141,7 +141,7 @@ export function PaywallClient({
               )}
             >
               {plan.badge && (
-                <span className="absolute top-3 right-3 bg-[#3B1F0A] text-[#FDF5E8] text-[10px] font-body px-2.5 py-1 rounded-full">
+                <span className="absolute top-3 right-3 bg-[#7A3E1E] text-[#FDF5E8] text-[10px] font-body px-2.5 py-1 rounded-full">
                   {plan.badge}
                 </span>
               )}
@@ -153,7 +153,7 @@ export function PaywallClient({
                   {plan.icon}
                 </div>
                 <div>
-                  <p className={cn('font-heading text-[20px] leading-none', selected === plan.id ? 'text-[#240E04]' : 'text-[#FDF5E8]')}>
+                  <p className={cn('font-heading text-[20px] leading-none', selected === plan.id ? 'text-[#4A2010]' : 'text-[#FDF5E8]')}>
                     {plan.name}
                   </p>
                   <p className={cn('font-body text-sm mt-0.5', selected === plan.id ? 'text-[#6B6058]' : 'text-[#FDF5E8]/50')}>
@@ -164,7 +164,7 @@ export function PaywallClient({
               <div className="space-y-1.5">
                 {plan.features.map((f) => (
                   <div key={f} className="flex items-center gap-2">
-                    <Check className={cn('w-3 h-3 flex-shrink-0', selected === plan.id ? 'text-[#3B1F0A]' : 'text-[#FDF5E8]/40')} />
+                    <Check className={cn('w-3 h-3 flex-shrink-0', selected === plan.id ? 'text-[#7A3E1E]' : 'text-[#FDF5E8]/40')} />
                     <span className={cn('text-[12px] font-body', selected === plan.id ? 'text-[#1A1410]' : 'text-[#FDF5E8]/60')}>
                       {f}
                     </span>
@@ -178,7 +178,7 @@ export function PaywallClient({
         {/* Subscribe CTA */}
         <button
           onClick={handleSubscribe}
-          className="w-full py-4 rounded-full bg-[#FDF5E8] text-[#3B1F0A] font-body text-[15px] font-medium mb-3 transition-opacity hover:opacity-90 active:scale-[0.98]"
+          className="w-full py-4 rounded-full bg-[#FDF5E8] text-[#7A3E1E] font-body text-[15px] font-medium mb-3 transition-opacity hover:opacity-90 active:scale-[0.98]"
         >
           {selected === 'premium' ? 'Premium starten — 69 €/Monat' : 'Mitgliedschaft starten — 29 €/Monat'}
         </button>

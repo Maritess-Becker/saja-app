@@ -54,7 +54,7 @@ export function AppNav() {
   return (
     <>
       {/* Desktop sidebar */}
-      <aside className="hidden md:flex flex-col w-64 min-h-screen bg-[#240E04] fixed left-0 top-0 px-4 py-6">
+      <aside className="hidden md:flex flex-col w-64 min-h-screen bg-[#4A2010] fixed left-0 top-0 px-4 py-6">
         <Link href="/discover" className="mb-10 px-2">
           <SajaLogo size="md" showTagline={true} onDark={true} />
         </Link>

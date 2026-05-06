@@ -1,4 +1,4 @@
-import type { Config } from 'tailwindcss'
+﻿import type { Config } from 'tailwindcss'
 
 const config: Config = {
   content: [
@@ -9,18 +9,18 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary:    '#3B1F0A',
-        medium:     '#6B3018',
-        deep:       '#240E04',
+        primary:    '#7A3E1E',
+        medium:     '#A05830',
+        deep:       '#4A2010',
         cream:      '#FDF5E8',
         moon:       '#FDF5E8',   // alias
-        background: '#3B1F0A',
+        background: '#7A3E1E',
         // compatibility aliases
-        dark:       '#240E04',
+        dark:       '#4A2010',
         light:      '#FDF5E8',
-        sand:       '#3B1F0A',
-        surface:    '#6B3018',
-        text:       '#3B1F0A',
+        sand:       '#7A3E1E',
+        surface:    '#A05830',
+        text:       '#7A3E1E',
         muted:      '#907060',
         'on-primary': '#FDF5E8',
       },

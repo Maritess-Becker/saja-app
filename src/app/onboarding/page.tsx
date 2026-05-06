@@ -59,10 +59,10 @@ const INTENTION_OPTIONS = [
 ]
 
 const CAPACITY_OPTIONS = [
-  { value: 'open' as EmotionalCapacity, dot: '#7EB89A', label: 'Offen für Tiefe & Nähe', desc: 'Bereit für echte Verbindung' },
-  { value: 'selective' as EmotionalCapacity, dot: '#E8C96B', label: 'Selektiv & vorsichtig', desc: 'Tiefe braucht Vertrauen' },
-  { value: 'light' as EmotionalCapacity, dot: '#6BAED6', label: 'Gerade eher leicht & locker', desc: 'Kein Druck, kein Ernst' },
-  { value: 'slow' as EmotionalCapacity, dot: '#D4845A', label: 'Slow Mode — wenig Kapazität', desc: 'Ich brauche gerade Zeit' },
+  { value: 'open' as EmotionalCapacity, dot: '#2D7A5F', label: 'Offen für Tiefe & Nähe', desc: 'Bereit für echte Verbindung' },
+  { value: 'selective' as EmotionalCapacity, dot: '#BF9B30', label: 'Selektiv & vorsichtig', desc: 'Tiefe braucht Vertrauen' },
+  { value: 'light' as EmotionalCapacity, dot: '#3A5F8A', label: 'Gerade eher leicht & locker', desc: 'Kein Druck, kein Ernst' },
+  { value: 'slow' as EmotionalCapacity, dot: '#C4603A', label: 'Slow Mode — wenig Kapazität', desc: 'Ich brauche gerade Zeit' },
 ]
 
 const GENDER_OPTIONS = ['Frau', 'Mann', 'Non-binär', 'Trans Frau', 'Trans Mann', 'Genderfluid', 'Andere', 'Lieber nicht angeben']
@@ -71,7 +71,7 @@ const GENDER_OPTIONS = ['Frau', 'Mann', 'Non-binär', 'Trans Frau', 'Trans Mann'
 function ProgressBar({ step }: { step: number }) {
   const pct = Math.round((step / TOTAL_STEPS) * 100)
   return (
-    <div className="sticky top-0 z-20 px-5 pt-5 pb-3 bg-[#3B1F0A]">
+    <div className="sticky top-0 z-20 px-5 pt-5 pb-3 bg-[#7A3E1E]">
       <div className="max-w-lg mx-auto">
         <div className="h-0.5 bg-[rgba(253,245,232,0.12)] rounded-full overflow-hidden mb-2">
           <div className="h-full bg-[#FDF5E8] rounded-full transition-all duration-500" style={{ width: `${pct}%` }} />
@@ -257,7 +257,7 @@ export default function OnboardingPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#3B1F0A] flex items-center justify-center">
+      <div className="min-h-screen bg-[#7A3E1E] flex items-center justify-center">
         <div className="w-8 h-8 border-2 border-[#FDF5E8]/20 border-t-[#FDF5E8]/70 rounded-full animate-spin" />
       </div>
     )
@@ -334,7 +334,7 @@ export default function OnboardingPage() {
                     className={cn(
                       'px-3 py-1.5 rounded-full text-sm font-body border transition-all',
                       gender === g
-                        ? 'bg-[#FDF5E8] text-[#3B1F0A] border-[#FDF5E8]'
+                        ? 'bg-[#FDF5E8] text-[#7A3E1E] border-[#FDF5E8]'
                         : 'bg-transparent border-[rgba(253,245,232,0.2)] text-[#FDF5E8]/70'
                     )}
                   >
@@ -383,7 +383,7 @@ export default function OnboardingPage() {
         </div>
 
         {/* CTA */}
-        <div className="fixed bottom-0 left-0 right-0 px-5 pb-8 pt-4 bg-gradient-to-t from-[#3B1F0A] to-transparent">
+        <div className="fixed bottom-0 left-0 right-0 px-5 pb-8 pt-4 bg-gradient-to-t from-[#7A3E1E] to-transparent">
           <div className="max-w-lg mx-auto">
             <button onClick={next} disabled={!canContinue} className="btn-primary w-full py-4 disabled:opacity-40">
               Weiter →
@@ -423,7 +423,7 @@ export default function OnboardingPage() {
                   <X className="w-3.5 h-3.5 text-white" />
                 </button>
                 {i === 0 && (
-                  <div className="absolute bottom-2 left-2 bg-[#3B1F0A]/80 rounded-full px-2 py-0.5 text-[10px] text-white">
+                  <div className="absolute bottom-2 left-2 bg-[#7A3E1E]/80 rounded-full px-2 py-0.5 text-[10px] text-white">
                     Hauptfoto
                   </div>
                 )}
@@ -460,7 +460,7 @@ export default function OnboardingPage() {
           </p>
         </div>
 
-        <div className="fixed bottom-0 left-0 right-0 px-5 pb-8 pt-4 bg-gradient-to-t from-[#3B1F0A] to-transparent">
+        <div className="fixed bottom-0 left-0 right-0 px-5 pb-8 pt-4 bg-gradient-to-t from-[#7A3E1E] to-transparent">
           <div className="max-w-lg mx-auto">
             <button onClick={next} disabled={photos.length === 0} className="btn-primary w-full py-4 disabled:opacity-40">
               Weiter →
@@ -511,7 +511,7 @@ export default function OnboardingPage() {
           </div>
         </div>
 
-        <div className="fixed bottom-0 left-0 right-0 px-5 pb-8 pt-4 bg-gradient-to-t from-[#3B1F0A] to-transparent">
+        <div className="fixed bottom-0 left-0 right-0 px-5 pb-8 pt-4 bg-gradient-to-t from-[#7A3E1E] to-transparent">
           <div className="max-w-lg mx-auto">
             <button onClick={next} disabled={!intention} className="btn-primary w-full py-4 disabled:opacity-40">
               Weiter →
@@ -560,7 +560,7 @@ export default function OnboardingPage() {
           </div>
         </div>
 
-        <div className="fixed bottom-0 left-0 right-0 px-5 pb-8 pt-4 bg-gradient-to-t from-[#3B1F0A] to-transparent">
+        <div className="fixed bottom-0 left-0 right-0 px-5 pb-8 pt-4 bg-gradient-to-t from-[#7A3E1E] to-transparent">
           <div className="max-w-lg mx-auto">
             <button onClick={next} disabled={!capacity} className="btn-primary w-full py-4 disabled:opacity-40">
               Weiter →
@@ -600,7 +600,7 @@ export default function OnboardingPage() {
           </div>
         </div>
 
-        <div className="fixed bottom-0 left-0 right-0 px-5 pb-8 pt-4 bg-gradient-to-t from-[#3B1F0A] to-transparent">
+        <div className="fixed bottom-0 left-0 right-0 px-5 pb-8 pt-4 bg-gradient-to-t from-[#7A3E1E] to-transparent">
           <div className="max-w-lg mx-auto flex flex-col gap-3">
             <button onClick={next} className="btn-primary w-full py-4">
               Weiter →
@@ -642,7 +642,7 @@ export default function OnboardingPage() {
           <span className="text-[#FDF5E8]/30 text-xs font-body block text-right mt-1">{bio.length}/400</span>
         </div>
 
-        <div className="fixed bottom-0 left-0 right-0 px-5 pb-8 pt-4 bg-gradient-to-t from-[#3B1F0A] to-transparent">
+        <div className="fixed bottom-0 left-0 right-0 px-5 pb-8 pt-4 bg-gradient-to-t from-[#7A3E1E] to-transparent">
           <div className="max-w-lg mx-auto flex flex-col gap-3">
             <button
               onClick={async () => {

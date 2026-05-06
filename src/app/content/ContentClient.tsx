@@ -377,7 +377,7 @@ const MODAL_CONTENT: Record<string, { title: string; body: React.ReactNode }> = 
     title: 'Meditations-Audio',
     body: (
       <div className="space-y-4">
-        <div className="bg-[#3B1F0A] rounded-2xl p-6 text-center">
+        <div className="bg-[#7A3E1E] rounded-2xl p-6 text-center">
           <Mic className="w-10 h-10 text-[#1A1410] mx-auto mb-3" />
           <p className="font-heading text-xl text-[#FDF5E8] mb-1">Ankommen im Moment</p>
           <p className="text-[#FDF5E8]/50 text-sm">15 Minuten • Geführte Meditation</p>
@@ -641,27 +641,27 @@ const MODAL_CONTENT: Record<string, { title: string; body: React.ReactNode }> = 
 // ─── Icon color map ───────────────────────────────────────────────────────────
 
 const ICON_BG: Record<string, string> = {
-  'bindungstyp-test': '#3B1F0A',
+  'bindungstyp-test': '#7A3E1E',
   'love-language-test': '#C4603A',
-  'beziehungsmodell-check': '#3B1F0A',
+  'beziehungsmodell-check': '#7A3E1E',
   'meditation-audio': '#5A8A6A',
   'erstes-date-guide': '#4A7A5A',
-  'reflexions-guide': '#6B3018',
-  'woechentliche-impulse': '#3B1F0A',
+  'reflexions-guide': '#A05830',
+  'woechentliche-impulse': '#7A3E1E',
   'mini-coaching': '#C4603A',
-  '36-fragen': '#3B1F0A',
-  '50-tiefenfragen': '#3B1F0A',
+  '36-fragen': '#7A3E1E',
+  '50-tiefenfragen': '#7A3E1E',
   'frage-des-tages': '#C4603A',
   'werte-zukunft': '#4A7A5A',
   'intimität': '#C4603A',
-  'konflikt': '#6B3018',
-  'ht-quiz-anna-yves': '#3B1F0A',
+  'konflikt': '#A05830',
+  'ht-quiz-anna-yves': '#7A3E1E',
   'meditation-anna-yves': '#5A8A6A',
-  'programm-verbindung': '#3B1F0A',
+  'programm-verbindung': '#7A3E1E',
   'programm-tantra': '#4A7A5A',
-  'sternzeichen-liebe': '#3B1F0A',
+  'sternzeichen-liebe': '#7A3E1E',
   'zeichen-kompatibilitaet': '#C4603A',
-  'aszendent-berechnen': '#3B1F0A',
+  'aszendent-berechnen': '#7A3E1E',
   'chinesisches-horoskop': '#4A7A5A',
 }
 
@@ -783,10 +783,10 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
 
   function tagColor(access: ContentItem['access']) {
     if (access === 'free') return 'bg-[rgba(90,138,106,0.15)] text-[#3D6B50]'
-    if (access === 'membership') return 'bg-[rgba(158,107,71,0.15)] text-[#240E04]'
+    if (access === 'membership') return 'bg-[rgba(158,107,71,0.15)] text-[#4A2010]'
     if (access === 'premium') return 'bg-[rgba(26,20,16,0.10)] text-[#1A1410]'
-    if (access === 'purchase') return 'bg-[rgba(158,107,71,0.15)] text-[#240E04]'
-    return 'bg-[rgba(59,31,10,0.07)] text-[#6B6058]'
+    if (access === 'purchase') return 'bg-[rgba(158,107,71,0.15)] text-[#4A2010]'
+    return 'bg-[rgba(122,62,30,0.07)] text-[#6B6058]'
   }
 
   const activeSection = CONTENT_SECTIONS.find((s) => s.id === activeTab)
@@ -851,7 +851,7 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
             value={draft}
             onChange={(e) => setDraft(e.target.value)}
             placeholder="Schreib, was dir gerade in den Sinn kommt…"
-            className="w-full h-64 bg-white rounded-2xl p-5 text-sm font-body text-[#1A1410] placeholder:text-[#A09888] leading-relaxed resize-none focus:outline-none focus:ring-2 focus:ring-[#3B1F0A]/20"
+            className="w-full h-64 bg-white rounded-2xl p-5 text-sm font-body text-[#1A1410] placeholder:text-[#A09888] leading-relaxed resize-none focus:outline-none focus:ring-2 focus:ring-[#7A3E1E]/20"
             style={{ boxShadow: '0 2px 16px rgba(26,20,16,0.07)' }}
           />
           <p className="text-right text-xs text-[#A09888] mt-2 font-body">{draft.length} Zeichen</p>
@@ -862,7 +862,7 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
           <button
             onClick={saveEntry}
             disabled={!draft.trim() || saving}
-            className="w-full py-4 rounded-full bg-[#3B1F0A] text-[#FDF5E8] font-body text-[14px] tracking-wide flex items-center justify-center gap-2 disabled:opacity-40 transition-opacity"
+            className="w-full py-4 rounded-full bg-[#7A3E1E] text-[#FDF5E8] font-body text-[14px] tracking-wide flex items-center justify-center gap-2 disabled:opacity-40 transition-opacity"
           >
             {saving ? (
               <span className="opacity-60">Speichern…</span>
@@ -914,13 +914,13 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
         <h1 className="font-heading text-[52px] font-light text-[#1A1410] tracking-[-0.5px] leading-none mb-3">Inhalte</h1>
 
         {/* Main tab toggle: Journal | Für dich — full width */}
-        <div className="flex gap-1 bg-[rgba(59,31,10,0.06)] rounded-full p-1 w-full">
+        <div className="flex gap-1 bg-[rgba(122,62,30,0.06)] rounded-full p-1 w-full">
           <button
             onClick={() => setMainTab('journal')}
             className={cn(
               'flex-1 px-4 py-2 rounded-full text-sm font-body transition-all',
               mainTab === 'journal'
-                ? 'bg-[#3B1F0A] text-[#FDF5E8]'
+                ? 'bg-[#7A3E1E] text-[#FDF5E8]'
                 : 'text-[#6B6058]'
             )}
           >
@@ -931,7 +931,7 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
             className={cn(
               'flex-1 px-4 py-2 rounded-full text-sm font-body transition-all',
               mainTab === 'content'
-                ? 'bg-[#3B1F0A] text-[#FDF5E8]'
+                ? 'bg-[#7A3E1E] text-[#FDF5E8]'
                 : 'text-[#6B6058]'
             )}
           >
@@ -978,13 +978,13 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
                       dismiss()
                       startWriting(cfg.journalPrompt)
                     }}
-                    className="flex-1 py-2.5 rounded-full bg-[#3B1F0A] text-[#FDF5E8] font-body text-[13px] transition-opacity hover:opacity-90"
+                    className="flex-1 py-2.5 rounded-full bg-[#7A3E1E] text-[#FDF5E8] font-body text-[13px] transition-opacity hover:opacity-90"
                   >
                     {cfg.positive ? 'Das freut mich ✦' : 'Im Journal erforschen →'}
                   </button>
                   <button
                     onClick={dismiss}
-                    className="px-4 py-2.5 rounded-full border border-[rgba(59,31,10,0.20)] text-[#6B6058] font-body text-[13px] transition-colors hover:border-[#3B1F0A]/40"
+                    className="px-4 py-2.5 rounded-full border border-[rgba(122,62,30,0.20)] text-[#6B6058] font-body text-[13px] transition-colors hover:border-[#7A3E1E]/40"
                   >
                     Danke, ich weiß
                   </button>
@@ -1004,7 +1004,7 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
             </p>
             <button
               onClick={() => startWriting(dailyPrompt)}
-              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-[#FDF5E8] text-[#3B1F0A] font-body text-[13px] transition-opacity hover:opacity-90"
+              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-[#FDF5E8] text-[#7A3E1E] font-body text-[13px] transition-opacity hover:opacity-90"
             >
               Jetzt schreiben →
             </button>
@@ -1045,8 +1045,8 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
           {/* FAB */}
           <button
             onClick={() => startWriting('')}
-            className="fixed bottom-24 right-5 md:bottom-8 md:right-8 w-14 h-14 rounded-full bg-[#3B1F0A] flex items-center justify-center z-30 transition-transform active:scale-95"
-            style={{ boxShadow: '0 4px 20px rgba(59,31,10,0.35)' }}
+            className="fixed bottom-24 right-5 md:bottom-8 md:right-8 w-14 h-14 rounded-full bg-[#7A3E1E] flex items-center justify-center z-30 transition-transform active:scale-95"
+            style={{ boxShadow: '0 4px 20px rgba(122,62,30,0.35)' }}
           >
             <Plus className="w-6 h-6 text-[#FDF5E8]" />
           </button>
@@ -1065,7 +1065,7 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Inhalte durchsuchen…"
-              className="w-full pl-10 pr-4 py-3 rounded-xl bg-white text-sm font-body text-[#1A1410] placeholder:text-[#6B6058] focus:outline-none focus:ring-2 focus:ring-[#3B1F0A]/30"
+              className="w-full pl-10 pr-4 py-3 rounded-xl bg-white text-sm font-body text-[#1A1410] placeholder:text-[#6B6058] focus:outline-none focus:ring-2 focus:ring-[#7A3E1E]/30"
               style={{ boxShadow: '0 2px 12px rgba(26,20,16,0.06)' }}
             />
           </div>
@@ -1080,8 +1080,8 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
                   className={cn(
                     'flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-body whitespace-nowrap transition-all',
                     activeTab === s.id
-                      ? 'bg-[#3B1F0A] text-white'
-                      : 'border border-[rgba(59,31,10,0.12)] text-[#6B6058] hover:border-[#3B1F0A]/40'
+                      ? 'bg-[#7A3E1E] text-white'
+                      : 'border border-[rgba(122,62,30,0.12)] text-[#6B6058] hover:border-[#7A3E1E]/40'
                   )}
                 >
                   {s.icon}
@@ -1111,7 +1111,7 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
                   >
                     <div
                       className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"
-                      style={{ backgroundColor: accessible ? (ICON_BG[item.id] ?? '#3B1F0A') : 'rgba(59,31,10,0.12)', color: '#FFFFFF' }}
+                      style={{ backgroundColor: accessible ? (ICON_BG[item.id] ?? '#7A3E1E') : 'rgba(122,62,30,0.12)', color: '#FFFFFF' }}
                     >
                       {item.icon}
                     </div>
@@ -1158,7 +1158,7 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
                     <div
                       className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"
                       style={{
-                        backgroundColor: accessible ? (ICON_BG[item.id] ?? '#3B1F0A') : 'rgba(59,31,10,0.12)',
+                        backgroundColor: accessible ? (ICON_BG[item.id] ?? '#7A3E1E') : 'rgba(122,62,30,0.12)',
                         color: '#FFFFFF',
                       }}
                     >

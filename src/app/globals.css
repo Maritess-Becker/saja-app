@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,42 +7,42 @@
 /* ── Background Gradients ───────────────────────────────────────────────── */
 :root {
   --bg-indigo:
-    radial-gradient(ellipse 200% 120% at 95% -5%,  rgba(196,96,58,0.32) 0%, transparent 60%),
+    radial-gradient(ellipse 200% 120% at 95% -5%,  rgba(210,120,70,0.32) 0%, transparent 60%),
     radial-gradient(ellipse 160% 100% at -5% 40%,  rgba(253,245,232,0.07) 0%, transparent 65%),
-    radial-gradient(ellipse 150% 130% at 50% 105%, rgba(36,14,4,0.60) 0%, transparent 60%),
-    radial-gradient(ellipse 120% 80%  at 85% 60%,  rgba(196,96,58,0.10) 0%, transparent 55%),
+    radial-gradient(ellipse 150% 130% at 50% 105%, rgba(74,32,16,0.60) 0%, transparent 60%),
+    radial-gradient(ellipse 120% 80%  at 85% 60%,  rgba(210,120,70,0.10) 0%, transparent 55%),
     radial-gradient(ellipse 100% 120% at 10% 85%,  rgba(253,245,232,0.06) 0%, transparent 60%),
-    radial-gradient(ellipse 80%  60%  at 45% 40%,  rgba(59,31,10,0.25) 0%, transparent 55%),
-    #3B1F0A;
+    radial-gradient(ellipse 80%  60%  at 45% 40%,  rgba(122,62,30,0.25) 0%, transparent 55%),
+    #7A3E1E;
 
   --bg-creme:
-    radial-gradient(ellipse 200% 100% at 100% 0%,  rgba(196,96,58,0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 180% 120% at 0% 100%,  rgba(59,31,10,0.08) 0%, transparent 65%),
-    radial-gradient(ellipse 150% 100% at 50% 45%,  rgba(59,31,10,0.03) 0%, transparent 65%),
-    radial-gradient(ellipse 120% 100% at 90% 75%,  rgba(196,96,58,0.05) 0%, transparent 60%),
-    radial-gradient(ellipse 100% 80%  at 20% 30%,  rgba(59,31,10,0.02) 0%, transparent 60%),
+    radial-gradient(ellipse 200% 100% at 100% 0%,  rgba(210,120,70,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 180% 120% at 0% 100%,  rgba(122,62,30,0.08) 0%, transparent 65%),
+    radial-gradient(ellipse 150% 100% at 50% 45%,  rgba(122,62,30,0.03) 0%, transparent 65%),
+    radial-gradient(ellipse 120% 100% at 90% 75%,  rgba(210,120,70,0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 100% 80%  at 20% 30%,  rgba(122,62,30,0.02) 0%, transparent 60%),
     #FDF5E8;
 
   --bg-violett:
-    radial-gradient(ellipse 200% 120% at 95% -5%,  rgba(196,96,58,0.38) 0%, transparent 58%),
+    radial-gradient(ellipse 200% 120% at 95% -5%,  rgba(210,120,70,0.38) 0%, transparent 58%),
     radial-gradient(ellipse 160% 100% at -5% 45%,  rgba(253,245,232,0.07) 0%, transparent 62%),
-    radial-gradient(ellipse 150% 130% at 50% 105%, rgba(36,14,4,0.50) 0%, transparent 58%),
-    radial-gradient(ellipse 100% 80%  at 80% 60%,  rgba(196,96,58,0.12) 0%, transparent 55%),
-    #6B3018;
+    radial-gradient(ellipse 150% 130% at 50% 105%, rgba(74,32,16,0.50) 0%, transparent 58%),
+    radial-gradient(ellipse 100% 80%  at 80% 60%,  rgba(210,120,70,0.12) 0%, transparent 55%),
+    #A05830;
 
   --bg-nav:
-    radial-gradient(ellipse 250% 150% at 95% 0%,  rgba(196,96,58,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 250% 150% at 95% 0%,  rgba(210,120,70,0.18) 0%, transparent 60%),
     radial-gradient(ellipse 200% 150% at 5% 100%, rgba(253,245,232,0.05) 0%, transparent 60%),
-    #3B1F0A;
+    #7A3E1E;
 
   /* ── Aura / Chakra accent colors ── */
-  --aura-heart:   #7EB89A;   /* Herzchakra — salbeigrün */
-  --aura-sacral:  #D4845A;   /* Sakralchakra — warmes Terrakotta */
-  --aura-crown:   #A78BC4;   /* Kronenchakra — sanftes Lavendel */
-  --aura-throat:  #6BAED6;   /* Kehlchakra — klares Himmelblau */
-  --aura-solar:   #E8C96B;   /* Solarplexus — goldenes Gelb */
-  --aura-root:    #B05C4A;   /* Wurzelchakra — tiefes Rot-Braun */
-  --aura-rose:    #D4849A;   /* Herzaura — zartes Rosenrot */
+  --aura-heart:   #2D7A5F;   /* Herzchakra — salbeigrün */
+  --aura-sacral:  #C4603A;   /* Sakralchakra — warmes Terrakotta */
+  --aura-crown:   #7B4FA6;   /* Kronenchakra — sanftes Lavendel */
+  --aura-throat:  #3A5F8A;   /* Kehlchakra — klares Himmelblau */
+  --aura-solar:   #BF9B30;   /* Solarplexus — goldenes Gelb */
+  --aura-root:    #8E3A20;   /* Wurzelchakra — tiefes Rot-Braun */
+  --aura-rose:    #C08080;   /* Herzaura — zartes Rosenrot */
 }
 
 /* ── Base ───────────────────────────────────────────────────────────────── */
@@ -108,7 +108,7 @@
   /* Primary — auf Indigo/Match (cremefarbener Button) */
   .btn-primary {
     background-color: #FDF5E8;
-    color: #3B1F0A;
+    color: #7A3E1E;
     letter-spacing: 0.06em;
     @apply px-6 py-3.5 rounded-full font-body font-normal
            transition-colors duration-200
@@ -118,14 +118,14 @@
 
   /* Primary — auf Creme (Dunkel-Button) */
   .btn-primary-dark {
-    background-color: #3B1F0A;
+    background-color: #7A3E1E;
     color: #FDF5E8;
     letter-spacing: 0.06em;
     @apply px-6 py-3.5 rounded-full font-body font-normal
            transition-colors duration-200
            disabled:opacity-50 disabled:cursor-not-allowed;
   }
-  .btn-primary-dark:hover { background-color: #240E04; }
+  .btn-primary-dark:hover { background-color: #4A2010; }
 
   /* Ghost — auf Indigo */
   .btn-secondary {
@@ -160,7 +160,7 @@
   /* Auf Creme */
   .card-light {
     background: white;
-    border: 0.5px solid rgba(59,31,10,0.10);
+    border: 0.5px solid rgba(122,62,30,0.10);
     @apply rounded-2xl p-6;
     transition: transform 150ms ease;
   }
@@ -186,17 +186,17 @@
   /* Auf Creme */
   .input-light {
     background: white;
-    border: 0.5px solid rgba(59,31,10,0.15);
-    color: #3B1F0A;
+    border: 0.5px solid rgba(122,62,30,0.15);
+    color: #7A3E1E;
     font-weight: 300;
     @apply w-full px-4 py-3 rounded-xl font-body
            transition-all duration-200;
   }
   .input-light:focus {
     outline: none;
-    border: 1px solid #3B1F0A;
+    border: 1px solid #7A3E1E;
   }
-  .input-light::placeholder { color: rgba(59,31,10,0.35); }
+  .input-light::placeholder { color: rgba(122,62,30,0.35); }
 
   /* ── Label ── */
   .label {
@@ -226,7 +226,7 @@
   .chip-active {
     background: #FDF5E8 !important;
     border: 0.5px solid #FDF5E8 !important;
-    color: #3B1F0A !important;
+    color: #7A3E1E !important;
   }
 
   /* ── Tag-Accent — auf Indigo ── */
@@ -240,7 +240,7 @@
 
   /* ── Schatten ── */
   .card-shadow {
-    box-shadow: 0 4px 24px rgba(36,14,4,0.4);
+    box-shadow: 0 4px 24px rgba(74,32,16,0.4);
   }
 }
 

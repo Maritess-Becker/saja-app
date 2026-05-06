@@ -81,7 +81,7 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
 
   if (tier === 'free') {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen px-6 text-center bg-[#3B1F0A]">
+      <div className="flex flex-col items-center justify-center min-h-screen px-6 text-center bg-[#7A3E1E]">
         <div className="w-20 h-20 bg-[rgba(253,245,232,0.12)] rounded-full flex items-center justify-center mx-auto mb-6">
           <Lock className="w-9 h-9 text-[#FDF5E8]/50" />
         </div>
@@ -120,7 +120,7 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
       <div className="max-w-2xl mx-auto px-4 pb-32">
         {/* Sticky header + gradient fade — one container so they stick together */}
         <div className="sticky top-0 z-20 -mx-4">
-          <div className="bg-[#3B1F0A] px-4 pt-5 pb-4">
+          <div className="bg-[#7A3E1E] px-4 pt-5 pb-4">
             <h1 className="font-heading text-[52px] font-light text-[#FDF5E8] tracking-[-0.5px] leading-none mb-1">Matches</h1>
             {activeMatchId ? (
               <span className="flex items-center gap-2 text-[#FDF5E8]/70 text-[13px] font-body">
@@ -132,7 +132,7 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
             )}
           </div>
           {/* Gradient fade from header to content */}
-          <div className="h-7 bg-gradient-to-b from-[#3B1F0A] to-transparent pointer-events-none" />
+          <div className="h-7 bg-gradient-to-b from-[#7A3E1E] to-transparent pointer-events-none" />
         </div>
 
         <div className="space-y-4">
@@ -152,9 +152,9 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
                 key={match.id}
                 className={cn(
                   'bg-white rounded-2xl overflow-hidden active:scale-[0.98] transition-transform duration-150',
-                  isThisActiveMatch ? 'ring-2 ring-[#3B1F0A]' : ''
+                  isThisActiveMatch ? 'ring-2 ring-[#7A3E1E]' : ''
                 )}
-                style={{ boxShadow: isRequested && !isRequester && !isActive ? '0 2px 12px rgba(26,20,16,0.08), inset 4px 0 0 #3B1F0A' : '0 2px 12px rgba(26,20,16,0.08)' }}
+                style={{ boxShadow: isRequested && !isRequester && !isActive ? '0 2px 12px rgba(26,20,16,0.08), inset 4px 0 0 #7A3E1E' : '0 2px 12px rgba(26,20,16,0.08)' }}
               >
                 {/* Photo area */}
                 <Link href={`/profile/${profile.user_id}`} className="block relative h-[220px] overflow-hidden">
@@ -166,7 +166,7 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
                       className="absolute inset-0 w-full h-full object-cover object-top"
                     />
                   ) : (
-                    <div className="absolute inset-0 bg-[rgba(59,31,10,0.07)] flex items-center justify-center">
+                    <div className="absolute inset-0 bg-[rgba(122,62,30,0.07)] flex items-center justify-center">
                       <span className="font-heading text-5xl text-[#6B6058]">
                         {profile.name?.[0]}
                       </span>
@@ -192,12 +192,12 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
                   {/* Bindungstyp badge */}
                   {profile.bindungstyp && (() => {
                     const BINDUNG_AURA: Record<string, string> = {
-                      'Sicher':                 '#7EB89A',
-                      'Ängstlich-präoccupiert': '#D4849A',
-                      'Vermeidend-distanziert': '#6BAED6',
-                      'Desorganisiert':         '#A78BC4',
+                      'Sicher':                 '#2D7A5F',
+                      'Ängstlich-präoccupiert': '#C08080',
+                      'Vermeidend-distanziert': '#3A5F8A',
+                      'Desorganisiert':         '#7B4FA6',
                     }
-                    const aura = BINDUNG_AURA[profile.bindungstyp] ?? '#D4845A'
+                    const aura = BINDUNG_AURA[profile.bindungstyp] ?? '#C4603A'
                     return (
                       <span className="absolute bottom-2 right-2 font-body text-[10px] px-2 py-0.5 rounded-full text-white"
                         style={{ backgroundColor: aura }}>
@@ -208,7 +208,7 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
 
                   {/* Active badge */}
                   {isThisActiveMatch && (
-                    <span className="absolute top-2 right-2 flex items-center gap-1 text-xs text-[#3B1F0A] bg-white px-2 py-1 rounded-full">
+                    <span className="absolute top-2 right-2 flex items-center gap-1 text-xs text-[#7A3E1E] bg-white px-2 py-1 rounded-full">
                       <CheckCircle className="w-3 h-3" /> Aktiv
                     </span>
                   )}
@@ -246,7 +246,7 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
                         onClick={() => requestConnection(match.id)}
                         disabled={loading === match.id || (!!activeMatchId && !isThisActiveMatch)}
                         className={cn(
-                          'w-full border-[1.5px] border-[#3B1F0A] text-[#3B1F0A] bg-transparent hover:bg-[#3B1F0A]/5 rounded-xl text-sm py-3 px-4 transition-colors duration-200 disabled:opacity-40 disabled:cursor-not-allowed font-body font-medium'
+                          'w-full border-[1.5px] border-[#7A3E1E] text-[#7A3E1E] bg-transparent hover:bg-[#7A3E1E]/5 rounded-xl text-sm py-3 px-4 transition-colors duration-200 disabled:opacity-40 disabled:cursor-not-allowed font-body font-medium'
                         )}
                       >
                         {loading === match.id ? '...' : 'Begegnung anfragen'}

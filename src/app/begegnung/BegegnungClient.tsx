@@ -280,7 +280,7 @@ export function BegegnungClient({
   // ── Free tier lock ──────────────────────────────────────────────────────
   if (tier === 'free') {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen px-6 text-center bg-[#3B1F0A]">
+      <div className="flex flex-col items-center justify-center min-h-screen px-6 text-center bg-[#7A3E1E]">
         <div className="w-20 h-20 bg-[rgba(253,245,232,0.12)] rounded-full flex items-center justify-center mx-auto mb-6">
           <Lock className="w-9 h-9 text-[#FDF5E8]/50" />
         </div>
@@ -340,7 +340,7 @@ export function BegegnungClient({
     <div ref={containerRef} className="flex flex-col w-full max-w-2xl mx-auto overflow-hidden" style={{ height: '100dvh' }}>
 
       {/* Header */}
-      <div className="flex-shrink-0 flex items-center gap-4 p-4 bg-[#3B1F0A]">
+      <div className="flex-shrink-0 flex items-center gap-4 p-4 bg-[#7A3E1E]">
         <Link href={`/profile/${otherProfile?.user_id}`} className="w-12 h-12 rounded-xl bg-[rgba(253,245,232,0.15)] flex items-center justify-center overflow-hidden flex-shrink-0 hover:opacity-90 transition-opacity">
           {photoUrl(otherProfile?.photos?.[0]) ? (
             // eslint-disable-next-line @next/next/no-img-element
@@ -375,7 +375,7 @@ export function BegegnungClient({
 
       {/* Meine Intention */}
       {selectedIntention && (
-        <div className="flex-shrink-0 px-4 py-2 border-b border-[rgba(59,31,10,0.10)] bg-[#FDF5E8]">
+        <div className="flex-shrink-0 px-4 py-2 border-b border-[rgba(122,62,30,0.10)] bg-[#FDF5E8]">
           <p className="text-[10px] text-[#6B6058] uppercase tracking-widest">Meine Intention</p>
           <p className="text-xs text-[#6B6058] font-body font-light">{selectedIntention}</p>
         </div>
@@ -442,12 +442,12 @@ export function BegegnungClient({
       {/* Eingabe — bleibt immer unten sichtbar */}
       <form
         onSubmit={sendMessage}
-        className="flex-shrink-0 px-4 pt-3 bg-white border-t border-[rgba(59,31,10,0.12)] flex gap-3"
+        className="flex-shrink-0 px-4 pt-3 bg-white border-t border-[rgba(122,62,30,0.12)] flex gap-3"
         style={{ paddingBottom: 'calc(0.75rem + env(safe-area-inset-bottom, 0px))' }}
       >
         <input
           type="text"
-          className="flex-1 rounded-full border border-[rgba(30,20,10,0.15)] bg-white px-4 py-3 text-sm font-body font-light text-[#1A1410] placeholder:text-[#A09888] focus:outline-none focus:border-[#3B1F0A] focus:border-[1.5px]"
+          className="flex-1 rounded-full border border-[rgba(30,20,10,0.15)] bg-white px-4 py-3 text-sm font-body font-light text-[#1A1410] placeholder:text-[#A09888] focus:outline-none focus:border-[#7A3E1E] focus:border-[1.5px]"
           placeholder="Schreibe etwas…"
           value={text}
           onChange={(e) => setText(e.target.value)}
@@ -455,7 +455,7 @@ export function BegegnungClient({
         <button
           type="submit"
           disabled={sending || !text.trim()}
-          className="w-11 h-11 bg-[#3B1F0A] rounded-full flex items-center justify-center flex-shrink-0 disabled:opacity-40 hover:bg-[#240E04] transition-colors active:scale-95"
+          className="w-11 h-11 bg-[#7A3E1E] rounded-full flex items-center justify-center flex-shrink-0 disabled:opacity-40 hover:bg-[#4A2010] transition-colors active:scale-95"
         >
           <Send className="w-4 h-4 text-[#FDF5E8]" />
         </button>
@@ -483,8 +483,8 @@ export function BegegnungClient({
               <div className="flex gap-2 mb-6">
                 {([
                   { key: 'leicht' as QuestionLevel, label: 'Leicht', badge: 'bg-[rgba(253,245,232,0.12)] text-[#FDF5E8]' },
-                  { key: 'mittel' as QuestionLevel, label: 'Nachdenklich', badge: 'bg-[#3B1F0A] text-[#FDF5E8]' },
-                  { key: 'tief' as QuestionLevel, label: 'In die Tiefe', badge: 'bg-[#6B3018] text-[#FDF5E8]' },
+                  { key: 'mittel' as QuestionLevel, label: 'Nachdenklich', badge: 'bg-[#7A3E1E] text-[#FDF5E8]' },
+                  { key: 'tief' as QuestionLevel, label: 'In die Tiefe', badge: 'bg-[#A05830] text-[#FDF5E8]' },
                 ] as const).map((lvl) => (
                   <button
                     key={lvl.key}
@@ -575,7 +575,7 @@ export function BegegnungClient({
               Wenn du die Begegnung beendest, seid ihr beide sofort wieder frei.
             </p>
             <div className="flex gap-3">
-              <button onClick={() => setEndStep('none')} className="flex-1 py-3 rounded-full text-sm font-body border border-[rgba(59,31,10,0.2)] text-[#6B6058]">
+              <button onClick={() => setEndStep('none')} className="flex-1 py-3 rounded-full text-sm font-body border border-[rgba(122,62,30,0.2)] text-[#6B6058]">
                 Abbrechen
               </button>
               <button onClick={confirmEnd} className="flex-1 bg-red-500 text-white py-3 rounded-full text-sm font-medium hover:bg-red-600 transition-colors">
@@ -600,7 +600,7 @@ export function BegegnungClient({
               value={closingMsg}
               onChange={(e) => setClosingMsg(e.target.value.slice(0, 200))}
               placeholder="Eine kurze ehrliche Nachricht..."
-              className="w-full px-4 py-3 rounded-xl border border-[rgba(59,31,10,0.15)] bg-white text-[#1A1410] text-sm font-body font-light resize-none focus:outline-none focus:border-[rgba(59,31,10,0.4)] mb-2"
+              className="w-full px-4 py-3 rounded-xl border border-[rgba(122,62,30,0.15)] bg-white text-[#1A1410] text-sm font-body font-light resize-none focus:outline-none focus:border-[rgba(122,62,30,0.4)] mb-2"
               rows={4}
             />
             <div className="flex justify-end mb-4">
@@ -628,8 +628,8 @@ export function BegegnungClient({
                   onClick={() => setCheckinResponse(opt.value)}
                   className={`flex flex-col items-center py-5 px-3 rounded-2xl border transition-all ${
                     checkinResponse === opt.value
-                      ? 'border-[rgba(59,31,10,0.4)] bg-[rgba(59,31,10,0.06)]'
-                      : 'border-[rgba(59,31,10,0.10)] bg-white hover:border-[rgba(59,31,10,0.2)]'
+                      ? 'border-[rgba(122,62,30,0.4)] bg-[rgba(122,62,30,0.06)]'
+                      : 'border-[rgba(122,62,30,0.10)] bg-white hover:border-[rgba(122,62,30,0.2)]'
                   }`}
                 >
                   <span className="text-2xl mb-2">{opt.emoji}</span>
@@ -643,7 +643,7 @@ export function BegegnungClient({
                   value={checkinNote}
                   onChange={(e) => setCheckinNote(e.target.value)}
                   placeholder="Möchtest du mehr dazu festhalten? (optional)"
-                  className="w-full px-4 py-3 rounded-xl border border-[rgba(59,31,10,0.12)] bg-white text-[#1A1410] text-sm font-body font-light resize-none focus:outline-none"
+                  className="w-full px-4 py-3 rounded-xl border border-[rgba(122,62,30,0.12)] bg-white text-[#1A1410] text-sm font-body font-light resize-none focus:outline-none"
                   rows={2}
                 />
               </div>
