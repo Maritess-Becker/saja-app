@@ -280,18 +280,18 @@ export function BegegnungClient({
   // ── Free tier lock ──────────────────────────────────────────────────────
   if (tier === 'free') {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen px-6 text-center bg-[#2F4A3C]">
-        <div className="w-20 h-20 bg-[rgba(242,235,226,0.12)] rounded-full flex items-center justify-center mx-auto mb-6">
-          <Lock className="w-9 h-9 text-[#F2EBE2]/50" />
+      <div className="flex flex-col items-center justify-center min-h-screen px-6 text-center" style={{ background: '#EAE0D5' }}>
+        <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6" style={{ background: 'rgba(44,26,14,0.06)' }}>
+          <Lock className="w-9 h-9 text-[#9A8A7A]" />
         </div>
-        <h2 className="font-heading text-4xl text-[#F2EBE2] mb-3">Begegnung ist gesperrt</h2>
-        <p className="text-[#F2EBE2]/60 leading-relaxed mb-8 max-w-sm">
+        <h2 className="font-heading text-4xl text-[#2C1A0E] mb-3">Begegnung ist gesperrt</h2>
+        <p className="text-[#9A8A7A] leading-relaxed mb-8 max-w-sm">
           Mit der Mitgliedschaft (29 €/Monat) kannst du Begegnungen starten und mit Matches chatten.
         </p>
-        <Link href="/pricing" className="bg-[#F2EBE2] text-[#232323] px-8 py-3.5 rounded-full font-body font-semibold hover:bg-white transition-colors">
+        <Link href="/pricing" className="btn-primary px-8">
           Mitgliedschaft ansehen
         </Link>
-        <p className="text-xs text-[#F2EBE2]/30 mt-4">14 Tage Geld-zurück-Garantie</p>
+        <p className="text-xs text-[#9A8A7A] mt-4">14 Tage Geld-zurück-Garantie</p>
       </div>
     )
   }
@@ -299,14 +299,14 @@ export function BegegnungClient({
   // ── Kein aktives Match ──────────────────────────────────────────────────
   if (!activeMatch || !activeConnection) {
     return (
-      <div className="flex flex-col items-center justify-center flex-1 px-6 text-center">
-        <div className="w-20 h-20 bg-[#F2EBE2] rounded-full flex items-center justify-center mx-auto mb-6">
-          <Sparkles className="w-10 h-10 text-[#232323]" />
+      <div className="flex flex-col items-center justify-center flex-1 px-6 text-center" style={{ background: '#EAE0D5' }}>
+        <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6" style={{ background: '#F2EBE2' }}>
+          <Sparkles className="w-10 h-10 text-[#2C1A0E]" />
         </div>
-        <h2 className="font-heading text-4xl text-[#232323] mb-4">
+        <h2 className="font-heading text-4xl text-[#2C1A0E] mb-4">
           Noch keine aktive Begegnung
         </h2>
-        <p className="text-[#6B6058] max-w-sm leading-relaxed mb-8">
+        <p className="text-[#9A8A7A] max-w-sm leading-relaxed mb-8">
           Sobald du und eine andere Person eine Begegnung gestartet habt,
           erscheint euer Chat hier — mit voller Aufmerksamkeit für einander.
         </p>
@@ -320,13 +320,13 @@ export function BegegnungClient({
           </Link>
         </div>
         <div className="mt-12 max-w-sm">
-          <div className="card bg-[#F2EBE2] border-0">
-            <p className="text-xs text-[#232323] font-medium uppercase tracking-wider mb-2">
+          <div className="card">
+            <p className="text-xs text-[#2C1A0E] font-medium uppercase tracking-wider mb-2">
               One Connection Rule
             </p>
-            <p className="text-[#6B6058] text-sm leading-relaxed">
+            <p className="text-[#9A8A7A] text-sm leading-relaxed">
               Bei Saja kannst du immer nur mit{' '}
-              <strong className="text-[#232323]">einer Person gleichzeitig</strong>{' '}
+              <strong className="text-[#2C1A0E]">einer Person gleichzeitig</strong>{' '}
               in einer Begegnung sein — für echte Tiefe statt endloses Chatten.
             </p>
           </div>
@@ -337,15 +337,15 @@ export function BegegnungClient({
 
   // ── Aktive Begegnung ────────────────────────────────────────────────────
   return (
-    <div ref={containerRef} className="flex flex-col w-full max-w-2xl mx-auto overflow-hidden" style={{ height: '100dvh', background: 'var(--bg-indigo)' }}>
+    <div ref={containerRef} className="flex flex-col w-full max-w-2xl mx-auto overflow-hidden" style={{ height: '100dvh', background: '#EAE0D5' }}>
 
       {/* Top bar */}
       <div className="flex-shrink-0 flex items-center justify-between px-6 pt-12 pb-0">
-        <span className="font-heading text-[22px] font-normal tracking-[-0.3px]" style={{ color: 'rgba(242,235,226,0.45)' }}>Saja</span>
+        <span className="font-heading text-[22px] font-normal tracking-[-0.3px]" style={{ color: '#2C1A0E' }}>Saja</span>
         <button
           onClick={() => setEndStep('confirm')}
           className="text-xs font-light font-body bg-transparent border-none cursor-pointer"
-          style={{ color: 'rgba(242,235,226,0.20)' }}
+          style={{ color: 'rgba(44,26,14,0.25)' }}
         >
           Begegnung beenden
         </button>
@@ -355,11 +355,11 @@ export function BegegnungClient({
       <div className="flex-1 overflow-y-auto overscroll-contain flex flex-col px-7 pt-10 pb-6">
 
         {/* Quiet ✦ symbol */}
-        <p className="font-heading text-[40px] leading-none mb-8" style={{ color: 'rgba(242,235,226,0.20)' }}>✦</p>
+        <p className="font-heading text-[40px] leading-none mb-8" style={{ color: 'rgba(44,26,14,0.15)' }}>✦</p>
 
         {/* Partner name */}
         <div className="mb-10">
-          <h2 className="font-heading text-[56px] font-normal text-[#F2EBE2] leading-none mb-2 tracking-[-0.5px]">
+          <h2 className="font-heading text-[56px] font-normal text-[#2C1A0E] leading-none mb-2 tracking-[-0.5px]">
             {otherProfile?.name}
           </h2>
           {(() => {
@@ -369,19 +369,19 @@ export function BegegnungClient({
               otherProfile?.sun_sign ?? '',
             ].filter(Boolean)
             return parts.length > 0 ? (
-              <p className="text-sm font-light font-body" style={{ color: 'rgba(242,235,226,0.35)' }}>{parts.join(' · ')}</p>
+              <p className="text-sm font-light font-body" style={{ color: '#9A8A7A' }}>{parts.join(' · ')}</p>
             ) : null
           })()}
         </div>
 
         {/* Daily question */}
-        <div className="mb-10" style={{ borderLeft: '1.5px solid rgba(242,235,226,0.12)', paddingLeft: '20px' }}>
-          <p className="text-[10px] uppercase tracking-widest mb-2 font-body" style={{ color: 'rgba(242,235,226,0.35)' }}>Frage des Tages</p>
-          <p className="font-heading text-[22px] font-normal leading-[1.45]" style={{ color: 'rgba(242,235,226,0.80)' }}>&ldquo;{dailyQuestion}&rdquo;</p>
+        <div className="mb-10" style={{ borderLeft: '1.5px solid rgba(44,26,14,0.12)', paddingLeft: '20px' }}>
+          <p className="text-[10px] uppercase tracking-widest mb-2 font-body" style={{ color: 'rgba(44,26,14,0.40)' }}>Frage des Tages</p>
+          <p className="font-heading text-[22px] font-normal leading-[1.45]" style={{ color: 'rgba(44,26,14,0.75)' }}>&ldquo;{dailyQuestion}&rdquo;</p>
           <button
             onClick={sendDailyQuestion}
             className="mt-2 text-[10px] font-body transition-colors"
-            style={{ color: 'rgba(242,235,226,0.25)', background: 'none', border: 'none', cursor: 'pointer' }}
+            style={{ color: 'rgba(44,26,14,0.30)', background: 'none', border: 'none', cursor: 'pointer' }}
           >
             Als Nachricht senden
           </button>
@@ -390,8 +390,8 @@ export function BegegnungClient({
         {/* Meine Intention */}
         {selectedIntention && (
           <div className="mb-6">
-            <p className="text-[10px] uppercase tracking-widest font-body mb-1" style={{ color: 'rgba(242,235,226,0.25)' }}>Meine Intention</p>
-            <p className="text-xs font-body font-light" style={{ color: 'rgba(242,235,226,0.50)' }}>{selectedIntention}</p>
+            <p className="text-[10px] uppercase tracking-widest font-body mb-1" style={{ color: 'rgba(44,26,14,0.30)' }}>Meine Intention</p>
+            <p className="text-xs font-body font-light" style={{ color: '#9A8A7A' }}>{selectedIntention}</p>
           </div>
         )}
 
@@ -399,7 +399,7 @@ export function BegegnungClient({
         <div className="space-y-3 mb-4">
           {messages.length === 0 && (
             <div className="text-center py-8">
-              <p className="font-heading text-xl" style={{ color: 'rgba(242,235,226,0.20)' }}>
+              <p className="font-heading text-xl" style={{ color: 'rgba(44,26,14,0.20)' }}>
                 Der Anfang von etwas Besonderem
               </p>
             </div>
@@ -410,8 +410,8 @@ export function BegegnungClient({
             return (
               <div key={msg.id} className={cn('flex', isMe ? 'justify-end' : 'justify-start')}>
                 {!isMe && (
-                  <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mr-2 mt-1" style={{ background: 'rgba(242,235,226,0.12)' }}>
-                    <span className="text-xs font-heading" style={{ color: 'rgba(242,235,226,0.60)' }}>
+                  <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mr-2 mt-1" style={{ background: 'rgba(44,26,14,0.08)' }}>
+                    <span className="text-xs font-heading" style={{ color: '#9A8A7A' }}>
                       {otherProfile?.name?.[0]}
                     </span>
                   </div>
@@ -422,12 +422,12 @@ export function BegegnungClient({
                     isMe ? 'rounded-br-sm' : 'rounded-bl-sm'
                   )}
                   style={isMe
-                    ? { background: 'rgba(242,235,226,0.18)', color: '#F2EBE2' }
-                    : { background: 'rgba(242,235,226,0.08)', border: '0.5px solid rgba(242,235,226,0.10)', color: 'rgba(242,235,226,0.80)' }
+                    ? { background: '#6B7B5A', color: '#F2EBE2' }
+                    : { background: '#F2EBE2', border: '0.5px solid rgba(44,26,14,0.10)', color: '#2C1A0E' }
                   }
                 >
                   {msg.content}
-                  <p className="text-[10px] mt-1.5" style={{ color: 'rgba(242,235,226,0.30)' }}>
+                  <p className="text-[10px] mt-1.5" style={{ color: isMe ? 'rgba(242,235,226,0.60)' : 'rgba(44,26,14,0.35)' }}>
                     {formatRelativeTime(msg.created_at)}
                   </p>
                 </div>
@@ -441,12 +441,12 @@ export function BegegnungClient({
         <form
           onSubmit={sendMessage}
           className="flex gap-3 items-center rounded-2xl px-4 py-3 mt-2"
-          style={{ background: 'rgba(242,235,226,0.06)', border: '0.5px solid rgba(242,235,226,0.10)' }}
+          style={{ background: '#F2EBE2', border: '0.5px solid rgba(44,26,14,0.12)' }}
         >
           <input
             type="text"
             className="flex-1 bg-transparent border-none outline-none text-sm font-body font-light"
-            style={{ color: '#F2EBE2' }}
+            style={{ color: '#2C1A0E' }}
             placeholder="Schreib etwas…"
             value={text}
             onChange={(e) => setText(e.target.value)}
@@ -455,36 +455,36 @@ export function BegegnungClient({
             type="submit"
             disabled={sending || !text.trim()}
             className="text-lg disabled:opacity-20 transition-colors"
-            style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(242,235,226,0.30)' }}
+            style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(44,26,14,0.35)' }}
           >↑</button>
         </form>
 
       </div>
 
       {/* Abstand zur Nav auf Mobile */}
-      <div ref={spacerRef} className="flex-shrink-0 md:hidden" style={{ height: 'calc(4rem + env(safe-area-inset-bottom, 0px))', background: 'var(--bg-indigo)' }} />
+      <div ref={spacerRef} className="flex-shrink-0 md:hidden" style={{ height: 'calc(4rem + env(safe-area-inset-bottom, 0px))', background: '#EAE0D5' }} />
 
       {/* ── Guided First Message Overlay — 3 Ebenen ── */}
       {showGuided && (
         <div className="fixed inset-0 z-50 flex flex-col px-5 py-8 overflow-y-auto"
-          style={{ background: 'var(--bg-violett)' }}>
-          <button onClick={skipGuided} className="self-end text-[#F2EBE2]/40 text-sm font-body mb-6 hover:text-[#F2EBE2]/70">
+          style={{ background: '#EAE0D5' }}>
+          <button onClick={skipGuided} className="self-end text-[#9A8A7A] text-sm font-body mb-6 hover:text-[#2C1A0E]">
             Überspringen
           </button>
 
           {guidedStep === 'question' ? (
             <>
-              <h2 className="font-heading text-[32px] text-[#F2EBE2] mb-3 leading-tight">Wie möchtest du beginnen?</h2>
-              <p className="text-[#F2EBE2]/55 font-body font-light text-sm mb-6 leading-relaxed">
+              <h2 className="font-heading text-[32px] text-[#2C1A0E] mb-3 leading-tight">Wie möchtest du beginnen?</h2>
+              <p className="text-[#9A8A7A] font-body font-light text-sm mb-6 leading-relaxed">
                 Wähle eine Ebene — oder schreib einfach was sich richtig anfühlt.
               </p>
 
               {/* Level pills */}
               <div className="flex gap-2 mb-6">
                 {([
-                  { key: 'leicht' as QuestionLevel, label: 'Leicht', badge: 'bg-[rgba(242,235,226,0.12)] text-[#F2EBE2]' },
-                  { key: 'mittel' as QuestionLevel, label: 'Nachdenklich', badge: 'bg-[#2F4A3C] text-[#F2EBE2]' },
-                  { key: 'tief' as QuestionLevel, label: 'In die Tiefe', badge: 'bg-[#3D5E4E] text-[#F2EBE2]' },
+                  { key: 'leicht' as QuestionLevel, label: 'Leicht' },
+                  { key: 'mittel' as QuestionLevel, label: 'Nachdenklich' },
+                  { key: 'tief' as QuestionLevel, label: 'In die Tiefe' },
                 ] as const).map((lvl) => (
                   <button
                     key={lvl.key}
@@ -495,8 +495,8 @@ export function BegegnungClient({
                     }}
                     className={`px-4 py-2 rounded-full text-sm font-body transition-all border ${
                       guidedLevel === lvl.key
-                        ? 'border-[#F2EBE2] bg-[rgba(242,235,226,0.15)] text-[#F2EBE2]'
-                        : 'border-[rgba(242,235,226,0.2)] text-[#F2EBE2]/55'
+                        ? 'border-[#6B7B5A] bg-[#6B7B5A] text-[#F2EBE2]'
+                        : 'border-[rgba(44,26,14,0.20)] text-[rgba(44,26,14,0.55)]'
                     }`}
                   >
                     {lvl.label}
@@ -512,9 +512,13 @@ export function BegegnungClient({
                     onClick={() => setSelectedQuestion(q)}
                     className={`w-full text-left px-5 py-4 rounded-2xl transition-all font-body font-light text-sm leading-relaxed ${
                       selectedQuestion === q
-                        ? 'bg-[rgba(242,235,226,0.14)] border border-[rgba(242,235,226,0.4)] text-[#F2EBE2]'
-                        : 'bg-[rgba(242,235,226,0.06)] border border-[rgba(242,235,226,0.12)] text-[#F2EBE2]/70'
+                        ? 'border text-[#2C1A0E]'
+                        : 'border text-[#9A8A7A]'
                     }`}
+                    style={selectedQuestion === q
+                      ? { background: 'rgba(107,123,90,0.10)', borderColor: '#6B7B5A' }
+                      : { background: '#F2EBE2', borderColor: 'rgba(44,26,14,0.12)' }
+                    }
                   >
                     &ldquo;{q}&rdquo;
                   </button>
@@ -528,17 +532,17 @@ export function BegegnungClient({
               >
                 Diese Frage senden ✦
               </button>
-              <button onClick={skipGuided} className="w-full py-3 text-[#F2EBE2]/50 text-sm font-body">
+              <button onClick={skipGuided} className="w-full py-3 text-[#9A8A7A] text-sm font-body">
                 Eigene Nachricht schreiben
               </button>
             </>
           ) : (
             <>
-              <button onClick={() => setGuidedStep('question')} className="self-start text-[#F2EBE2]/40 text-sm font-body mb-6">
+              <button onClick={() => setGuidedStep('question')} className="self-start text-[#9A8A7A] text-sm font-body mb-6">
                 ← Zurück
               </button>
-              <h2 className="font-heading text-[28px] text-[#F2EBE2] mb-2 leading-tight">Meine Intention für dieses Gespräch</h2>
-              <p className="text-[#F2EBE2]/40 font-body font-light text-xs uppercase tracking-widest mb-6">Nur für dich sichtbar</p>
+              <h2 className="font-heading text-[28px] text-[#2C1A0E] mb-2 leading-tight">Meine Intention für dieses Gespräch</h2>
+              <p className="text-[rgba(44,26,14,0.40)] font-body font-light text-xs uppercase tracking-widest mb-6">Nur für dich sichtbar</p>
               <div className="space-y-2 mb-8">
                 {INTENTION_OPTIONS.map((opt) => (
                   <button
@@ -546,9 +550,13 @@ export function BegegnungClient({
                     onClick={() => setSelectedIntention(opt)}
                     className={`w-full text-left px-5 py-3.5 rounded-full transition-all font-body font-light text-sm ${
                       selectedIntention === opt
-                        ? 'bg-[#F2EBE2] text-[#232323]'
-                        : 'bg-[rgba(242,235,226,0.08)] border border-[rgba(242,235,226,0.15)] text-[#F2EBE2]/70'
+                        ? 'text-[#F2EBE2]'
+                        : 'border text-[rgba(44,26,14,0.65)]'
                     }`}
+                    style={selectedIntention === opt
+                      ? { background: '#6B7B5A' }
+                      : { background: '#F2EBE2', borderColor: 'rgba(44,26,14,0.15)' }
+                    }
                   >
                     {opt}
                   </button>

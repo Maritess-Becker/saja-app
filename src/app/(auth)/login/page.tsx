@@ -48,26 +48,26 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-4 py-12" style={{ background: 'var(--bg-indigo)' }}>
+    <div className="min-h-screen flex flex-col items-center justify-center px-4 py-12" style={{ background: '#EAE0D5' }}>
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="text-center mb-10">
           <Link href="/" className="inline-flex justify-center mb-6">
-            <SajaLogo size="lg" showTagline={true} />
+            <SajaLogo size="lg" showTagline={true} onDark={false} />
           </Link>
-          <h1 className="font-heading text-4xl font-light text-[#F2EBE2]">Willkommen zurück</h1>
-          <p className="text-[#F2EBE2]/50 mt-2 font-body text-sm">Schön, dich wieder zu sehen.</p>
+          <h1 className="font-heading text-4xl font-light text-[#2C1A0E]">Willkommen zurück</h1>
+          <p className="mt-2 font-body text-sm" style={{ color: 'rgba(44,26,14,0.50)' }}>Schön, dich wieder zu sehen.</p>
         </div>
 
         <div className="card">
           {/* Mode Toggle */}
-          <div className="flex rounded-xl bg-[rgba(242,235,226,0.08)] p-1 mb-8">
+          <div className="flex rounded-xl p-1 mb-8" style={{ background: 'rgba(44,26,14,0.06)' }}>
             <button
               onClick={() => setMode('password')}
               className={`flex-1 py-2 rounded-lg text-sm font-medium transition-all font-body ${
                 mode === 'password'
-                  ? 'bg-[rgba(242,235,226,0.15)] text-[#F2EBE2]'
-                  : 'text-[#F2EBE2]/40'
+                  ? 'bg-[#F2EBE2] text-[#2C1A0E] shadow-sm'
+                  : 'text-[#9A8A7A]'
               }`}
             >
               Passwort
@@ -76,8 +76,8 @@ export default function LoginPage() {
               onClick={() => setMode('magic')}
               className={`flex-1 py-2 rounded-lg text-sm font-medium transition-all font-body ${
                 mode === 'magic'
-                  ? 'bg-[rgba(242,235,226,0.15)] text-[#F2EBE2]'
-                  : 'text-[#F2EBE2]/40'
+                  ? 'bg-[#F2EBE2] text-[#2C1A0E] shadow-sm'
+                  : 'text-[#9A8A7A]'
               }`}
             >
               Magic Link
@@ -86,11 +86,11 @@ export default function LoginPage() {
 
           {magicSent ? (
             <div className="text-center py-8">
-              <div className="w-16 h-16 bg-[rgba(242,235,226,0.10)] rounded-full flex items-center justify-center mx-auto mb-4">
-                <Mail className="w-8 h-8 text-[#F2EBE2]/70" />
+              <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style={{ background: 'rgba(44,26,14,0.06)' }}>
+                <Mail className="w-8 h-8 text-[#9A8A7A]" />
               </div>
-              <h3 className="font-heading text-2xl text-[#F2EBE2] mb-2">Link gesendet!</h3>
-              <p className="text-[#F2EBE2]/50 text-sm font-body leading-relaxed">
+              <h3 className="font-heading text-2xl text-[#2C1A0E] mb-2">Link gesendet!</h3>
+              <p className="text-sm font-body leading-relaxed" style={{ color: 'rgba(44,26,14,0.55)' }}>
                 Schau in dein Postfach ({email}) und klicke auf den Link zum Anmelden.
               </p>
             </div>
@@ -139,9 +139,9 @@ export default function LoginPage() {
           )}
         </div>
 
-        <p className="text-center text-[#F2EBE2]/40 text-sm mt-6 font-body">
+        <p className="text-center text-sm mt-6 font-body" style={{ color: 'rgba(44,26,14,0.40)' }}>
           Noch kein Konto?{' '}
-          <Link href="/register" className="text-[#F2EBE2]/80 hover:text-[#F2EBE2] underline underline-offset-2 transition-colors">
+          <Link href="/register" className="text-[#9A8A7A] hover:text-[#2C1A0E] underline underline-offset-2 transition-colors">
             Jetzt registrieren
           </Link>
         </p>

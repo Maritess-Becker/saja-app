@@ -30,6 +30,7 @@ const BASE: Omit<Profile, 'id' | 'user_id' | 'name' | 'age' | 'location' | 'gend
   profile_quote: null,
   birth_date: null,
   smoking: null,
+  drugs: null,
   alcohol: null,
   prompts: [],
   dealbreakers: [],

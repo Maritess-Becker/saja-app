@@ -187,12 +187,12 @@ export function ConnectionClient({ connection, otherProfile, initialMessages, cu
       {/* Eingabe — bleibt immer unten sichtbar */}
       <form
         onSubmit={sendMessage}
-        className="flex-shrink-0 px-4 pt-3 bg-white border-t border-[rgba(47,74,60,0.12)] flex gap-3"
+        className="flex-shrink-0 px-4 pt-3 bg-[#EAE0D5] border-t border-[rgba(44,26,14,0.08)] flex gap-3"
         style={{ paddingBottom: 'calc(0.75rem + env(safe-area-inset-bottom, 0px))' }}
       >
         <input
           type="text"
-          className="flex-1 rounded-2xl border border-[rgba(47,74,60,0.12)] bg-[rgba(47,74,60,0.07)] px-4 py-3 text-sm font-body text-[#232323] placeholder:text-[#6B6058] focus:outline-none focus:ring-2 focus:ring-[#2F4A3C]/30"
+          className="flex-1 rounded-2xl border border-[rgba(44,26,14,0.12)] bg-[#F2EBE2] px-4 py-3 text-sm font-body text-[#2C1A0E] placeholder:text-[#9A8A7A] focus:outline-none focus:ring-2 focus:ring-[rgba(107,123,90,0.30)]"
           placeholder="Schreibe etwas…"
           value={text}
           onChange={(e) => setText(e.target.value)}
@@ -200,14 +200,14 @@ export function ConnectionClient({ connection, otherProfile, initialMessages, cu
         <button
           type="submit"
           disabled={sending || !text.trim()}
-          className="w-12 h-12 bg-[#2F4A3C] rounded-2xl flex items-center justify-center flex-shrink-0 disabled:opacity-40 hover:bg-[#1E3028] transition-colors active:scale-95"
+          className="w-12 h-12 bg-[#6B7B5A] rounded-2xl flex items-center justify-center flex-shrink-0 disabled:opacity-40 hover:bg-[#4A5840] transition-colors active:scale-95"
         >
           <Send className="w-5 h-5 text-white" />
         </button>
       </form>
 
       {/* Abstand zur Nav auf Mobile — kollabiert wenn Tastatur offen ist */}
-      <div ref={spacerRef} className="flex-shrink-0 md:hidden bg-white" style={{ height: 'calc(4rem + env(safe-area-inset-bottom, 0px))' }} />
+      <div ref={spacerRef} className="flex-shrink-0 md:hidden bg-[#EAE0D5]" style={{ height: 'calc(4rem + env(safe-area-inset-bottom, 0px))' }} />
 
       {/* End confirmation modal */}
       {showEndConfirm && (

@@ -15,8 +15,8 @@ function PersonalityBar({ leftLabel, rightLabel, value }: { leftLabel: string; r
         <span>{leftLabel}</span>
         <span>{rightLabel}</span>
       </div>
-      <div className="h-1.5 bg-[#D8D0C7] rounded-full overflow-hidden">
-        <div className="h-full bg-primary/50 rounded-full" style={{ width: `${value}%` }} />
+      <div className="h-1.5 rounded-full overflow-hidden" style={{ background: 'rgba(44,26,14,0.07)' }}>
+        <div className="h-full rounded-full" style={{ width: `${value}%`, background: 'rgba(107,123,90,0.60)' }} />
       </div>
     </div>
   )
@@ -37,17 +37,18 @@ function AudioPlayer({ url }: { url: string }) {
       <audio ref={audioRef} src={url} onEnded={() => setPlaying(false)} preload="none" />
       <button
         onClick={handleToggle}
-        className="w-10 h-10 rounded-full bg-primary flex items-center justify-center shadow flex-shrink-0 hover:bg-[#1E3028] transition-colors active:scale-95"
+        className="w-10 h-10 rounded-full flex items-center justify-center shadow flex-shrink-0 hover:opacity-90 transition-all active:scale-95"
+        style={{ background: '#6B7B5A' }}
       >
         {playing ? <Pause className="w-4 h-4 text-white" /> : <Play className="w-4 h-4 text-white translate-x-0.5" />}
       </button>
       <div className="flex-1">
-        <p className="text-sm font-medium text-[#232323] mb-1">Sprach-Intro anhören</p>
+        <p className="text-sm font-medium text-[#2C1A0E] mb-1">Sprach-Intro anhören</p>
         <div className="flex items-end gap-0.5 h-4">
           {Array.from({ length: 24 }).map((_, i) => (
             <div key={i}
-              className={`w-0.5 rounded-full transition-all ${playing ? 'bg-primary animate-pulse' : 'bg-primary/30'}`}
-              style={{ height: `${28 + Math.sin(i * 0.85) * 48 + Math.cos(i * 1.3) * 18}%`, animationDelay: `${i * 50}ms` }}
+              className={`w-0.5 rounded-full transition-all ${playing ? 'animate-pulse' : ''}`}
+              style={{ background: playing ? '#6B7B5A' : 'rgba(107,123,90,0.30)', height: `${28 + Math.sin(i * 0.85) * 48 + Math.cos(i * 1.3) * 18}%`, animationDelay: `${i * 50}ms` }}
             />
           ))}
         </div>
@@ -66,7 +67,7 @@ function PhotoWithCaption({ photo, name, height }: { photo: { url: string; path:
         <img src={url} alt={name} className="w-full h-full object-cover" />
       </div>
       {photo.caption && (
-        <p className="px-5 pt-2.5 text-sm text-[#232323]/55 italic leading-relaxed text-justify">{photo.caption}</p>
+        <p className="px-5 pt-2.5 text-sm text-[#2C1A0E]/55 italic leading-relaxed text-justify">{photo.caption}</p>
       )}
     </div>
   )
@@ -74,10 +75,10 @@ function PhotoWithCaption({ photo, name, height }: { photo: { url: string; path:
 
 function PromptBlock({ question, answer }: { question: string; answer: string }) {
   return (
-    <div className="px-4 py-4 border-t border-[rgba(47,74,60,0.10)]">
+    <div className="px-4 py-4 border-t border-[rgba(44,26,14,0.10)]">
       <div className="bg-[#F2EBE2] rounded-xl px-4 py-4 border-l-[3px] border-primary">
         <p className="text-[11px] text-[#9A8E84] uppercase tracking-widest mb-2">{question}</p>
-        <p className="font-heading text-xl italic text-[#1E3028] leading-snug text-justify">{answer}</p>
+        <p className="font-heading text-xl italic text-[#2C1A0E] leading-snug text-justify">{answer}</p>
       </div>
     </div>
   )
@@ -109,10 +110,10 @@ export function ProfileDetailClient({
     <div className="max-w-lg mx-auto pb-36">
 
       {/* Back button */}
-      <div className="sticky top-0 z-20 bg-[#2F4A3C] px-4 pt-5 pb-4">
+      <div className="sticky top-0 z-20 px-4 pt-5 pb-4" style={{ background: '#EAE0D5', borderBottom: '0.5px solid rgba(44,26,14,0.08)' }}>
         <button
           onClick={() => router.back()}
-          className="flex items-center gap-2 text-[#F2EBE2]/70 hover:text-[#F2EBE2] transition-colors"
+          className="flex items-center gap-2 text-[#9A8A7A] hover:text-[#2C1A0E] transition-colors"
         >
           <ArrowLeft className="w-5 h-5" />
           <span className="text-sm">Zurück</span>
@@ -125,8 +126,8 @@ export function ProfileDetailClient({
           // eslint-disable-next-line @next/next/no-img-element
           <img src={photoUrl(photos[0])} alt={profile.name} className="w-full h-full object-cover" />
         ) : (
-          <div className="w-full h-full bg-[#D8D0C7] flex items-center justify-center">
-            <span className="font-heading text-8xl text-[#6B6058]">{profile.name?.[0]}</span>
+          <div className="w-full h-full flex items-center justify-center" style={{ background: '#EAE0D5' }}>
+            <span className="font-heading text-8xl text-[#9A8A7A]">{profile.name?.[0]}</span>
           </div>
         )}
         <div className="absolute bottom-0 left-0 right-0 h-52 bg-gradient-to-t from-[rgba(30,48,40,0.88)] to-transparent pointer-events-none" />
@@ -158,53 +159,53 @@ export function ProfileDetailClient({
       {/* ── Was mich gerade bewegt ── */}
       {profile.current_moment && (
         <div className="px-5 pt-3 pb-1">
-          <p className="font-heading text-xl italic text-[#232323]/65 leading-snug">&ldquo;{profile.current_moment}&rdquo;</p>
+          <p className="font-heading text-xl italic text-[#2C1A0E]/65 leading-snug">&ldquo;{profile.current_moment}&rdquo;</p>
         </div>
       )}
 
       {/* ── Quick-info pills ── */}
       <div className="px-5 pt-5 pb-1 flex flex-wrap gap-2">
         {profile.height_cm && (
-          <span className="flex items-center gap-1.5 text-sm text-[#6B6058] bg-[#D8D0C7] px-3 py-1.5 rounded-full">
+          <span className="flex items-center gap-1.5 text-sm text-[#6B6058] bg-[#F2EBE2] px-3 py-1.5 rounded-full">
             <Ruler className="w-3.5 h-3.5" />{profile.height_cm} cm
           </span>
         )}
         {profile.occupation && (
-          <span className="flex items-center gap-1.5 text-sm text-[#6B6058] bg-[#D8D0C7] px-3 py-1.5 rounded-full">
+          <span className="flex items-center gap-1.5 text-sm text-[#6B6058] bg-[#F2EBE2] px-3 py-1.5 rounded-full">
             <Briefcase className="w-3.5 h-3.5" />{profile.occupation}
           </span>
         )}
         {profile.intention && (
-          <span className="flex items-center gap-1.5 text-sm text-[#232323] bg-[#F2EBE2] px-3 py-1.5 rounded-full">
+          <span className="flex items-center gap-1.5 text-sm text-[#2C1A0E] bg-[#F2EBE2] px-3 py-1.5 rounded-full">
             <Sparkles className="w-3.5 h-3.5" />{profile.intention}
           </span>
         )}
         {profile.has_children && (
-          <span className="text-sm text-[#6B6058] bg-[#D8D0C7] px-3 py-1.5 rounded-full">{profile.has_children}</span>
+          <span className="text-sm text-[#6B6058] bg-[#F2EBE2] px-3 py-1.5 rounded-full">{profile.has_children}</span>
         )}
       </div>
 
       {/* ── Über mich ── */}
       {profile.bio && (
-        <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)]">
+        <div className="px-5 py-5 border-t border-[rgba(44,26,14,0.10)]">
           <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Über mich</p>
-          <p className="text-[#232323] text-sm leading-relaxed text-justify">{profile.bio}</p>
+          <p className="text-[#2C1A0E] text-sm leading-relaxed text-justify">{profile.bio}</p>
         </div>
       )}
 
       {/* ── Sprachmemo ── */}
       {profile.audio_prompt_url ? (
-        <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)]">
+        <div className="px-5 py-5 border-t border-[rgba(44,26,14,0.10)]">
           <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Sprachmemo</p>
           <AudioPlayer url={profile.audio_prompt_url} />
         </div>
       ) : (
-        <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)] flex items-center gap-3">
+        <div className="px-5 py-5 border-t border-[rgba(44,26,14,0.10)] flex items-center gap-3">
           <div className="w-10 h-10 rounded-full bg-[#F2EBE2] flex items-center justify-center flex-shrink-0">
-            <Mic className="w-5 h-5 text-[#232323]" />
+            <Mic className="w-5 h-5 text-[#2C1A0E]" />
           </div>
           <div className="flex-1">
-            <p className="text-sm font-medium text-[#232323] mb-1.5">Sprachmemo</p>
+            <p className="text-sm font-medium text-[#2C1A0E] mb-1.5">Sprachmemo</p>
             <div className="flex items-center gap-0.5 h-5">
               {Array.from({ length: 26 }).map((_, i) => (
                 <div
@@ -221,7 +222,7 @@ export function ProfileDetailClient({
 
       {/* ── LAYER 2 CONTENT (after match) ── */}
       {!layer2Visible && (
-        <div className="mx-5 my-4 px-4 py-3 rounded-xl bg-[rgba(47,74,60,0.05)] border border-[rgba(47,74,60,0.1)] text-center">
+        <div className="mx-5 my-4 px-4 py-3 rounded-xl bg-[rgba(44,26,14,0.05)] border border-[rgba(44,26,14,0.10)] text-center">
           <p className="text-[#9A8E84] text-xs font-body leading-relaxed">
             Weitere Details werden nach einem gegenseitigen Like sichtbar.
           </p>
@@ -230,11 +231,11 @@ export function ProfileDetailClient({
 
       {/* ── Interessen ── */}
       {layer2Visible && profile.interests?.length > 0 && (
-        <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)]">
+        <div className="px-5 py-5 border-t border-[rgba(44,26,14,0.10)]">
           <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Interessen</p>
           <div className="flex flex-wrap gap-2">
             {profile.interests.map((item) => (
-              <span key={item} className="text-sm text-[#6B6058] bg-[#D8D0C7] px-3 py-1.5 rounded-full">{item}</span>
+              <span key={item} className="text-sm text-[#6B6058] bg-[#F2EBE2] px-3 py-1.5 rounded-full">{item}</span>
             ))}
           </div>
         </div>
@@ -242,11 +243,11 @@ export function ProfileDetailClient({
 
       {/* ── Werte ── */}
       {layer2Visible && profile.werte?.length > 0 && (
-        <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)]">
+        <div className="px-5 py-5 border-t border-[rgba(44,26,14,0.10)]">
           <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Werte</p>
           <div className="flex flex-wrap gap-2">
             {profile.werte.map((w) => (
-              <span key={w} className="text-sm text-[#232323] bg-[#F2EBE2] px-3 py-1.5 rounded-full">{w}</span>
+              <span key={w} className="text-sm text-[#2C1A0E] bg-[#F2EBE2] px-3 py-1.5 rounded-full">{w}</span>
             ))}
           </div>
         </div>
@@ -254,14 +255,14 @@ export function ProfileDetailClient({
 
       {/* ── Meine Welt ── */}
       {layer2Visible && (profile.my_world?.length ?? 0) > 0 && (
-        <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)]">
+        <div className="px-5 py-5 border-t border-[rgba(44,26,14,0.10)]">
           <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Meine Welt</p>
           <div className="flex flex-wrap gap-2">
             {profile.my_world!.map((item) => (
               <span
                 key={item}
                 className="text-[11px] font-body font-light px-3 py-1.5 rounded-full"
-                style={{ background: 'rgba(47,74,60,0.08)', color: '#232323' }}
+                style={{ background: 'rgba(44,26,14,0.06)', color: '#2C1A0E' }}
               >
                 {item}
               </span>
@@ -272,11 +273,11 @@ export function ProfileDetailClient({
 
       {/* ── Meine Communities ── */}
       {layer2Visible && (profile.communities?.length ?? 0) > 0 && (
-        <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)]">
+        <div className="px-5 py-5 border-t border-[rgba(44,26,14,0.10)]">
           <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Meine Communities</p>
           <div className="flex flex-wrap gap-2">
             {profile.communities!.map((c) => (
-              <span key={c} className="text-[12px] font-body px-3 py-1.5 rounded-full border border-[rgba(47,74,60,0.30)] text-[#232323] bg-[rgba(47,74,60,0.08)]">
+              <span key={c} className="text-[12px] font-body px-3 py-1.5 rounded-full border border-[rgba(44,26,14,0.20)] text-[#2C1A0E] bg-[rgba(44,26,14,0.06)]">
                 {c}
               </span>
             ))}
@@ -286,7 +287,7 @@ export function ProfileDetailClient({
 
       {/* ── LAYER 3 CONTENT (both phase 3 complete) ── */}
       {layer2Visible && !layer3Visible && (
-        <div className="mx-5 my-4 px-4 py-3 rounded-xl bg-[rgba(47,74,60,0.05)] border border-[rgba(47,74,60,0.1)] text-center">
+        <div className="mx-5 my-4 px-4 py-3 rounded-xl bg-[rgba(44,26,14,0.05)] border border-[rgba(44,26,14,0.10)] text-center">
           <p className="text-[#9A8E84] text-xs font-body leading-relaxed">
             {!profilePhase3Complete
               ? 'Diese Person vervollständigt noch ihr Profil.'
@@ -297,19 +298,19 @@ export function ProfileDetailClient({
 
       {/* ── Beziehung & Bindung ── */}
       {layer3Visible && (profile.relationship_model || profile.love_language) && (
-        <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)] space-y-4">
+        <div className="px-5 py-5 border-t border-[rgba(44,26,14,0.10)] space-y-4">
           <p className="text-[11px] text-[#6B6058] uppercase tracking-widest">Beziehung &amp; Bindung</p>
           {profile.relationship_model && (
             <div className="flex items-center justify-between">
               <span className="text-sm text-[#9A8E84]">Beziehungsmodell</span>
-              <span className="text-sm text-[#232323] font-medium">{profile.relationship_model}</span>
+              <span className="text-sm text-[#2C1A0E] font-medium">{profile.relationship_model}</span>
             </div>
           )}
           {profile.love_language && (
             <div className="flex items-center justify-between">
               <span className="text-sm text-[#9A8E84]">Love Language</span>
-              <span className="text-sm text-[#232323] font-medium flex items-center gap-1.5">
-                <Heart className="w-3.5 h-3.5 text-[#232323]" />{profile.love_language}
+              <span className="text-sm text-[#2C1A0E] font-medium flex items-center gap-1.5">
+                <Heart className="w-3.5 h-3.5 text-[#2C1A0E]" />{profile.love_language}
               </span>
             </div>
           )}
@@ -318,7 +319,7 @@ export function ProfileDetailClient({
 
       {/* ── Persönlichkeit (Layer 2) ── */}
       {layer2Visible && (profile.introvert_extrovert != null || profile.spontan_strukturiert != null || profile.rational_emotional != null) && (
-        <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)] space-y-4">
+        <div className="px-5 py-5 border-t border-[rgba(44,26,14,0.10)] space-y-4">
           <p className="text-[11px] text-[#6B6058] uppercase tracking-widest">Persönlichkeit</p>
           {profile.introvert_extrovert != null && (
             <PersonalityBar leftLabel="Introvertiert" rightLabel="Extrovertiert" value={profile.introvert_extrovert} />
@@ -334,16 +335,16 @@ export function ProfileDetailClient({
 
       {/* ── Horoskop (Layer 3) ── */}
       {layer3Visible && (profile.sun_sign || profile.ascendant) && (
-        <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)] space-y-3">
+        <div className="px-5 py-5 border-t border-[rgba(44,26,14,0.10)] space-y-3">
           <p className="text-[11px] text-[#6B6058] uppercase tracking-widest">Horoskop</p>
           <div className="flex flex-wrap gap-2">
             {profile.sun_sign && (
-              <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(47,74,60,0.08)', color: '#232323' }}>
+              <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(44,26,14,0.06)', color: '#2C1A0E' }}>
                 {profile.sun_sign}
               </span>
             )}
             {profile.ascendant && (
-              <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(47,74,60,0.08)', color: '#232323' }}>
+              <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(44,26,14,0.06)', color: '#2C1A0E' }}>
                 ↑ {profile.ascendant.replace(/^[♈♉♊♋♌♍♎♏♐♑♒♓]\s*/, '')}
               </span>
             )}
@@ -353,7 +354,7 @@ export function ProfileDetailClient({
 
       {/* ── Dealbreakers (Layer 3) ── */}
       {layer3Visible && profile.dealbreakers?.length > 0 && (
-        <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)]">
+        <div className="px-5 py-5 border-t border-[rgba(44,26,14,0.10)]">
           <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Dealbreaker</p>
           <div className="flex flex-wrap gap-2">
             {profile.dealbreakers.map((d) => (
@@ -365,11 +366,11 @@ export function ProfileDetailClient({
 
       {/* ── Intimität (Layer 3) ── */}
       {layer3Visible && profile.sexuality_visible && viewerSexualityVisible && (profile.sexuality_interests?.length ?? 0) > 0 && (
-        <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)]">
+        <div className="px-5 py-5 border-t border-[rgba(44,26,14,0.10)]">
           <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Intimität</p>
           <div className="flex flex-wrap gap-2">
             {profile.sexuality_interests!.map((item) => (
-              <span key={item} className="text-sm text-[#6B6058] bg-[rgba(47,74,60,0.07)] px-3 py-1.5 rounded-full">{item}</span>
+              <span key={item} className="text-sm text-[#6B6058] bg-[rgba(44,26,14,0.06)] px-3 py-1.5 rounded-full">{item}</span>
             ))}
           </div>
         </div>

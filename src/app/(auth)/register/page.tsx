@@ -45,15 +45,15 @@ export default function RegisterPage() {
 
   if (done) {
     return (
-      <div className="min-h-screen flex items-center justify-center px-4" style={{ background: 'var(--bg-indigo)' }}>
+      <div className="min-h-screen flex items-center justify-center px-4" style={{ background: '#EAE0D5' }}>
         <div className="text-center max-w-md">
-          <div className="w-20 h-20 bg-[rgba(242,235,226,0.10)] rounded-full flex items-center justify-center mx-auto mb-6">
-            <Mail className="w-10 h-10 text-[#F2EBE2]/70" />
+          <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6" style={{ background: 'rgba(44,26,14,0.06)' }}>
+            <Mail className="w-10 h-10 text-[#9A8A7A]" />
           </div>
-          <h1 className="font-heading text-4xl text-[#F2EBE2] mb-4">Fast geschafft!</h1>
-          <p className="text-[#F2EBE2]/50 leading-relaxed font-body text-sm">
+          <h1 className="font-heading text-4xl text-[#2C1A0E] mb-4">Fast geschafft!</h1>
+          <p className="leading-relaxed font-body text-sm" style={{ color: 'rgba(44,26,14,0.55)' }}>
             Wir haben dir eine Bestätigungs-E-Mail an{' '}
-            <strong className="text-[#F2EBE2]/80">{email}</strong> gesendet.
+            <strong className="text-[#2C1A0E]">{email}</strong> gesendet.
             Bitte bestätige deine Adresse, um mit dem Onboarding zu beginnen.
           </p>
         </div>
@@ -62,15 +62,15 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-4 py-12" style={{ background: 'var(--bg-indigo)' }}>
+    <div className="min-h-screen flex flex-col items-center justify-center px-4 py-12" style={{ background: '#EAE0D5' }}>
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="text-center mb-10">
           <Link href="/" className="inline-flex justify-center mb-6">
-            <SajaLogo size="lg" showTagline={true} />
+            <SajaLogo size="lg" showTagline={true} onDark={false} />
           </Link>
-          <h1 className="font-heading text-4xl font-light text-[#F2EBE2]">Konto erstellen</h1>
-          <p className="text-[#F2EBE2]/50 mt-2 font-body text-sm">Kostenlos und unverbindlich starten.</p>
+          <h1 className="font-heading text-4xl font-light text-[#2C1A0E]">Konto erstellen</h1>
+          <p className="mt-2 font-body text-sm" style={{ color: 'rgba(44,26,14,0.50)' }}>Kostenlos und unverbindlich starten.</p>
         </div>
 
         <div className="card">
@@ -109,10 +109,10 @@ export default function RegisterPage() {
               />
             </div>
 
-            <p className="text-xs text-[#F2EBE2]/30 leading-relaxed font-body">
+            <p className="text-xs leading-relaxed font-body" style={{ color: 'rgba(44,26,14,0.35)' }}>
               Mit der Registrierung stimmst du unseren{' '}
-              <Link href="/agb" className="text-[#F2EBE2]/60 hover:text-[#F2EBE2]/80 underline underline-offset-2 transition-colors">AGB</Link> und der{' '}
-              <Link href="/datenschutz" className="text-[#F2EBE2]/60 hover:text-[#F2EBE2]/80 underline underline-offset-2 transition-colors">Datenschutzerklärung</Link> zu.
+              <Link href="/agb" className="text-[#9A8A7A] hover:text-[#2C1A0E] underline underline-offset-2 transition-colors">AGB</Link> und der{' '}
+              <Link href="/datenschutz" className="text-[#9A8A7A] hover:text-[#2C1A0E] underline underline-offset-2 transition-colors">Datenschutzerklärung</Link> zu.
             </p>
 
             <button type="submit" disabled={loading} className="btn-primary w-full">
@@ -121,9 +121,9 @@ export default function RegisterPage() {
           </form>
         </div>
 
-        <p className="text-center text-[#F2EBE2]/40 text-sm mt-6 font-body">
+        <p className="text-center text-sm mt-6 font-body" style={{ color: 'rgba(44,26,14,0.40)' }}>
           Bereits registriert?{' '}
-          <Link href="/login" className="text-[#F2EBE2]/80 hover:text-[#F2EBE2] underline underline-offset-2 transition-colors">
+          <Link href="/login" className="text-[#9A8A7A] hover:text-[#2C1A0E] underline underline-offset-2 transition-colors">
             Anmelden
           </Link>
         </p>

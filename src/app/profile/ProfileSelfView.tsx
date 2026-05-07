@@ -20,8 +20,8 @@ function PersonalityBar({ leftLabel, rightLabel, value }: { leftLabel: string; r
         <span>{leftLabel}</span>
         <span>{rightLabel}</span>
       </div>
-      <div className="h-1.5 bg-[rgba(47,74,60,0.07)] rounded-full overflow-hidden">
-        <div className="h-full bg-[#2F4A3C]/50 rounded-full" style={{ width: `${value}%` }} />
+      <div className="h-1.5 rounded-full overflow-hidden" style={{ background: 'rgba(44,26,14,0.07)' }}>
+        <div className="h-full rounded-full" style={{ width: `${value}%`, background: 'rgba(107,123,90,0.60)' }} />
       </div>
     </div>
   )
@@ -42,7 +42,8 @@ function AudioPlayer({ url }: { url: string }) {
       <audio ref={audioRef} src={url} onEnded={() => setPlaying(false)} preload="none" />
       <button
         onClick={handleToggle}
-        className="w-10 h-10 rounded-full bg-[#2F4A3C] flex items-center justify-center shadow flex-shrink-0 hover:bg-[#1E3028] transition-colors active:scale-95"
+        className="w-10 h-10 rounded-full flex items-center justify-center shadow flex-shrink-0 hover:opacity-90 transition-all active:scale-95"
+        style={{ background: '#6B7B5A' }}
       >
         {playing ? <Pause className="w-4 h-4 text-white" /> : <Play className="w-4 h-4 text-white translate-x-0.5" />}
       </button>
@@ -51,8 +52,12 @@ function AudioPlayer({ url }: { url: string }) {
         <div className="flex items-end gap-0.5 h-4">
           {Array.from({ length: 24 }).map((_, i) => (
             <div key={i}
-              className={`w-0.5 rounded-full transition-all ${playing ? 'bg-[#2F4A3C] animate-pulse' : 'bg-[#2F4A3C]/30'}`}
-              style={{ height: `${28 + Math.sin(i * 0.85) * 48 + Math.cos(i * 1.3) * 18}%`, animationDelay: `${i * 50}ms` }}
+              className={`w-0.5 rounded-full transition-all ${playing ? 'animate-pulse' : ''}`}
+              style={{
+                background: playing ? '#6B7B5A' : 'rgba(107,123,90,0.30)',
+                height: `${28 + Math.sin(i * 0.85) * 48 + Math.cos(i * 1.3) * 18}%`,
+                animationDelay: `${i * 50}ms`,
+              }}
             />
           ))}
         </div>
@@ -79,10 +84,10 @@ function PhotoWithCaption({ photo, name, height }: { photo: { url: string; path:
 
 function PromptBlock({ question, answer }: { question: string; answer: string }) {
   return (
-    <div className="px-4 py-4 border-t border-[rgba(47,74,60,0.10)]">
-      <div className="bg-[rgba(47,74,60,0.07)] rounded-xl px-4 py-4 border-l-[3px] border-[#2F4A3C]">
-        <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-2">{question}</p>
-        <p className="font-heading text-xl italic text-[#1E3028] leading-snug text-justify">{answer}</p>
+    <div className="px-4 py-4 border-t border-[rgba(44,26,14,0.10)]">
+      <div className="rounded-xl px-4 py-4 border-l-[3px]" style={{ background: 'rgba(44,26,14,0.04)', borderLeftColor: '#6B7B5A' }}>
+        <p className="text-[11px] text-[#9A8A7A] uppercase tracking-widest mb-2">{question}</p>
+        <p className="font-heading text-xl italic text-[#2C1A0E] leading-snug text-justify">{answer}</p>
       </div>
     </div>
   )
@@ -219,7 +224,7 @@ export function ProfileSelfView({ profile, tier }: Props) {
     <div className="max-w-lg mx-auto pb-36">
 
       {/* Hero — full gradient, h-80, serif name */}
-      <div className="relative h-80 overflow-hidden" style={{ background: 'var(--bg-indigo)' }}>
+      <div className="relative h-80 overflow-hidden" style={{ background: '#EAE0D5' }}>
         {/* Photo */}
         {photoUrl(photos[0]) ? (
           // eslint-disable-next-line @next/next/no-img-element
@@ -260,18 +265,18 @@ export function ProfileSelfView({ profile, tier }: Props) {
       {trialActive && (
         <div
           className="mx-4 mb-4 rounded-2xl px-4 py-3 flex items-center gap-3"
-          style={{ background: 'var(--bg-indigo)' }}
+          style={{ background: '#F2EBE2', border: '0.5px solid rgba(44,26,14,0.10)' }}
         >
-          <Sparkles className="w-4 h-4 text-[#F2EBE2]/70 flex-shrink-0" />
+          <Sparkles className="w-4 h-4 text-[#6B7B5A] flex-shrink-0" />
           <div className="flex-1">
-            <p className="text-[#F2EBE2] font-body text-sm">
+            <p className="text-[#2C1A0E] font-body text-sm">
               ✦ Du bist im Vollzugang —{' '}
               <span className="font-medium">noch {trialDaysLeft} {trialDaysLeft === 1 ? 'Tag' : 'Tage'}</span>
             </p>
           </div>
           <Link
             href="/paywall"
-            className="text-[#F2EBE2]/70 text-[11px] font-body underline underline-offset-2 flex-shrink-0"
+            className="text-[#6B7B5A] text-[11px] font-body underline underline-offset-2 flex-shrink-0"
           >
             Upgrade
           </Link>
@@ -294,16 +299,16 @@ export function ProfileSelfView({ profile, tier }: Props) {
       <PhaseCircles phase={onboardingPhase} />
 
       {/* ── Emotionale Kapazität + Pause — plain text ── */}
-      <div className="px-5 py-5 border-b border-[rgba(47,74,60,0.08)]">
+      <div className="px-5 py-5 border-b border-[rgba(44,26,14,0.08)]">
         <div className="flex items-center justify-between mb-4">
-          <p className="text-[10px] text-[#9A8E84] uppercase tracking-[0.10em] font-semibold">Gerade</p>
+          <p className="text-[10px] text-[#9A8A7A] uppercase tracking-[0.10em] font-semibold">Gerade</p>
           <button
             onClick={togglePause}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-body transition-colors ${
-              paused
-                ? 'bg-[#2F4A3C] text-[#F2EBE2]'
-                : 'bg-[rgba(47,74,60,0.07)] text-[#232323] hover:bg-[rgba(47,74,60,0.12)]'
-            }`}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-body transition-colors"
+            style={paused
+              ? { background: '#6B7B5A', color: '#F2EBE2' }
+              : { background: 'rgba(44,26,14,0.07)', color: '#2C1A0E' }
+            }
           >
             <Moon className="w-3 h-3" />
             {paused ? 'Pause aktiv' : 'Pause einlegen'}
@@ -316,7 +321,7 @@ export function ProfileSelfView({ profile, tier }: Props) {
               onClick={() => saveCapacity(opt.value)}
               className="text-left py-2 transition-all"
             >
-              <span className={`text-sm font-light font-body ${capacity === opt.value ? 'text-[#2F4A3C] font-medium' : 'text-[#9A8E84]'}`}>
+              <span className={`text-sm font-light font-body ${capacity === opt.value ? 'text-[#6B7B5A] font-medium' : 'text-[#9A8A7A]'}`}>
                 {capacity === opt.value ? '· ' : ''}{opt.label}
               </span>
             </button>
@@ -355,7 +360,8 @@ export function ProfileSelfView({ profile, tier }: Props) {
                 <button
                   onClick={saveMoment}
                   disabled={saving}
-                  className="flex items-center gap-1 text-xs bg-[#2F4A3C] text-[#F2EBE2] px-4 py-1.5 rounded-full hover:bg-[#1E3028] transition-colors disabled:opacity-50"
+                  className="flex items-center gap-1 text-xs text-[#F2EBE2] px-4 py-1.5 rounded-full hover:opacity-90 transition-colors disabled:opacity-50"
+                  style={{ background: '#6B7B5A' }}
                 >
                   <Check className="w-3 h-3" /> Speichern
                 </button>
@@ -391,7 +397,13 @@ export function ProfileSelfView({ profile, tier }: Props) {
           </span>
         )}
         {profile.has_children && (
-          <span className="text-sm text-[#6B6058] bg-[rgba(47,74,60,0.07)] px-3 py-1.5 rounded-full">{profile.has_children}</span>
+          <span className="text-sm text-[#6B6058] bg-[rgba(47,74,60,0.07)] px-3 py-1.5 rounded-full">Kinder: {profile.has_children}</span>
+        )}
+        {profile.smoking && (
+          <span className="text-sm text-[#6B6058] bg-[rgba(47,74,60,0.07)] px-3 py-1.5 rounded-full">Raucher: {profile.smoking}</span>
+        )}
+        {profile.drugs && (
+          <span className="text-sm text-[#6B6058] bg-[rgba(47,74,60,0.07)] px-3 py-1.5 rounded-full">Drogen: {profile.drugs}</span>
         )}
       </div>
 
@@ -420,8 +432,8 @@ export function ProfileSelfView({ profile, tier }: Props) {
               {Array.from({ length: 26 }).map((_, i) => (
                 <div
                   key={i}
-                  className="w-1 bg-[#2F4A3C]/25 rounded-full"
-                  style={{ height: `${30 + Math.sin(i * 0.9) * 50 + Math.cos(i * 1.4) * 20}%` }}
+                  className="w-1 rounded-full"
+                  style={{ background: 'rgba(107,123,90,0.25)', height: `${30 + Math.sin(i * 0.9) * 50 + Math.cos(i * 1.4) * 20}%` }}
                 />
               ))}
             </div>
@@ -588,18 +600,18 @@ export function ProfileSelfView({ profile, tier }: Props) {
 
       {/* ── Phase 3: Vollständiges Profil badge OR invitation ── */}
       {onboardingPhase >= 3 ? (
-        <div className="mx-4 mt-6 flex items-center gap-3 px-4 py-3 rounded-2xl bg-[rgba(47,74,60,0.06)] border border-[#2F4A3C]/20">
-          <Sparkles className="w-4 h-4 text-[#2F4A3C] flex-shrink-0" />
-          <p className="text-[#2F4A3C] font-body text-sm font-medium">Vollständiges Profil ✦</p>
+        <div className="mx-4 mt-6 flex items-center gap-3 px-4 py-3 rounded-2xl" style={{ background: 'rgba(107,123,90,0.08)', border: '0.5px solid rgba(107,123,90,0.20)' }}>
+          <Sparkles className="w-4 h-4 text-[#6B7B5A] flex-shrink-0" />
+          <p className="text-[#6B7B5A] font-body text-sm font-medium">Vollständiges Profil ✦</p>
         </div>
       ) : (
         <div
           className="mx-4 mt-6 rounded-2xl p-5"
-          style={{ background: 'var(--bg-indigo)' }}
+          style={{ background: '#F2EBE2', border: '0.5px solid rgba(44,26,14,0.10)' }}
         >
-          <p className="text-[#F2EBE2]/60 font-body text-[10px] uppercase tracking-[0.12em] mb-2">Für echte Verbindung</p>
-          <p className="font-heading text-[22px] text-[#F2EBE2] leading-snug mb-1">Geh tiefer.</p>
-          <p className="text-[#F2EBE2]/70 font-body text-sm leading-relaxed mb-4">
+          <p className="text-[#9A8A7A] font-body text-[10px] uppercase tracking-[0.12em] mb-2">Für echte Verbindung</p>
+          <p className="font-heading text-[22px] text-[#2C1A0E] leading-snug mb-1">Geh tiefer.</p>
+          <p className="text-[#9A8A7A] font-body text-sm leading-relaxed mb-4">
             Bindungstyp, Love Language, Dealbreaker, Intimität, Beziehungsmodell, Horoskop —
             für Menschen, die wirklich gesehen werden wollen.
           </p>
@@ -614,12 +626,14 @@ export function ProfileSelfView({ profile, tier }: Props) {
             ].map((item) => (
               <div
                 key={item.label}
-                className={`rounded-xl px-2 py-2 text-center flex flex-col items-center gap-1 ${
-                  item.done ? 'bg-[rgba(242,235,226,0.20)]' : 'bg-[rgba(242,235,226,0.06)] border border-[rgba(242,235,226,0.12)]'
-                }`}
+                className={`rounded-xl px-2 py-2 text-center flex flex-col items-center gap-1`}
+                style={item.done
+                  ? { background: 'rgba(107,123,90,0.10)' }
+                  : { background: 'rgba(44,26,14,0.04)', border: '0.5px solid rgba(44,26,14,0.10)' }
+                }
               >
-                <span className="text-sm">{item.done ? '✓' : '·'}</span>
-                <span className={`text-[10px] font-body leading-tight ${item.done ? 'text-[#F2EBE2]' : 'text-[#F2EBE2]/50'}`}>
+                <span className="text-sm" style={{ color: item.done ? '#6B7B5A' : '#9A8A7A' }}>{item.done ? '✓' : '·'}</span>
+                <span className={`text-[10px] font-body leading-tight`} style={{ color: item.done ? '#6B7B5A' : '#9A8A7A' }}>
                   {item.label}
                 </span>
               </div>
@@ -627,7 +641,7 @@ export function ProfileSelfView({ profile, tier }: Props) {
           </div>
           <Link
             href="/profile/edit?phase=3"
-            className="flex items-center justify-center gap-2 w-full py-3 rounded-full bg-[#F2EBE2] text-[#2F4A3C] font-body text-[13px] font-medium transition-opacity hover:opacity-90"
+            className="btn-primary flex items-center justify-center gap-2 w-full py-3 text-[13px]"
           >
             Jetzt vertiefen →
           </Link>
@@ -636,12 +650,12 @@ export function ProfileSelfView({ profile, tier }: Props) {
 
       {/* ── Upgrade-Banner (nur wenn nicht Premium) ── */}
       {tier !== 'premium' && (
-        <div className="mx-4 mt-6 bg-[#1E3028] rounded-2xl p-6 text-[#EDE8F8]">
+        <div className="mx-4 mt-6 rounded-2xl p-6" style={{ background: '#F2EBE2', border: '0.5px solid rgba(44,26,14,0.10)' }}>
           <div className="flex items-center gap-2 mb-3">
-            <Star className="w-5 h-5 text-[#232323]" />
-            <span className="font-heading text-xl">Premium freischalten</span>
+            <Star className="w-5 h-5 text-[#C8A86A]" />
+            <span className="font-heading text-xl text-[#2C1A0E]">Premium freischalten</span>
           </div>
-          <p className="text-[#EDE8F8]/60 text-sm mb-4 leading-relaxed text-justify">
+          <p className="text-[#9A8A7A] text-sm mb-4 leading-relaxed text-justify">
             Love Language Test, 36 Fragen, 50 Tiefen-Fragen, Kompatibilitäts-Score und mehr.
           </p>
           <Link href="/pricing" className="btn-primary text-sm py-2.5 inline-block">

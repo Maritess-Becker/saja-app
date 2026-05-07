@@ -4,49 +4,31 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ── Background Gradients ───────────────────────────────────────────────── */
 :root {
-  /* DUNKEL — Navigation, Onboarding, Matches, Paywall */
-  --bg-indigo:
-    radial-gradient(ellipse 200% 120% at 95% -5%,  rgba(168,101,76,0.32)  0%, transparent 60%),
-    radial-gradient(ellipse 160% 100% at -5% 40%,  rgba(242,235,226,0.07) 0%, transparent 65%),
-    radial-gradient(ellipse 150% 130% at 50% 105%, rgba(20,32,26,0.60)    0%, transparent 60%),
-    radial-gradient(ellipse 120% 80%  at 85% 60%,  rgba(168,101,76,0.10)  0%, transparent 55%),
-    radial-gradient(ellipse 100% 120% at 10% 85%,  rgba(242,235,226,0.06) 0%, transparent 60%),
-    radial-gradient(ellipse 80%  60%  at 45% 40%,  rgba(47,74,60,0.25)    0%, transparent 55%),
-    #2F4A3C;
+  /* Neue Palette */
+  --color-sand:        #EAE0D5;
+  --color-oat:         #F2EBE2;
+  --color-taupe:       #9A8A7A;
+  --color-sage:        #6B7B5A;
+  --color-sage-dark:   #4A5840;
+  --color-terra:       #B5522A;
+  --color-espresso:    #2C1A0E;
 
-  /* HELL — Entdecken, Profil, Begegnung, Inhalte */
-  --bg-creme:
-    radial-gradient(ellipse 200% 100% at 100% 0%,  rgba(168,101,76,0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 180% 120% at 0% 100%,  rgba(47,74,60,0.08)   0%, transparent 65%),
-    radial-gradient(ellipse 150% 100% at 50% 45%,  rgba(47,74,60,0.03)   0%, transparent 65%),
-    radial-gradient(ellipse 120% 100% at 90% 75%,  rgba(168,101,76,0.05) 0%, transparent 60%),
-    radial-gradient(ellipse 100% 80%  at 20% 30%,  rgba(47,74,60,0.02)   0%, transparent 60%),
-    #E7DFD6;
+  /* Hintergrund-Varianten */
+  --bg-sand: #EAE0D5;
+  --bg-oat:  #F2EBE2;
 
-  /* BESONDERER MOMENT — Match-Screen, Guided First Message */
-  --bg-violett:
-    radial-gradient(ellipse 200% 120% at 95% -5%,  rgba(168,101,76,0.38) 0%, transparent 58%),
-    radial-gradient(ellipse 160% 100% at -5% 45%,  rgba(242,235,226,0.07) 0%, transparent 62%),
-    radial-gradient(ellipse 150% 130% at 50% 105%, rgba(20,32,26,0.50)   0%, transparent 58%),
-    radial-gradient(ellipse 100% 80%  at 80% 60%,  rgba(168,101,76,0.12) 0%, transparent 55%),
-    #3D5E4E;
+  /* Dark photo overlay (nur über Fotos) */
+  --photo-gradient: linear-gradient(to top, rgba(20,12,6,0.75) 0%, rgba(20,12,6,0.15) 55%, transparent 100%);
 
-  /* NAVIGATION */
-  --bg-nav:
-    radial-gradient(ellipse 250% 150% at 95% 0%,  rgba(168,101,76,0.18) 0%, transparent 60%),
-    radial-gradient(ellipse 200% 150% at 5% 100%, rgba(242,235,226,0.05) 0%, transparent 60%),
-    #2F4A3C;
+  /* Legacy-Kompatibilität — werden schrittweise ersetzt */
+  --bg-indigo: #EAE0D5;
+  --bg-creme:  #EAE0D5;
+  --bg-violett: #EAE0D5;
+  --bg-nav:    #EAE0D5;
 
-  /* ── Accent colors ── */
-  --accent-green:  #7A9E8A;
-  --accent-orange: #A8654C;
-  --accent-purple: #7B4FA6;
-  --accent-blue:   #3A5F8A;
-  --accent-gold:   #BFA76A;
-  --accent-red:    #8E3A20;
-  --accent-rose:   #C08080;
+  --accent-terra: #B5522A;
+  --accent-sage:  #6B7B5A;
 }
 
 /* ── Base ───────────────────────────────────────────────────────────────── */
@@ -54,8 +36,8 @@
   html {
     font-family: 'Outfit', system-ui, sans-serif;
     font-weight: 300;
-    background: var(--bg-indigo);
-    color: #F2EBE2;
+    background: var(--bg-sand);
+    color: var(--color-espresso);
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -66,41 +48,26 @@
 
 /* ── Utility bg classes ─────────────────────────────────────────────────── */
 @layer utilities {
-  /* Dunkle Screens */
   .bg-indigo-screen {
-    background: var(--bg-indigo);
-    background-size: cover;
+    background: #EAE0D5;
   }
-  /* Aliases */
   .bg-mondlicht {
-    background: var(--bg-indigo);
-    background-size: cover;
+    background: #EAE0D5;
   }
   .bg-daemmerung {
-    background: var(--bg-indigo);
-    background-size: cover;
+    background: #EAE0D5;
   }
-
-  /* Helle Screens */
   .bg-creme {
-    background: var(--bg-creme);
-    background-size: cover;
+    background: #EAE0D5;
   }
-  /* Alias */
   .bg-mondweiss {
-    background: var(--bg-creme);
-    background-size: cover;
+    background: #EAE0D5;
   }
-
-  /* Besonderer Moment */
   .bg-match-screen {
-    background: var(--bg-violett);
-    background-size: cover;
+    background: #EAE0D5;
   }
-  /* Alias */
   .bg-violett {
-    background: var(--bg-violett);
-    background-size: cover;
+    background: #EAE0D5;
   }
 }
 
@@ -109,62 +76,54 @@
 
   /* ── Buttons ── */
 
-  /* Primary — auf dunklen Screens (warmer heller Button) */
   .btn-primary {
-    background-color: #F2EBE2;
-    color: #2F4A3C;
-    letter-spacing: 0.06em;
-    @apply px-6 py-3.5 rounded-full font-body font-normal
-           transition-colors duration-500
-           disabled:opacity-50 disabled:cursor-not-allowed;
-  }
-  .btn-primary:hover { background-color: white; }
-
-  /* Primary — auf hellen Screens (dunkler Button) */
-  .btn-primary-dark {
-    background-color: #2F4A3C;
+    background-color: #6B7B5A;
     color: #F2EBE2;
-    letter-spacing: 0.06em;
     @apply px-6 py-3.5 rounded-full font-body font-normal
-           transition-colors duration-500
+           transition-colors duration-300
            disabled:opacity-50 disabled:cursor-not-allowed;
   }
-  .btn-primary-dark:hover { background-color: #1E3028; }
+  .btn-primary:hover { background-color: #4A5840; }
 
-  /* Ghost — auf dunklen Screens */
+  .btn-primary-dark {
+    background-color: #6B7B5A;
+    color: #F2EBE2;
+    @apply px-6 py-3.5 rounded-full font-body font-normal
+           transition-colors duration-300
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-primary-dark:hover { background-color: #4A5840; }
+
   .btn-secondary {
     background: transparent;
-    border: 1.5px solid rgba(242,235,226,0.3);
-    color: #F2EBE2;
-    letter-spacing: 0.06em;
+    border: 1.5px solid rgba(44,26,14,0.25);
+    color: #2C1A0E;
     @apply px-6 py-3 rounded-full font-body font-normal
-           transition-colors duration-500 disabled:opacity-50;
+           transition-colors duration-300 disabled:opacity-50;
   }
-  .btn-secondary:hover { background: rgba(242,235,226,0.08); }
+  .btn-secondary:hover { background: rgba(44,26,14,0.06); }
 
   .btn-ghost {
     background: transparent;
-    color: rgba(242,235,226,0.7);
+    color: rgba(44,26,14,0.55);
     @apply px-6 py-3 rounded-full font-body font-normal
-           transition-colors duration-500;
+           transition-colors duration-300;
   }
-  .btn-ghost:hover { background: rgba(242,235,226,0.06); }
+  .btn-ghost:hover { background: rgba(44,26,14,0.06); }
 
   /* ── Cards ── */
 
-  /* Auf dunklen Screens */
   .card {
-    background: rgba(242,235,226,0.06);
-    border: 0.5px solid rgba(242,235,226,0.12);
+    background: #F2EBE2;
+    border: 0.5px solid rgba(44,26,14,0.10);
     @apply rounded-2xl p-6;
     transition: transform 200ms ease-in-out;
   }
   .card:active { transform: scale(0.98); }
 
-  /* Auf hellen Screens */
   .card-light {
     background: #F2EBE2;
-    border: 0.5px solid rgba(47,74,60,0.10);
+    border: 0.5px solid rgba(44,26,14,0.10);
     @apply rounded-2xl p-6;
     transition: transform 200ms ease-in-out;
   }
@@ -172,35 +131,19 @@
 
   /* ── Inputs ── */
 
-  /* Auf dunklen Screens */
-  .input {
-    background: rgba(242,235,226,0.08);
-    border: 0.5px solid rgba(242,235,226,0.15);
-    color: #F2EBE2;
-    font-weight: 300;
-    @apply w-full px-4 py-3 rounded-xl font-body
-           transition-all duration-500;
-  }
-  .input:focus {
-    outline: none;
-    border: 1.5px solid rgba(242,235,226,0.5);
-  }
-  .input::placeholder { color: rgba(242,235,226,0.32); }
-
-  /* Auf hellen Screens */
-  .input-light {
+  .input, .input-light {
     background: #F2EBE2;
-    border: 1px solid rgba(47,74,60,0.20);
-    color: #232323;
+    border: 1px solid rgba(44,26,14,0.18);
+    color: #2C1A0E;
     font-weight: 300;
     @apply w-full px-4 py-3 rounded-xl font-body
-           transition-all duration-500;
+           transition-all duration-300;
   }
-  .input-light:focus {
+  .input:focus, .input-light:focus {
     outline: none;
-    border: 1.5px solid #2F4A3C;
+    border-color: #6B7B5A;
   }
-  .input-light::placeholder { color: #9A8E84; }
+  .input::placeholder, .input-light::placeholder { color: #9A8A7A; }
 
   /* ── Label ── */
   .label {
@@ -209,42 +152,41 @@
     font-weight: 300;
     text-transform: uppercase;
     letter-spacing: 0.14em;
-    color: rgba(242,235,226,0.45);
+    color: rgba(44,26,14,0.45);
     @apply block mb-1.5;
   }
 
-  /* ── Chips — auf dunklen Screens ── */
+  /* ── Chips ── */
   .chip {
-    background: rgba(242,235,226,0.06);
-    border: 0.5px solid rgba(242,235,226,0.14);
-    color: rgba(242,235,226,0.75);
+    background: rgba(44,26,14,0.06);
+    border: 0.5px solid rgba(44,26,14,0.14);
+    color: rgba(44,26,14,0.65);
     @apply px-3 py-1.5 rounded-full text-sm cursor-pointer
-           transition-all duration-400;
+           transition-all;
     font-weight: 300;
   }
   .chip:hover {
-    background: rgba(242,235,226,0.10);
-    border-color: rgba(242,235,226,0.3);
-    color: #F2EBE2;
+    background: rgba(44,26,14,0.10);
+    color: #2C1A0E;
   }
   .chip-active {
-    background: #F2EBE2 !important;
-    border: 0.5px solid #F2EBE2 !important;
-    color: #2F4A3C !important;
+    background: #6B7B5A !important;
+    border-color: #6B7B5A !important;
+    color: #F2EBE2 !important;
   }
 
-  /* ── Tag-Accent — auf dunklen Screens ── */
+  /* ── Tag-Accent ── */
   .tag-accent {
-    background: rgba(242,235,226,0.08);
-    color: rgba(242,235,226,0.75);
-    border: 0.5px solid rgba(242,235,226,0.14);
+    background: rgba(44,26,14,0.06);
+    color: rgba(44,26,14,0.65);
+    border: 0.5px solid rgba(44,26,14,0.12);
     @apply px-3 py-1 rounded-full text-xs font-body;
     font-weight: 300;
   }
 
   /* ── Schatten ── */
   .card-shadow {
-    box-shadow: 0 4px 24px rgba(20,32,26,0.35);
+    box-shadow: 0 4px 24px rgba(44,26,14,0.10);
   }
 }
 
@@ -258,9 +200,9 @@
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-  background: rgba(242,235,226,0.15);
+  background: rgba(44,26,14,0.15);
   border-radius: 2px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(242,235,226,0.3);
+  background: rgba(44,26,14,0.30);
 }

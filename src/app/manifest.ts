@@ -7,8 +7,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: 'Bewusstes Dating für echte Verbindung',
     start_url: '/discover',
     display: 'standalone',
-    background_color: '#2F4A3C',
-    theme_color: '#2F4A3C',
+    background_color: '#EAE0D5',
+    theme_color: '#EAE0D5',
     orientation: 'portrait',
     categories: ['lifestyle', 'social'],
     icons: [

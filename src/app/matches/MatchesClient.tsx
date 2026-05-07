@@ -81,28 +81,28 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
 
   if (tier === 'free') {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen px-6 text-center bg-[#2F4A3C]">
-        <div className="w-20 h-20 bg-[rgba(242,235,226,0.12)] rounded-full flex items-center justify-center mx-auto mb-6">
-          <Lock className="w-9 h-9 text-[#F2EBE2]/50" />
+      <div className="flex flex-col items-center justify-center min-h-screen px-6 text-center" style={{ background: '#EAE0D5' }}>
+        <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6" style={{ background: 'rgba(44,26,14,0.06)' }}>
+          <Lock className="w-9 h-9 text-[#9A8A7A]" />
         </div>
-        <h2 className="font-heading text-4xl text-[#F2EBE2] font-light mb-3">Matches sind gesperrt</h2>
-        <p className="text-[#F2EBE2]/60 leading-relaxed mb-8 max-w-sm">
+        <h2 className="font-heading text-4xl text-[#2C1A0E] font-light mb-3">Matches sind gesperrt</h2>
+        <p className="text-[#9A8A7A] leading-relaxed mb-8 max-w-sm">
           Mit der Mitgliedschaft (29 €/Monat) siehst du gegenseitige Interessen und kannst Begegnungen anfragen.
         </p>
-        <Link href="/pricing" className="bg-[#F2EBE2] text-[#232323] px-8 py-3.5 rounded-full font-body font-semibold hover:bg-white transition-colors">
+        <Link href="/pricing" className="btn-primary px-8">
           Mitgliedschaft ansehen
         </Link>
-        <p className="text-xs text-[#F2EBE2]/30 mt-4">14 Tage Geld-zurück-Garantie</p>
+        <p className="text-xs text-[#9A8A7A] mt-4">14 Tage Geld-zurück-Garantie</p>
       </div>
     )
   }
 
   if (matches.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[80vh] px-4 text-center">
-        <Heart className="w-16 h-16 text-[#6B6058] mb-6" />
-        <h2 className="font-heading text-4xl text-[#F2EBE2] font-light mb-3">Noch keine Matches</h2>
-        <p className="text-[#6B6058] max-w-sm mb-8">
+      <div className="flex flex-col items-center justify-center min-h-[80vh] px-4 text-center" style={{ background: '#EAE0D5' }}>
+        <Heart className="w-16 h-16 mb-6" style={{ color: 'rgba(44,26,14,0.20)' }} />
+        <h2 className="font-heading text-4xl text-[#2C1A0E] font-light mb-3">Noch keine Matches</h2>
+        <p className="text-[#9A8A7A] max-w-sm mb-8">
           Wenn du jemanden likest und diese Person dich ebenfalls geliked hat, erscheint sie hier.
         </p>
         <Link href="/discover" className="btn-primary">Entdecken starten</Link>
@@ -120,7 +120,7 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
       <div className="max-w-2xl mx-auto px-4 pb-32">
         {/* Header */}
         <div className="pt-12 pb-5">
-          <h1 className="font-heading text-[52px] font-normal text-primary tracking-[-0.5px] leading-none mb-1">Matches</h1>
+          <h1 className="font-heading text-[52px] font-normal text-[#2C1A0E] tracking-[-0.5px] leading-none mb-1">Matches</h1>
           {activeMatchId ? (
             <p className="text-[#9A8E84] font-body text-sm font-light">One Connection Rule aktiv</p>
           ) : (
@@ -129,7 +129,7 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
         </div>
 
         {/* One Connection hint */}
-        <p className="text-xs text-[rgba(47,74,60,0.35)] font-light mb-6">✦ &nbsp; Du kannst eine Begegnung gleichzeitig führen.</p>
+        <p className="text-xs text-[rgba(44,26,14,0.35)] font-light mb-6">✦ &nbsp; Du kannst eine Begegnung gleichzeitig führen.</p>
 
         <div className="space-y-4">
           {matches.map((match) => {
@@ -148,11 +148,11 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
                 key={match.id}
                 className={cn(
                   'rounded-2xl bg-[#F2EBE2] overflow-hidden shadow-sm active:scale-[0.98] transition-transform duration-300',
-                  isThisActiveMatch ? 'ring-2 ring-[#2F4A3C]' : ''
+                  isThisActiveMatch ? 'ring-2 ring-[#6B7B5A]' : ''
                 )}
               >
                 {/* Photo strip with serif name */}
-                <Link href={`/profile/${profile.user_id}`} className="block relative h-48 overflow-hidden bg-gradient-to-br from-[#3D5E4E] to-[#1E3028]">
+                <Link href={`/profile/${profile.user_id}`} className="block relative h-48 overflow-hidden" style={{ background: '#EAE0D5' }}>
                   {photo ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
@@ -162,7 +162,7 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
                     />
                   ) : (
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="font-heading text-5xl text-[#F2EBE2]/20">
+                      <span className="font-heading text-5xl text-[#9A8A7A]">
                         {profile.name?.[0]}
                       </span>
                     </div>
@@ -183,7 +183,7 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
 
                   {/* Active badge */}
                   {isThisActiveMatch && (
-                    <span className="absolute top-2 right-2 flex items-center gap-1 text-xs text-[#2F4A3C] bg-white px-2 py-1 rounded-full z-20">
+                    <span className="absolute top-2 right-2 flex items-center gap-1 text-xs text-[#6B7B5A] bg-white px-2 py-1 rounded-full z-20">
                       <CheckCircle className="w-3 h-3" /> Aktiv
                     </span>
                   )}
@@ -193,7 +193,7 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
                 <div className="px-5 pt-4 pb-5">
                   {/* Bio/intention preview */}
                   {(profile.bio || profile.intention) && (
-                    <p className="text-sm font-light text-[#6B6058] leading-relaxed mb-4">
+                    <p className="text-sm font-light text-[#9A8A7A] leading-relaxed mb-4">
                       {profile.bio || profile.intention}
                     </p>
                   )}
@@ -206,14 +206,14 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
 
                     <div>
                       {isActive ? (
-                        <Link href={`/connection/${match.id}`} className="bg-[#2F4A3C] text-[#F2EBE2] text-xs font-normal px-5 py-2.5 rounded-xl">
+                        <Link href={`/connection/${match.id}`} className="bg-[#6B7B5A] text-[#F2EBE2] text-xs font-normal px-5 py-2.5 rounded-xl">
                           Zum Chat
                         </Link>
                       ) : isRequested && !isRequester ? (
                         <button
                           onClick={() => acceptConnection(connection.id, match.id)}
                           disabled={loading === connection.id}
-                          className="bg-[#2F4A3C] text-[#F2EBE2] text-xs font-normal px-5 py-2.5 rounded-xl disabled:opacity-50"
+                          className="bg-[#6B7B5A] text-[#F2EBE2] text-xs font-normal px-5 py-2.5 rounded-xl disabled:opacity-50"
                         >
                           {loading === connection.id ? '...' : 'Anfrage annehmen'}
                         </button>
@@ -225,7 +225,7 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
                         <button
                           onClick={() => requestConnection(match.id)}
                           disabled={loading === match.id || (!!activeMatchId && !isThisActiveMatch)}
-                          className="bg-[#2F4A3C] text-[#F2EBE2] text-xs font-normal px-5 py-2.5 rounded-xl disabled:opacity-40 disabled:cursor-not-allowed"
+                          className="bg-[#6B7B5A] text-[#F2EBE2] text-xs font-normal px-5 py-2.5 rounded-xl disabled:opacity-40 disabled:cursor-not-allowed"
                         >
                           {loading === match.id ? '...' : 'Begegnung anfragen'}
                         </button>

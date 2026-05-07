@@ -1,25 +1,26 @@
-﻿'use client'
+'use client'
 
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { Search, Heart, BookOpen, User, LogOut, Users } from 'lucide-react'
+import { Search, BookOpen, User, LogOut } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { cn } from '@/lib/utils'
 import toast from 'react-hot-toast'
 import { SajaLogo } from '@/components/ui/SajaLogo'
 
 const NAV_ITEMS = [
-  { href: '/discover', icon: 'search', label: 'Entdecken' },
-  { href: '/matches', icon: 'heart', label: 'Matches' },
-  { href: '/begegnung', icon: 'saja', label: 'Begegnung' },
-  { href: '/content', icon: 'book', label: 'Inhalte' },
-  { href: '/profile', icon: 'user', label: 'Profil' },
+  { href: '/discover',        icon: 'search',     label: 'Entdecken' },
+  { href: '/verbindungsraum', icon: 'connection',  label: 'Verbindungsraum' },
+  { href: '/journal',         icon: 'book',        label: 'Journal' },
+  { href: '/profile',         icon: 'user',        label: 'Profil' },
 ]
 
 function NavIcon({ iconKey, isActive }: { iconKey: string; isActive: boolean }) {
-  const color = isActive ? '#F2EBE2' : 'rgba(242,235,226,0.28)'
+  const activeColor   = '#6B7B5A'
+  const inactiveColor = 'rgba(44,26,14,0.30)'
+  const color = isActive ? activeColor : inactiveColor
 
-  if (iconKey === 'saja') {
+  if (iconKey === 'connection') {
     return (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style={{ transform: 'rotate(135deg)', transformOrigin: 'center' }}>
         <path
@@ -31,11 +32,9 @@ function NavIcon({ iconKey, isActive }: { iconKey: string; isActive: boolean }) 
       </svg>
     )
   }
-  if (iconKey === 'search') return <Search className="w-5 h-5" strokeWidth={1.5} />
-  if (iconKey === 'heart') return <Heart className="w-5 h-5" strokeWidth={1.5} />
-  if (iconKey === 'users') return <Users className="w-5 h-5" strokeWidth={1.5} />
-  if (iconKey === 'book') return <BookOpen className="w-5 h-5" strokeWidth={1.5} />
-  if (iconKey === 'user') return <User className="w-5 h-5" strokeWidth={1.5} />
+  if (iconKey === 'search') return <Search className="w-5 h-5" strokeWidth={1.5} style={{ color }} />
+  if (iconKey === 'book')   return <BookOpen className="w-5 h-5" strokeWidth={1.5} style={{ color }} />
+  if (iconKey === 'user')   return <User className="w-5 h-5" strokeWidth={1.5} style={{ color }} />
   return null
 }
 
@@ -54,9 +53,10 @@ export function AppNav() {
   return (
     <>
       {/* Desktop sidebar */}
-      <aside className="hidden md:flex flex-col w-64 min-h-screen bg-[#1E3028] fixed left-0 top-0 px-4 py-6">
+      <aside className="hidden md:flex flex-col w-64 min-h-screen fixed left-0 top-0 px-4 py-6"
+        style={{ background: '#EAE0D5', borderRight: '0.5px solid rgba(44,26,14,0.08)' }}>
         <Link href="/discover" className="mb-10 px-2">
-          <SajaLogo size="md" showTagline={true} onDark={true} />
+          <SajaLogo size="md" showTagline={true} onDark={false} />
         </Link>
 
         <nav className="flex-1 space-y-1">
@@ -69,8 +69,8 @@ export function AppNav() {
                 className={cn(
                   'flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-body text-sm',
                   isActive
-                    ? 'bg-[rgba(242,235,226,0.14)] text-[#F2EBE2] font-normal'
-                    : 'text-[rgba(242,235,226,0.38)] hover:bg-[rgba(242,235,226,0.07)] hover:text-[#F2EBE2]'
+                    ? 'bg-[rgba(107,123,90,0.12)] text-[#6B7B5A] font-normal'
+                    : 'text-[rgba(44,26,14,0.45)] hover:bg-[rgba(44,26,14,0.05)] hover:text-[#2C1A0E]'
                 )}
               >
                 <NavIcon iconKey={icon} isActive={isActive} />
@@ -82,7 +82,7 @@ export function AppNav() {
 
         <button
           onClick={handleLogout}
-          className="flex items-center gap-3 px-4 py-3 text-[rgba(242,235,226,0.35)] hover:text-[#F2EBE2] transition-colors text-sm font-body"
+          className="flex items-center gap-3 px-4 py-3 text-[rgba(44,26,14,0.35)] hover:text-[#2C1A0E] transition-colors text-sm font-body"
         >
           <LogOut className="w-5 h-5" strokeWidth={1.5} />
           Abmelden
@@ -94,8 +94,8 @@ export function AppNav() {
         data-mobile-nav
         className="md:hidden fixed bottom-0 left-0 right-0 z-50"
         style={{
-          background: 'var(--bg-nav)',
-          borderTop: '0.5px solid rgba(242,235,226,0.08)',
+          background: '#EAE0D5',
+          borderTop: '0.5px solid rgba(44,26,14,0.08)',
           paddingBottom: 'env(safe-area-inset-bottom)',
         }}
       >
@@ -109,12 +109,11 @@ export function AppNav() {
                 title={label}
                 className={cn(
                   'flex-1 flex flex-col items-center justify-center py-3 gap-1 transition-colors',
-                  isActive ? 'text-[#F2EBE2]' : 'text-[rgba(242,235,226,0.28)]'
                 )}
               >
                 <NavIcon iconKey={icon} isActive={isActive} />
                 {isActive
-                  ? <span className="text-[8px] font-body font-light tracking-wide text-[#F2EBE2]">{label}</span>
+                  ? <span className="text-[8px] font-body font-light tracking-wide" style={{ color: '#6B7B5A' }}>{label}</span>
                   : <div className="h-[8px]" />
                 }
               </Link>

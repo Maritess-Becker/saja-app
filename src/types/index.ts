@@ -98,6 +98,7 @@ export interface Profile {
   profile_quote: string | null
   birth_date: string | null
   smoking: string | null
+  drugs: string | null
   alcohol: string | null
   prompts: Array<{ question: string; answer: string }>
   dealbreakers: string[]

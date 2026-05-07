@@ -1,4 +1,4 @@
-﻿import type { Config } from 'tailwindcss'
+import type { Config } from 'tailwindcss'
 
 const config: Config = {
   content: [
@@ -10,25 +10,25 @@ const config: Config = {
     extend: {
       colors: {
         // ── Core palette ──────────────────────────────────
-        primary:      '#2F4A3C',   // Tiefes Waldgrün
-        medium:       '#3D5E4E',   // Besondere Momente
-        deep:         '#1E3028',   // Sehr dunkles Waldgrün
-        cream:        '#E7DFD6',   // Warmes Steinbeige (Haupthintergrund)
-        surface:      '#F2EBE2',   // Card / erhöhte Flächen
-        background:   '#2F4A3C',
+        primary:      '#6B7B5A',   // Sage
+        medium:       '#4A5840',   // Sage Dark
+        deep:         '#2C1A0E',   // Espresso
+        cream:        '#EAE0D5',   // Sand
+        surface:      '#F2EBE2',   // Oat
+        background:   '#EAE0D5',   // Sand
         // ── Text ──────────────────────────────────────────
-        text:         '#232323',   // Dunkles Anthrazit
-        muted:        '#6B6058',   // Sekundärtext
-        subtle:       '#9A8E84',   // Tertiärtext / Placeholder
+        text:         '#2C1A0E',   // Espresso
+        muted:        '#9A8A7A',   // Taupe
+        subtle:       '#B5A898',   // Helles Taupe
         // ── Accents ───────────────────────────────────────
-        terra:        '#A8654C',   // Gedämpftes Terrakotta
-        sage:         '#7A9E8A',   // Akzent Salbeigrün
-        gold:         '#BFA76A',   // Akzent Gold
+        terra:        '#B5522A',   // Terracotta
+        sage:         '#6B7B5A',   // Sage (primär)
+        gold:         '#C8A86A',   // Gold
         // ── Compatibility aliases ──────────────────────────
-        moon:         '#E7DFD6',
-        dark:         '#1E3028',
+        moon:         '#EAE0D5',
+        dark:         '#2C1A0E',
         light:        '#F2EBE2',
-        sand:         '#2F4A3C',
+        sand:         '#EAE0D5',
         'on-primary': '#F2EBE2',
       },
       fontFamily: {

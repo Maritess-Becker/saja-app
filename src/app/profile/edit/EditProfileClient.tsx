@@ -160,6 +160,9 @@ export function EditProfileClient({ profile, userId }: Props) {
   const [heightCm, setHeightCm] = useState(profile.height_cm?.toString() ?? '')
   const [hideAge, setHideAge] = useState(profile.hide_age ?? false)
   const [hideLocation, setHideLocation] = useState(profile.hide_location ?? false)
+  const [hasChildren, setHasChildren] = useState(profile.has_children ?? '')
+  const [smokingVal, setSmokingVal] = useState(profile.smoking ?? '')
+  const [drugsVal, setDrugsVal] = useState(profile.drugs ?? '')
 
   // Bio / Intention
   const [bio, setBio] = useState(profile.bio ?? '')
@@ -300,6 +303,9 @@ export function EditProfileClient({ profile, userId }: Props) {
       height_cm: heightCm ? parseInt(heightCm) : null,
       hide_age: hideAge,
       hide_location: hideLocation,
+      has_children: hasChildren || null,
+      smoking: smokingVal || null,
+      drugs: drugsVal || null,
       bio: bio || null,
       intention: intention || null,
       relationship_model: relationshipModel || null,
@@ -386,6 +392,43 @@ export function EditProfileClient({ profile, userId }: Props) {
               <label className="font-body text-[11px] uppercase tracking-widest text-[#6B6058] block mb-2">Größe (cm)</label>
               <input type="number" value={heightCm} onChange={e => setHeightCm(e.target.value)} placeholder="z.B. 170" min={140} max={220}
                 className="w-full bg-white border border-[rgba(47,74,60,0.12)] rounded-xl px-4 py-3 font-body text-[14px] text-[#232323] placeholder-[#6B6058] focus:outline-none focus:border-[#2F4A3C]/60" />
+            </div>
+            {/* Lebensstil */}
+            <div>
+              <label className="font-body text-[11px] uppercase tracking-widest text-[#6B6058] block mb-2">Kinder</label>
+              <div className="flex flex-wrap gap-2">
+                {['Keine', 'Ja', 'Offen'].map(opt => (
+                  <button key={opt} onClick={() => setHasChildren(hasChildren === opt ? '' : opt)}
+                    className={cn('px-4 py-2 rounded-full text-sm border transition-all',
+                      hasChildren === opt ? 'bg-[#2F4A3C] border-[#2F4A3C] text-white' : 'bg-white border-[rgba(47,74,60,0.15)] text-[#6B6058]')}>
+                    {opt}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div>
+              <label className="font-body text-[11px] uppercase tracking-widest text-[#6B6058] block mb-2">Rauchen</label>
+              <div className="flex flex-wrap gap-2">
+                {['Nein', 'Gelegentlich', 'Ja'].map(opt => (
+                  <button key={opt} onClick={() => setSmokingVal(smokingVal === opt ? '' : opt)}
+                    className={cn('px-4 py-2 rounded-full text-sm border transition-all',
+                      smokingVal === opt ? 'bg-[#2F4A3C] border-[#2F4A3C] text-white' : 'bg-white border-[rgba(47,74,60,0.15)] text-[#6B6058]')}>
+                    {opt}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div>
+              <label className="font-body text-[11px] uppercase tracking-widest text-[#6B6058] block mb-2">Drogen</label>
+              <div className="flex flex-wrap gap-2">
+                {['Nein', 'Gelegentlich', 'Ja'].map(opt => (
+                  <button key={opt} onClick={() => setDrugsVal(drugsVal === opt ? '' : opt)}
+                    className={cn('px-4 py-2 rounded-full text-sm border transition-all',
+                      drugsVal === opt ? 'bg-[#2F4A3C] border-[#2F4A3C] text-white' : 'bg-white border-[rgba(47,74,60,0.15)] text-[#6B6058]')}>
+                    {opt}
+                  </button>
+                ))}
+              </div>
             </div>
             <div className="space-y-3">
               <label className="font-body text-[11px] uppercase tracking-widest text-[#6B6058] block">Privatsphäre</label>
