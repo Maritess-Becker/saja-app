@@ -10,6 +10,7 @@ import type { Profile, EmotionalCapacity } from '@/types'
 import { photoUrl, calculateAge } from '@/lib/utils'
 import { createClient } from '@/lib/supabase/client'
 import toast from 'react-hot-toast'
+import { getDailyAffirmation } from '@/lib/affirmations'
 
 // ── Sub-components ────────────────────────────────────────────────────────────
 
@@ -178,12 +179,16 @@ export function ProfileSelfView({ profile, tier }: Props) {
   const trialDaysLeft = trialStarted ? Math.max(0, 14 - Math.floor(trialMs / 86_400_000)) : 0
   const trialActive = (profile.trial_active ?? false) && trialDaysLeft > 0
 
-  const [capacity, setCapacity]           = useState<EmotionalCapacity | null>(profile.emotional_capacity ?? null)
-  const [currentMoment, setCurrentMoment] = useState(profile.current_moment ?? '')
-  const [editingMoment, setEditingMoment] = useState(false)
-  const [momentDraft, setMomentDraft]     = useState(profile.current_moment ?? '')
-  const [paused, setPaused]               = useState(profile.profile_paused ?? false)
-  const [saving, setSaving]               = useState(false)
+  const [capacity, setCapacity]                       = useState<EmotionalCapacity | null>(profile.emotional_capacity ?? null)
+  const [currentMoment, setCurrentMoment]             = useState(profile.current_moment ?? '')
+  const [editingMoment, setEditingMoment]             = useState(false)
+  const [momentDraft, setMomentDraft]                 = useState(profile.current_moment ?? '')
+  const [paused, setPaused]                           = useState(profile.profile_paused ?? false)
+  const [saving, setSaving]                           = useState(false)
+  // Affirmation settings
+  const [affirmEnabled, setAffirmEnabled]             = useState(profile.affirmations_enabled ?? true)
+  const [affirmTime, setAffirmTime]                   = useState(profile.affirmation_time ?? '09:00')
+  const [savingAffirm, setSavingAffirm]               = useState(false)
 
   async function saveCapacity(val: EmotionalCapacity) {
     setCapacity(val)
@@ -213,6 +218,16 @@ export function ProfileSelfView({ profile, tier }: Props) {
       paused_since: next ? new Date().toISOString() : null,
     }).eq('user_id', profile.user_id)
     toast.success(next ? 'Profil pausiert. 🌙' : 'Pause beendet — willkommen zurück.')
+  }
+
+  async function saveAffirmationSettings(enabled: boolean, time: string) {
+    setSavingAffirm(true)
+    await supabase.from('profiles').update({
+      affirmations_enabled: enabled,
+      affirmation_time: time,
+    }).eq('user_id', profile.user_id)
+    setSavingAffirm(false)
+    toast.success('Affirmations-Einstellungen gespeichert.')
   }
 
   return (
@@ -661,6 +676,64 @@ export function ProfileSelfView({ profile, tier }: Props) {
           </Link>
         </div>
       )}
+
+      {/* ── Meine Affirmationen ── */}
+      <div className="mx-4 mt-6 bg-white rounded-2xl border border-[rgba(122,62,30,0.12)] p-6">
+        <div className="flex items-center gap-2 mb-4">
+          <span className="text-[#C08080]">✦</span>
+          <h3 className="font-heading text-xl text-[#1A1410]">Meine Affirmationen</h3>
+        </div>
+
+        {/* Toggle */}
+        <div className="flex items-center justify-between py-3 border-b border-[rgba(122,62,30,0.08)]">
+          <div>
+            <p className="text-sm text-[#1A1410] font-body">Tägliche Affirmation</p>
+            <p className="text-xs text-[#A09888] mt-0.5">Jeden Morgen eine Affirmation erhalten</p>
+          </div>
+          <button
+            onClick={async () => {
+              const next = !affirmEnabled
+              setAffirmEnabled(next)
+              await saveAffirmationSettings(next, affirmTime)
+            }}
+            className={`relative w-11 h-6 rounded-full transition-colors duration-200 ${
+              affirmEnabled ? 'bg-[#C08080]' : 'bg-[rgba(122,62,30,0.15)]'
+            }`}
+            aria-label="Affirmationen ein/aus"
+          >
+            <span
+              className={`absolute top-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform duration-200 ${
+                affirmEnabled ? 'translate-x-5' : 'translate-x-0.5'
+              }`}
+            />
+          </button>
+        </div>
+
+        {/* Time picker */}
+        {affirmEnabled && (
+          <div className="flex items-center justify-between py-3 border-b border-[rgba(122,62,30,0.08)]">
+            <div>
+              <p className="text-sm text-[#1A1410] font-body">Uhrzeit</p>
+              <p className="text-xs text-[#A09888] mt-0.5">Wann möchtest du deine Affirmation?</p>
+            </div>
+            <input
+              type="time"
+              value={affirmTime}
+              onChange={(e) => setAffirmTime(e.target.value)}
+              onBlur={() => saveAffirmationSettings(affirmEnabled, affirmTime)}
+              className="text-sm text-[#7A3E1E] font-body bg-transparent border-b border-[rgba(122,62,30,0.3)] focus:outline-none focus:border-[#7A3E1E] text-right"
+            />
+          </div>
+        )}
+
+        {/* Today's affirmation preview */}
+        <div className="pt-3">
+          <p className="text-[11px] uppercase tracking-wider text-[#A09888] mb-2">Heutige Affirmation</p>
+          <p className="font-heading text-[16px] italic text-[#4A2010] leading-snug">
+            &ldquo;{getDailyAffirmation().content}&rdquo;
+          </p>
+        </div>
+      </div>
 
       {/* ── Einstellungen ── */}
       <div className="mx-4 mt-6 bg-white rounded-2xl border border-[rgba(122,62,30,0.12)] p-6 mb-8">

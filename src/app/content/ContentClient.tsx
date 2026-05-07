@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils'
 import toastLib from 'react-hot-toast'
 import { createClient } from '@/lib/supabase/client'
 import type { JournalEntry } from '@/types'
+import { getDailyAffirmation, CATEGORY_LABELS } from '@/lib/affirmations'
 
 type Tier = 'free' | 'membership' | 'premium'
 
@@ -148,6 +149,15 @@ const CONTENT_SECTIONS = [
     icon: <Compass size={16} strokeWidth={1.8} />,
     items: [
       {
+        id: 'heutige-affirmation',
+        title: 'Heutige Affirmation',
+        description: 'Eine Affirmation für dich — täglich wechselnd aus einem Pool von 20 Affirmationen zu Selbstliebe, Präsenz, Verbindung und Mut.',
+        format: 'Tägliche Karte',
+        access: 'free',
+        icon: <Sparkles size={20} strokeWidth={1.8} />,
+        tag: 'Kostenlos',
+      },
+      {
         id: 'taeglicher-impuls',
         title: 'Täglicher Impuls',
         description: 'Jeden Tag ein kurzer Gedanke oder eine Frage zum bewussten Dating — rotierend aus einem Pool von 30+ Impulsen.',
@@ -267,6 +277,7 @@ const ICON_BG: Record<string, string> = {
   'was-ich-wirklich-suche':        '#2D7A5F',
   'grenzen-kennen':                '#C4603A',
   // Begleitung — Solar & Sacral
+  'heutige-affirmation':           '#C08080',
   'taeglicher-impuls':             '#BF9B30',
   'nach-der-begegnung':            '#A05830',
   'wenn-es-schwer-wird':           '#C08080',
@@ -408,6 +419,31 @@ const MODAL_CONTENT: Record<string, { title: string; body: React.ReactNode }> = 
         <p className="text-xs text-[#A09888] italic">Vollständige Reflexion folgt.</p>
       </div>
     ),
+  },
+  'heutige-affirmation': {
+    title: 'Heutige Affirmation',
+    body: (() => {
+      const aff = getDailyAffirmation()
+      return (
+        <div className="text-center py-4 space-y-4">
+          <p className="text-[#6B6058] text-sm">{new Date().toLocaleDateString('de-DE', { weekday: 'long', day: 'numeric', month: 'long' })}</p>
+          <div
+            className="rounded-2xl p-6"
+            style={{ background: 'var(--bg-indigo)' }}
+          >
+            <p className="font-heading text-[22px] italic text-[#FDF5E8] leading-snug">
+              &ldquo;{aff.content}&rdquo;
+            </p>
+          </div>
+          <span className="inline-block text-[10px] uppercase tracking-widest px-3 py-1 rounded-full bg-[#C08080]/15 text-[#C08080]">
+            {CATEGORY_LABELS[aff.category]}
+          </span>
+          <p className="text-xs text-[#A09888] leading-relaxed">
+            Täglich wechselnd · 20 Affirmationen zu Selbstliebe, Präsenz, Verbindung und Mut.
+          </p>
+        </div>
+      )
+    })(),
   },
   'taeglicher-impuls': {
     title: 'Täglicher Impuls',
@@ -721,6 +757,7 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
   // ── Content state ──
   const [activeTab, setActiveTab] = useState('kenne-dich-selbst')
   const [openModal, setOpenModal] = useState<string | null>(null)
+  const dailyAffirmation = getDailyAffirmation()
 
   // ── Main tab: content vs journal ──
   const [mainTab, setMainTab] = useState<'content' | 'journal'>('content')
@@ -1010,6 +1047,29 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
           {activeSection && (
             <div className="space-y-3">
 
+              {/* Special: Heutige Affirmation featured card (Begleitung only) */}
+              {activeTab === 'begleitung' && (
+                <button
+                  onClick={() => handleOpen(activeSection.items.find(i => i.id === 'heutige-affirmation')!)}
+                  className="w-full text-left rounded-2xl overflow-hidden active:scale-[0.98] transition-transform duration-150"
+                  style={{ background: 'var(--bg-indigo)' }}
+                >
+                  <div className="p-5">
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="text-[#C08080] text-base">✦</span>
+                      <p className="font-body text-[11px] uppercase tracking-[0.14em] text-[#FDF5E8]/50">Heutige Affirmation</p>
+                      <span className="ml-auto text-[10px] font-body px-2 py-0.5 rounded-full bg-[rgba(192,128,128,0.2)] text-[#C08080]">Kostenlos</span>
+                    </div>
+                    <p className="font-heading text-[20px] italic text-[#FDF5E8] leading-snug mb-3">
+                      &ldquo;{dailyAffirmation.content}&rdquo;
+                    </p>
+                    <p className="text-[#FDF5E8]/40 font-body text-xs">
+                      {CATEGORY_LABELS[dailyAffirmation.category]} · Täglich wechselnd
+                    </p>
+                  </div>
+                </button>
+              )}
+
               {/* Special: Täglicher Impuls featured card (Begleitung only) */}
               {activeTab === 'begleitung' && (
                 <button
@@ -1033,7 +1093,7 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
 
               {/* Regular content cards */}
               {activeSection.items
-                .filter(item => !(activeTab === 'begleitung' && item.id === 'taeglicher-impuls'))
+                .filter(item => !(activeTab === 'begleitung' && (item.id === 'taeglicher-impuls' || item.id === 'heutige-affirmation')))
                 .map((item) => {
                   const accessible = canAccess(item)
                   return (

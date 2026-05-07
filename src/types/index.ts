@@ -120,6 +120,18 @@ export interface Profile {
   trial_started_at: string | null
   trial_active: boolean
   checkin_pattern: Record<string, number> | null
+  // Affirmations
+  affirmations_enabled: boolean
+  affirmation_time: string // 'HH:MM'
+}
+
+export interface Light {
+  id: string
+  sender_id: string
+  receiver_id: string
+  returned: boolean
+  dismissed: boolean
+  created_at: string
 }
 
 export interface Match {

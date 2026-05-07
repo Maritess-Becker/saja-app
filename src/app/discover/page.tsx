@@ -2,7 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { AppNav } from '@/components/layout/AppNav'
 import { DiscoverClient } from './DiscoverClient'
-import type { Profile } from '@/types'
+import type { Profile, Light } from '@/types'
 
 export default async function DiscoverPage() {
   const supabase = createClient()
@@ -66,6 +66,16 @@ export default async function DiscoverPage() {
 
   const profiles = (rawProfiles ?? []) as Profile[]
 
+  // ── Fetch received lights (unread, unreturned) ─────────────────────────────
+  const { data: rawLights } = await supabase
+    .from('lights')
+    .select('*')
+    .eq('receiver_id', user.id)
+    .eq('dismissed', false)
+    .eq('returned', false)
+    .order('created_at', { ascending: false })
+  const receivedLights = (rawLights ?? []) as Light[]
+
   // ── 20% Serendipity: mark 2 out of every 10 profiles ──────────────
   // Pick 2 random indices from the full list to be "surprise" profiles
   const serendipityCount = Math.max(0, Math.floor(profiles.length / 5))
@@ -93,6 +103,7 @@ export default async function DiscoverPage() {
           serendipityIds={serendipityIds}
           trialActive={trialActive}
           trialDaysLeft={trialStarted ? Math.max(0, 14 - Math.floor((Date.now() - trialStarted.getTime()) / 86400000)) : 14}
+          receivedLights={receivedLights}
         />
       </main>
     </div>

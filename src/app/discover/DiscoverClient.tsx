@@ -1,6 +1,6 @@
 ﻿'use client'
 
-import { useState, useMemo, useRef } from 'react'
+import { useState, useMemo, useRef, useEffect } from 'react'
 import {
   Heart, X, MapPin, Briefcase, Sparkles, SlidersHorizontal, RotateCcw,
   Search, ChevronDown, Lock, Mic, Ruler, CornerUpLeft, Play, Pause,
@@ -8,7 +8,7 @@ import {
 import { photoUrl, calculateAge } from '@/lib/utils'
 import { createClient } from '@/lib/supabase/client'
 import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion'
-import type { Profile } from '@/types'
+import type { Profile, Light } from '@/types'
 import toast from 'react-hot-toast'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
@@ -29,6 +29,7 @@ interface Props {
   serendipityIds?: string[]
   trialActive?: boolean
   trialDaysLeft?: number
+  receivedLights?: Light[]
 }
 
 // ─── Matching Algorithm ───────────────────────────────────────────────────────
@@ -512,6 +513,7 @@ export function DiscoverClient({
   serendipityIds = [],
   trialActive = true,
   trialDaysLeft = 14,
+  receivedLights = [],
 }: Props) {
   const supabase = createClient()
 
@@ -549,6 +551,19 @@ export function DiscoverClient({
 
   // Phase 2 onboarding overlay (triggers when phase < 2 and user tries to like)
   const [showPhase2Overlay, setShowPhase2Overlay] = useState(false)
+
+  // ── Licht schicken ────────────────────────────────────────────────────────
+  const todayLightKey = `light_count_${todayStr}`
+  const [lightSentCount, setLightSentCount] = useState<number>(() => {
+    if (typeof window === 'undefined') return 0
+    return parseInt(localStorage.getItem(todayLightKey) ?? '0', 10)
+  })
+  const [lightAnim, setLightAnim]               = useState(false)
+  const [lightLimitToast, setLightLimitToast]   = useState(false)
+  const [localReceivedLights, setLocalReceivedLights] = useState<Light[]>(
+    receivedLights.filter(l => !l.dismissed && !l.returned)
+  )
+  const [lightReturned, setLightReturned]       = useState(false)
 
   // Swipe motion values
   const x = useMotionValue(0)
@@ -702,6 +717,45 @@ export function DiscoverClient({
     setCurrent(prev)
     x.set(0)
     window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  // ── Licht schicken ────────────────────────────────────────────────────────
+
+  async function handleSendLight() {
+    if (!profile) return
+    const DAILY_LIMIT = 3
+    if (lightSentCount >= DAILY_LIMIT) {
+      setLightLimitToast(true)
+      setTimeout(() => setLightLimitToast(false), 4000)
+      return
+    }
+    // Animate glow
+    setLightAnim(true)
+    setTimeout(() => setLightAnim(false), 1200)
+    // Persist in DB
+    await supabase.from('lights').upsert({
+      sender_id: currentUserId,
+      receiver_id: profile.user_id,
+      returned: false,
+      dismissed: false,
+    }, { onConflict: 'sender_id,receiver_id', ignoreDuplicates: true })
+    // Update daily count
+    const newCount = lightSentCount + 1
+    setLightSentCount(newCount)
+    localStorage.setItem(todayLightKey, String(newCount))
+  }
+
+  async function handleReturnLight(lightId: string) {
+    // Mark as returned
+    await supabase.from('lights').update({ returned: true }).eq('id', lightId)
+    setLocalReceivedLights(prev => prev.filter(l => l.id !== lightId))
+    setLightReturned(true)
+    toast('✦ Licht zurückgeschickt — anonym und mit Wärme.')
+  }
+
+  async function handleDismissLight(lightId: string) {
+    await supabase.from('lights').update({ dismissed: true }).eq('id', lightId)
+    setLocalReceivedLights(prev => prev.filter(l => l.id !== lightId))
   }
 
   // ── Pause screen ──────────────────────────────────────────────────────────
@@ -1044,6 +1098,92 @@ export function DiscoverClient({
           </div>
         </div>
       </div>
+
+      {/* ── Received light card ── */}
+      <AnimatePresence>
+        {localReceivedLights.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.35, ease: 'easeOut' }}
+            className="max-w-lg mx-auto px-4 mb-4"
+          >
+            <div
+              className="rounded-2xl p-5 text-center"
+              style={{ background: 'var(--bg-indigo)' }}
+            >
+              <p className="text-[#BF9B30] text-xl mb-2">✦</p>
+              <p className="font-heading text-[20px] italic text-[#FDF5E8] leading-snug mb-1">
+                &ldquo;Jemand hat dir heute ein stilles Licht geschickt.&rdquo;
+              </p>
+              <p className="text-[#FDF5E8]/45 font-body text-xs mb-4">Anonym — kein Name, keine Erwartung.</p>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => handleReturnLight(localReceivedLights[0].id)}
+                  className="flex-1 py-2.5 rounded-xl font-body text-[13px] text-[#FDF5E8] transition-all active:scale-[0.97]"
+                  style={{ background: 'rgba(253,245,232,0.18)' }}
+                >
+                  Ein Licht zurückschicken ✦
+                </button>
+                <button
+                  onClick={() => handleDismissLight(localReceivedLights[0].id)}
+                  className="px-4 py-2.5 rounded-xl font-body text-[13px] text-[#FDF5E8]/50 transition-all active:scale-[0.97]"
+                  style={{ background: 'rgba(253,245,232,0.07)' }}
+                >
+                  In Stille annehmen
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ── Light sent glow animation ── */}
+      <AnimatePresence>
+        {lightAnim && (
+          <motion.div
+            key="light-glow"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-50 pointer-events-none flex items-center justify-center"
+          >
+            <motion.div
+              initial={{ scale: 0.6, opacity: 0.9 }}
+              animate={{ scale: 2.5, opacity: 0 }}
+              transition={{ duration: 1.0, ease: 'easeOut' }}
+              className="w-40 h-40 rounded-full"
+              style={{
+                background: 'radial-gradient(circle, rgba(191,155,48,0.55) 0%, rgba(122,62,30,0.18) 60%, transparent 100%)',
+              }}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ── Light limit toast ── */}
+      <AnimatePresence>
+        {lightLimitToast && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            className="fixed bottom-32 left-0 right-0 z-40 flex justify-center px-4 pointer-events-none"
+          >
+            <div
+              className="rounded-2xl px-5 py-3.5 max-w-sm text-center"
+              style={{ background: 'rgba(74,32,16,0.92)', backdropFilter: 'blur(12px)' }}
+            >
+              <p className="text-[#FDF5E8]/90 font-body text-sm leading-relaxed">
+                Du hast heute 3 Lichter verschickt.<br />
+                <span className="text-[#FDF5E8]/55">Morgen kannst du wieder jemandem eine Freude machen. ✦</span>
+              </p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* ── Empty state ── */}
       {!hasProfile ? (
@@ -1469,6 +1609,21 @@ export function DiscoverClient({
                 style={{ background: 'rgba(253,245,232,0.08)' }}
               >
                 Gerade nicht
+              </button>
+
+              {/* ✦ Licht schicken — dezent, mittig */}
+              <button
+                onClick={handleSendLight}
+                className="w-10 h-[50px] rounded-xl flex items-center justify-center flex-shrink-0 transition-all active:scale-95"
+                style={{
+                  background: 'transparent',
+                  border: `1px solid rgba(253,245,232,${lightSentCount >= 3 ? '0.10' : '0.22'})`,
+                  opacity: lightSentCount >= 3 ? 0.35 : 1,
+                }}
+                aria-label="Ein stilles Licht schicken"
+                title="Ein stilles Licht schicken — anonym und ohne Erwartung"
+              >
+                <span className="text-[#BF9B30] text-base leading-none">✦</span>
               </button>
 
               {/* Undo — square, same height as buttons */}
