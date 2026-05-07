@@ -1,4 +1,4 @@
-﻿@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,41 +6,45 @@
 
 /* ── Background Gradients ───────────────────────────────────────────────── */
 :root {
+  /* DUNKEL — Navigation, Onboarding, Matches, Paywall */
   --bg-indigo:
-    radial-gradient(ellipse 200% 120% at 95% -5%,  rgba(210,120,70,0.32) 0%, transparent 60%),
-    radial-gradient(ellipse 160% 100% at -5% 40%,  rgba(253,245,232,0.07) 0%, transparent 65%),
-    radial-gradient(ellipse 150% 130% at 50% 105%, rgba(74,32,16,0.60) 0%, transparent 60%),
-    radial-gradient(ellipse 120% 80%  at 85% 60%,  rgba(210,120,70,0.10) 0%, transparent 55%),
-    radial-gradient(ellipse 100% 120% at 10% 85%,  rgba(253,245,232,0.06) 0%, transparent 60%),
-    radial-gradient(ellipse 80%  60%  at 45% 40%,  rgba(122,62,30,0.25) 0%, transparent 55%),
-    #7A3E1E;
+    radial-gradient(ellipse 200% 120% at 95% -5%,  rgba(168,101,76,0.32)  0%, transparent 60%),
+    radial-gradient(ellipse 160% 100% at -5% 40%,  rgba(242,235,226,0.07) 0%, transparent 65%),
+    radial-gradient(ellipse 150% 130% at 50% 105%, rgba(20,32,26,0.60)    0%, transparent 60%),
+    radial-gradient(ellipse 120% 80%  at 85% 60%,  rgba(168,101,76,0.10)  0%, transparent 55%),
+    radial-gradient(ellipse 100% 120% at 10% 85%,  rgba(242,235,226,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 80%  60%  at 45% 40%,  rgba(47,74,60,0.25)    0%, transparent 55%),
+    #2F4A3C;
 
+  /* HELL — Entdecken, Profil, Begegnung, Inhalte */
   --bg-creme:
-    radial-gradient(ellipse 200% 100% at 100% 0%,  rgba(210,120,70,0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 180% 120% at 0% 100%,  rgba(122,62,30,0.08) 0%, transparent 65%),
-    radial-gradient(ellipse 150% 100% at 50% 45%,  rgba(122,62,30,0.03) 0%, transparent 65%),
-    radial-gradient(ellipse 120% 100% at 90% 75%,  rgba(210,120,70,0.05) 0%, transparent 60%),
-    radial-gradient(ellipse 100% 80%  at 20% 30%,  rgba(122,62,30,0.02) 0%, transparent 60%),
-    #FDF5E8;
+    radial-gradient(ellipse 200% 100% at 100% 0%,  rgba(168,101,76,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 180% 120% at 0% 100%,  rgba(47,74,60,0.08)   0%, transparent 65%),
+    radial-gradient(ellipse 150% 100% at 50% 45%,  rgba(47,74,60,0.03)   0%, transparent 65%),
+    radial-gradient(ellipse 120% 100% at 90% 75%,  rgba(168,101,76,0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 100% 80%  at 20% 30%,  rgba(47,74,60,0.02)   0%, transparent 60%),
+    #E7DFD6;
 
+  /* BESONDERER MOMENT — Match-Screen, Guided First Message */
   --bg-violett:
-    radial-gradient(ellipse 200% 120% at 95% -5%,  rgba(210,120,70,0.38) 0%, transparent 58%),
-    radial-gradient(ellipse 160% 100% at -5% 45%,  rgba(253,245,232,0.07) 0%, transparent 62%),
-    radial-gradient(ellipse 150% 130% at 50% 105%, rgba(74,32,16,0.50) 0%, transparent 58%),
-    radial-gradient(ellipse 100% 80%  at 80% 60%,  rgba(210,120,70,0.12) 0%, transparent 55%),
-    #A05830;
+    radial-gradient(ellipse 200% 120% at 95% -5%,  rgba(168,101,76,0.38) 0%, transparent 58%),
+    radial-gradient(ellipse 160% 100% at -5% 45%,  rgba(242,235,226,0.07) 0%, transparent 62%),
+    radial-gradient(ellipse 150% 130% at 50% 105%, rgba(20,32,26,0.50)   0%, transparent 58%),
+    radial-gradient(ellipse 100% 80%  at 80% 60%,  rgba(168,101,76,0.12) 0%, transparent 55%),
+    #3D5E4E;
 
+  /* NAVIGATION */
   --bg-nav:
-    radial-gradient(ellipse 250% 150% at 95% 0%,  rgba(210,120,70,0.18) 0%, transparent 60%),
-    radial-gradient(ellipse 200% 150% at 5% 100%, rgba(253,245,232,0.05) 0%, transparent 60%),
-    #7A3E1E;
+    radial-gradient(ellipse 250% 150% at 95% 0%,  rgba(168,101,76,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 200% 150% at 5% 100%, rgba(242,235,226,0.05) 0%, transparent 60%),
+    #2F4A3C;
 
   /* ── Accent colors ── */
-  --accent-green:  #2D7A5F;
-  --accent-orange: #C4603A;
+  --accent-green:  #7A9E8A;
+  --accent-orange: #A8654C;
   --accent-purple: #7B4FA6;
   --accent-blue:   #3A5F8A;
-  --accent-gold:   #BF9B30;
+  --accent-gold:   #BFA76A;
   --accent-red:    #8E3A20;
   --accent-rose:   #C08080;
 }
@@ -51,7 +55,7 @@
     font-family: 'Outfit', system-ui, sans-serif;
     font-weight: 300;
     background: var(--bg-indigo);
-    color: #FDF5E8;
+    color: #F2EBE2;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -62,12 +66,12 @@
 
 /* ── Utility bg classes ─────────────────────────────────────────────────── */
 @layer utilities {
-  /* Indigo-Screens */
+  /* Dunkle Screens */
   .bg-indigo-screen {
     background: var(--bg-indigo);
     background-size: cover;
   }
-  /* Alias — bestehende Klassen bleiben kompatibel */
+  /* Aliases */
   .bg-mondlicht {
     background: var(--bg-indigo);
     background-size: cover;
@@ -77,7 +81,7 @@
     background-size: cover;
   }
 
-  /* Creme-Screens */
+  /* Helle Screens */
   .bg-creme {
     background: var(--bg-creme);
     background-size: cover;
@@ -88,7 +92,7 @@
     background-size: cover;
   }
 
-  /* Match / Violett */
+  /* Besonderer Moment */
   .bg-match-screen {
     background: var(--bg-violett);
     background-size: cover;
@@ -105,98 +109,98 @@
 
   /* ── Buttons ── */
 
-  /* Primary — auf Indigo/Match (cremefarbener Button) */
+  /* Primary — auf dunklen Screens (warmer heller Button) */
   .btn-primary {
-    background-color: #FDF5E8;
-    color: #7A3E1E;
+    background-color: #F2EBE2;
+    color: #2F4A3C;
     letter-spacing: 0.06em;
     @apply px-6 py-3.5 rounded-full font-body font-normal
-           transition-colors duration-200
+           transition-colors duration-500
            disabled:opacity-50 disabled:cursor-not-allowed;
   }
   .btn-primary:hover { background-color: white; }
 
-  /* Primary — auf Creme (Dunkel-Button) */
+  /* Primary — auf hellen Screens (dunkler Button) */
   .btn-primary-dark {
-    background-color: #7A3E1E;
-    color: #FDF5E8;
+    background-color: #2F4A3C;
+    color: #F2EBE2;
     letter-spacing: 0.06em;
     @apply px-6 py-3.5 rounded-full font-body font-normal
-           transition-colors duration-200
+           transition-colors duration-500
            disabled:opacity-50 disabled:cursor-not-allowed;
   }
-  .btn-primary-dark:hover { background-color: #4A2010; }
+  .btn-primary-dark:hover { background-color: #1E3028; }
 
-  /* Ghost — auf Indigo */
+  /* Ghost — auf dunklen Screens */
   .btn-secondary {
     background: transparent;
-    border: 0.5px solid rgba(253,248,242,0.3);
-    color: #FDF8F2;
+    border: 1.5px solid rgba(242,235,226,0.3);
+    color: #F2EBE2;
     letter-spacing: 0.06em;
     @apply px-6 py-3 rounded-full font-body font-normal
-           transition-colors duration-200 disabled:opacity-50;
+           transition-colors duration-500 disabled:opacity-50;
   }
-  .btn-secondary:hover { background: rgba(253,248,242,0.08); }
+  .btn-secondary:hover { background: rgba(242,235,226,0.08); }
 
   .btn-ghost {
     background: transparent;
-    color: rgba(253,248,242,0.7);
+    color: rgba(242,235,226,0.7);
     @apply px-6 py-3 rounded-full font-body font-normal
-           transition-colors duration-200;
+           transition-colors duration-500;
   }
-  .btn-ghost:hover { background: rgba(253,248,242,0.06); }
+  .btn-ghost:hover { background: rgba(242,235,226,0.06); }
 
   /* ── Cards ── */
 
-  /* Auf Indigo */
+  /* Auf dunklen Screens */
   .card {
-    background: rgba(253,248,242,0.06);
-    border: 0.5px solid rgba(253,248,242,0.12);
+    background: rgba(242,235,226,0.06);
+    border: 0.5px solid rgba(242,235,226,0.12);
     @apply rounded-2xl p-6;
-    transition: transform 150ms ease;
+    transition: transform 200ms ease-in-out;
   }
   .card:active { transform: scale(0.98); }
 
-  /* Auf Creme */
+  /* Auf hellen Screens */
   .card-light {
-    background: white;
-    border: 0.5px solid rgba(122,62,30,0.10);
+    background: #F2EBE2;
+    border: 0.5px solid rgba(47,74,60,0.10);
     @apply rounded-2xl p-6;
-    transition: transform 150ms ease;
+    transition: transform 200ms ease-in-out;
   }
   .card-light:active { transform: scale(0.98); }
 
   /* ── Inputs ── */
 
-  /* Auf Indigo */
+  /* Auf dunklen Screens */
   .input {
-    background: rgba(253,248,242,0.08);
-    border: 0.5px solid rgba(253,248,242,0.15);
-    color: #FDF8F2;
+    background: rgba(242,235,226,0.08);
+    border: 0.5px solid rgba(242,235,226,0.15);
+    color: #F2EBE2;
     font-weight: 300;
     @apply w-full px-4 py-3 rounded-xl font-body
-           transition-all duration-200;
+           transition-all duration-500;
   }
   .input:focus {
     outline: none;
-    border: 1px solid rgba(253,248,242,0.5);
+    border: 1.5px solid rgba(242,235,226,0.5);
   }
-  .input::placeholder { color: rgba(253,248,242,0.32); }
+  .input::placeholder { color: rgba(242,235,226,0.32); }
 
-  /* Auf Creme */
+  /* Auf hellen Screens */
   .input-light {
-    background: white;
-    border: 0.5px solid rgba(122,62,30,0.15);
-    color: #7A3E1E;
+    background: #F2EBE2;
+    border: 1px solid rgba(47,74,60,0.20);
+    color: #232323;
     font-weight: 300;
     @apply w-full px-4 py-3 rounded-xl font-body
-           transition-all duration-200;
+           transition-all duration-500;
   }
   .input-light:focus {
     outline: none;
-    border: 1px solid #7A3E1E;
+    border: 1.5px solid #2F4A3C;
   }
-  .input-light::placeholder { color: rgba(122,62,30,0.35); }
+  .input-light::placeholder { color: #9A8E84; }
 
   /* ── Label ── */
   .label {
@@ -205,42 +209,42 @@
     font-weight: 300;
     text-transform: uppercase;
     letter-spacing: 0.14em;
-    color: rgba(253,248,242,0.45);
+    color: rgba(242,235,226,0.45);
     @apply block mb-1.5;
   }
 
-  /* ── Chips — auf Indigo ── */
+  /* ── Chips — auf dunklen Screens ── */
   .chip {
-    background: rgba(253,248,242,0.06);
-    border: 0.5px solid rgba(253,248,242,0.14);
-    color: rgba(253,248,242,0.75);
+    background: rgba(242,235,226,0.06);
+    border: 0.5px solid rgba(242,235,226,0.14);
+    color: rgba(242,235,226,0.75);
     @apply px-3 py-1.5 rounded-full text-sm cursor-pointer
-           transition-all duration-200;
+           transition-all duration-400;
     font-weight: 300;
   }
   .chip:hover {
-    background: rgba(253,248,242,0.10);
-    border-color: rgba(253,248,242,0.3);
-    color: #FDF8F2;
+    background: rgba(242,235,226,0.10);
+    border-color: rgba(242,235,226,0.3);
+    color: #F2EBE2;
   }
   .chip-active {
-    background: #FDF5E8 !important;
-    border: 0.5px solid #FDF5E8 !important;
-    color: #7A3E1E !important;
+    background: #F2EBE2 !important;
+    border: 0.5px solid #F2EBE2 !important;
+    color: #2F4A3C !important;
   }
 
-  /* ── Tag-Accent — auf Indigo ── */
+  /* ── Tag-Accent — auf dunklen Screens ── */
   .tag-accent {
-    background: rgba(253,248,242,0.08);
-    color: rgba(253,248,242,0.75);
-    border: 0.5px solid rgba(253,248,242,0.14);
+    background: rgba(242,235,226,0.08);
+    color: rgba(242,235,226,0.75);
+    border: 0.5px solid rgba(242,235,226,0.14);
     @apply px-3 py-1 rounded-full text-xs font-body;
     font-weight: 300;
   }
 
   /* ── Schatten ── */
   .card-shadow {
-    box-shadow: 0 4px 24px rgba(74,32,16,0.4);
+    box-shadow: 0 4px 24px rgba(20,32,26,0.35);
   }
 }
 
@@ -254,9 +258,9 @@
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-  background: rgba(253,248,242,0.15);
+  background: rgba(242,235,226,0.15);
   border-radius: 2px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(253,248,242,0.3);
+  background: rgba(242,235,226,0.3);
 }

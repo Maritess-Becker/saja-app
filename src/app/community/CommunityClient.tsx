@@ -15,7 +15,7 @@ const GROUPS = [
   {
     id: 'bindungstypen',
     icon: <Heart size={22} strokeWidth={1.8} />,
-    iconBg: '#2D7A5F',
+    iconBg: '#7A9E8A',
     iconColor: '#FFFFFF',
     name: 'Bindungstypen',
     description: 'Austausch rund um ängstliche, vermeidende und sichere Bindungsmuster. Wie prägen sie unsere Beziehungen?',
@@ -27,7 +27,7 @@ const GROUPS = [
   {
     id: 'bewusste-sexualitaet',
     icon: <Flame size={22} strokeWidth={1.8} />,
-    iconBg: '#C4603A',
+    iconBg: '#A8654C',
     iconColor: '#FFFFFF',
     name: 'Bewusste Sexualität',
     description: 'Ein sicherer Raum für Gespräche über gelebte Sexualität, persönliches Wachstum und Verkörperung.',
@@ -63,7 +63,7 @@ const GROUPS = [
   {
     id: 'selbstliebe-heilung',
     icon: <Leaf size={22} strokeWidth={1.8} />,
-    iconBg: '#2D7A5F',
+    iconBg: '#7A9E8A',
     iconColor: '#FFFFFF',
     name: 'Wachstum & Veränderung',
     description: 'Wachstum beginnt bei dir. Muster erkennen, Verhaltensweisen verändern — und was das mit Beziehungen zu tun hat.',
@@ -121,14 +121,14 @@ export function CommunityClient({ tier }: Props) {
   if (!isPremium) {
     return (
       <div className="max-w-2xl mx-auto px-4 pt-8 pb-32">
-        <h1 className="font-heading text-[52px] font-light text-[#1A1410] tracking-[-0.5px] leading-none mb-1">Community</h1>
+        <h1 className="font-heading text-[52px] font-light text-[#232323] tracking-[-0.5px] leading-none mb-1">Community</h1>
         <p className="text-[#6B6058] font-body text-sm mb-10">Gruppen zu Bindungstypen, Sexualität, Beziehungsmodellen und mehr.</p>
 
         {/* Teaser groups (blurred) */}
         <div className="relative">
           <div className="space-y-3 blur-sm pointer-events-none select-none">
             {GROUPS.slice(0, 3).map((g) => (
-              <div key={g.id} className="bg-white rounded-2xl p-5 flex gap-4 items-start" style={{ boxShadow: '0 2px 12px rgba(26,20,16,0.08)' }}>
+              <div key={g.id} className="bg-white rounded-2xl p-5 flex gap-4 items-start" style={{ boxShadow: '0 2px 12px rgba(35,35,35,0.08)' }}>
                 <div
                   className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"
                   style={{ backgroundColor: g.iconBg, color: g.iconColor }}
@@ -137,9 +137,9 @@ export function CommunityClient({ tier }: Props) {
                 </div>
                 <div className="flex-1 min-w-0">
                   <h3 className="font-heading text-[22px]" style={{ color: g.iconBg }}>{g.name}</h3>
-                  <p className="text-[#1A1410] text-sm truncate">{g.description}</p>
+                  <p className="text-[#232323] text-sm truncate">{g.description}</p>
                   <p className="text-[#6B6058]/60 text-xs mt-1">
-                    <span className="font-body font-semibold text-[#1A1410] text-[15px]">{g.members}</span>
+                    <span className="font-body font-semibold text-[#232323] text-[15px]">{g.members}</span>
                     <span className="font-body font-light text-[#6B6058] text-[15px]"> Mitglieder</span>
                   </p>
                 </div>
@@ -150,10 +150,10 @@ export function CommunityClient({ tier }: Props) {
           {/* Lock overlay */}
           <div className="absolute inset-0 flex flex-col items-center justify-center">
             <div className="bg-white rounded-3xl shadow-xl px-8 py-8 text-center max-w-xs mx-4">
-              <div className="w-14 h-14 bg-[#4A2010] rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-14 h-14 bg-[#1E3028] rounded-full flex items-center justify-center mx-auto mb-4">
                 <Lock className="w-7 h-7 text-[#EDE8F8]" />
               </div>
-              <h2 className="font-heading text-2xl text-[#1A1410] mb-2">Nur für Premium</h2>
+              <h2 className="font-heading text-2xl text-[#232323] mb-2">Nur für Premium</h2>
               <p className="text-[#6B6058] text-sm leading-relaxed mb-6">
                 Die Community ist exklusiv für Premium-Mitglieder — ein geschützter Raum für tiefe Gespräche.
               </p>
@@ -173,7 +173,7 @@ export function CommunityClient({ tier }: Props) {
       <div className="max-w-2xl mx-auto px-4 pt-8 pb-32">
         <button
           onClick={() => setSelectedGroup(null)}
-          className="flex items-center gap-2 text-[#6B6058] hover:text-[#1A1410] text-sm mb-6 transition-colors font-body"
+          className="flex items-center gap-2 text-[#6B6058] hover:text-[#232323] text-sm mb-6 transition-colors font-body"
         >
           <ArrowLeft className="w-4 h-4" />
           Alle Gruppen
@@ -187,10 +187,10 @@ export function CommunityClient({ tier }: Props) {
             {group.icon}
           </div>
           <div>
-            <h1 className="font-heading text-2xl text-[#1A1410]">{group.name}</h1>
+            <h1 className="font-heading text-2xl text-[#232323]">{group.name}</h1>
             <p className="font-body text-sm text-[#6B6058]">
-              <span className="font-medium text-[#1A1410]">{group.members}</span> Mitglieder ·{' '}
-              <span className="font-medium text-[#1A1410]">{group.posts}</span> Beiträge
+              <span className="font-medium text-[#232323]">{group.members}</span> Mitglieder ·{' '}
+              <span className="font-medium text-[#232323]">{group.posts}</span> Beiträge
             </p>
           </div>
         </div>
@@ -199,20 +199,20 @@ export function CommunityClient({ tier }: Props) {
 
         <div className="flex flex-wrap gap-1.5 mb-8">
           {group.tags.map((tag) => (
-            <span key={tag} className="text-xs bg-[rgba(122,62,30,0.07)] text-[#8B6040] px-3 py-1 rounded-full font-body">{tag}</span>
+            <span key={tag} className="text-xs bg-[rgba(47,74,60,0.07)] text-[#8B6040] px-3 py-1 rounded-full font-body">{tag}</span>
           ))}
         </div>
 
         <div className="space-y-4 mb-8">
           {posts.map((post, i) => (
-            <div key={i} className="bg-[#FDFAF7] rounded-2xl border border-[rgba(122,62,30,0.12)] p-5">
+            <div key={i} className="bg-[#FDFAF7] rounded-2xl border border-[rgba(47,74,60,0.12)] p-5">
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full bg-[rgba(122,62,30,0.07)] flex items-center justify-center">
-                    <span className="font-heading text-sm text-[#1A1410]">{post.author[0]}</span>
+                  <div className="w-8 h-8 rounded-full bg-[rgba(47,74,60,0.07)] flex items-center justify-center">
+                    <span className="font-heading text-sm text-[#232323]">{post.author[0]}</span>
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-[#1A1410] font-body">{post.author}</p>
+                    <p className="text-sm font-medium text-[#232323] font-body">{post.author}</p>
                     <p className="text-xs text-[#6B6058]">{post.time}</p>
                   </div>
                 </div>
@@ -226,7 +226,7 @@ export function CommunityClient({ tier }: Props) {
           ))}
         </div>
 
-        <div className="bg-[#FDFAF7] rounded-2xl border-2 border-dashed border-[rgba(122,62,30,0.12)] text-center py-6">
+        <div className="bg-[#FDFAF7] rounded-2xl border-2 border-dashed border-[rgba(47,74,60,0.12)] text-center py-6">
           <Star className="w-6 h-6 text-[#6B6058]/40 mx-auto mb-2" />
           <p className="text-[#6B6058] text-sm">Eigene Beiträge kommen in Phase 2.</p>
         </div>
@@ -237,7 +237,7 @@ export function CommunityClient({ tier }: Props) {
   // Groups overview
   return (
     <div className="max-w-2xl mx-auto px-4 pt-8 pb-32">
-      <h1 className="font-heading text-[52px] font-light text-[#1A1410] tracking-[-0.5px] leading-none mb-1">Community</h1>
+      <h1 className="font-heading text-[52px] font-light text-[#232323] tracking-[-0.5px] leading-none mb-1">Community</h1>
       <p className="text-[#6B6058] font-body text-sm mb-5">Dein geschützter Raum für tiefe Gespräche.</p>
 
       {/* Search */}
@@ -248,8 +248,8 @@ export function CommunityClient({ tier }: Props) {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Gruppen durchsuchen…"
-          className="w-full pl-10 pr-4 py-3 rounded-xl bg-white text-sm font-body text-[#1A1410] placeholder:text-[#6B6058] focus:outline-none focus:ring-2 focus:ring-[#7A3E1E]/30"
-          style={{ boxShadow: '0 2px 12px rgba(26,20,16,0.06)' }}
+          className="w-full pl-10 pr-4 py-3 rounded-xl bg-white text-sm font-body text-[#232323] placeholder:text-[#6B6058] focus:outline-none focus:ring-2 focus:ring-[#2F4A3C]/30"
+          style={{ boxShadow: '0 2px 12px rgba(35,35,35,0.06)' }}
         />
       </div>
 
@@ -261,8 +261,8 @@ export function CommunityClient({ tier }: Props) {
           <button
             key={g.id}
             onClick={() => setSelectedGroup(g.id)}
-            className="bg-white rounded-2xl p-5 w-full text-left flex gap-4 items-start transition-all active:scale-[0.98] duration-150"
-            style={{ boxShadow: '0 2px 12px rgba(26,20,16,0.08)' }}
+            className="bg-white rounded-2xl p-5 w-full text-left flex gap-4 items-start transition-all active:scale-[0.98] duration-300"
+            style={{ boxShadow: '0 2px 12px rgba(35,35,35,0.08)' }}
           >
             <div
               className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"
@@ -272,9 +272,9 @@ export function CommunityClient({ tier }: Props) {
             </div>
             <div className="flex-1 min-w-0">
               <h3 className="font-heading text-[22px]" style={{ color: g.iconBg }}>{g.name}</h3>
-              <p className="text-[#1A1410] text-sm leading-snug mb-1.5">{g.description}</p>
+              <p className="text-[#232323] text-sm leading-snug mb-1.5">{g.description}</p>
               <div className="flex items-center gap-1 text-xs">
-                <span className="font-body font-semibold text-[#1A1410] text-[15px]">{g.members}</span>
+                <span className="font-body font-semibold text-[#232323] text-[15px]">{g.members}</span>
                 <span className="font-body font-light text-[#6B6058] text-[15px]"> Mitglieder</span>
                 <span className="text-[#6B6058] mx-1">·</span>
                 <span className="italic text-[#6B6058] truncate">{g.latestPost}</span>

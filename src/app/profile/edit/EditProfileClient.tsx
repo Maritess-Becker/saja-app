@@ -126,8 +126,8 @@ function Slider({ label1, label2, value, onChange }: { label1: string; label2: s
   return (
     <div className="space-y-2">
       <div className="flex justify-between font-body text-[13px]">
-        <span className={cn('transition-colors', value <= 40 ? 'text-[#1A1410] font-medium' : 'text-[#6B6058]')}>{label1}</span>
-        <span className={cn('transition-colors', value >= 60 ? 'text-[#1A1410] font-medium' : 'text-[#6B6058]')}>{label2}</span>
+        <span className={cn('transition-colors', value <= 40 ? 'text-[#232323] font-medium' : 'text-[#6B6058]')}>{label1}</span>
+        <span className={cn('transition-colors', value >= 60 ? 'text-[#232323] font-medium' : 'text-[#6B6058]')}>{label2}</span>
       </div>
       <input
         type="range"
@@ -135,7 +135,7 @@ function Slider({ label1, label2, value, onChange }: { label1: string; label2: s
         max={100}
         value={value}
         onChange={e => onChange(Number(e.target.value))}
-        style={{ accentColor: '#7A3E1E' }}
+        style={{ accentColor: '#2F4A3C' }}
         className="w-full h-2 rounded-full cursor-pointer"
       />
       <div className="flex justify-center">
@@ -333,10 +333,10 @@ export function EditProfileClient({ profile, userId }: Props) {
   const bqIndex = bindungStep - 1
 
   return (
-    <div className="min-h-screen bg-[#7A3E1E]">
+    <div className="min-h-screen bg-[#2F4A3C]">
 
       {/* Header */}
-      <div className="sticky top-0 z-10 bg-[#7A3E1E] border-b border-[rgba(122,62,30,0.08)] px-4 pt-4 pb-3">
+      <div className="sticky top-0 z-10 bg-[#2F4A3C] border-b border-[rgba(47,74,60,0.08)] px-4 pt-4 pb-3">
         <div className="max-w-lg mx-auto">
           <div className="flex items-center gap-3 mb-3">
             <button
@@ -346,21 +346,21 @@ export function EditProfileClient({ profile, userId }: Props) {
                 if (step === 0) router.back()
                 else { setStep(s => s - 1); window.scrollTo({ top: 0, behavior: 'smooth' }) }
               }}
-              className="w-9 h-9 rounded-full bg-[rgba(122,62,30,0.07)] flex items-center justify-center hover:bg-[#EDE8E0] transition-colors flex-shrink-0"
+              className="w-9 h-9 rounded-full bg-[rgba(47,74,60,0.07)] flex items-center justify-center hover:bg-[#D8D0C7] transition-colors flex-shrink-0"
             >
-              <ChevronLeft className="w-5 h-5 text-[#1A1410]" />
+              <ChevronLeft className="w-5 h-5 text-[#232323]" />
             </button>
             <div className="flex-1">
               <p className="font-body text-[11px] uppercase tracking-widest text-[#6B6058]">
                 Schritt {step + 1} von {STEPS.length}
               </p>
-              <p className="font-body text-[14px] font-medium text-[#1A1410]">
+              <p className="font-body text-[14px] font-medium text-[#232323]">
                 {STEPS[step].emoji} {STEPS[step].label}
               </p>
             </div>
           </div>
-          <div className="h-1 bg-[#EDE8E0] rounded-full overflow-hidden">
-            <div className="h-full bg-[#7A3E1E] rounded-full transition-all duration-300" style={{ width: `${((step + 1) / STEPS.length) * 100}%` }} />
+          <div className="h-1 bg-[#D8D0C7] rounded-full overflow-hidden">
+            <div className="h-full bg-[#2F4A3C] rounded-full transition-all duration-300" style={{ width: `${((step + 1) / STEPS.length) * 100}%` }} />
           </div>
         </div>
       </div>
@@ -371,28 +371,28 @@ export function EditProfileClient({ profile, userId }: Props) {
         {/* ── BASICS ── */}
         {current === 'basics' && (
           <div className="space-y-5">
-            <h2 className="font-heading text-[28px] font-light text-[#1A1410]">Deine Basics</h2>
+            <h2 className="font-heading text-[28px] font-light text-[#232323]">Deine Basics</h2>
             <div>
               <label className="font-body text-[11px] uppercase tracking-widest text-[#6B6058] block mb-2">Beruf / Tätigkeit</label>
               <input value={occupation} onChange={e => setOccupation(e.target.value)} placeholder="z.B. Designer, Coach, Lehrerin…"
-                className="w-full bg-white border border-[rgba(122,62,30,0.12)] rounded-xl px-4 py-3 font-body text-[14px] text-[#1A1410] placeholder-[#6B6058] focus:outline-none focus:border-[#7A3E1E]/60" />
+                className="w-full bg-white border border-[rgba(47,74,60,0.12)] rounded-xl px-4 py-3 font-body text-[14px] text-[#232323] placeholder-[#6B6058] focus:outline-none focus:border-[#2F4A3C]/60" />
             </div>
             <div>
               <label className="font-body text-[11px] uppercase tracking-widest text-[#6B6058] block mb-2">Wohnort</label>
               <input value={location} onChange={e => setLocation(e.target.value)} placeholder="z.B. Berlin, München…"
-                className="w-full bg-white border border-[rgba(122,62,30,0.12)] rounded-xl px-4 py-3 font-body text-[14px] text-[#1A1410] placeholder-[#6B6058] focus:outline-none focus:border-[#7A3E1E]/60" />
+                className="w-full bg-white border border-[rgba(47,74,60,0.12)] rounded-xl px-4 py-3 font-body text-[14px] text-[#232323] placeholder-[#6B6058] focus:outline-none focus:border-[#2F4A3C]/60" />
             </div>
             <div>
               <label className="font-body text-[11px] uppercase tracking-widest text-[#6B6058] block mb-2">Größe (cm)</label>
               <input type="number" value={heightCm} onChange={e => setHeightCm(e.target.value)} placeholder="z.B. 170" min={140} max={220}
-                className="w-full bg-white border border-[rgba(122,62,30,0.12)] rounded-xl px-4 py-3 font-body text-[14px] text-[#1A1410] placeholder-[#6B6058] focus:outline-none focus:border-[#7A3E1E]/60" />
+                className="w-full bg-white border border-[rgba(47,74,60,0.12)] rounded-xl px-4 py-3 font-body text-[14px] text-[#232323] placeholder-[#6B6058] focus:outline-none focus:border-[#2F4A3C]/60" />
             </div>
             <div className="space-y-3">
               <label className="font-body text-[11px] uppercase tracking-widest text-[#6B6058] block">Privatsphäre</label>
               {[{ label: 'Alter verbergen', value: hideAge, set: setHideAge }, { label: 'Wohnort verbergen', value: hideLocation, set: setHideLocation }].map(({ label, value, set }) => (
-                <div key={label} className="flex items-center justify-between bg-white border border-[rgba(122,62,30,0.12)] rounded-xl px-4 py-3">
-                  <span className="font-body text-[14px] text-[#1A1410]">{label}</span>
-                  <button onClick={() => set(!value)} className={cn('w-11 h-6 rounded-full transition-colors relative', value ? 'bg-[#7A3E1E]' : 'bg-[#EDE8E0]')}>
+                <div key={label} className="flex items-center justify-between bg-white border border-[rgba(47,74,60,0.12)] rounded-xl px-4 py-3">
+                  <span className="font-body text-[14px] text-[#232323]">{label}</span>
+                  <button onClick={() => set(!value)} className={cn('w-11 h-6 rounded-full transition-colors relative', value ? 'bg-[#2F4A3C]' : 'bg-[#D8D0C7]')}>
                     <div className={cn('absolute top-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform', value ? 'translate-x-[22px]' : 'translate-x-0.5')} />
                   </button>
                 </div>
@@ -404,7 +404,7 @@ export function EditProfileClient({ profile, userId }: Props) {
         {/* ── FOTOS ── */}
         {current === 'photos' && (
           <div className="space-y-5">
-            <h2 className="font-heading text-[28px] font-light text-[#1A1410]">Deine Fotos</h2>
+            <h2 className="font-heading text-[28px] font-light text-[#232323]">Deine Fotos</h2>
             <p className="font-body text-[13px] text-[#6B6058]">Bis zu 6 Fotos. Halte ein Foto gedrückt um es zu verschieben. Tippe auf das Textfeld für eine Bildunterschrift.</p>
 
             {/* Foto-Grid */}
@@ -419,11 +419,11 @@ export function EditProfileClient({ profile, userId }: Props) {
                   className="relative"
                 >
                   {/* Foto */}
-                  <div className="relative rounded-2xl overflow-hidden bg-[rgba(122,62,30,0.07)]" style={{ aspectRatio: '3/4' }}>
+                  <div className="relative rounded-2xl overflow-hidden bg-[rgba(47,74,60,0.07)]" style={{ aspectRatio: '3/4' }}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={photo.url} alt="" className="w-full h-full object-cover" />
                     {i === 0 && (
-                      <div className="absolute top-2 left-2 bg-[#7A3E1E] text-white text-[10px] font-body px-2 py-0.5 rounded-full">
+                      <div className="absolute top-2 left-2 bg-[#2F4A3C] text-white text-[10px] font-body px-2 py-0.5 rounded-full">
                         Hauptfoto
                       </div>
                     )}
@@ -445,7 +445,7 @@ export function EditProfileClient({ profile, userId }: Props) {
                       onChange={e => updateCaption(i, e.target.value)}
                       placeholder="Bildunterschrift…"
                       maxLength={100}
-                      className="mt-2 w-full bg-white border border-[rgba(122,62,30,0.12)] rounded-xl px-3 py-2 font-body text-[12px] text-[#1A1410] placeholder-[#6B6058] focus:outline-none focus:border-[#7A3E1E]/60"
+                      className="mt-2 w-full bg-white border border-[rgba(47,74,60,0.12)] rounded-xl px-3 py-2 font-body text-[12px] text-[#232323] placeholder-[#6B6058] focus:outline-none focus:border-[#2F4A3C]/60"
                     />
                   )}
                 </div>
@@ -456,11 +456,11 @@ export function EditProfileClient({ profile, userId }: Props) {
                 <button
                   onClick={() => fileInputRef.current?.click()}
                   disabled={uploadingPhoto}
-                  className="rounded-2xl border-2 border-dashed border-[rgba(122,62,30,0.12)] bg-[#7A3E1E] flex flex-col items-center justify-center gap-2 hover:border-[#7A3E1E]/40 hover:bg-[#7A3E1E]/5 transition-all disabled:opacity-50"
+                  className="rounded-2xl border-2 border-dashed border-[rgba(47,74,60,0.12)] bg-[#2F4A3C] flex flex-col items-center justify-center gap-2 hover:border-[#2F4A3C]/40 hover:bg-[#2F4A3C]/5 transition-all disabled:opacity-50"
                   style={{ aspectRatio: '3/4' }}
                 >
                   {uploadingPhoto ? (
-                    <div className="w-6 h-6 border-2 border-[#7A3E1E] border-t-transparent rounded-full animate-spin" />
+                    <div className="w-6 h-6 border-2 border-[#2F4A3C] border-t-transparent rounded-full animate-spin" />
                   ) : (
                     <>
                       <Plus className="w-7 h-7 text-[#6B6058]" />
@@ -492,10 +492,10 @@ export function EditProfileClient({ profile, userId }: Props) {
         {/* ── BIO ── */}
         {current === 'bio' && (
           <div className="space-y-4">
-            <h2 className="font-heading text-[28px] font-light text-[#1A1410]">Über dich</h2>
+            <h2 className="font-heading text-[28px] font-light text-[#232323]">Über dich</h2>
             <p className="font-body text-[13px] text-[#6B6058]">Was sollen andere über dich wissen?</p>
             <textarea value={bio} onChange={e => setBio(e.target.value)} placeholder="Erzähl etwas über dich, dein Leben, was dich bewegt…" rows={7} maxLength={500}
-              className="w-full bg-white border border-[rgba(122,62,30,0.12)] rounded-xl px-4 py-3 font-body text-[14px] text-[#1A1410] placeholder-[#6B6058] resize-none focus:outline-none focus:border-[#7A3E1E]/60 leading-relaxed" />
+              className="w-full bg-white border border-[rgba(47,74,60,0.12)] rounded-xl px-4 py-3 font-body text-[14px] text-[#232323] placeholder-[#6B6058] resize-none focus:outline-none focus:border-[#2F4A3C]/60 leading-relaxed" />
             <p className="font-body text-[12px] text-[#6B6058] text-right">{bio.length}/500</p>
           </div>
         )}
@@ -503,13 +503,13 @@ export function EditProfileClient({ profile, userId }: Props) {
         {/* ── INTENTION ── */}
         {current === 'intention' && (
           <div className="space-y-6">
-            <h2 className="font-heading text-[28px] font-light text-[#1A1410]">Was suchst du?</h2>
+            <h2 className="font-heading text-[28px] font-light text-[#232323]">Was suchst du?</h2>
             <div>
               <p className="font-body text-[11px] uppercase tracking-widest text-[#6B6058] mb-3">Intention</p>
               <div className="flex flex-wrap gap-2">
                 {INTENTION_OPTIONS.map(opt => (
                   <button key={opt} onClick={() => setIntention(opt)}
-                    className={cn('px-4 py-2.5 rounded-full border transition-all font-body text-[14px]', intention === opt ? 'bg-[#7A3E1E] border-[#7A3E1E] text-white' : 'bg-white border-[rgba(122,62,30,0.12)] text-[#1A1410] hover:border-[#7A3E1E]/40')}
+                    className={cn('px-4 py-2.5 rounded-full border transition-all font-body text-[14px]', intention === opt ? 'bg-[#2F4A3C] border-[#2F4A3C] text-white' : 'bg-white border-[rgba(47,74,60,0.12)] text-[#232323] hover:border-[#2F4A3C]/40')}
                   >{opt}</button>
                 ))}
               </div>
@@ -519,7 +519,7 @@ export function EditProfileClient({ profile, userId }: Props) {
               <div className="flex flex-wrap gap-2">
                 {RELATIONSHIP_OPTIONS.map(opt => (
                   <button key={opt} onClick={() => setRelationshipModel(opt)}
-                    className={cn('px-4 py-2.5 rounded-full border transition-all font-body text-[14px]', relationshipModel === opt ? 'bg-[#7A3E1E] border-[#7A3E1E] text-white' : 'bg-white border-[rgba(122,62,30,0.12)] text-[#1A1410] hover:border-[#7A3E1E]/40')}
+                    className={cn('px-4 py-2.5 rounded-full border transition-all font-body text-[14px]', relationshipModel === opt ? 'bg-[#2F4A3C] border-[#2F4A3C] text-white' : 'bg-white border-[rgba(47,74,60,0.12)] text-[#232323] hover:border-[#2F4A3C]/40')}
                   >{opt}</button>
                 ))}
               </div>
@@ -530,13 +530,13 @@ export function EditProfileClient({ profile, userId }: Props) {
         {/* ── WERTE ── */}
         {current === 'werte' && (
           <div className="space-y-4">
-            <h2 className="font-heading text-[28px] font-light text-[#1A1410]">Was trägt dich?</h2>
+            <h2 className="font-heading text-[28px] font-light text-[#232323]">Was trägt dich?</h2>
             <p className="font-body text-[13px] text-[#6B6058]">Wähle bis zu 5 Werte.</p>
             <div className="flex flex-wrap gap-2">
               {WERTE_OPTIONS.map(opt => (
                 <button key={opt} onClick={() => toggle(werte, setWerte, opt, 5)} disabled={!werte.includes(opt) && werte.length >= 5}
                   className={cn('px-4 py-2 rounded-full border transition-all font-body text-[14px]',
-                    werte.includes(opt) ? 'bg-[#7A3E1E] border-[#7A3E1E] text-white' : 'bg-white border-[rgba(122,62,30,0.12)] text-[#1A1410] hover:border-[#7A3E1E]/40',
+                    werte.includes(opt) ? 'bg-[#2F4A3C] border-[#2F4A3C] text-white' : 'bg-white border-[rgba(47,74,60,0.12)] text-[#232323] hover:border-[#2F4A3C]/40',
                     !werte.includes(opt) && werte.length >= 5 && 'opacity-30 cursor-not-allowed')}
                 >{opt}</button>
               ))}
@@ -548,13 +548,13 @@ export function EditProfileClient({ profile, userId }: Props) {
         {/* ── DEALBREAKER ── */}
         {current === 'dealbreaker' && (
           <div className="space-y-4">
-            <h2 className="font-heading text-[28px] font-light text-[#1A1410]">Was geht wirklich nicht?</h2>
+            <h2 className="font-heading text-[28px] font-light text-[#232323]">Was geht wirklich nicht?</h2>
             <p className="font-body text-[13px] text-[#6B6058]">Bis zu 3 Dealbreaker.</p>
             <div className="flex flex-wrap gap-2">
               {DEALBREAKER_OPTIONS.map(opt => (
                 <button key={opt} onClick={() => toggle(dealbreakers, setDealbreakers, opt, 3)} disabled={!dealbreakers.includes(opt) && dealbreakers.length >= 3}
                   className={cn('px-4 py-2 rounded-full border transition-all font-body text-[14px]',
-                    dealbreakers.includes(opt) ? 'bg-[#7A3E1E] border-[#7A3E1E] text-white' : 'bg-white border-[rgba(122,62,30,0.12)] text-[#1A1410] hover:border-[#7A3E1E]/40',
+                    dealbreakers.includes(opt) ? 'bg-[#2F4A3C] border-[#2F4A3C] text-white' : 'bg-white border-[rgba(47,74,60,0.12)] text-[#232323] hover:border-[#2F4A3C]/40',
                     !dealbreakers.includes(opt) && dealbreakers.length >= 3 && 'opacity-30 cursor-not-allowed')}
                 >{opt}</button>
               ))}
@@ -566,7 +566,7 @@ export function EditProfileClient({ profile, userId }: Props) {
         {/* ── MEINE WELT ── */}
         {current === 'my_world' && (
           <div className="space-y-5">
-            <h2 className="font-heading text-[28px] font-light text-[#1A1410]">Wo fühlst du dich zuhause?</h2>
+            <h2 className="font-heading text-[28px] font-light text-[#232323]">Wo fühlst du dich zuhause?</h2>
             <p className="font-body text-[13px] text-[#6B6058]">Wähle deine Szenen — oder lass es offen.</p>
             {MY_WORLD_CATEGORIES.map(cat => (
               <div key={cat.label}>
@@ -575,20 +575,20 @@ export function EditProfileClient({ profile, userId }: Props) {
                   {cat.items.map(item => (
                     <button key={item} onClick={() => toggle(myWorld, setMyWorld, item)}
                       className={cn('px-3 py-2 rounded-full border transition-all font-body text-[12px]',
-                        myWorld.includes(item) ? 'bg-[#7A3E1E] border-[#7A3E1E] text-white' : 'bg-white border-[rgba(122,62,30,0.12)] text-[#1A1410] hover:border-[#7A3E1E]/40')}
+                        myWorld.includes(item) ? 'bg-[#2F4A3C] border-[#2F4A3C] text-white' : 'bg-white border-[rgba(47,74,60,0.12)] text-[#232323] hover:border-[#2F4A3C]/40')}
                     >{item}</button>
                   ))}
                 </div>
               </div>
             ))}
-            {myWorld.length > 0 && <p className="font-body text-[12px] text-[#1A1410]">{myWorld.length} Szene{myWorld.length > 1 ? 'n' : ''} gewählt</p>}
+            {myWorld.length > 0 && <p className="font-body text-[12px] text-[#232323]">{myWorld.length} Szene{myWorld.length > 1 ? 'n' : ''} gewählt</p>}
           </div>
         )}
 
         {/* ── COMMUNITIES ── */}
         {current === 'communities' && (
           <div className="space-y-5">
-            <h2 className="font-heading text-[28px] font-light text-[#1A1410]">Meine Communities</h2>
+            <h2 className="font-heading text-[28px] font-light text-[#232323]">Meine Communities</h2>
             <p className="font-body text-[13px] text-[#6B6058] leading-relaxed">
               Welchen Gruppen gehörst du an? Diese werden als Badge auf deinem Profil angezeigt und können als Filter im Entdecken verwendet werden.
             </p>
@@ -600,8 +600,8 @@ export function EditProfileClient({ profile, userId }: Props) {
                   className={cn(
                     'w-full text-left px-4 py-3.5 rounded-xl border-2 transition-all font-body text-[14px] flex items-center justify-between',
                     communities.includes(c)
-                      ? 'border-[#7A3E1E] bg-[#7A3E1E]/5 text-[#1A1410]'
-                      : 'border-[rgba(122,62,30,0.12)] bg-white text-[#1A1410] hover:border-[#7A3E1E]/40'
+                      ? 'border-[#2F4A3C] bg-[#2F4A3C]/5 text-[#232323]'
+                      : 'border-[rgba(47,74,60,0.12)] bg-white text-[#232323] hover:border-[#2F4A3C]/40'
                   )}
                 >
                   <span>{c}</span>
@@ -610,7 +610,7 @@ export function EditProfileClient({ profile, userId }: Props) {
               ))}
             </div>
             {communities.length > 0 && (
-              <p className="font-body text-[12px] text-[#1A1410]">{communities.length} Community{communities.length > 1 ? 's' : ''} gewählt</p>
+              <p className="font-body text-[12px] text-[#232323]">{communities.length} Community{communities.length > 1 ? 's' : ''} gewählt</p>
             )}
           </div>
         )}
@@ -618,14 +618,14 @@ export function EditProfileClient({ profile, userId }: Props) {
         {/* ── INTIMITÄT ── */}
         {current === 'sexuality' && (
           <div className="space-y-5">
-            <h2 className="font-heading text-[28px] font-light text-[#1A1410]">Was du zeigst siehst du auch.</h2>
+            <h2 className="font-heading text-[28px] font-light text-[#232323]">Was du zeigst siehst du auch.</h2>
             <p className="font-body text-[13px] text-[#6B6058] leading-relaxed">Freiwillig und nach dem Gegenseitigkeitsprinzip — du siehst die Interessen anderer nur wenn du deine eigenen teilst.</p>
-            <div className="bg-white rounded-xl border border-[rgba(122,62,30,0.12)] p-4 flex items-center justify-between">
+            <div className="bg-white rounded-xl border border-[rgba(47,74,60,0.12)] p-4 flex items-center justify-between">
               <div>
-                <p className="font-body text-[14px] text-[#1A1410] font-medium">Interessen teilen</p>
+                <p className="font-body text-[14px] text-[#232323] font-medium">Interessen teilen</p>
                 <p className="font-body text-[12px] text-[#6B6058]">Sichtbar für andere die auch geteilt haben</p>
               </div>
-              <button onClick={() => setSexualityVisible(v => !v)} className={cn('w-12 h-6 rounded-full transition-colors relative flex-shrink-0', sexualityVisible ? 'bg-[#7A3E1E]' : 'bg-[#EDE8E0]')}>
+              <button onClick={() => setSexualityVisible(v => !v)} className={cn('w-12 h-6 rounded-full transition-colors relative flex-shrink-0', sexualityVisible ? 'bg-[#2F4A3C]' : 'bg-[#D8D0C7]')}>
                 <div className={cn('absolute top-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform', sexualityVisible ? 'translate-x-6' : 'translate-x-0.5')} />
               </button>
             </div>
@@ -638,7 +638,7 @@ export function EditProfileClient({ profile, userId }: Props) {
                       {cat.items.map(item => (
                         <button key={item} onClick={() => toggle(sexualityInterests, setSexualityInterests, item)}
                           className={cn('px-3 py-2 rounded-full border transition-all font-body text-[12px]',
-                            sexualityInterests.includes(item) ? 'bg-[#7A3E1E] border-[#7A3E1E] text-white' : 'bg-white border-[rgba(122,62,30,0.12)] text-[#1A1410] hover:border-[#7A3E1E]/40')}
+                            sexualityInterests.includes(item) ? 'bg-[#2F4A3C] border-[#2F4A3C] text-white' : 'bg-white border-[rgba(47,74,60,0.12)] text-[#232323] hover:border-[#2F4A3C]/40')}
                         >{item}</button>
                       ))}
                     </div>
@@ -652,12 +652,12 @@ export function EditProfileClient({ profile, userId }: Props) {
         {/* ── INTERESSEN ── */}
         {current === 'interests' && (
           <div className="space-y-4">
-            <h2 className="font-heading text-[28px] font-light text-[#1A1410]">Deine Interessen</h2>
+            <h2 className="font-heading text-[28px] font-light text-[#232323]">Deine Interessen</h2>
             <div className="flex flex-wrap gap-2">
               {INTERESTS_OPTIONS.map(opt => (
                 <button key={opt} onClick={() => toggle(interests, setInterests, opt)}
                   className={cn('px-3 py-2 rounded-full border transition-all font-body text-[13px]',
-                    interests.includes(opt) ? 'bg-[#7A3E1E] border-[#7A3E1E] text-white' : 'bg-white border-[rgba(122,62,30,0.12)] text-[#1A1410] hover:border-[#7A3E1E]/40')}
+                    interests.includes(opt) ? 'bg-[#2F4A3C] border-[#2F4A3C] text-white' : 'bg-white border-[rgba(47,74,60,0.12)] text-[#232323] hover:border-[#2F4A3C]/40')}
                 >{opt}</button>
               ))}
             </div>
@@ -667,7 +667,7 @@ export function EditProfileClient({ profile, userId }: Props) {
         {/* ── PERSÖNLICHKEIT ── */}
         {current === 'personality' && (
           <div className="space-y-8">
-            <h2 className="font-heading text-[28px] font-light text-[#1A1410]">Deine Persönlichkeit</h2>
+            <h2 className="font-heading text-[28px] font-light text-[#232323]">Deine Persönlichkeit</h2>
             <p className="font-body text-[13px] text-[#6B6058]">Verschiebe die Regler.</p>
             <Slider label1="Introvertiert" label2="Extrovertiert" value={introExtro} onChange={setIntroExtro} />
             <Slider label1="Spontan" label2="Strukturiert" value={spontanStruk} onChange={setSpontanStruk} />
@@ -681,18 +681,18 @@ export function EditProfileClient({ profile, userId }: Props) {
             {/* Intro */}
             {bindungStep === 0 && (
               <div className="space-y-5">
-                <h2 className="font-heading text-[28px] font-light text-[#1A1410]">Dein Bindungstyp</h2>
+                <h2 className="font-heading text-[28px] font-light text-[#232323]">Dein Bindungstyp</h2>
                 <p className="font-body text-[14px] text-[#6B6058] leading-relaxed">
                   10 kurze Fragen — beantworte spontan auf einer Skala von 1 (stimme gar nicht zu) bis 5 (stimme völlig zu).
                 </p>
                 {bindungResult && (
-                  <div className="bg-[rgba(122,62,30,0.07)] rounded-xl p-4 border border-[rgba(122,62,30,0.12)]">
+                  <div className="bg-[rgba(47,74,60,0.07)] rounded-xl p-4 border border-[rgba(47,74,60,0.12)]">
                     <p className="font-body text-[12px] text-[#6B6058] mb-1">Dein aktuelles Ergebnis</p>
-                    <p className="font-heading text-[18px] text-[#1A1410]">{bindungResult}</p>
+                    <p className="font-heading text-[18px] text-[#232323]">{bindungResult}</p>
                   </div>
                 )}
                 <button onClick={() => setBindungStep(1)}
-                  className="w-full py-4 rounded-full bg-[#7A3E1E] text-white font-body text-[16px] font-medium hover:bg-[#4A2010] active:scale-[0.98] transition-all">
+                  className="w-full py-4 rounded-full bg-[#2F4A3C] text-white font-body text-[16px] font-medium hover:bg-[#1E3028] active:scale-[0.98] transition-all">
                   Test starten →
                 </button>
                 <button onClick={() => { setStep(s => s + 1); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
@@ -704,17 +704,17 @@ export function EditProfileClient({ profile, userId }: Props) {
             {bindungStep >= 1 && bindungStep <= 10 && (
               <div className="space-y-6">
                 <p className="font-body text-[12px] uppercase tracking-widest text-[#6B6058]">Frage {bindungStep} von 10</p>
-                <div className="h-1 bg-[#EDE8E0] rounded-full overflow-hidden mb-6">
-                  <div className="h-full bg-[#7A3E1E] rounded-full transition-all" style={{ width: `${(bindungStep / 10) * 100}%` }} />
+                <div className="h-1 bg-[#D8D0C7] rounded-full overflow-hidden mb-6">
+                  <div className="h-full bg-[#2F4A3C] rounded-full transition-all" style={{ width: `${(bindungStep / 10) * 100}%` }} />
                 </div>
-                <p className="font-heading text-[22px] font-normal text-[#1A1410] leading-snug">
+                <p className="font-heading text-[22px] font-normal text-[#232323] leading-snug">
                   {BINDUNGS_QUESTIONS[bqIndex]}
                 </p>
                 <div className="flex justify-between gap-2 mt-6">
                   {[1, 2, 3, 4, 5].map(n => (
                     <button key={n} onClick={() => handleBindungAnswer(bqIndex, n)}
                       className={cn('flex-1 py-4 rounded-xl border-2 font-body text-[16px] font-medium transition-all',
-                        bindungAnswers[bqIndex] === n ? 'border-[#7A3E1E] bg-[#7A3E1E] text-white' : 'border-[rgba(122,62,30,0.12)] bg-white text-[#6B6058] hover:border-[#7A3E1E]/40')}
+                        bindungAnswers[bqIndex] === n ? 'border-[#2F4A3C] bg-[#2F4A3C] text-white' : 'border-[rgba(47,74,60,0.12)] bg-white text-[#6B6058] hover:border-[#2F4A3C]/40')}
                     >{n}</button>
                   ))}
                 </div>
@@ -729,10 +729,10 @@ export function EditProfileClient({ profile, userId }: Props) {
             {bindungStep === 11 && (
               <div className="text-center space-y-6 pt-4">
                 <div className="text-5xl">🔗</div>
-                <p className="font-body text-[12px] uppercase tracking-widest text-[#1A1410]">Dein Bindungstyp</p>
-                <h3 className="font-heading text-[32px] font-light text-[#1A1410]">{bindungResult}</h3>
+                <p className="font-body text-[12px] uppercase tracking-widest text-[#232323]">Dein Bindungstyp</p>
+                <h3 className="font-heading text-[32px] font-light text-[#232323]">{bindungResult}</h3>
                 <button onClick={() => { setStep(s => s + 1); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
-                  className="w-full py-4 rounded-full bg-[#7A3E1E] text-white font-body text-[16px] font-medium hover:bg-[#4A2010] active:scale-[0.98] transition-all">
+                  className="w-full py-4 rounded-full bg-[#2F4A3C] text-white font-body text-[16px] font-medium hover:bg-[#1E3028] active:scale-[0.98] transition-all">
                   Weiter →
                 </button>
               </div>
@@ -746,18 +746,18 @@ export function EditProfileClient({ profile, userId }: Props) {
             {/* Intro */}
             {loveStep === 0 && (
               <div className="space-y-5">
-                <h2 className="font-heading text-[28px] font-light text-[#1A1410]">Deine Love Language</h2>
+                <h2 className="font-heading text-[28px] font-light text-[#232323]">Deine Love Language</h2>
                 <p className="font-body text-[14px] text-[#6B6058] leading-relaxed">
                   10 Fragen — wähle jeweils das was dir mehr entspricht.
                 </p>
                 {lovePrimary && (
-                  <div className="bg-[rgba(122,62,30,0.07)] rounded-xl p-4 border border-[rgba(122,62,30,0.12)]">
+                  <div className="bg-[rgba(47,74,60,0.07)] rounded-xl p-4 border border-[rgba(47,74,60,0.12)]">
                     <p className="font-body text-[12px] text-[#6B6058] mb-1">Dein aktuelles Ergebnis</p>
-                    <p className="font-heading text-[18px] text-[#1A1410]">{lovePrimary}</p>
+                    <p className="font-heading text-[18px] text-[#232323]">{lovePrimary}</p>
                   </div>
                 )}
                 <button onClick={() => setLoveStep(1)}
-                  className="w-full py-4 rounded-full bg-[#7A3E1E] text-white font-body text-[16px] font-medium hover:bg-[#4A2010] active:scale-[0.98] transition-all">
+                  className="w-full py-4 rounded-full bg-[#2F4A3C] text-white font-body text-[16px] font-medium hover:bg-[#1E3028] active:scale-[0.98] transition-all">
                   Test starten →
                 </button>
                 <button onClick={() => { setStep(s => s + 1); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
@@ -769,8 +769,8 @@ export function EditProfileClient({ profile, userId }: Props) {
             {loveStep >= 1 && loveStep <= 10 && (
               <div className="space-y-6">
                 <p className="font-body text-[12px] uppercase tracking-widest text-[#6B6058]">Frage {loveStep} von 10</p>
-                <div className="h-1 bg-[#EDE8E0] rounded-full overflow-hidden mb-6">
-                  <div className="h-full bg-[#7A3E1E] rounded-full transition-all" style={{ width: `${(loveStep / 10) * 100}%` }} />
+                <div className="h-1 bg-[#D8D0C7] rounded-full overflow-hidden mb-6">
+                  <div className="h-full bg-[#2F4A3C] rounded-full transition-all" style={{ width: `${(loveStep / 10) * 100}%` }} />
                 </div>
                 <p className="font-body text-[12px] uppercase tracking-widest text-[#6B6058] mb-2">Was bedeutet dir mehr?</p>
                 <div className="space-y-3">
@@ -780,8 +780,8 @@ export function EditProfileClient({ profile, userId }: Props) {
                     const label = opt === 'a' ? q.labelA : q.labelB
                     return (
                       <button key={opt} onClick={() => handleLoveAnswer(label)}
-                        className="w-full text-left bg-white border-2 border-[rgba(122,62,30,0.12)] rounded-2xl px-5 py-5 hover:border-[#7A3E1E]/60 hover:bg-[#7A3E1E] active:scale-[0.98] transition-all">
-                        <p className="font-body text-[15px] text-[#1A1410] leading-relaxed">{text}</p>
+                        className="w-full text-left bg-white border-2 border-[rgba(47,74,60,0.12)] rounded-2xl px-5 py-5 hover:border-[#2F4A3C]/60 hover:bg-[#2F4A3C] active:scale-[0.98] transition-all">
+                        <p className="font-body text-[15px] text-[#232323] leading-relaxed">{text}</p>
                       </button>
                     )
                   })}
@@ -793,11 +793,11 @@ export function EditProfileClient({ profile, userId }: Props) {
             {loveStep === 11 && (
               <div className="text-center space-y-6 pt-4">
                 <div className="text-5xl">💝</div>
-                <p className="font-body text-[12px] uppercase tracking-widest text-[#1A1410]">Deine Love Language</p>
-                <h3 className="font-heading text-[32px] font-light text-[#1A1410]">{lovePrimary}</h3>
+                <p className="font-body text-[12px] uppercase tracking-widest text-[#232323]">Deine Love Language</p>
+                <h3 className="font-heading text-[32px] font-light text-[#232323]">{lovePrimary}</h3>
                 {loveSecondary && <p className="font-body text-[14px] text-[#6B6058]">Zweit-Sprache: {loveSecondary}</p>}
                 <button onClick={() => { setStep(s => s + 1); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
-                  className="w-full py-4 rounded-full bg-[#7A3E1E] text-white font-body text-[16px] font-medium hover:bg-[#4A2010] active:scale-[0.98] transition-all">
+                  className="w-full py-4 rounded-full bg-[#2F4A3C] text-white font-body text-[16px] font-medium hover:bg-[#1E3028] active:scale-[0.98] transition-all">
                   Weiter →
                 </button>
               </div>
@@ -808,24 +808,24 @@ export function EditProfileClient({ profile, userId }: Props) {
         {/* ── PROMPTS ── */}
         {current === 'prompts' && (
           <div className="space-y-4">
-            <h2 className="font-heading text-[28px] font-light text-[#1A1410]">Deine Antworten</h2>
+            <h2 className="font-heading text-[28px] font-light text-[#232323]">Deine Antworten</h2>
             <p className="font-body text-[13px] text-[#6B6058]">Bis zu 3 Fragen beantworten.</p>
             {PROMPT_QUESTIONS.map(q => {
               const ex = prompts.find(p => p.question === q)
               const canAdd = !ex && prompts.filter(p => p.answer?.trim()).length < 3
               return (
-                <div key={q} className="border border-[rgba(122,62,30,0.12)] rounded-xl overflow-hidden bg-white">
-                  <div className="px-4 py-3 bg-[#7A3E1E] flex items-center justify-between gap-3">
-                    <p className="font-body text-[13px] text-[#1A1410] flex-1">{q}</p>
+                <div key={q} className="border border-[rgba(47,74,60,0.12)] rounded-xl overflow-hidden bg-white">
+                  <div className="px-4 py-3 bg-[#2F4A3C] flex items-center justify-between gap-3">
+                    <p className="font-body text-[13px] text-[#232323] flex-1">{q}</p>
                     {ex ? (
                       <button onClick={() => setPrompts(prev => prev.filter(p => p.question !== q))} className="text-[11px] text-red-400 flex-shrink-0">Entfernen</button>
                     ) : canAdd ? (
-                      <button onClick={() => setPrompts(prev => [...prev, { question: q, answer: '' }])} className="text-[11px] text-[#1A1410] flex-shrink-0">+ Hinzufügen</button>
+                      <button onClick={() => setPrompts(prev => [...prev, { question: q, answer: '' }])} className="text-[11px] text-[#232323] flex-shrink-0">+ Hinzufügen</button>
                     ) : null}
                   </div>
                   {ex && (
                     <textarea value={ex.answer} onChange={e => updatePromptAnswer(q, e.target.value)} placeholder="Deine Antwort…" rows={3} maxLength={300}
-                      className="w-full px-4 py-3 font-heading text-[15px] italic text-[#4A2010] placeholder-[#6B6058] resize-none focus:outline-none" />
+                      className="w-full px-4 py-3 font-heading text-[15px] italic text-[#1E3028] placeholder-[#6B6058] resize-none focus:outline-none" />
                   )}
                 </div>
               )
@@ -838,19 +838,19 @@ export function EditProfileClient({ profile, userId }: Props) {
       {/* Sticky Footer */}
       {/* Beim Bindungstest/Love Language während der Fragen keinen Weiter-Button zeigen */}
       {!((current === 'bindung' && bindungStep >= 1 && bindungStep <= 10) || (current === 'lovelang' && loveStep >= 1 && loveStep <= 10)) && (
-        <div className="fixed bottom-16 md:bottom-0 left-0 right-0 bg-[#7A3E1E]/95 backdrop-blur-sm border-t border-[rgba(122,62,30,0.08)] px-4 py-3 md:pl-64">
+        <div className="fixed bottom-16 md:bottom-0 left-0 right-0 bg-[#2F4A3C]/95 backdrop-blur-sm border-t border-[rgba(47,74,60,0.08)] px-4 py-3 md:pl-64">
           <div className="max-w-lg mx-auto">
             {/* Beim Bindungstest-/Love Language-Intro oder Ergebnis keinen doppelten Button anzeigen */}
             {(current !== 'bindung' && current !== 'lovelang') && (
               isLast ? (
                 <button onClick={handleSave} disabled={saving}
-                  className="w-full py-3.5 rounded-full bg-[#7A3E1E] text-white font-body text-[15px] font-medium hover:bg-[#4A2010] active:scale-[0.98] transition-all disabled:opacity-50 flex items-center justify-center gap-2">
+                  className="w-full py-3.5 rounded-full bg-[#2F4A3C] text-white font-body text-[15px] font-medium hover:bg-[#1E3028] active:scale-[0.98] transition-all disabled:opacity-50 flex items-center justify-center gap-2">
                   <Check className="w-4 h-4" />
                   {saving ? 'Speichern…' : 'Speichern & Fertig'}
                 </button>
               ) : (
                 <button onClick={() => { setStep(s => s + 1); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
-                  className="w-full py-3.5 rounded-full bg-[#7A3E1E] text-white font-body text-[15px] font-medium hover:bg-[#4A2010] active:scale-[0.98] transition-all">
+                  className="w-full py-3.5 rounded-full bg-[#2F4A3C] text-white font-body text-[15px] font-medium hover:bg-[#1E3028] active:scale-[0.98] transition-all">
                   Weiter →
                 </button>
               )
@@ -858,7 +858,7 @@ export function EditProfileClient({ profile, userId }: Props) {
             {/* Letzter Schritt (Prompts) immer speichern */}
             {isLast && (current === 'bindung' || current === 'lovelang') && (
               <button onClick={handleSave} disabled={saving}
-                className="w-full py-3.5 rounded-full bg-[#7A3E1E] text-white font-body text-[15px] font-medium hover:bg-[#4A2010] active:scale-[0.98] transition-all disabled:opacity-50 flex items-center justify-center gap-2">
+                className="w-full py-3.5 rounded-full bg-[#2F4A3C] text-white font-body text-[15px] font-medium hover:bg-[#1E3028] active:scale-[0.98] transition-all disabled:opacity-50 flex items-center justify-center gap-2">
                 <Check className="w-4 h-4" />
                 {saving ? 'Speichern…' : 'Speichern & Fertig'}
               </button>

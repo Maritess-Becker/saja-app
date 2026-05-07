@@ -15,18 +15,18 @@ interface Props {
 
 const CONFIG = {
   match: {
-    overlayBg: '#F7F2EA',
-    circleColor: '#C17A4E',
-    textColor: '#2D1B0E',
+    overlayBg: '#E7DFD6',
+    circleColor: '#A8654C',
+    textColor: '#232323',
     closeDuration: 1.5,
     line1: 'Ein Match',
     line2: 'jetzt kannst du eine Begegnung anfragen.',
     line3: null,
   },
   begegnung: {
-    overlayBg: '#4A2510',
-    circleColor: '#F7F2EA',
-    textColor: '#F7F2EA',
+    overlayBg: '#1E3028',
+    circleColor: '#F2EBE2',
+    textColor: '#F2EBE2',
     closeDuration: 2,
     line1: 'Eine Begegnung',
     line2: '— auf einmal.',

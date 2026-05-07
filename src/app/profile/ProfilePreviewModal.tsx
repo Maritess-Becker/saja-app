@@ -14,8 +14,8 @@ function PersonalityBar({ leftLabel, rightLabel, value }: { leftLabel: string; r
         <span>{leftLabel}</span>
         <span>{rightLabel}</span>
       </div>
-      <div className="h-1.5 bg-[rgba(122,62,30,0.07)] rounded-full overflow-hidden">
-        <div className="h-full bg-[#7A3E1E]/50 rounded-full" style={{ width: `${value}%` }} />
+      <div className="h-1.5 bg-[rgba(47,74,60,0.07)] rounded-full overflow-hidden">
+        <div className="h-full bg-[#2F4A3C]/50 rounded-full" style={{ width: `${value}%` }} />
       </div>
     </div>
   )
@@ -38,16 +38,16 @@ function AudioPlayer({ url }: { url: string }) {
       <audio ref={audioRef} src={url} onEnded={() => setPlaying(false)} preload="none" />
       <button
         onClick={handleToggle}
-        className="w-10 h-10 rounded-full bg-[#7A3E1E] flex items-center justify-center shadow flex-shrink-0 hover:bg-[#4A2010] transition-colors active:scale-95"
+        className="w-10 h-10 rounded-full bg-[#2F4A3C] flex items-center justify-center shadow flex-shrink-0 hover:bg-[#1E3028] transition-colors active:scale-95"
       >
         {playing ? <Pause className="w-4 h-4 text-white" /> : <Play className="w-4 h-4 text-white translate-x-0.5" />}
       </button>
       <div className="flex-1">
-        <p className="text-sm font-medium text-[#1A1410] mb-1">Sprach-Intro anhören</p>
+        <p className="text-sm font-medium text-[#232323] mb-1">Sprach-Intro anhören</p>
         <div className="flex items-end gap-0.5 h-4">
           {Array.from({ length: 24 }).map((_, i) => (
             <div key={i}
-              className={cn('w-0.5 rounded-full transition-all', playing ? 'bg-[#7A3E1E] animate-pulse' : 'bg-[#7A3E1E]/30')}
+              className={cn('w-0.5 rounded-full transition-all', playing ? 'bg-[#2F4A3C] animate-pulse' : 'bg-[#2F4A3C]/30')}
               style={{ height: `${28 + Math.sin(i * 0.85) * 48 + Math.cos(i * 1.3) * 18}%`, animationDelay: `${i * 50}ms` }}
             />
           ))}
@@ -75,10 +75,10 @@ function PhotoWithCaption({ photo, alt }: { photo: { url: string; path: string; 
 
 function PromptBlock({ question, answer }: { question: string; answer: string }) {
   return (
-    <div className="px-4 py-4 border-t border-[rgba(122,62,30,0.10)]">
-      <div className="bg-[rgba(122,62,30,0.07)] rounded-xl px-4 py-4 border-l-[3px] border-[#7A3E1E]">
+    <div className="px-4 py-4 border-t border-[rgba(47,74,60,0.10)]">
+      <div className="bg-[rgba(47,74,60,0.07)] rounded-xl px-4 py-4 border-l-[3px] border-[#2F4A3C]">
         <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-2">{question}</p>
-        <p className="font-heading text-xl italic text-[#4A2010] leading-snug text-justify">{answer}</p>
+        <p className="font-heading text-xl italic text-[#1E3028] leading-snug text-justify">{answer}</p>
       </div>
     </div>
   )
@@ -123,17 +123,17 @@ export function ProfilePreviewModal({ profile, children }: Props) {
           {/* Sheet — slides up from bottom, full height, max-width centred */}
           <div
             ref={scrollRef}
-            className="relative z-10 mt-12 mx-auto w-full max-w-lg flex-1 overflow-y-auto bg-[#FDF5E8] rounded-t-3xl shadow-2xl"
+            className="relative z-10 mt-12 mx-auto w-full max-w-lg flex-1 overflow-y-auto bg-[#F2EBE2] rounded-t-3xl shadow-2xl"
             style={{ maxHeight: 'calc(100dvh - 3rem)' }}
           >
             {/* Sticky top bar */}
-            <div className="sticky top-0 z-20 flex items-center justify-between px-4 py-3 bg-[#FDF5E8]/95 backdrop-blur-sm border-b border-[rgba(122,62,30,0.08)]">
-              <p className="text-xs font-body font-medium text-[#1A1410] uppercase tracking-widest">
+            <div className="sticky top-0 z-20 flex items-center justify-between px-4 py-3 bg-[#F2EBE2]/95 backdrop-blur-sm border-b border-[rgba(47,74,60,0.08)]">
+              <p className="text-xs font-body font-medium text-[#232323] uppercase tracking-widest">
                 So sieht dein Profil aus
               </p>
               <button
                 onClick={() => setOpen(false)}
-                className="w-8 h-8 flex items-center justify-center rounded-full bg-[rgba(122,62,30,0.07)] hover:bg-[#EDE8E0] transition-colors"
+                className="w-8 h-8 flex items-center justify-center rounded-full bg-[rgba(47,74,60,0.07)] hover:bg-[#D8D0C7] transition-colors"
                 aria-label="Schließen"
               >
                 <X className="w-4 h-4 text-[#6B6058]" />
@@ -151,11 +151,11 @@ export function ProfilePreviewModal({ profile, children }: Props) {
                   style={{ objectPosition: 'center 20%' }}
                 />
               ) : (
-                <div className="w-full h-full bg-[rgba(122,62,30,0.07)] flex items-center justify-center">
+                <div className="w-full h-full bg-[rgba(47,74,60,0.07)] flex items-center justify-center">
                   <span className="font-heading text-8xl text-[#6B6058]">{profile.name?.[0]}</span>
                 </div>
               )}
-              <div className="absolute bottom-0 left-0 right-0 h-56 bg-gradient-to-t from-[rgba(74,32,16,0.88)] to-transparent pointer-events-none" />
+              <div className="absolute bottom-0 left-0 right-0 h-56 bg-gradient-to-t from-[rgba(30,48,40,0.88)] to-transparent pointer-events-none" />
               <div className="absolute bottom-5 left-5 text-white pointer-events-none">
                 <h2 className="font-heading text-4xl drop-shadow">
                   {profile.name}
@@ -173,51 +173,51 @@ export function ProfilePreviewModal({ profile, children }: Props) {
             {/* ── Quick-info pills ── */}
             <div className="px-5 pt-5 pb-1 flex flex-wrap gap-2">
               {profile.height_cm && (
-                <span className="flex items-center gap-1.5 text-sm text-[#6B6058] bg-[rgba(122,62,30,0.07)] px-3 py-1.5 rounded-full">
+                <span className="flex items-center gap-1.5 text-sm text-[#6B6058] bg-[rgba(47,74,60,0.07)] px-3 py-1.5 rounded-full">
                   <Ruler className="w-3.5 h-3.5" />{profile.height_cm} cm
                 </span>
               )}
               {profile.occupation && (
-                <span className="flex items-center gap-1.5 text-sm text-[#6B6058] bg-[rgba(122,62,30,0.07)] px-3 py-1.5 rounded-full">
+                <span className="flex items-center gap-1.5 text-sm text-[#6B6058] bg-[rgba(47,74,60,0.07)] px-3 py-1.5 rounded-full">
                   <Briefcase className="w-3.5 h-3.5" />{profile.occupation}
                 </span>
               )}
               {profile.intention && (
-                <span className="flex items-center gap-1.5 text-sm text-[#1A1410] bg-[rgba(122,62,30,0.07)] px-3 py-1.5 rounded-full">
+                <span className="flex items-center gap-1.5 text-sm text-[#232323] bg-[rgba(47,74,60,0.07)] px-3 py-1.5 rounded-full">
                   <Sparkles className="w-3.5 h-3.5" />{profile.intention}
                 </span>
               )}
               {profile.has_children && (
-                <span className="text-sm text-[#6B6058] bg-[rgba(122,62,30,0.07)] px-3 py-1.5 rounded-full">{profile.has_children}</span>
+                <span className="text-sm text-[#6B6058] bg-[rgba(47,74,60,0.07)] px-3 py-1.5 rounded-full">{profile.has_children}</span>
               )}
             </div>
 
             {/* ── Über mich ── */}
             {profile.bio && (
-              <div className="px-5 py-5 border-t border-[rgba(122,62,30,0.10)]">
+              <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)]">
                 <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Über mich</p>
-                <p className="text-[#1A1410] text-sm leading-relaxed text-justify">{profile.bio}</p>
+                <p className="text-[#232323] text-sm leading-relaxed text-justify">{profile.bio}</p>
               </div>
             )}
 
             {/* ── Sprachmemo ── */}
             {profile.audio_prompt_url ? (
-              <div className="px-5 py-5 border-t border-[rgba(122,62,30,0.10)]">
+              <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)]">
                 <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Sprachmemo</p>
                 <AudioPlayer url={profile.audio_prompt_url} />
               </div>
             ) : (
-              <div className="px-5 py-5 border-t border-[rgba(122,62,30,0.10)] flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-[rgba(122,62,30,0.07)] flex items-center justify-center flex-shrink-0">
-                  <Mic className="w-5 h-5 text-[#1A1410]" />
+              <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)] flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-[rgba(47,74,60,0.07)] flex items-center justify-center flex-shrink-0">
+                  <Mic className="w-5 h-5 text-[#232323]" />
                 </div>
                 <div className="flex-1">
-                  <p className="text-sm font-medium text-[#1A1410] mb-1.5">Sprachmemo</p>
+                  <p className="text-sm font-medium text-[#232323] mb-1.5">Sprachmemo</p>
                   <div className="flex items-center gap-0.5 h-5">
                     {Array.from({ length: 26 }).map((_, i) => (
                       <div
                         key={i}
-                        className="w-1 bg-[#7A3E1E]/25 rounded-full"
+                        className="w-1 bg-[#2F4A3C]/25 rounded-full"
                         style={{ height: `${30 + Math.sin(i * 0.9) * 50 + Math.cos(i * 1.4) * 20}%` }}
                       />
                     ))}
@@ -229,11 +229,11 @@ export function ProfilePreviewModal({ profile, children }: Props) {
 
             {/* ── Interessen ── */}
             {profile.interests?.length > 0 && (
-              <div className="px-5 py-5 border-t border-[rgba(122,62,30,0.10)]">
+              <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)]">
                 <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Interessen</p>
                 <div className="flex flex-wrap gap-2">
                   {profile.interests.map((item) => (
-                    <span key={item} className="text-sm text-[#6B6058] bg-[rgba(122,62,30,0.07)] px-3 py-1.5 rounded-full">{item}</span>
+                    <span key={item} className="text-sm text-[#6B6058] bg-[rgba(47,74,60,0.07)] px-3 py-1.5 rounded-full">{item}</span>
                   ))}
                 </div>
               </div>
@@ -241,11 +241,11 @@ export function ProfilePreviewModal({ profile, children }: Props) {
 
             {/* ── Werte ── */}
             {profile.werte?.length > 0 && (
-              <div className="px-5 py-5 border-t border-[rgba(122,62,30,0.10)]">
+              <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)]">
                 <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Werte</p>
                 <div className="flex flex-wrap gap-2">
                   {profile.werte.map((w) => (
-                    <span key={w} className="text-sm text-[#1A1410] bg-[rgba(122,62,30,0.07)] px-3 py-1.5 rounded-full">{w}</span>
+                    <span key={w} className="text-sm text-[#232323] bg-[rgba(47,74,60,0.07)] px-3 py-1.5 rounded-full">{w}</span>
                   ))}
                 </div>
               </div>
@@ -253,14 +253,14 @@ export function ProfilePreviewModal({ profile, children }: Props) {
 
             {/* ── Meine Welt ── */}
             {(profile.my_world?.length ?? 0) > 0 && (
-              <div className="px-5 py-5 border-t border-[rgba(122,62,30,0.10)]">
+              <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)]">
                 <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Meine Welt</p>
                 <div className="flex flex-wrap gap-2">
                   {profile.my_world!.map((item) => (
                     <span
                       key={item}
                       className="text-[11px] font-body font-light px-3 py-1.5 rounded-full"
-                      style={{ background: 'rgba(122,62,30,0.08)', color: '#1A1410' }}
+                      style={{ background: 'rgba(47,74,60,0.08)', color: '#232323' }}
                     >
                       {item}
                     </span>
@@ -271,11 +271,11 @@ export function ProfilePreviewModal({ profile, children }: Props) {
 
             {/* ── Meine Communities ── */}
             {(profile.communities?.length ?? 0) > 0 && (
-              <div className="px-5 py-5 border-t border-[rgba(122,62,30,0.10)]">
+              <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)]">
                 <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Meine Communities</p>
                 <div className="flex flex-wrap gap-2">
                   {profile.communities!.map((c) => (
-                    <span key={c} className="text-[12px] font-body px-3 py-1.5 rounded-full border border-[#7A3E1E]/30 text-[#1A1410] bg-[#7A3E1E]/8">
+                    <span key={c} className="text-[12px] font-body px-3 py-1.5 rounded-full border border-[#2F4A3C]/30 text-[#232323] bg-[#2F4A3C]/8">
                       {c}
                     </span>
                   ))}
@@ -285,19 +285,19 @@ export function ProfilePreviewModal({ profile, children }: Props) {
 
             {/* ── Beziehung & Bindung ── */}
             {(profile.relationship_model || profile.love_language) && (
-              <div className="px-5 py-5 border-t border-[rgba(122,62,30,0.10)] space-y-4">
+              <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)] space-y-4">
                 <p className="text-[11px] text-[#6B6058] uppercase tracking-widest">Beziehung &amp; Bindung</p>
                 {profile.relationship_model && (
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-[#6B6058]">Beziehungsmodell</span>
-                    <span className="text-sm text-[#1A1410] font-medium">{profile.relationship_model}</span>
+                    <span className="text-sm text-[#232323] font-medium">{profile.relationship_model}</span>
                   </div>
                 )}
                 {profile.love_language && (
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-[#6B6058]">Love Language</span>
-                    <span className="text-sm text-[#1A1410] font-medium flex items-center gap-1.5">
-                      <Heart className="w-3.5 h-3.5 text-[#1A1410]" />{profile.love_language}
+                    <span className="text-sm text-[#232323] font-medium flex items-center gap-1.5">
+                      <Heart className="w-3.5 h-3.5 text-[#232323]" />{profile.love_language}
                     </span>
                   </div>
                 )}
@@ -306,7 +306,7 @@ export function ProfilePreviewModal({ profile, children }: Props) {
 
             {/* ── Persönlichkeit ── */}
             {(profile.introvert_extrovert != null || profile.spontan_strukturiert != null || profile.rational_emotional != null) && (
-              <div className="px-5 py-5 border-t border-[rgba(122,62,30,0.10)] space-y-4">
+              <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)] space-y-4">
                 <p className="text-[11px] text-[#6B6058] uppercase tracking-widest">Persönlichkeit</p>
                 {profile.introvert_extrovert != null && (
                   <PersonalityBar leftLabel="Introvertiert" rightLabel="Extrovertiert" value={profile.introvert_extrovert} />
@@ -322,16 +322,16 @@ export function ProfilePreviewModal({ profile, children }: Props) {
 
             {/* ── Horoskop ── */}
             {(profile.sun_sign || profile.ascendant) && (
-              <div className="px-5 py-5 border-t border-[rgba(122,62,30,0.10)] space-y-3">
+              <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)] space-y-3">
                 <p className="text-[11px] text-[#6B6058] uppercase tracking-widest">Horoskop</p>
                 <div className="flex flex-wrap gap-2">
                   {profile.sun_sign && (
-                    <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(122,62,30,0.08)', color: '#1A1410' }}>
+                    <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(47,74,60,0.08)', color: '#232323' }}>
                       {profile.sun_sign}
                     </span>
                   )}
                   {profile.ascendant && (
-                    <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(122,62,30,0.08)', color: '#1A1410' }}>
+                    <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(47,74,60,0.08)', color: '#232323' }}>
                       ↑ {profile.ascendant.replace(/^[♈♉♊♋♌♍♎♏♐♑♒♓]\s*/, '')}
                     </span>
                   )}
@@ -341,7 +341,7 @@ export function ProfilePreviewModal({ profile, children }: Props) {
 
             {/* ── Dealbreakers ── */}
             {profile.dealbreakers?.length > 0 && (
-              <div className="px-5 py-5 border-t border-[rgba(122,62,30,0.10)]">
+              <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)]">
                 <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Dealbreaker</p>
                 <div className="flex flex-wrap gap-2">
                   {profile.dealbreakers.map((d) => (
@@ -353,11 +353,11 @@ export function ProfilePreviewModal({ profile, children }: Props) {
 
             {/* ── Intimität ── */}
             {profile.sexuality_visible && (profile.sexuality_interests?.length ?? 0) > 0 && (
-              <div className="px-5 py-5 border-t border-[rgba(122,62,30,0.10)]">
+              <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)]">
                 <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Intimität</p>
                 <div className="flex flex-wrap gap-2">
                   {profile.sexuality_interests!.map((item) => (
-                    <span key={item} className="text-sm text-[#6B6058] bg-[rgba(122,62,30,0.07)] px-3 py-1.5 rounded-full">{item}</span>
+                    <span key={item} className="text-sm text-[#6B6058] bg-[rgba(47,74,60,0.07)] px-3 py-1.5 rounded-full">{item}</span>
                   ))}
                 </div>
               </div>

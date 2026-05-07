@@ -21,7 +21,7 @@ const PLANS = [
     price: '29',
     period: 'Monat',
     icon: <Heart className="w-5 h-5" />,
-    color: '#7A3E1E',
+    color: '#2F4A3C',
     features: [
       'Unbegrenzt liken & matchen',
       'Alle Tests (Bindungstyp, Love Language, …)',
@@ -36,7 +36,7 @@ const PLANS = [
     price: '69',
     period: 'Monat',
     icon: <Star className="w-5 h-5" />,
-    color: '#4A2010',
+    color: '#1E3028',
     features: [
       'Alles aus Mitgliedschaft',
       'Audio-Meditationen & Guides',
@@ -77,9 +77,9 @@ export function PaywallClient({
         <div className="px-4 pt-5">
           <button
             onClick={() => router.back()}
-            className="w-9 h-9 rounded-full bg-[#FDF5E8]/10 flex items-center justify-center"
+            className="w-9 h-9 rounded-full bg-[#F2EBE2]/10 flex items-center justify-center"
           >
-            <ChevronLeft className="w-4 h-4 text-[#FDF5E8]" />
+            <ChevronLeft className="w-4 h-4 text-[#F2EBE2]" />
           </button>
         </div>
       )}
@@ -87,24 +87,24 @@ export function PaywallClient({
       <div className="flex-1 flex flex-col max-w-lg mx-auto w-full px-4 pb-12">
         {/* Header */}
         <div className={cn('text-center', trialExpired ? 'pt-16 pb-8' : 'pt-6 pb-8')}>
-          <div className="w-14 h-14 rounded-full bg-[#FDF5E8]/10 flex items-center justify-center mx-auto mb-5">
-            <Sparkles className="w-7 h-7 text-[#FDF5E8]" />
+          <div className="w-14 h-14 rounded-full bg-[#F2EBE2]/10 flex items-center justify-center mx-auto mb-5">
+            <Sparkles className="w-7 h-7 text-[#F2EBE2]" />
           </div>
           {trialExpired ? (
             <>
-              <h1 className="font-heading text-[38px] font-light text-[#FDF5E8] leading-tight mb-3">
+              <h1 className="font-heading text-[38px] font-light text-[#F2EBE2] leading-tight mb-3">
                 Dein Vollzugang<br />ist abgelaufen.
               </h1>
-              <p className="text-[#FDF5E8]/60 font-body text-sm leading-relaxed max-w-xs mx-auto">
+              <p className="text-[#F2EBE2]/60 font-body text-sm leading-relaxed max-w-xs mx-auto">
                 14 Tage bist du dabei. Zeit, deine Reise fortzusetzen.
               </p>
             </>
           ) : (
             <>
-              <h1 className="font-heading text-[38px] font-light text-[#FDF5E8] leading-tight mb-3">
+              <h1 className="font-heading text-[38px] font-light text-[#F2EBE2] leading-tight mb-3">
                 {trialDaysLeft === 1 ? 'Noch 1 Tag' : `Noch ${trialDaysLeft} Tage`}<br />Vollzugang.
               </h1>
-              <p className="text-[#FDF5E8]/60 font-body text-sm leading-relaxed max-w-xs mx-auto">
+              <p className="text-[#F2EBE2]/60 font-body text-sm leading-relaxed max-w-xs mx-auto">
                 Danach brauchst du eine Mitgliedschaft, um weiter zu liken.
               </p>
             </>
@@ -119,9 +119,9 @@ export function PaywallClient({
               { value: matchCount, label: matchCount === 1 ? 'Match' : 'Matches' },
               { value: encounterCount, label: encounterCount === 1 ? 'Begegnung' : 'Begegnungen' },
             ].map((stat) => (
-              <div key={stat.label} className="rounded-2xl bg-[#FDF5E8]/08 p-4 text-center border border-[#FDF5E8]/10">
-                <p className="font-heading text-[32px] font-light text-[#FDF5E8] leading-none mb-1">{stat.value}</p>
-                <p className="text-[10px] text-[#FDF5E8]/50 font-body">{stat.label}</p>
+              <div key={stat.label} className="rounded-2xl bg-[#F2EBE2]/08 p-4 text-center border border-[#F2EBE2]/10">
+                <p className="font-heading text-[32px] font-light text-[#F2EBE2] leading-none mb-1">{stat.value}</p>
+                <p className="text-[10px] text-[#F2EBE2]/50 font-body">{stat.label}</p>
               </div>
             ))}
           </div>
@@ -136,27 +136,27 @@ export function PaywallClient({
               className={cn(
                 'w-full rounded-2xl p-5 text-left transition-all relative overflow-hidden',
                 selected === plan.id
-                  ? 'bg-[#FDF5E8] border-2 border-[#FDF5E8]'
-                  : 'bg-[#FDF5E8]/08 border border-[#FDF5E8]/20'
+                  ? 'bg-[#F2EBE2] border-2 border-[#F2EBE2]'
+                  : 'bg-[#F2EBE2]/08 border border-[#F2EBE2]/20'
               )}
             >
               {plan.badge && (
-                <span className="absolute top-3 right-3 bg-[#7A3E1E] text-[#FDF5E8] text-[10px] font-body px-2.5 py-1 rounded-full">
+                <span className="absolute top-3 right-3 bg-[#2F4A3C] text-[#F2EBE2] text-[10px] font-body px-2.5 py-1 rounded-full">
                   {plan.badge}
                 </span>
               )}
               <div className="flex items-center gap-3 mb-3">
                 <div
                   className="w-9 h-9 rounded-full flex items-center justify-center"
-                  style={{ backgroundColor: selected === plan.id ? plan.color : 'rgba(253,245,232,0.12)', color: '#FDF5E8' }}
+                  style={{ backgroundColor: selected === plan.id ? plan.color : 'rgba(242,235,226,0.12)', color: '#F2EBE2' }}
                 >
                   {plan.icon}
                 </div>
                 <div>
-                  <p className={cn('font-heading text-[20px] leading-none', selected === plan.id ? 'text-[#4A2010]' : 'text-[#FDF5E8]')}>
+                  <p className={cn('font-heading text-[20px] leading-none', selected === plan.id ? 'text-[#1E3028]' : 'text-[#F2EBE2]')}>
                     {plan.name}
                   </p>
-                  <p className={cn('font-body text-sm mt-0.5', selected === plan.id ? 'text-[#6B6058]' : 'text-[#FDF5E8]/50')}>
+                  <p className={cn('font-body text-sm mt-0.5', selected === plan.id ? 'text-[#6B6058]' : 'text-[#F2EBE2]/50')}>
                     {plan.price} €&thinsp;/&thinsp;{plan.period}
                   </p>
                 </div>
@@ -164,8 +164,8 @@ export function PaywallClient({
               <div className="space-y-1.5">
                 {plan.features.map((f) => (
                   <div key={f} className="flex items-center gap-2">
-                    <Check className={cn('w-3 h-3 flex-shrink-0', selected === plan.id ? 'text-[#7A3E1E]' : 'text-[#FDF5E8]/40')} />
-                    <span className={cn('text-[12px] font-body', selected === plan.id ? 'text-[#1A1410]' : 'text-[#FDF5E8]/60')}>
+                    <Check className={cn('w-3 h-3 flex-shrink-0', selected === plan.id ? 'text-[#2F4A3C]' : 'text-[#F2EBE2]/40')} />
+                    <span className={cn('text-[12px] font-body', selected === plan.id ? 'text-[#232323]' : 'text-[#F2EBE2]/60')}>
                       {f}
                     </span>
                   </div>
@@ -178,7 +178,7 @@ export function PaywallClient({
         {/* Subscribe CTA */}
         <button
           onClick={handleSubscribe}
-          className="w-full py-4 rounded-full bg-[#FDF5E8] text-[#7A3E1E] font-body text-[15px] font-medium mb-3 transition-opacity hover:opacity-90 active:scale-[0.98]"
+          className="w-full py-4 rounded-full bg-[#F2EBE2] text-[#2F4A3C] font-body text-[15px] font-medium mb-3 transition-opacity hover:opacity-90 active:scale-[0.98]"
         >
           {selected === 'premium' ? 'Premium starten — 69 €/Monat' : 'Mitgliedschaft starten — 29 €/Monat'}
         </button>
@@ -186,19 +186,19 @@ export function PaywallClient({
         {/* Later option */}
         <button
           onClick={handleLater}
-          className="w-full py-3 rounded-full border border-[#FDF5E8]/20 text-[#FDF5E8]/50 font-body text-sm flex items-center justify-center gap-2 transition-colors hover:border-[#FDF5E8]/40 hover:text-[#FDF5E8]/70"
+          className="w-full py-3 rounded-full border border-[#F2EBE2]/20 text-[#F2EBE2]/50 font-body text-sm flex items-center justify-center gap-2 transition-colors hover:border-[#F2EBE2]/40 hover:text-[#F2EBE2]/70"
         >
           <X className="w-3.5 h-3.5" />
           Später entscheiden
         </button>
 
         {trialExpired && (
-          <p className="text-center text-[#FDF5E8]/30 text-[11px] font-body mt-4">
+          <p className="text-center text-[#F2EBE2]/30 text-[11px] font-body mt-4">
             Ohne Mitgliedschaft kannst du die App weiter lesen, aber nicht liken.
           </p>
         )}
 
-        <p className="text-center text-[#FDF5E8]/20 text-[10px] font-body mt-6">
+        <p className="text-center text-[#F2EBE2]/20 text-[10px] font-body mt-6">
           Jederzeit kündbar · Keine automatische Verlängerung ohne Bestätigung
         </p>
       </div>

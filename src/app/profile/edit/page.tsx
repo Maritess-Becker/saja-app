@@ -17,7 +17,7 @@ export default async function EditProfilePage() {
   if (!profile) redirect('/onboarding')
 
   return (
-    <div className="min-h-screen bg-[#7A3E1E]">
+    <div className="min-h-screen bg-creme">
       <AppNav />
       <main className="md:pl-64 pb-20 md:pb-0">
         <EditProfileClient profile={profile} userId={user.id} />

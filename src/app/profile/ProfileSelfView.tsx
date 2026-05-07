@@ -20,8 +20,8 @@ function PersonalityBar({ leftLabel, rightLabel, value }: { leftLabel: string; r
         <span>{leftLabel}</span>
         <span>{rightLabel}</span>
       </div>
-      <div className="h-1.5 bg-[rgba(122,62,30,0.07)] rounded-full overflow-hidden">
-        <div className="h-full bg-[#7A3E1E]/50 rounded-full" style={{ width: `${value}%` }} />
+      <div className="h-1.5 bg-[rgba(47,74,60,0.07)] rounded-full overflow-hidden">
+        <div className="h-full bg-[#2F4A3C]/50 rounded-full" style={{ width: `${value}%` }} />
       </div>
     </div>
   )
@@ -42,16 +42,16 @@ function AudioPlayer({ url }: { url: string }) {
       <audio ref={audioRef} src={url} onEnded={() => setPlaying(false)} preload="none" />
       <button
         onClick={handleToggle}
-        className="w-10 h-10 rounded-full bg-[#7A3E1E] flex items-center justify-center shadow flex-shrink-0 hover:bg-[#4A2010] transition-colors active:scale-95"
+        className="w-10 h-10 rounded-full bg-[#2F4A3C] flex items-center justify-center shadow flex-shrink-0 hover:bg-[#1E3028] transition-colors active:scale-95"
       >
         {playing ? <Pause className="w-4 h-4 text-white" /> : <Play className="w-4 h-4 text-white translate-x-0.5" />}
       </button>
       <div className="flex-1">
-        <p className="text-sm font-medium text-[#1A1410] mb-1">Sprach-Intro anhören</p>
+        <p className="text-sm font-medium text-[#232323] mb-1">Sprach-Intro anhören</p>
         <div className="flex items-end gap-0.5 h-4">
           {Array.from({ length: 24 }).map((_, i) => (
             <div key={i}
-              className={`w-0.5 rounded-full transition-all ${playing ? 'bg-[#7A3E1E] animate-pulse' : 'bg-[#7A3E1E]/30'}`}
+              className={`w-0.5 rounded-full transition-all ${playing ? 'bg-[#2F4A3C] animate-pulse' : 'bg-[#2F4A3C]/30'}`}
               style={{ height: `${28 + Math.sin(i * 0.85) * 48 + Math.cos(i * 1.3) * 18}%`, animationDelay: `${i * 50}ms` }}
             />
           ))}
@@ -79,10 +79,10 @@ function PhotoWithCaption({ photo, name, height }: { photo: { url: string; path:
 
 function PromptBlock({ question, answer }: { question: string; answer: string }) {
   return (
-    <div className="px-4 py-4 border-t border-[rgba(122,62,30,0.10)]">
-      <div className="bg-[rgba(122,62,30,0.07)] rounded-xl px-4 py-4 border-l-[3px] border-[#7A3E1E]">
+    <div className="px-4 py-4 border-t border-[rgba(47,74,60,0.10)]">
+      <div className="bg-[rgba(47,74,60,0.07)] rounded-xl px-4 py-4 border-l-[3px] border-[#2F4A3C]">
         <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-2">{question}</p>
-        <p className="font-heading text-xl italic text-[#4A2010] leading-snug text-justify">{answer}</p>
+        <p className="font-heading text-xl italic text-[#1E3028] leading-snug text-justify">{answer}</p>
       </div>
     </div>
   )
@@ -104,12 +104,12 @@ const settingsItems = [
 function PhaseCircles({ phase }: { phase: number }) {
   // Each phase gets a distinct aura color: Wurzel → Herz → Krone
   const phases = [
-    { num: 1, label: 'Basis',      aura: '#C4603A' },  // Sakral — warm terracotta
-    { num: 2, label: 'Vertiefung', aura: '#2D7A5F' },  // Herz — salbeigrün
+    { num: 1, label: 'Basis',      aura: '#A8654C' },  // Sakral — warm terracotta
+    { num: 2, label: 'Vertiefung', aura: '#7A9E8A' },  // Herz — salbeigrün
     { num: 3, label: 'Tiefe',      aura: '#7B4FA6' },  // Krone — lavendel
   ]
   return (
-    <div className="mx-4 mb-4 bg-white rounded-2xl border border-[rgba(122,62,30,0.08)] p-4">
+    <div className="mx-4 mb-4 bg-[#F2EBE2] rounded-2xl border border-[rgba(47,74,60,0.08)] p-4">
       <p className="text-[9px] text-[#6B6058] uppercase tracking-[0.12em] font-body mb-3">Profiltiefe</p>
       <div className="flex items-center gap-0 mb-3">
         {phases.map((p, i) => {
@@ -122,23 +122,23 @@ function PhaseCircles({ phase }: { phase: number }) {
                   className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-body font-medium transition-all"
                   style={
                     done
-                      ? { backgroundColor: p.aura, color: '#FDF5E8' }
+                      ? { backgroundColor: p.aura, color: '#F2EBE2' }
                       : active
                       ? { border: `2px solid ${p.aura}`, color: p.aura }
-                      : { border: '2px solid rgba(122,62,30,0.20)', color: '#A09888' }
+                      : { border: '2px solid rgba(47,74,60,0.20)', color: '#9A8E84' }
                   }
                 >
                   {done ? <Check className="w-3.5 h-3.5" /> : p.num}
                 </div>
                 <span
                   className="text-[9px] mt-1 font-body"
-                  style={{ color: done ? p.aura : '#A09888' }}
+                  style={{ color: done ? p.aura : '#9A8E84' }}
                 >{p.label}</span>
               </div>
               {i < phases.length - 1 && (
                 <div
                   className="h-0.5 w-6 mx-1 rounded-full mb-4"
-                  style={{ backgroundColor: phase > p.num ? p.aura : 'rgba(122,62,30,0.15)' }}
+                  style={{ backgroundColor: phase > p.num ? p.aura : 'rgba(47,74,60,0.15)' }}
                 />
               )}
             </div>
@@ -159,10 +159,10 @@ interface Props {
 
 // ── Emotional Capacity config ─────────────────────────────────────────────────
 const CAPACITY_OPTIONS: Array<{ value: EmotionalCapacity; dot: string; label: string; desc: string }> = [
-  { value: 'open',      dot: '#2D7A5F', label: 'Offen für Tiefe & Nähe',     desc: 'Bereit für echte Verbindung' },
-  { value: 'selective', dot: '#BF9B30', label: 'Selektiv & vorsichtig',       desc: 'Tiefe braucht Vertrauen' },
+  { value: 'open',      dot: '#7A9E8A', label: 'Offen für Tiefe & Nähe',     desc: 'Bereit für echte Verbindung' },
+  { value: 'selective', dot: '#BFA76A', label: 'Selektiv & vorsichtig',       desc: 'Tiefe braucht Vertrauen' },
   { value: 'light',     dot: '#3A5F8A', label: 'Gerade eher leicht & locker', desc: 'Kein Druck, kein Ernst' },
-  { value: 'slow',      dot: '#C4603A', label: 'Slow Mode — wenig Kapazität', desc: 'Ich brauche gerade Zeit' },
+  { value: 'slow',      dot: '#A8654C', label: 'Slow Mode — wenig Kapazität', desc: 'Ich brauche gerade Zeit' },
 ]
 
 // ── Main component ────────────────────────────────────────────────────────────
@@ -220,10 +220,10 @@ export function ProfileSelfView({ profile, tier }: Props) {
 
       {/* Header with title + Bearbeiten button */}
       <div className="px-4 pt-5 pb-4 flex items-center justify-between">
-        <h1 className="font-heading text-[52px] font-light text-[#1A1410] tracking-[-0.5px] leading-none">Mein Profil</h1>
+        <h1 className="font-heading text-[52px] font-light text-[#232323] tracking-[-0.5px] leading-none">Mein Profil</h1>
         <Link
           href="/profile/edit"
-          className="flex items-center gap-1.5 border border-[rgba(30,20,10,0.25)] text-[#1A1410] hover:bg-[rgba(30,20,10,0.06)] rounded-full text-xs py-1.5 px-3 font-body transition-colors duration-200"
+          className="flex items-center gap-1.5 border border-[rgba(47,74,60,0.25)] text-[#232323] hover:bg-[rgba(47,74,60,0.06)] rounded-full text-xs py-1.5 px-3 font-body transition-colors duration-200"
         >
           <Edit className="w-3.5 h-3.5" /> Bearbeiten
         </Link>
@@ -235,28 +235,28 @@ export function ProfileSelfView({ profile, tier }: Props) {
           className="mx-4 mb-4 rounded-2xl px-4 py-3 flex items-center gap-3"
           style={{ background: 'var(--bg-indigo)' }}
         >
-          <Sparkles className="w-4 h-4 text-[#FDF5E8]/70 flex-shrink-0" />
+          <Sparkles className="w-4 h-4 text-[#F2EBE2]/70 flex-shrink-0" />
           <div className="flex-1">
-            <p className="text-[#FDF5E8] font-body text-sm">
+            <p className="text-[#F2EBE2] font-body text-sm">
               ✦ Du bist im Vollzugang —{' '}
               <span className="font-medium">noch {trialDaysLeft} {trialDaysLeft === 1 ? 'Tag' : 'Tage'}</span>
             </p>
           </div>
           <Link
             href="/paywall"
-            className="text-[#FDF5E8]/70 text-[11px] font-body underline underline-offset-2 flex-shrink-0"
+            className="text-[#F2EBE2]/70 text-[11px] font-body underline underline-offset-2 flex-shrink-0"
           >
             Upgrade
           </Link>
         </div>
       )}
       {!trialActive && profile.trial_started_at && (
-        <div className="mx-4 mb-4 rounded-2xl px-4 py-3 flex items-center gap-3 bg-[rgba(26,20,16,0.06)] border border-[rgba(26,20,16,0.12)]">
+        <div className="mx-4 mb-4 rounded-2xl px-4 py-3 flex items-center gap-3 bg-[rgba(35,35,35,0.06)] border border-[rgba(35,35,35,0.12)]">
           <Lock className="w-4 h-4 text-[#6B6058] flex-shrink-0" />
-          <p className="text-[#1A1410] font-body text-sm flex-1">Dein Vollzugang ist abgelaufen.</p>
+          <p className="text-[#232323] font-body text-sm flex-1">Dein Vollzugang ist abgelaufen.</p>
           <Link
             href="/paywall"
-            className="text-[#7A3E1E] text-[11px] font-body font-medium flex-shrink-0"
+            className="text-[#2F4A3C] text-[11px] font-body font-medium flex-shrink-0"
           >
             Weiter →
           </Link>
@@ -267,15 +267,15 @@ export function ProfileSelfView({ profile, tier }: Props) {
       <PhaseCircles phase={onboardingPhase} />
 
       {/* ── Emotionale Kapazität + Pause ── */}
-      <div className="mx-4 mb-4 bg-white rounded-2xl border border-[rgba(30,20,10,0.08)] p-4">
+      <div className="mx-4 mb-4 bg-[#F2EBE2] rounded-2xl border border-[rgba(47,74,60,0.08)] p-4">
         <div className="flex items-center justify-between mb-3">
           <p className="text-[9px] text-[#6B6058] uppercase tracking-[0.12em] font-body">Mein Status</p>
           <button
             onClick={togglePause}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-body transition-colors ${
               paused
-                ? 'bg-[#7A3E1E] text-[#FDF5E8]'
-                : 'bg-[#EDE8E0] text-[#1A1410] hover:bg-[rgba(30,20,10,0.12)]'
+                ? 'bg-[#2F4A3C] text-[#F2EBE2]'
+                : 'bg-[#D8D0C7] text-[#232323] hover:bg-[rgba(47,74,60,0.12)]'
             }`}
           >
             <Moon className="w-3 h-3" />
@@ -289,12 +289,12 @@ export function ProfileSelfView({ profile, tier }: Props) {
               onClick={() => saveCapacity(opt.value)}
               className={`flex items-center gap-2 px-3 py-2.5 rounded-xl border transition-all text-left ${
                 capacity === opt.value
-                  ? 'border-[#7A3E1E] bg-[#7A3E1E]'
-                  : 'border-[rgba(30,20,10,0.12)] bg-[#EDE8E0] hover:bg-[rgba(30,20,10,0.08)]'
+                  ? 'border-[#2F4A3C] bg-[#2F4A3C]'
+                  : 'border-[rgba(47,74,60,0.12)] bg-[#D8D0C7] hover:bg-[rgba(47,74,60,0.08)]'
               }`}
             >
               <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: opt.dot }} />
-              <span className={`text-xs font-body font-light leading-snug ${capacity === opt.value ? 'text-[#FDF5E8]' : 'text-[#1A1410]'}`}>
+              <span className={`text-xs font-body font-light leading-snug ${capacity === opt.value ? 'text-[#F2EBE2]' : 'text-[#232323]'}`}>
                 {opt.label}
               </span>
             </button>
@@ -308,11 +308,11 @@ export function ProfileSelfView({ profile, tier }: Props) {
           // eslint-disable-next-line @next/next/no-img-element
           <img src={photoUrl(photos[0])} alt={profile.name} className="w-full h-full object-cover" />
         ) : (
-          <div className="w-full h-full bg-[rgba(122,62,30,0.07)] flex items-center justify-center">
+          <div className="w-full h-full bg-[rgba(47,74,60,0.07)] flex items-center justify-center">
             <span className="font-heading text-8xl text-[#6B6058]">{profile.name?.[0]}</span>
           </div>
         )}
-        <div className="absolute bottom-0 left-0 right-0 h-52 bg-gradient-to-t from-[rgba(74,32,16,0.88)] to-transparent pointer-events-none" />
+        <div className="absolute bottom-0 left-0 right-0 h-52 bg-gradient-to-t from-[rgba(30,48,40,0.88)] to-transparent pointer-events-none" />
         <div className="absolute bottom-5 left-5 text-white">
           <h2 className="font-heading text-4xl drop-shadow">
             {profile.name}{!profile.hide_age && profile.birth_date ? `, ${calculateAge(profile.birth_date)}` : !profile.hide_age && profile.age ? `, ${profile.age}` : ''}
@@ -327,13 +327,13 @@ export function ProfileSelfView({ profile, tier }: Props) {
       </div>
 
       {/* ── Was mich gerade bewegt ── */}
-      <div className="px-5 py-5 border-t border-[rgba(122,62,30,0.08)]">
+      <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.08)]">
         <div className="flex items-center justify-between mb-3">
           <p className="text-[11px] text-[#6B6058] uppercase tracking-widest">Was mich gerade bewegt</p>
           {!editingMoment && (
             <button
               onClick={() => { setMomentDraft(currentMoment); setEditingMoment(true) }}
-              className="text-[10px] text-[#6B6058] hover:text-[#1A1410] transition-colors underline underline-offset-2"
+              className="text-[10px] text-[#6B6058] hover:text-[#232323] transition-colors underline underline-offset-2"
             >
               {currentMoment ? 'ändern' : 'hinzufügen'}
             </button>
@@ -345,19 +345,19 @@ export function ProfileSelfView({ profile, tier }: Props) {
               value={momentDraft}
               onChange={(e) => setMomentDraft(e.target.value.slice(0, 120))}
               placeholder="Ein Gedanke, ein Gefühl, ein Thema das dich gerade begleitet..."
-              className="w-full px-4 py-3 rounded-xl border border-[rgba(122,62,30,0.15)] bg-white text-[#1A1410] text-sm font-body font-light resize-none focus:outline-none focus:border-[#7A3E1E]/40 placeholder:text-[#6B6058]"
+              className="w-full px-4 py-3 rounded-xl border border-[rgba(47,74,60,0.15)] bg-white text-[#232323] text-sm font-body font-light resize-none focus:outline-none focus:border-[#2F4A3C]/40 placeholder:text-[#6B6058]"
               rows={3}
             />
             <div className="flex items-center justify-between mt-2">
               <span className="text-[10px] text-[#6B6058]">{momentDraft.length}/120</span>
               <div className="flex gap-2">
-                <button onClick={() => setEditingMoment(false)} className="text-xs text-[#6B6058] hover:text-[#1A1410] px-3 py-1.5 transition-colors">
+                <button onClick={() => setEditingMoment(false)} className="text-xs text-[#6B6058] hover:text-[#232323] px-3 py-1.5 transition-colors">
                   Abbrechen
                 </button>
                 <button
                   onClick={saveMoment}
                   disabled={saving}
-                  className="flex items-center gap-1 text-xs bg-[#7A3E1E] text-[#FDF5E8] px-4 py-1.5 rounded-full hover:bg-[#4A2010] transition-colors disabled:opacity-50"
+                  className="flex items-center gap-1 text-xs bg-[#2F4A3C] text-[#F2EBE2] px-4 py-1.5 rounded-full hover:bg-[#1E3028] transition-colors disabled:opacity-50"
                 >
                   <Check className="w-3 h-3" /> Speichern
                 </button>
@@ -365,7 +365,7 @@ export function ProfileSelfView({ profile, tier }: Props) {
             </div>
           </div>
         ) : currentMoment ? (
-          <p className="font-heading text-lg italic text-[#1A1410] leading-snug">
+          <p className="font-heading text-lg italic text-[#232323] leading-snug">
             &ldquo;{currentMoment}&rdquo;
           </p>
         ) : (
@@ -378,51 +378,51 @@ export function ProfileSelfView({ profile, tier }: Props) {
       {/* ── Quick-info pills ── */}
       <div className="px-5 pt-5 pb-1 flex flex-wrap gap-2">
         {profile.height_cm && (
-          <span className="flex items-center gap-1.5 text-sm text-[#6B6058] bg-[rgba(122,62,30,0.07)] px-3 py-1.5 rounded-full">
+          <span className="flex items-center gap-1.5 text-sm text-[#6B6058] bg-[rgba(47,74,60,0.07)] px-3 py-1.5 rounded-full">
             <Ruler className="w-3.5 h-3.5" />{profile.height_cm} cm
           </span>
         )}
         {profile.occupation && (
-          <span className="flex items-center gap-1.5 text-sm text-[#6B6058] bg-[rgba(122,62,30,0.07)] px-3 py-1.5 rounded-full">
+          <span className="flex items-center gap-1.5 text-sm text-[#6B6058] bg-[rgba(47,74,60,0.07)] px-3 py-1.5 rounded-full">
             <Briefcase className="w-3.5 h-3.5" />{profile.occupation}
           </span>
         )}
         {profile.intention && (
-          <span className="flex items-center gap-1.5 text-sm text-[#1A1410] bg-[rgba(122,62,30,0.07)] px-3 py-1.5 rounded-full">
+          <span className="flex items-center gap-1.5 text-sm text-[#232323] bg-[rgba(47,74,60,0.07)] px-3 py-1.5 rounded-full">
             <Sparkles className="w-3.5 h-3.5" />{profile.intention}
           </span>
         )}
         {profile.has_children && (
-          <span className="text-sm text-[#6B6058] bg-[rgba(122,62,30,0.07)] px-3 py-1.5 rounded-full">{profile.has_children}</span>
+          <span className="text-sm text-[#6B6058] bg-[rgba(47,74,60,0.07)] px-3 py-1.5 rounded-full">{profile.has_children}</span>
         )}
       </div>
 
       {/* ── Über mich ── */}
       {profile.bio && (
-        <div className="px-5 py-5 border-t border-[rgba(122,62,30,0.10)]">
+        <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)]">
           <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Über mich</p>
-          <p className="text-[#1A1410] text-sm leading-relaxed text-justify">{profile.bio}</p>
+          <p className="text-[#232323] text-sm leading-relaxed text-justify">{profile.bio}</p>
         </div>
       )}
 
       {/* ── Sprachmemo ── */}
       {profile.audio_prompt_url ? (
-        <div className="px-5 py-5 border-t border-[rgba(122,62,30,0.10)]">
+        <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)]">
           <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Sprachmemo</p>
           <AudioPlayer url={profile.audio_prompt_url} />
         </div>
       ) : (
-        <div className="px-5 py-5 border-t border-[rgba(122,62,30,0.10)] flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-[rgba(122,62,30,0.07)] flex items-center justify-center flex-shrink-0">
-            <Mic className="w-5 h-5 text-[#1A1410]" />
+        <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)] flex items-center gap-3">
+          <div className="w-10 h-10 rounded-full bg-[rgba(47,74,60,0.07)] flex items-center justify-center flex-shrink-0">
+            <Mic className="w-5 h-5 text-[#232323]" />
           </div>
           <div className="flex-1">
-            <p className="text-sm font-medium text-[#1A1410] mb-1.5">Sprachmemo</p>
+            <p className="text-sm font-medium text-[#232323] mb-1.5">Sprachmemo</p>
             <div className="flex items-center gap-0.5 h-5">
               {Array.from({ length: 26 }).map((_, i) => (
                 <div
                   key={i}
-                  className="w-1 bg-[#7A3E1E]/25 rounded-full"
+                  className="w-1 bg-[#2F4A3C]/25 rounded-full"
                   style={{ height: `${30 + Math.sin(i * 0.9) * 50 + Math.cos(i * 1.4) * 20}%` }}
                 />
               ))}
@@ -434,11 +434,11 @@ export function ProfileSelfView({ profile, tier }: Props) {
 
       {/* ── Interessen ── */}
       {profile.interests?.length > 0 && (
-        <div className="px-5 py-5 border-t border-[rgba(122,62,30,0.10)]">
+        <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)]">
           <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Interessen</p>
           <div className="flex flex-wrap gap-2">
             {profile.interests.map((item) => (
-              <span key={item} className="text-sm text-[#6B6058] bg-[rgba(122,62,30,0.07)] px-3 py-1.5 rounded-full">{item}</span>
+              <span key={item} className="text-sm text-[#6B6058] bg-[rgba(47,74,60,0.07)] px-3 py-1.5 rounded-full">{item}</span>
             ))}
           </div>
         </div>
@@ -446,11 +446,11 @@ export function ProfileSelfView({ profile, tier }: Props) {
 
       {/* ── Werte ── */}
       {profile.werte?.length > 0 && (
-        <div className="px-5 py-5 border-t border-[rgba(122,62,30,0.10)]">
+        <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)]">
           <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Werte</p>
           <div className="flex flex-wrap gap-2">
             {profile.werte.map((w) => (
-              <span key={w} className="text-sm text-[#1A1410] bg-[rgba(122,62,30,0.07)] px-3 py-1.5 rounded-full">{w}</span>
+              <span key={w} className="text-sm text-[#232323] bg-[rgba(47,74,60,0.07)] px-3 py-1.5 rounded-full">{w}</span>
             ))}
           </div>
         </div>
@@ -458,14 +458,14 @@ export function ProfileSelfView({ profile, tier }: Props) {
 
       {/* ── Meine Welt ── */}
       {(profile.my_world?.length ?? 0) > 0 && (
-        <div className="px-5 py-5 border-t border-[rgba(122,62,30,0.10)]">
+        <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)]">
           <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Meine Welt</p>
           <div className="flex flex-wrap gap-2">
             {profile.my_world!.map((item) => (
               <span
                 key={item}
                 className="text-[11px] font-body font-light px-3 py-1.5 rounded-full"
-                style={{ background: 'rgba(122,62,30,0.08)', color: '#1A1410' }}
+                style={{ background: 'rgba(47,74,60,0.08)', color: '#232323' }}
               >
                 {item}
               </span>
@@ -476,11 +476,11 @@ export function ProfileSelfView({ profile, tier }: Props) {
 
       {/* ── Meine Communities ── */}
       {(profile.communities?.length ?? 0) > 0 && (
-        <div className="px-5 py-5 border-t border-[rgba(122,62,30,0.10)]">
+        <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)]">
           <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Meine Communities</p>
           <div className="flex flex-wrap gap-2">
             {profile.communities!.map((c) => (
-              <span key={c} className="text-[12px] font-body px-3 py-1.5 rounded-full border border-[rgba(122,62,30,0.30)] text-[#1A1410] bg-[rgba(122,62,30,0.08)]">
+              <span key={c} className="text-[12px] font-body px-3 py-1.5 rounded-full border border-[rgba(47,74,60,0.30)] text-[#232323] bg-[rgba(47,74,60,0.08)]">
                 {c}
               </span>
             ))}
@@ -490,19 +490,19 @@ export function ProfileSelfView({ profile, tier }: Props) {
 
       {/* ── Beziehung & Bindung ── */}
       {(profile.relationship_model || profile.love_language) && (
-        <div className="px-5 py-5 border-t border-[rgba(122,62,30,0.10)] space-y-4">
+        <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)] space-y-4">
           <p className="text-[11px] text-[#6B6058] uppercase tracking-widest">Beziehung &amp; Bindung</p>
           {profile.relationship_model && (
             <div className="flex items-center justify-between">
               <span className="text-sm text-[#6B6058]">Beziehungsmodell</span>
-              <span className="text-sm text-[#1A1410] font-medium">{profile.relationship_model}</span>
+              <span className="text-sm text-[#232323] font-medium">{profile.relationship_model}</span>
             </div>
           )}
           {profile.love_language && (
             <div className="flex items-center justify-between">
               <span className="text-sm text-[#6B6058]">Love Language</span>
-              <span className="text-sm text-[#1A1410] font-medium flex items-center gap-1.5">
-                <Heart className="w-3.5 h-3.5 text-[#1A1410]" />{profile.love_language}
+              <span className="text-sm text-[#232323] font-medium flex items-center gap-1.5">
+                <Heart className="w-3.5 h-3.5 text-[#232323]" />{profile.love_language}
               </span>
             </div>
           )}
@@ -511,7 +511,7 @@ export function ProfileSelfView({ profile, tier }: Props) {
 
       {/* ── Persönlichkeit ── */}
       {(profile.introvert_extrovert != null || profile.spontan_strukturiert != null || profile.rational_emotional != null) && (
-        <div className="px-5 py-5 border-t border-[rgba(122,62,30,0.10)] space-y-4">
+        <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)] space-y-4">
           <p className="text-[11px] text-[#6B6058] uppercase tracking-widest">Persönlichkeit</p>
           {profile.introvert_extrovert != null && (
             <PersonalityBar leftLabel="Introvertiert" rightLabel="Extrovertiert" value={profile.introvert_extrovert} />
@@ -527,16 +527,16 @@ export function ProfileSelfView({ profile, tier }: Props) {
 
       {/* ── Horoskop ── */}
       {(profile.sun_sign || profile.ascendant) && (
-        <div className="px-5 py-5 border-t border-[rgba(122,62,30,0.10)] space-y-3">
+        <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)] space-y-3">
           <p className="text-[11px] text-[#6B6058] uppercase tracking-widest">Horoskop</p>
           <div className="flex flex-wrap gap-2">
             {profile.sun_sign && (
-              <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(122,62,30,0.08)', color: '#1A1410' }}>
+              <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(47,74,60,0.08)', color: '#232323' }}>
                 {profile.sun_sign}
               </span>
             )}
             {profile.ascendant && (
-              <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(122,62,30,0.08)', color: '#1A1410' }}>
+              <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(47,74,60,0.08)', color: '#232323' }}>
                 ↑ {profile.ascendant.replace(/^[♈♉♊♋♌♍♎♏♐♑♒♓]\s*/, '')}
               </span>
             )}
@@ -546,7 +546,7 @@ export function ProfileSelfView({ profile, tier }: Props) {
 
       {/* ── Dealbreakers ── */}
       {profile.dealbreakers?.length > 0 && (
-        <div className="px-5 py-5 border-t border-[rgba(122,62,30,0.10)]">
+        <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)]">
           <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Dealbreaker</p>
           <div className="flex flex-wrap gap-2">
             {profile.dealbreakers.map((d) => (
@@ -558,11 +558,11 @@ export function ProfileSelfView({ profile, tier }: Props) {
 
       {/* ── Intimität ── */}
       {profile.sexuality_visible && (profile.sexuality_interests?.length ?? 0) > 0 && (
-        <div className="px-5 py-5 border-t border-[rgba(122,62,30,0.10)]">
+        <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)]">
           <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Intimität</p>
           <div className="flex flex-wrap gap-2">
             {profile.sexuality_interests!.map((item) => (
-              <span key={item} className="text-sm text-[#6B6058] bg-[rgba(122,62,30,0.07)] px-3 py-1.5 rounded-full">{item}</span>
+              <span key={item} className="text-sm text-[#6B6058] bg-[rgba(47,74,60,0.07)] px-3 py-1.5 rounded-full">{item}</span>
             ))}
           </div>
         </div>
@@ -589,18 +589,18 @@ export function ProfileSelfView({ profile, tier }: Props) {
 
       {/* ── Phase 3: Vollständiges Profil badge OR invitation ── */}
       {onboardingPhase >= 3 ? (
-        <div className="mx-4 mt-6 flex items-center gap-3 px-4 py-3 rounded-2xl bg-[rgba(122,62,30,0.06)] border border-[#7A3E1E]/20">
-          <Sparkles className="w-4 h-4 text-[#7A3E1E] flex-shrink-0" />
-          <p className="text-[#7A3E1E] font-body text-sm font-medium">Vollständiges Profil ✦</p>
+        <div className="mx-4 mt-6 flex items-center gap-3 px-4 py-3 rounded-2xl bg-[rgba(47,74,60,0.06)] border border-[#2F4A3C]/20">
+          <Sparkles className="w-4 h-4 text-[#2F4A3C] flex-shrink-0" />
+          <p className="text-[#2F4A3C] font-body text-sm font-medium">Vollständiges Profil ✦</p>
         </div>
       ) : (
         <div
           className="mx-4 mt-6 rounded-2xl p-5"
           style={{ background: 'var(--bg-indigo)' }}
         >
-          <p className="text-[#FDF5E8]/60 font-body text-[10px] uppercase tracking-[0.12em] mb-2">Für echte Verbindung</p>
-          <p className="font-heading text-[22px] text-[#FDF5E8] leading-snug mb-1">Geh tiefer.</p>
-          <p className="text-[#FDF5E8]/70 font-body text-sm leading-relaxed mb-4">
+          <p className="text-[#F2EBE2]/60 font-body text-[10px] uppercase tracking-[0.12em] mb-2">Für echte Verbindung</p>
+          <p className="font-heading text-[22px] text-[#F2EBE2] leading-snug mb-1">Geh tiefer.</p>
+          <p className="text-[#F2EBE2]/70 font-body text-sm leading-relaxed mb-4">
             Bindungstyp, Love Language, Dealbreaker, Intimität, Beziehungsmodell, Horoskop —
             für Menschen, die wirklich gesehen werden wollen.
           </p>
@@ -616,11 +616,11 @@ export function ProfileSelfView({ profile, tier }: Props) {
               <div
                 key={item.label}
                 className={`rounded-xl px-2 py-2 text-center flex flex-col items-center gap-1 ${
-                  item.done ? 'bg-[rgba(253,245,232,0.20)]' : 'bg-[rgba(253,245,232,0.06)] border border-[rgba(253,245,232,0.12)]'
+                  item.done ? 'bg-[rgba(242,235,226,0.20)]' : 'bg-[rgba(242,235,226,0.06)] border border-[rgba(242,235,226,0.12)]'
                 }`}
               >
                 <span className="text-sm">{item.done ? '✓' : '·'}</span>
-                <span className={`text-[10px] font-body leading-tight ${item.done ? 'text-[#FDF5E8]' : 'text-[#FDF5E8]/50'}`}>
+                <span className={`text-[10px] font-body leading-tight ${item.done ? 'text-[#F2EBE2]' : 'text-[#F2EBE2]/50'}`}>
                   {item.label}
                 </span>
               </div>
@@ -628,7 +628,7 @@ export function ProfileSelfView({ profile, tier }: Props) {
           </div>
           <Link
             href="/profile/edit?phase=3"
-            className="flex items-center justify-center gap-2 w-full py-3 rounded-full bg-[#FDF5E8] text-[#7A3E1E] font-body text-[13px] font-medium transition-opacity hover:opacity-90"
+            className="flex items-center justify-center gap-2 w-full py-3 rounded-full bg-[#F2EBE2] text-[#2F4A3C] font-body text-[13px] font-medium transition-opacity hover:opacity-90"
           >
             Jetzt vertiefen →
           </Link>
@@ -637,9 +637,9 @@ export function ProfileSelfView({ profile, tier }: Props) {
 
       {/* ── Upgrade-Banner (nur wenn nicht Premium) ── */}
       {tier !== 'premium' && (
-        <div className="mx-4 mt-6 bg-[#4A2010] rounded-2xl p-6 text-[#EDE8F8]">
+        <div className="mx-4 mt-6 bg-[#1E3028] rounded-2xl p-6 text-[#EDE8F8]">
           <div className="flex items-center gap-2 mb-3">
-            <Star className="w-5 h-5 text-[#1A1410]" />
+            <Star className="w-5 h-5 text-[#232323]" />
             <span className="font-heading text-xl">Premium freischalten</span>
           </div>
           <p className="text-[#EDE8F8]/60 text-sm mb-4 leading-relaxed text-justify">
@@ -652,20 +652,20 @@ export function ProfileSelfView({ profile, tier }: Props) {
       )}
 
       {/* ── Einstellungen ── */}
-      <div className="mx-4 mt-6 bg-white rounded-2xl border border-[rgba(122,62,30,0.12)] p-6 mb-8">
-        <h3 className="font-heading text-xl text-[#1A1410] mb-4">Einstellungen</h3>
+      <div className="mx-4 mt-6 bg-[#F2EBE2] rounded-2xl border border-[rgba(47,74,60,0.12)] p-6 mb-8">
+        <h3 className="font-heading text-xl text-[#232323] mb-4">Einstellungen</h3>
         <div className="space-y-1">
           {settingsItems.map(({ label, icon: Icon, href, danger }) => (
             <Link
               key={label}
               href={href}
-              className={`flex items-center gap-3 py-3 px-1 rounded-xl transition-colors hover:bg-[#7A3E1E] text-sm font-body ${
+              className={`flex items-center gap-3 py-3 px-1 rounded-xl transition-colors hover:bg-[#2F4A3C] text-sm font-body ${
                 danger ? 'text-red-400' : 'text-[#6B6058]'
               }`}
             >
               <Icon className="w-4 h-4 flex-shrink-0" />
               <span className="flex-1">{label}</span>
-              <ChevronRight className="w-4 h-4 text-[#EDE8E0]" />
+              <ChevronRight className="w-4 h-4 text-[#D8D0C7]" />
             </Link>
           ))}
         </div>

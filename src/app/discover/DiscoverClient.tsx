@@ -157,7 +157,7 @@ function ChipGroup({
               'px-3 py-1.5 rounded-full text-sm border transition-all',
               selected.includes(opt)
                 ? 'bg-primary border-primary text-white'
-                : 'bg-white border-[rgba(122,62,30,0.12)] text-[#6B6058] hover:border-[#7A3E1E]/50',
+                : 'bg-white border-[rgba(47,74,60,0.12)] text-[#6B6058] hover:border-[#2F4A3C]/50',
             )}
           >
             {opt}
@@ -183,9 +183,9 @@ function PersonalityBar({
         <span>{leftLabel}</span>
         <span>{rightLabel}</span>
       </div>
-      <div className="h-2 bg-[rgba(122,62,30,0.07)] rounded-full overflow-hidden">
+      <div className="h-2 bg-[rgba(47,74,60,0.07)] rounded-full overflow-hidden">
         <div
-          className="h-full bg-[#7A3E1E]/60 rounded-full transition-all"
+          className="h-full bg-[#2F4A3C]/60 rounded-full transition-all"
           style={{ width: `${value}%` }}
         />
       </div>
@@ -211,7 +211,7 @@ function AudioPlayer({ url }: { url: string }) {
   }
 
   return (
-    <div className="flex items-center gap-3 px-5 py-4 border-t border-[rgba(122,62,30,0.10)]">
+    <div className="flex items-center gap-3 px-5 py-4 border-t border-[rgba(47,74,60,0.10)]">
       {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
       <audio
         ref={audioRef}
@@ -221,7 +221,7 @@ function AudioPlayer({ url }: { url: string }) {
       />
       <button
         onClick={handleToggle}
-        className="w-10 h-10 rounded-full bg-[#7A3E1E] flex items-center justify-center shadow flex-shrink-0 hover:bg-[#4A2010] transition-colors active:scale-95"
+        className="w-10 h-10 rounded-full bg-[#2F4A3C] flex items-center justify-center shadow flex-shrink-0 hover:bg-[#1E3028] transition-colors active:scale-95"
       >
         {playing ? (
           <Pause className="w-4 h-4 text-white" />
@@ -230,14 +230,14 @@ function AudioPlayer({ url }: { url: string }) {
         )}
       </button>
       <div className="flex-1">
-        <p className="text-sm font-medium text-[#1A1410] mb-1">Sprach-Intro anhören</p>
+        <p className="text-sm font-medium text-[#232323] mb-1">Sprach-Intro anhören</p>
         <div className="flex items-end gap-0.5 h-4">
           {Array.from({ length: 24 }).map((_, i) => (
             <div
               key={i}
               className={cn(
                 'w-0.5 rounded-full transition-all',
-                playing ? 'bg-[#7A3E1E] animate-pulse' : 'bg-[#7A3E1E]/30',
+                playing ? 'bg-[#2F4A3C] animate-pulse' : 'bg-[#2F4A3C]/30',
               )}
               style={{
                 height: `${28 + Math.sin(i * 0.85) * 48 + Math.cos(i * 1.3) * 18}%`,
@@ -255,10 +255,10 @@ function AudioPlayer({ url }: { url: string }) {
 /** Single prompt block */
 function PromptBlock({ question, answer }: { question: string; answer: string }) {
   return (
-    <div className="px-4 py-4 border-t border-[rgba(122,62,30,0.10)]">
-      <div className="bg-[rgba(122,62,30,0.07)] rounded-xl px-4 py-4 border-l-[3px] border-[#7A3E1E]">
+    <div className="px-4 py-4 border-t border-[rgba(47,74,60,0.10)]">
+      <div className="bg-[rgba(47,74,60,0.07)] rounded-xl px-4 py-4 border-l-[3px] border-[#2F4A3C]">
         <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-2">{question}</p>
-        <p className="font-heading text-xl italic text-[#4A2010] leading-snug text-justify">{answer}</p>
+        <p className="font-heading text-xl italic text-[#1E3028] leading-snug text-justify">{answer}</p>
       </div>
     </div>
   )
@@ -327,12 +327,12 @@ function Phase2Overlay({ userId, onComplete, onDismiss }: { userId: string; onCo
       {/* Header */}
       <div className="flex items-center justify-between px-5 pt-5 pb-3">
         {step !== 'intro' && (
-          <button onClick={() => setStep(step === 1 ? 'intro' : (step as number) - 1 as any)} className="text-[#FDF5E8]/50 hover:text-[#FDF5E8] transition-colors">
+          <button onClick={() => setStep(step === 1 ? 'intro' : (step as number) - 1 as any)} className="text-[#F2EBE2]/50 hover:text-[#F2EBE2] transition-colors">
             ← Zurück
           </button>
         )}
         {step === 'intro' && <div />}
-        <button onClick={onDismiss} className="text-[#FDF5E8]/30 hover:text-[#FDF5E8]/60 transition-colors text-sm">
+        <button onClick={onDismiss} className="text-[#F2EBE2]/30 hover:text-[#F2EBE2]/60 transition-colors text-sm">
           Später
         </button>
       </div>
@@ -340,8 +340,8 @@ function Phase2Overlay({ userId, onComplete, onDismiss }: { userId: string; onCo
       {/* Progress */}
       {step !== 'intro' && (
         <div className="px-5 mb-4">
-          <div className="h-0.5 bg-[rgba(253,245,232,0.12)] rounded-full overflow-hidden">
-            <div className="h-full bg-[#FDF5E8] rounded-full transition-all duration-500" style={{ width: `${((step as number) / totalSteps) * 100}%` }} />
+          <div className="h-0.5 bg-[rgba(242,235,226,0.12)] rounded-full overflow-hidden">
+            <div className="h-full bg-[#F2EBE2] rounded-full transition-all duration-500" style={{ width: `${((step as number) / totalSteps) * 100}%` }} />
           </div>
         </div>
       )}
@@ -351,10 +351,10 @@ function Phase2Overlay({ userId, onComplete, onDismiss }: { userId: string; onCo
         {step === 'intro' && (
           <div className="flex flex-col items-center justify-center min-h-full text-center py-16">
             <div className="text-4xl mb-6">✦</div>
-            <h2 className="font-heading text-[36px] font-light text-[#FDF5E8] leading-tight mb-4">
+            <h2 className="font-heading text-[36px] font-light text-[#F2EBE2] leading-tight mb-4">
               Vervollständige dein Profil um diese Person wirklich zu sehen.
             </h2>
-            <p className="font-body font-light text-[#FDF5E8]/60 text-base leading-relaxed max-w-sm mb-10">
+            <p className="font-body font-light text-[#F2EBE2]/60 text-base leading-relaxed max-w-sm mb-10">
               Ein paar Minuten mehr — und du wirst sichtbar für Menschen die wirklich zu dir passen.
             </p>
             <button onClick={() => setStep(1)} className="btn-primary px-10 py-4">
@@ -366,13 +366,13 @@ function Phase2Overlay({ userId, onComplete, onDismiss }: { userId: string; onCo
         {/* Step 1: Werte */}
         {step === 1 && (
           <div className="pt-6">
-            <h2 className="font-heading text-[32px] font-light text-[#FDF5E8] mb-2">Deine Werte.</h2>
-            <p className="text-[#FDF5E8]/50 text-sm font-body mb-6">Wähle 2–5 Werte die dich wirklich beschreiben.</p>
+            <h2 className="font-heading text-[32px] font-light text-[#F2EBE2] mb-2">Deine Werte.</h2>
+            <p className="text-[#F2EBE2]/50 text-sm font-body mb-6">Wähle 2–5 Werte die dich wirklich beschreiben.</p>
             <div className="flex flex-wrap gap-2">
               {WERTE_OPTIONS.map((w) => (
                 <button key={w} onClick={() => setWerte(prev => prev.includes(w) ? prev.filter(x => x !== w) : prev.length < 5 ? [...prev, w] : prev)}
                   className={cn('px-4 py-2 rounded-full text-sm font-body border transition-all',
-                    werte.includes(w) ? 'bg-[#FDF5E8] text-[#7A3E1E] border-[#FDF5E8]' : 'border-[rgba(253,245,232,0.2)] text-[#FDF5E8]/70'
+                    werte.includes(w) ? 'bg-[#F2EBE2] text-[#2F4A3C] border-[#F2EBE2]' : 'border-[rgba(242,235,226,0.2)] text-[#F2EBE2]/70'
                   )}>
                   {w}
                 </button>
@@ -384,8 +384,8 @@ function Phase2Overlay({ userId, onComplete, onDismiss }: { userId: string; onCo
         {/* Step 2: Bio */}
         {step === 2 && (
           <div className="pt-6">
-            <h2 className="font-heading text-[32px] font-light text-[#FDF5E8] mb-2">Über dich.</h2>
-            <p className="text-[#FDF5E8]/50 text-sm font-body mb-6">Was sollen Menschen über dich wissen? (optional)</p>
+            <h2 className="font-heading text-[32px] font-light text-[#F2EBE2] mb-2">Über dich.</h2>
+            <p className="text-[#F2EBE2]/50 text-sm font-body mb-6">Was sollen Menschen über dich wissen? (optional)</p>
             <textarea
               value={bio}
               onChange={(e) => setBio(e.target.value.slice(0, 400))}
@@ -393,20 +393,20 @@ function Phase2Overlay({ userId, onComplete, onDismiss }: { userId: string; onCo
               rows={5}
               className="input resize-none"
             />
-            <span className="text-[#FDF5E8]/30 text-xs block text-right mt-1">{bio.length}/400</span>
+            <span className="text-[#F2EBE2]/30 text-xs block text-right mt-1">{bio.length}/400</span>
           </div>
         )}
 
         {/* Step 3: Interessen */}
         {step === 3 && (
           <div className="pt-6">
-            <h2 className="font-heading text-[32px] font-light text-[#FDF5E8] mb-2">Deine Interessen.</h2>
-            <p className="text-[#FDF5E8]/50 text-sm font-body mb-6">Was beschäftigt dich?</p>
+            <h2 className="font-heading text-[32px] font-light text-[#F2EBE2] mb-2">Deine Interessen.</h2>
+            <p className="text-[#F2EBE2]/50 text-sm font-body mb-6">Was beschäftigt dich?</p>
             <div className="flex flex-wrap gap-2">
               {INTEREST_OPTIONS.map((i) => (
                 <button key={i} onClick={() => setInterests(prev => prev.includes(i) ? prev.filter(x => x !== i) : [...prev, i])}
                   className={cn('px-4 py-2 rounded-full text-sm font-body border transition-all',
-                    interests.includes(i) ? 'bg-[#FDF5E8] text-[#7A3E1E] border-[#FDF5E8]' : 'border-[rgba(253,245,232,0.2)] text-[#FDF5E8]/70'
+                    interests.includes(i) ? 'bg-[#F2EBE2] text-[#2F4A3C] border-[#F2EBE2]' : 'border-[rgba(242,235,226,0.2)] text-[#F2EBE2]/70'
                   )}>
                   {i}
                 </button>
@@ -418,13 +418,13 @@ function Phase2Overlay({ userId, onComplete, onDismiss }: { userId: string; onCo
         {/* Step 4: Meine Welt */}
         {step === 4 && (
           <div className="pt-6">
-            <h2 className="font-heading text-[32px] font-light text-[#FDF5E8] mb-2">Meine Welt.</h2>
-            <p className="text-[#FDF5E8]/50 text-sm font-body mb-6">Was gehört zu deiner Welt?</p>
+            <h2 className="font-heading text-[32px] font-light text-[#F2EBE2] mb-2">Meine Welt.</h2>
+            <p className="text-[#F2EBE2]/50 text-sm font-body mb-6">Was gehört zu deiner Welt?</p>
             <div className="flex flex-wrap gap-2">
               {MY_WORLD_OPTIONS.map((w) => (
                 <button key={w} onClick={() => setMyWorld(prev => prev.includes(w) ? prev.filter(x => x !== w) : [...prev, w])}
                   className={cn('px-4 py-2 rounded-full text-sm font-body border transition-all',
-                    myWorld.includes(w) ? 'bg-[#FDF5E8] text-[#7A3E1E] border-[#FDF5E8]' : 'border-[rgba(253,245,232,0.2)] text-[#FDF5E8]/70'
+                    myWorld.includes(w) ? 'bg-[#F2EBE2] text-[#2F4A3C] border-[#F2EBE2]' : 'border-[rgba(242,235,226,0.2)] text-[#F2EBE2]/70'
                   )}>
                   {w}
                 </button>
@@ -437,8 +437,8 @@ function Phase2Overlay({ userId, onComplete, onDismiss }: { userId: string; onCo
         {step === 5 && (
           <div className="pt-6 space-y-8">
             <div>
-              <h2 className="font-heading text-[32px] font-light text-[#FDF5E8] mb-2">Persönlichkeit.</h2>
-              <p className="text-[#FDF5E8]/50 text-sm font-body mb-6">Wo siehst du dich auf diesen Spektren?</p>
+              <h2 className="font-heading text-[32px] font-light text-[#F2EBE2] mb-2">Persönlichkeit.</h2>
+              <p className="text-[#F2EBE2]/50 text-sm font-body mb-6">Wo siehst du dich auf diesen Spektren?</p>
             </div>
             {[
               { label1: 'Introvertiert', label2: 'Extrovertiert', val: introvert, set: setIntrovert },
@@ -446,12 +446,12 @@ function Phase2Overlay({ userId, onComplete, onDismiss }: { userId: string; onCo
               { label1: 'Rational', label2: 'Emotional', val: rational, set: setRational },
             ].map((slider) => (
               <div key={slider.label1} className="space-y-2">
-                <div className="flex justify-between text-xs text-[#FDF5E8]/50 font-body">
+                <div className="flex justify-between text-xs text-[#F2EBE2]/50 font-body">
                   <span>{slider.label1}</span>
                   <span>{slider.label2}</span>
                 </div>
                 <input type="range" min={0} max={100} value={slider.val} onChange={(e) => slider.set(Number(e.target.value))}
-                  className="w-full" style={{ accentColor: '#FDF5E8' }} />
+                  className="w-full" style={{ accentColor: '#F2EBE2' }} />
               </div>
             ))}
           </div>
@@ -461,18 +461,18 @@ function Phase2Overlay({ userId, onComplete, onDismiss }: { userId: string; onCo
         {step === 6 && (
           <div className="pt-6 space-y-5">
             <div>
-              <h2 className="font-heading text-[32px] font-light text-[#FDF5E8] mb-2">Deine Antworten.</h2>
-              <p className="text-[#FDF5E8]/50 text-sm font-body mb-6">Beantworte mindestens 2 Fragen in deinen eigenen Worten.</p>
+              <h2 className="font-heading text-[32px] font-light text-[#F2EBE2] mb-2">Deine Antworten.</h2>
+              <p className="text-[#F2EBE2]/50 text-sm font-body mb-6">Beantworte mindestens 2 Fragen in deinen eigenen Worten.</p>
             </div>
             {prompts.map((p, i) => (
-              <div key={i} className="bg-[rgba(253,245,232,0.06)] rounded-2xl p-4 border border-[rgba(253,245,232,0.1)]">
-                <p className="text-[#FDF5E8]/60 text-xs uppercase tracking-widest font-body mb-2">{p.question}</p>
+              <div key={i} className="bg-[rgba(242,235,226,0.06)] rounded-2xl p-4 border border-[rgba(242,235,226,0.1)]">
+                <p className="text-[#F2EBE2]/60 text-xs uppercase tracking-widest font-body mb-2">{p.question}</p>
                 <textarea
                   value={p.answer}
                   onChange={(e) => setPrompts(prev => prev.map((x, j) => j === i ? { ...x, answer: e.target.value.slice(0, 200) } : x))}
                   placeholder="Deine Antwort..."
                   rows={3}
-                  className="w-full bg-transparent text-[#FDF5E8] text-sm font-body font-light resize-none focus:outline-none placeholder:text-[#FDF5E8]/25"
+                  className="w-full bg-transparent text-[#F2EBE2] text-sm font-body font-light resize-none focus:outline-none placeholder:text-[#F2EBE2]/25"
                 />
               </div>
             ))}
@@ -481,7 +481,7 @@ function Phase2Overlay({ userId, onComplete, onDismiss }: { userId: string; onCo
       </div>
 
       {/* CTA */}
-      <div className="fixed bottom-0 left-0 right-0 px-5 pb-8 pt-4 bg-gradient-to-t from-[#7A3E1E] to-transparent">
+      <div className="fixed bottom-0 left-0 right-0 px-5 pb-8 pt-4 bg-gradient-to-t from-[#2F4A3C] to-transparent">
         {step === 'intro' ? null : (
           <button
             onClick={() => {
@@ -764,8 +764,8 @@ export function DiscoverClient({
     return (
       <div className="flex flex-col items-center justify-center min-h-screen px-6 text-center">
         <div className="text-5xl mb-6">🌙</div>
-        <h2 className="font-heading text-4xl text-[#FDF5E8] mb-4">Du bist gerade in der Stille.</h2>
-        <p className="text-[#FDF5E8]/60 leading-relaxed mb-8 max-w-sm font-body font-light">
+        <h2 className="font-heading text-4xl text-[#F2EBE2] mb-4">Du bist gerade in der Stille.</h2>
+        <p className="text-[#F2EBE2]/60 leading-relaxed mb-8 max-w-sm font-body font-light">
           Dein Profil ist pausiert. Niemand sieht dich gerade im Entdecken.
           Komm zurück wenn es sich richtig anfühlt.
         </p>
@@ -781,11 +781,11 @@ export function DiscoverClient({
   if (showDailyLimit) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen px-6 text-center">
-        <div className="w-16 h-16 bg-[rgba(253,245,232,0.12)] rounded-full flex items-center justify-center mx-auto mb-6">
-          <Search className="w-8 h-8 text-[#FDF5E8]/50" />
+        <div className="w-16 h-16 bg-[rgba(242,235,226,0.12)] rounded-full flex items-center justify-center mx-auto mb-6">
+          <Search className="w-8 h-8 text-[#F2EBE2]/50" />
         </div>
-        <h2 className="font-heading text-4xl text-[#FDF5E8] mb-4">Du hast heute bewusst geschaut.</h2>
-        <p className="text-[#FDF5E8]/60 leading-relaxed mb-8 max-w-sm font-body font-light">
+        <h2 className="font-heading text-4xl text-[#F2EBE2] mb-4">Du hast heute bewusst geschaut.</h2>
+        <p className="text-[#F2EBE2]/60 leading-relaxed mb-8 max-w-sm font-body font-light">
           10 Begegnungen für heute. Morgen gibt es neue Menschen zu entdecken.
           Nimm dir Zeit mit dem was du gesehen hast.
         </p>
@@ -795,7 +795,7 @@ export function DiscoverClient({
         >
           Zum Revisit-Modus →
         </button>
-        <Link href="/profile" className="text-[#FDF5E8]/50 text-sm font-body hover:text-[#FDF5E8] transition-colors">
+        <Link href="/profile" className="text-[#F2EBE2]/50 text-sm font-body hover:text-[#F2EBE2] transition-colors">
           Zum Profil
         </Link>
       </div>
@@ -806,19 +806,19 @@ export function DiscoverClient({
 
   if (tier === 'free') {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen px-6 text-center bg-[#7A3E1E]">
-        <div className="w-20 h-20 bg-[rgba(253,245,232,0.12)] rounded-full flex items-center justify-center mx-auto mb-6">
-          <Lock className="w-9 h-9 text-[#FDF5E8]/50" />
+      <div className="flex flex-col items-center justify-center min-h-screen px-6 text-center bg-[#2F4A3C]">
+        <div className="w-20 h-20 bg-[rgba(242,235,226,0.12)] rounded-full flex items-center justify-center mx-auto mb-6">
+          <Lock className="w-9 h-9 text-[#F2EBE2]/50" />
         </div>
-        <h2 className="font-heading text-4xl text-[#FDF5E8] mb-3">Entdecken ist gesperrt</h2>
-        <p className="text-[#FDF5E8]/60 leading-relaxed mb-8 max-w-sm">
+        <h2 className="font-heading text-4xl text-[#F2EBE2] mb-3">Entdecken ist gesperrt</h2>
+        <p className="text-[#F2EBE2]/60 leading-relaxed mb-8 max-w-sm">
           Mit der Mitgliedschaft (29&nbsp;€/Monat) kannst du Profile entdecken, swipen und Matches
           aufbauen.
         </p>
-        <Link href="/pricing" className="bg-[#FDF5E8] text-[#1A1410] px-8 py-3.5 rounded-full font-body font-semibold hover:bg-white transition-colors">
+        <Link href="/pricing" className="bg-[#F2EBE2] text-[#232323] px-8 py-3.5 rounded-full font-body font-semibold hover:bg-white transition-colors">
           Mitgliedschaft ansehen
         </Link>
-        <p className="text-xs text-[#FDF5E8]/30 mt-4">14 Tage Geld-zurück-Garantie</p>
+        <p className="text-xs text-[#F2EBE2]/30 mt-4">14 Tage Geld-zurück-Garantie</p>
       </div>
     )
   }
@@ -827,13 +827,13 @@ export function DiscoverClient({
 
   if (isInConnection) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen px-4 text-center bg-[#7A3E1E]">
-        <p className="font-heading text-[42px] text-[#FDF5E8]/90 mb-3 leading-none">✦</p>
-        <h2 className="font-heading text-4xl text-[#FDF5E8] mb-4">Du bist gerade in einer Begegnung.</h2>
-        <p className="text-[#FDF5E8]/55 max-w-xs leading-relaxed mb-10 font-body font-light text-sm">
+      <div className="flex flex-col items-center justify-center min-h-screen px-4 text-center bg-[#2F4A3C]">
+        <p className="font-heading text-[42px] text-[#F2EBE2]/90 mb-3 leading-none">✦</p>
+        <h2 className="font-heading text-4xl text-[#F2EBE2] mb-4">Du bist gerade in einer Begegnung.</h2>
+        <p className="text-[#F2EBE2]/55 max-w-xs leading-relaxed mb-10 font-body font-light text-sm">
           Volle Präsenz.
         </p>
-        <Link href={`/connection/${connectionId}`} className="bg-[#FDF5E8] text-[#1A1410] px-8 py-3.5 rounded-full font-body font-normal hover:bg-white transition-colors">
+        <Link href={`/connection/${connectionId}`} className="bg-[#F2EBE2] text-[#232323] px-8 py-3.5 rounded-full font-body font-normal hover:bg-white transition-colors">
           Zur Begegnung
         </Link>
       </div>
@@ -848,9 +848,9 @@ export function DiscoverClient({
 
       {/* ── Trial expired banner ── */}
       {!trialActive && (
-        <div className="sticky top-0 z-30 bg-[#7A3E1E] px-4 py-2 flex items-center justify-between">
-          <p className="text-[#FDF5E8]/80 text-xs font-body">Dein Zugang ist abgelaufen.</p>
-          <Link href="/pricing" className="text-[#FDF5E8] text-xs font-body font-medium underline underline-offset-2">
+        <div className="sticky top-0 z-30 bg-[#2F4A3C] px-4 py-2 flex items-center justify-between">
+          <p className="text-[#F2EBE2]/80 text-xs font-body">Dein Zugang ist abgelaufen.</p>
+          <Link href="/pricing" className="text-[#F2EBE2] text-xs font-body font-medium underline underline-offset-2">
             Jetzt Mitglied werden →
           </Link>
         </div>
@@ -858,9 +858,9 @@ export function DiscoverClient({
 
       {/* ── Trial active hint ── */}
       {trialActive && trialDaysLeft <= 3 && trialDaysLeft > 0 && (
-        <div className="sticky top-0 z-30 bg-[rgba(122,62,30,0.85)] backdrop-blur-sm px-4 py-2 flex items-center justify-between">
-          <p className="text-[#FDF5E8]/80 text-xs font-body">✦ Du bist im Vollzugang — noch {trialDaysLeft} {trialDaysLeft === 1 ? 'Tag' : 'Tage'}</p>
-          <Link href="/pricing" className="text-[#FDF5E8] text-xs font-body font-medium underline underline-offset-2">
+        <div className="sticky top-0 z-30 bg-[rgba(47,74,60,0.85)] backdrop-blur-sm px-4 py-2 flex items-center justify-between">
+          <p className="text-[#F2EBE2]/80 text-xs font-body">✦ Du bist im Vollzugang — noch {trialDaysLeft} {trialDaysLeft === 1 ? 'Tag' : 'Tage'}</p>
+          <Link href="/pricing" className="text-[#F2EBE2] text-xs font-body font-medium underline underline-offset-2">
             Mitglied werden
           </Link>
         </div>
@@ -895,11 +895,11 @@ export function DiscoverClient({
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 28, stiffness: 280 }}
-              className="fixed top-0 right-0 h-full w-full max-w-sm bg-[#FDF5E8] z-50 shadow-2xl flex flex-col"
+              className="fixed top-0 right-0 h-full w-full max-w-sm bg-[#F2EBE2] z-50 shadow-2xl flex flex-col"
             >
               {/* Drawer header */}
-              <div className="flex items-center justify-between px-6 py-5 border-b border-[rgba(122,62,30,0.12)]">
-                <h2 className="font-heading text-2xl text-[#4A2010]">Filter</h2>
+              <div className="flex items-center justify-between px-6 py-5 border-b border-[rgba(47,74,60,0.12)]">
+                <h2 className="font-heading text-2xl text-[#1E3028]">Filter</h2>
                 <div className="flex items-center gap-3">
                   {activeFilterCount > 0 && (
                     <button
@@ -908,14 +908,14 @@ export function DiscoverClient({
                         setCurrent(0)
                         setHistory([])
                       }}
-                      className="flex items-center gap-1.5 text-sm text-[#6B6058] hover:text-[#1A1410] transition-colors"
+                      className="flex items-center gap-1.5 text-sm text-[#6B6058] hover:text-[#232323] transition-colors"
                     >
                       <RotateCcw className="w-3.5 h-3.5" /> Zurücksetzen
                     </button>
                   )}
                   <button
                     onClick={() => setShowFilters(false)}
-                    className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[rgba(122,62,30,0.07)] transition-colors"
+                    className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[rgba(47,74,60,0.07)] transition-colors"
                   >
                     <X className="w-5 h-5 text-[#6B6058]" />
                   </button>
@@ -930,7 +930,7 @@ export function DiscoverClient({
                     <p className="text-xs font-medium text-[#6B6058] uppercase tracking-wider">
                       Alter
                     </p>
-                    <span className="text-sm font-medium text-[#1A1410]">
+                    <span className="text-sm font-medium text-[#232323]">
                       {filters.ageMin} – {filters.ageMax === 100 ? '100+' : filters.ageMax}
                     </span>
                   </div>
@@ -951,7 +951,7 @@ export function DiscoverClient({
                           setCurrent(0)
                           setHistory([])
                         }}
-                        className="w-full accent-[#7A3E1E]"
+                        className="w-full accent-[#2F4A3C]"
                       />
                     </div>
                     <div>
@@ -970,7 +970,7 @@ export function DiscoverClient({
                           setCurrent(0)
                           setHistory([])
                         }}
-                        className="w-full accent-[#7A3E1E]"
+                        className="w-full accent-[#2F4A3C]"
                       />
                     </div>
                   </div>
@@ -993,8 +993,8 @@ export function DiscoverClient({
                         className={cn(
                           'px-3 py-1.5 rounded-full text-sm border transition-all',
                           filters.distanceKm === opt.value
-                            ? 'bg-[#7A3E1E] border-[#7A3E1E] text-white'
-                            : 'bg-white border-[rgba(122,62,30,0.12)] text-[#6B6058] hover:border-[#7A3E1E]/50',
+                            ? 'bg-[#2F4A3C] border-[#2F4A3C] text-white'
+                            : 'bg-white border-[rgba(47,74,60,0.12)] text-[#6B6058] hover:border-[#2F4A3C]/50',
                         )}
                       >
                         {opt.label}
@@ -1012,7 +1012,7 @@ export function DiscoverClient({
                         setCurrent(0)
                         setHistory([])
                       }}
-                      className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-[rgba(122,62,30,0.12)] bg-white text-sm text-[#1A1410] placeholder:text-[#6B6058] focus:outline-none focus:border-[#7A3E1E]/50"
+                      className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-[rgba(47,74,60,0.12)] bg-white text-sm text-[#232323] placeholder:text-[#6B6058] focus:outline-none focus:border-[#2F4A3C]/50"
                     />
                   </div>
                   <p className="text-xs text-[#6B6058] mt-1.5">Filtert nach Stadtname im Profil</p>
@@ -1061,7 +1061,7 @@ export function DiscoverClient({
               </div>
 
               {/* Drawer footer */}
-              <div className="px-6 py-5 border-t border-[rgba(122,62,30,0.12)]">
+              <div className="px-6 py-5 border-t border-[rgba(47,74,60,0.12)]">
                 <button onClick={() => setShowFilters(false)} className="w-full btn-primary-dark py-3.5">
                   {profiles.length} {profiles.length === 1 ? 'Profil' : 'Profile'} anzeigen
                 </button>
@@ -1081,14 +1081,14 @@ export function DiscoverClient({
               className={cn(
                 'relative flex items-center gap-2 px-4 py-2 rounded-2xl border-2 text-sm font-medium transition-all',
                 activeFilterCount > 0
-                  ? 'border-[#FDF5E8] bg-[rgba(253,245,232,0.15)] text-[#FDF5E8]'
-                  : 'border-[rgba(253,245,232,0.35)] text-[rgba(253,245,232,0.6)] hover:border-[rgba(253,245,232,0.6)]',
+                  ? 'border-[#F2EBE2] bg-[rgba(242,235,226,0.15)] text-[#F2EBE2]'
+                  : 'border-[rgba(242,235,226,0.35)] text-[rgba(242,235,226,0.6)] hover:border-[rgba(242,235,226,0.6)]',
               )}
             >
               <SlidersHorizontal className="w-4 h-4" />
               Filter
               {activeFilterCount > 0 && (
-                <span className="w-5 h-5 rounded-full bg-[#FDF5E8] text-[#1A1410] text-xs flex items-center justify-center font-semibold">
+                <span className="w-5 h-5 rounded-full bg-[#F2EBE2] text-[#232323] text-xs flex items-center justify-center font-semibold">
                   {activeFilterCount}
                 </span>
               )}
@@ -1111,23 +1111,23 @@ export function DiscoverClient({
               className="rounded-2xl p-5 text-center"
               style={{ background: 'var(--bg-indigo)' }}
             >
-              <p className="text-[#BF9B30] text-xl mb-2">✦</p>
-              <p className="font-heading text-[20px] italic text-[#FDF5E8] leading-snug mb-1">
+              <p className="text-[#BFA76A] text-xl mb-2">✦</p>
+              <p className="font-heading text-[20px] italic text-[#F2EBE2] leading-snug mb-1">
                 &ldquo;Jemand hat dir heute ein stilles Zeichen geschickt.&rdquo;
               </p>
-              <p className="text-[#FDF5E8]/45 font-body text-xs mb-4">Anonym — kein Name, keine Erwartung.</p>
+              <p className="text-[#F2EBE2]/45 font-body text-xs mb-4">Anonym — kein Name, keine Erwartung.</p>
               <div className="flex gap-2">
                 <button
                   onClick={() => handleReturnLight(localReceivedLights[0].id)}
-                  className="flex-1 py-2.5 rounded-xl font-body text-[13px] text-[#FDF5E8] transition-all active:scale-[0.97]"
-                  style={{ background: 'rgba(253,245,232,0.18)' }}
+                  className="flex-1 py-2.5 rounded-xl font-body text-[13px] text-[#F2EBE2] transition-all active:scale-[0.97]"
+                  style={{ background: 'rgba(242,235,226,0.18)' }}
                 >
                   Ein Zeichen zurückschicken ✦
                 </button>
                 <button
                   onClick={() => handleDismissLight(localReceivedLights[0].id)}
-                  className="px-4 py-2.5 rounded-xl font-body text-[13px] text-[#FDF5E8]/50 transition-all active:scale-[0.97]"
-                  style={{ background: 'rgba(253,245,232,0.07)' }}
+                  className="px-4 py-2.5 rounded-xl font-body text-[13px] text-[#F2EBE2]/50 transition-all active:scale-[0.97]"
+                  style={{ background: 'rgba(242,235,226,0.07)' }}
                 >
                   In Stille annehmen
                 </button>
@@ -1154,7 +1154,7 @@ export function DiscoverClient({
               transition={{ duration: 1.0, ease: 'easeOut' }}
               className="w-40 h-40 rounded-full"
               style={{
-                background: 'radial-gradient(circle, rgba(191,155,48,0.55) 0%, rgba(122,62,30,0.18) 60%, transparent 100%)',
+                background: 'radial-gradient(circle, rgba(191,155,48,0.55) 0%, rgba(47,74,60,0.18) 60%, transparent 100%)',
               }}
             />
           </motion.div>
@@ -1172,11 +1172,11 @@ export function DiscoverClient({
           >
             <div
               className="rounded-2xl px-5 py-3.5 max-w-sm text-center"
-              style={{ background: 'rgba(74,32,16,0.92)', backdropFilter: 'blur(12px)' }}
+              style={{ background: 'rgba(30,48,40,0.92)', backdropFilter: 'blur(12px)' }}
             >
-              <p className="text-[#FDF5E8]/90 font-body text-sm leading-relaxed">
+              <p className="text-[#F2EBE2]/90 font-body text-sm leading-relaxed">
                 Du hast heute 3 Zeichen verschickt.<br />
-                <span className="text-[#FDF5E8]/55">Morgen kannst du wieder jemandem eine Freude machen. ✦</span>
+                <span className="text-[#F2EBE2]/55">Morgen kannst du wieder jemandem eine Freude machen. ✦</span>
               </p>
             </div>
           </motion.div>
@@ -1186,11 +1186,11 @@ export function DiscoverClient({
       {/* ── Empty state ── */}
       {!hasProfile ? (
         <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
-          <Heart className="w-16 h-16 text-[#FDF5E8]/30 mb-6" />
+          <Heart className="w-16 h-16 text-[#F2EBE2]/30 mb-6" />
           {activeFilterCount > 0 ? (
             <>
-              <h2 className="font-heading text-4xl text-[#FDF5E8] mb-3">Keine Treffer</h2>
-              <p className="text-[#FDF5E8]/60 max-w-sm mb-6">
+              <h2 className="font-heading text-4xl text-[#F2EBE2] mb-3">Keine Treffer</h2>
+              <p className="text-[#F2EBE2]/60 max-w-sm mb-6">
                 Passe die Filter an oder setze sie zurück.
               </p>
               <button
@@ -1206,8 +1206,8 @@ export function DiscoverClient({
             </>
           ) : (
             <>
-              <h2 className="font-heading text-4xl text-[#FDF5E8] mb-3">Das war's erstmal</h2>
-              <p className="text-[#FDF5E8]/60 max-w-sm">
+              <h2 className="font-heading text-4xl text-[#F2EBE2] mb-3">Das war's erstmal</h2>
+              <p className="text-[#F2EBE2]/60 max-w-sm">
                 Schau später wieder vorbei — neue Menschen kommen täglich dazu.
               </p>
             </>
@@ -1251,7 +1251,7 @@ export function DiscoverClient({
                   draggable={false}
                 />
               ) : (
-                <div className="w-full h-full bg-[rgba(122,62,30,0.07)] flex items-center justify-center">
+                <div className="w-full h-full bg-[rgba(47,74,60,0.07)] flex items-center justify-center">
                   <span className="font-heading text-8xl text-[#6B6058]">
                     {profile.name?.[0]}
                   </span>
@@ -1275,7 +1275,7 @@ export function DiscoverClient({
               </motion.div>
 
               {/* Name / location gradient overlay */}
-              <div className="absolute bottom-0 left-0 right-0 h-56 bg-gradient-to-t from-[rgba(74,32,16,0.88)] to-transparent pointer-events-none z-10" />
+              <div className="absolute bottom-0 left-0 right-0 h-56 bg-gradient-to-t from-[rgba(30,48,40,0.88)] to-transparent pointer-events-none z-10" />
               <div className="absolute bottom-5 left-5 text-white pointer-events-none z-10">
                 <h2 className="font-heading text-4xl drop-shadow">
                   {profile.name}
@@ -1291,8 +1291,8 @@ export function DiscoverClient({
 
               {/* Serendipity badge */}
               {serendipityIds.includes(profile.user_id) && (
-                <div className="absolute top-4 right-4 z-20 bg-[rgba(74,32,16,0.75)] backdrop-blur-sm px-3 py-1.5 rounded-full flex items-center gap-1.5">
-                  <span className="text-[#FDF5E8] text-xs font-body">✦ Überraschung</span>
+                <div className="absolute top-4 right-4 z-20 bg-[rgba(30,48,40,0.75)] backdrop-blur-sm px-3 py-1.5 rounded-full flex items-center gap-1.5">
+                  <span className="text-[#F2EBE2] text-xs font-body">✦ Überraschung</span>
                 </div>
               )}
 
@@ -1306,20 +1306,20 @@ export function DiscoverClient({
             {/* ── Below-photo content ── */}
             {(() => {
               const INTENTION_AURA: Record<string, string> = {
-                'Ernsthafte Beziehung': '#2D7A5F',
+                'Ernsthafte Beziehung': '#7A9E8A',
                 'Freundschaft & mehr':  '#3A5F8A',
                 'Bewusstes Dating':     '#7B4FA6',
-                'Offenes Erkunden':     '#BF9B30',
+                'Offenes Erkunden':     '#BFA76A',
               }
               const stripeColor = profile.intention ? (INTENTION_AURA[profile.intention] ?? 'transparent') : 'transparent'
               return (
-            <div className="mt-2 mx-3 bg-[#FDF5E8] rounded-3xl overflow-hidden"
+            <div className="mt-2 mx-3 bg-[#F2EBE2] rounded-3xl overflow-hidden"
               style={{ boxShadow: stripeColor !== 'transparent' ? `inset 4px 0 0 ${stripeColor}` : undefined }}
             >
 
               {/* ── Emotionale Kapazität ── */}
               {profile.emotional_capacity && (() => {
-                const CAP = { open: { dot: '#2D7A5F', label: 'Offen für Tiefe & Nähe' }, selective: { dot: '#BF9B30', label: 'Selektiv & vorsichtig' }, light: { dot: '#3A5F8A', label: 'Gerade eher leicht & locker' }, slow: { dot: '#C4603A', label: 'Slow Mode' } }
+                const CAP = { open: { dot: '#7A9E8A', label: 'Offen für Tiefe & Nähe' }, selective: { dot: '#BFA76A', label: 'Selektiv & vorsichtig' }, light: { dot: '#3A5F8A', label: 'Gerade eher leicht & locker' }, slow: { dot: '#A8654C', label: 'Slow Mode' } }
                 const c = CAP[profile.emotional_capacity as keyof typeof CAP]
                 return c ? (
                   <div className="px-5 pt-4 pb-1 flex items-center gap-2">
@@ -1332,58 +1332,58 @@ export function DiscoverClient({
               {/* ── Was mich gerade bewegt ── */}
               {profile.current_moment && (
                 <div className="px-5 pt-3 pb-1">
-                  <p className="font-heading text-lg italic text-[#1A1410] leading-snug">&ldquo;{profile.current_moment}&rdquo;</p>
+                  <p className="font-heading text-lg italic text-[#232323] leading-snug">&ldquo;{profile.current_moment}&rdquo;</p>
                 </div>
               )}
 
               {/* ── Quick-info pills ── */}
               <div className="px-5 pt-5 pb-1 flex flex-wrap gap-2">
                 {profile.height_cm && (
-                  <span className="flex items-center gap-1.5 text-sm text-[#6B6058] bg-[rgba(122,62,30,0.07)] px-3 py-1.5 rounded-full">
+                  <span className="flex items-center gap-1.5 text-sm text-[#6B6058] bg-[rgba(47,74,60,0.07)] px-3 py-1.5 rounded-full">
                     <Ruler className="w-3.5 h-3.5" />{profile.height_cm} cm
                   </span>
                 )}
                 {profile.occupation && (
-                  <span className="flex items-center gap-1.5 text-sm text-[#6B6058] bg-[rgba(122,62,30,0.07)] px-3 py-1.5 rounded-full">
+                  <span className="flex items-center gap-1.5 text-sm text-[#6B6058] bg-[rgba(47,74,60,0.07)] px-3 py-1.5 rounded-full">
                     <Briefcase className="w-3.5 h-3.5" />{profile.occupation}
                   </span>
                 )}
                 {profile.intention && (
-                  <span className="flex items-center gap-1.5 text-sm text-[#1A1410] bg-[rgba(122,62,30,0.07)] px-3 py-1.5 rounded-full">
+                  <span className="flex items-center gap-1.5 text-sm text-[#232323] bg-[rgba(47,74,60,0.07)] px-3 py-1.5 rounded-full">
                     <Sparkles className="w-3.5 h-3.5" />{profile.intention}
                   </span>
                 )}
                 {profile.has_children && (
-                  <span className="text-sm text-[#6B6058] bg-[rgba(122,62,30,0.07)] px-3 py-1.5 rounded-full">{profile.has_children}</span>
+                  <span className="text-sm text-[#6B6058] bg-[rgba(47,74,60,0.07)] px-3 py-1.5 rounded-full">{profile.has_children}</span>
                 )}
               </div>
 
               {/* ── Über mich ── */}
               {profile.bio && (
-                <div className="px-5 py-5 border-t border-[rgba(122,62,30,0.10)]">
+                <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)]">
                   <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Über mich</p>
-                  <p className="text-[#1A1410] text-sm leading-relaxed text-justify">{profile.bio}</p>
+                  <p className="text-[#232323] text-sm leading-relaxed text-justify">{profile.bio}</p>
                 </div>
               )}
 
               {/* ── Sprachmemo ── */}
               {profile.audio_prompt_url ? (
-                <div className="px-5 py-5 border-t border-[rgba(122,62,30,0.10)]">
+                <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)]">
                   <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Sprachmemo</p>
                   <AudioPlayer url={profile.audio_prompt_url} />
                 </div>
               ) : (
-                <div className="px-5 py-5 border-t border-[rgba(122,62,30,0.10)] flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[rgba(122,62,30,0.07)] flex items-center justify-center flex-shrink-0">
-                    <Mic className="w-5 h-5 text-[#1A1410]" />
+                <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)] flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-[rgba(47,74,60,0.07)] flex items-center justify-center flex-shrink-0">
+                    <Mic className="w-5 h-5 text-[#232323]" />
                   </div>
                   <div className="flex-1">
-                    <p className="text-sm font-medium text-[#1A1410] mb-1.5">Sprachmemo</p>
+                    <p className="text-sm font-medium text-[#232323] mb-1.5">Sprachmemo</p>
                     <div className="flex items-center gap-0.5 h-5">
                       {Array.from({ length: 26 }).map((_, i) => (
                         <div
                           key={i}
-                          className="w-1 bg-[#7A3E1E]/25 rounded-full"
+                          className="w-1 bg-[#2F4A3C]/25 rounded-full"
                           style={{ height: `${30 + Math.sin(i * 0.9) * 50 + Math.cos(i * 1.4) * 20}%` }}
                         />
                       ))}
@@ -1395,11 +1395,11 @@ export function DiscoverClient({
 
               {/* ── Interessen ── */}
               {profile.interests?.length > 0 && (
-                <div className="px-5 py-5 border-t border-[rgba(122,62,30,0.10)]">
+                <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)]">
                   <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Interessen</p>
                   <div className="flex flex-wrap gap-2">
                     {profile.interests.map((item) => (
-                      <span key={item} className="text-sm text-[#6B6058] bg-[rgba(122,62,30,0.07)] px-3 py-1.5 rounded-full">{item}</span>
+                      <span key={item} className="text-sm text-[#6B6058] bg-[rgba(47,74,60,0.07)] px-3 py-1.5 rounded-full">{item}</span>
                     ))}
                   </div>
                 </div>
@@ -1407,11 +1407,11 @@ export function DiscoverClient({
 
               {/* ── Werte ── */}
               {profile.werte?.length > 0 && (
-                <div className="px-5 py-5 border-t border-[rgba(122,62,30,0.10)]">
+                <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)]">
                   <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Werte</p>
                   <div className="flex flex-wrap gap-2">
                     {profile.werte.map((w) => (
-                      <span key={w} className="text-sm text-[#1A1410] bg-[rgba(122,62,30,0.07)] px-3 py-1.5 rounded-full">{w}</span>
+                      <span key={w} className="text-sm text-[#232323] bg-[rgba(47,74,60,0.07)] px-3 py-1.5 rounded-full">{w}</span>
                     ))}
                   </div>
                 </div>
@@ -1419,14 +1419,14 @@ export function DiscoverClient({
 
               {/* ── Meine Welt ── */}
               {(profile.my_world?.length ?? 0) > 0 && (
-                <div className="px-5 py-5 border-t border-[rgba(122,62,30,0.10)]">
+                <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)]">
                   <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Meine Welt</p>
                   <div className="flex flex-wrap gap-2">
                     {profile.my_world!.map((item) => (
                       <span
                         key={item}
                         className="text-[11px] font-body font-light px-3 py-1.5 rounded-full"
-                        style={{ background: 'rgba(122,62,30,0.08)', color: '#1A1410' }}
+                        style={{ background: 'rgba(47,74,60,0.08)', color: '#232323' }}
                       >
                         {item}
                       </span>
@@ -1437,11 +1437,11 @@ export function DiscoverClient({
 
               {/* ── Meine Communities ── */}
               {(profile.communities?.length ?? 0) > 0 && (
-                <div className="px-5 py-5 border-t border-[rgba(122,62,30,0.10)]">
+                <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)]">
                   <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Meine Communities</p>
                   <div className="flex flex-wrap gap-2">
                     {profile.communities!.map((c) => (
-                      <span key={c} className="text-[12px] font-body px-3 py-1.5 rounded-full border border-[rgba(122,62,30,0.30)] text-[#1A1410] bg-[rgba(122,62,30,0.08)]">
+                      <span key={c} className="text-[12px] font-body px-3 py-1.5 rounded-full border border-[rgba(47,74,60,0.30)] text-[#232323] bg-[rgba(47,74,60,0.08)]">
                         {c}
                       </span>
                     ))}
@@ -1451,19 +1451,19 @@ export function DiscoverClient({
 
               {/* ── Beziehung & Bindung ── */}
               {(profile.relationship_model || profile.bindungstyp || profile.love_language) && (
-                <div className="px-5 py-5 border-t border-[rgba(122,62,30,0.10)] space-y-4">
+                <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)] space-y-4">
                   <p className="text-[11px] text-[#6B6058] uppercase tracking-widest">Beziehung &amp; Bindung</p>
                   {profile.relationship_model && (
                     <div className="flex items-center justify-between">
                       <span className="text-sm text-[#6B6058]">Beziehungsmodell</span>
-                      <span className="text-sm text-[#1A1410] font-medium">{profile.relationship_model}</span>
+                      <span className="text-sm text-[#232323] font-medium">{profile.relationship_model}</span>
                     </div>
                   )}
                   {profile.love_language && (
                     <div className="flex items-center justify-between">
                       <span className="text-sm text-[#6B6058]">Love Language</span>
-                      <span className="text-sm text-[#1A1410] font-medium flex items-center gap-1.5">
-                        <Heart className="w-3.5 h-3.5 text-[#1A1410]" />{profile.love_language}
+                      <span className="text-sm text-[#232323] font-medium flex items-center gap-1.5">
+                        <Heart className="w-3.5 h-3.5 text-[#232323]" />{profile.love_language}
                       </span>
                     </div>
                   )}
@@ -1474,7 +1474,7 @@ export function DiscoverClient({
               {(profile.introvert_extrovert != null ||
                 profile.spontan_strukturiert != null ||
                 profile.rational_emotional != null) && (
-                <div className="px-5 py-5 border-t border-[rgba(122,62,30,0.10)] space-y-4">
+                <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)] space-y-4">
                   <p className="text-[11px] text-[#6B6058] uppercase tracking-widest">Persönlichkeit</p>
                   {profile.introvert_extrovert != null && (
                     <PersonalityBar leftLabel="Introvertiert" rightLabel="Extrovertiert" value={profile.introvert_extrovert} />
@@ -1490,16 +1490,16 @@ export function DiscoverClient({
 
               {/* ── Horoskop ── */}
               {(profile.sun_sign || profile.ascendant) && (
-                <div className="px-5 py-5 border-t border-[rgba(122,62,30,0.10)] space-y-3">
+                <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)] space-y-3">
                   <p className="text-[11px] text-[#6B6058] uppercase tracking-widest">Horoskop</p>
                   <div className="flex flex-wrap gap-2">
                     {profile.sun_sign && (
-                      <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(122,62,30,0.08)', color: '#1A1410' }}>
+                      <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(47,74,60,0.08)', color: '#232323' }}>
                         {profile.sun_sign}
                       </span>
                     )}
                     {profile.ascendant && (
-                      <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(122,62,30,0.08)', color: '#1A1410' }}>
+                      <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(47,74,60,0.08)', color: '#232323' }}>
                         ↑ {profile.ascendant.replace(/^[♈♉♊♋♌♍♎♏♐♑♒♓]\s*/, '')}
                       </span>
                     )}
@@ -1509,7 +1509,7 @@ export function DiscoverClient({
 
               {/* ── Dealbreakers ── */}
               {profile.dealbreakers?.length > 0 && (
-                <div className="px-5 py-5 border-t border-[rgba(122,62,30,0.10)]">
+                <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)]">
                   <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Dealbreaker</p>
                   <div className="flex flex-wrap gap-2">
                     {profile.dealbreakers.map((d) => (
@@ -1521,16 +1521,16 @@ export function DiscoverClient({
 
               {/* ── Intimität ── */}
               {profile.sexuality_visible && viewerSexualityVisible && (profile.sexuality_interests?.length ?? 0) > 0 ? (
-                <div className="px-5 py-5 border-t border-[rgba(122,62,30,0.10)]">
+                <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)]">
                   <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Intimität</p>
                   <div className="flex flex-wrap gap-2">
                     {profile.sexuality_interests!.map((item) => (
-                      <span key={item} className="text-sm text-[#6B6058] bg-[rgba(122,62,30,0.07)] px-3 py-1.5 rounded-full">{item}</span>
+                      <span key={item} className="text-sm text-[#6B6058] bg-[rgba(47,74,60,0.07)] px-3 py-1.5 rounded-full">{item}</span>
                     ))}
                   </div>
                 </div>
               ) : (!viewerSexualityVisible && profile.sexuality_visible) ? (
-                <div className="px-5 py-5 border-t border-[rgba(122,62,30,0.10)]">
+                <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)]">
                   <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Intimität</p>
                   <p className="text-sm text-[#6B6058] italic">Teile deine Interessen im Profil um diese Informationen zu sehen.</p>
                 </div>
@@ -1583,17 +1583,17 @@ export function DiscoverClient({
             <div
               className="flex items-center gap-1.5 rounded-2xl p-1.5"
               style={{
-                background: 'rgba(74,32,16,0.78)',
+                background: 'rgba(30,48,40,0.78)',
                 backdropFilter: 'blur(18px)',
                 WebkitBackdropFilter: 'blur(18px)',
-                border: '0.5px solid rgba(253,245,232,0.14)',
+                border: '0.5px solid rgba(242,235,226,0.14)',
               }}
             >
               {/* Gerade nicht */}
               <button
                 onClick={handlePass}
-                className="flex-1 py-3.5 rounded-xl font-body font-light text-[13px] text-[#FDF5E8]/70 transition-all active:scale-[0.97]"
-                style={{ background: 'rgba(253,245,232,0.08)' }}
+                className="flex-1 py-3.5 rounded-xl font-body font-light text-[13px] text-[#F2EBE2]/70 transition-all active:scale-[0.97]"
+                style={{ background: 'rgba(242,235,226,0.08)' }}
               >
                 Gerade nicht
               </button>
@@ -1604,13 +1604,13 @@ export function DiscoverClient({
                 className="w-10 h-[50px] rounded-xl flex items-center justify-center flex-shrink-0 transition-all active:scale-95"
                 style={{
                   background: 'transparent',
-                  border: `1px solid rgba(253,245,232,${lightSentCount >= 3 ? '0.10' : '0.22'})`,
+                  border: `1px solid rgba(242,235,226,${lightSentCount >= 3 ? '0.10' : '0.22'})`,
                   opacity: lightSentCount >= 3 ? 0.35 : 1,
                 }}
                 aria-label="Ein stilles Zeichen schicken"
                 title="Ein stilles Zeichen schicken — anonym und ohne Erwartung"
               >
-                <span className="text-[#BF9B30] text-base leading-none">✦</span>
+                <span className="text-[#BFA76A] text-base leading-none">✦</span>
               </button>
 
               {/* Undo — square, same height as buttons */}
@@ -1618,17 +1618,17 @@ export function DiscoverClient({
                 onClick={handleUndo}
                 disabled={history.length === 0}
                 className="w-12 h-[50px] rounded-xl flex items-center justify-center flex-shrink-0 transition-all disabled:opacity-20 active:scale-95"
-                style={{ background: 'rgba(253,245,232,0.10)' }}
+                style={{ background: 'rgba(242,235,226,0.10)' }}
                 aria-label="Rückgängig"
               >
-                <CornerUpLeft className="w-5 h-5 text-[#FDF5E8]/80" />
+                <CornerUpLeft className="w-5 h-5 text-[#F2EBE2]/80" />
               </button>
 
               {/* Fühlt sich stimmig an */}
               <button
                 onClick={handleLike}
-                className="flex-[1.6] py-3.5 rounded-xl font-body font-normal text-[13px] text-[#FDF5E8] transition-all active:scale-[0.97] hover:opacity-90"
-                style={{ background: 'rgba(253,245,232,0.22)', letterSpacing: '0.01em' }}
+                className="flex-[1.6] py-3.5 rounded-xl font-body font-normal text-[13px] text-[#F2EBE2] transition-all active:scale-[0.97] hover:opacity-90"
+                style={{ background: 'rgba(242,235,226,0.22)', letterSpacing: '0.01em' }}
               >
                 Stimmig an ✦
               </button>
@@ -1640,7 +1640,7 @@ export function DiscoverClient({
                 <button
                   onClick={openRevisitMode}
                   disabled={loadingRevisit}
-                  className="text-xs text-[#FDF5E8]/40 hover:text-[#FDF5E8]/60 font-body transition-colors"
+                  className="text-xs text-[#F2EBE2]/40 hover:text-[#F2EBE2]/60 font-body transition-colors"
                 >
                   {loadingRevisit ? '…' : `↩ Nochmal anschauen (${revisitIds.length})`}
                 </button>
@@ -1655,22 +1655,22 @@ export function DiscoverClient({
         <div className="fixed inset-0 z-50 flex flex-col" style={{ background: 'var(--bg-indigo)', backgroundAttachment: 'fixed' }}>
           <div className="flex items-center justify-between px-5 pt-6 pb-4">
             <div>
-              <h2 className="font-heading text-3xl text-[#FDF5E8]">Nochmal anschauen</h2>
-              <p className="text-xs text-[#FDF5E8]/40 font-body mt-0.5">{revisitProfiles.length} Profile</p>
+              <h2 className="font-heading text-3xl text-[#F2EBE2]">Nochmal anschauen</h2>
+              <p className="text-xs text-[#F2EBE2]/40 font-body mt-0.5">{revisitProfiles.length} Profile</p>
             </div>
-            <button onClick={() => setShowRevisit(false)} className="w-8 h-8 flex items-center justify-center text-[#FDF5E8]/50 hover:text-[#FDF5E8]">
+            <button onClick={() => setShowRevisit(false)} className="w-8 h-8 flex items-center justify-center text-[#F2EBE2]/50 hover:text-[#F2EBE2]">
               <X className="w-5 h-5" />
             </button>
           </div>
 
           {revisitProfiles.length === 0 ? (
-            <div className="flex-1 flex items-center justify-center text-[#FDF5E8]/40 text-center px-8">
+            <div className="flex-1 flex items-center justify-center text-[#F2EBE2]/40 text-center px-8">
               <p className="font-heading text-2xl">Keine Profile mehr in der Liste.</p>
             </div>
           ) : revisitIdx >= revisitProfiles.length ? (
             <div className="flex-1 flex flex-col items-center justify-center px-6 text-center">
-              <p className="font-heading text-3xl text-[#FDF5E8] mb-4">Das war's.</p>
-              <p className="text-[#FDF5E8]/50 font-body mb-6">Du hast alle Revisit-Profile gesehen.</p>
+              <p className="font-heading text-3xl text-[#F2EBE2] mb-4">Das war's.</p>
+              <p className="text-[#F2EBE2]/50 font-body mb-6">Du hast alle Revisit-Profile gesehen.</p>
               <button onClick={() => setShowRevisit(false)} className="btn-primary px-8">Zurück zum Entdecken</button>
             </div>
           ) : (() => {
@@ -1682,18 +1682,18 @@ export function DiscoverClient({
                     // eslint-disable-next-line @next/next/no-img-element
                     <img src={photoUrl(rp.photos[0])} alt={rp.name} className="w-full h-full object-cover" />
                   ) : (
-                    <div className="w-full h-full bg-[rgba(253,245,232,0.08)] flex items-center justify-center">
-                      <span className="font-heading text-8xl text-[#FDF5E8]/20">{rp.name?.[0]}</span>
+                    <div className="w-full h-full bg-[rgba(242,235,226,0.08)] flex items-center justify-center">
+                      <span className="font-heading text-8xl text-[#F2EBE2]/20">{rp.name?.[0]}</span>
                     </div>
                   )}
-                  <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-[rgba(74,32,16,0.88)] to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-[rgba(30,48,40,0.88)] to-transparent" />
                   <div className="absolute bottom-5 left-5 text-white">
                     <h3 className="font-heading text-3xl">{rp.name}{rp.age ? `, ${rp.age}` : ''}</h3>
                     {rp.location && !rp.hide_location && <p className="text-white/70 text-sm">{rp.location}</p>}
                   </div>
                 </div>
-                <div className="mt-2 mx-3 bg-[#FDF5E8] rounded-3xl p-5">
-                  {rp.bio && <p className="text-[#1A1410] text-sm leading-relaxed">{rp.bio}</p>}
+                <div className="mt-2 mx-3 bg-[#F2EBE2] rounded-3xl p-5">
+                  {rp.bio && <p className="text-[#232323] text-sm leading-relaxed">{rp.bio}</p>}
                   {rp.intention && <p className="mt-3 text-xs text-[#6B6058] uppercase tracking-wider">{rp.intention}</p>}
                 </div>
               </div>
@@ -1702,7 +1702,7 @@ export function DiscoverClient({
 
           {/* Revisit Action Bar */}
           {revisitProfiles.length > 0 && revisitIdx < revisitProfiles.length && (
-            <div className="fixed bottom-0 left-0 right-0 px-5 pb-6 pt-3" style={{ background: 'rgba(122,62,30,0.9)', backdropFilter: 'blur(16px)' }}>
+            <div className="fixed bottom-0 left-0 right-0 px-5 pb-6 pt-3" style={{ background: 'rgba(47,74,60,0.9)', backdropFilter: 'blur(16px)' }}>
               <div className="flex gap-3 max-w-sm mx-auto">
                 <button
                   onClick={async () => {
@@ -1713,7 +1713,7 @@ export function DiscoverClient({
                     setRevisitIdx(i => i + 1)
                   }}
                   className="flex-1 py-3.5 rounded-full font-body text-sm transition-all"
-                  style={{ background: 'transparent', border: '0.5px solid rgba(253,245,232,0.3)', color: 'rgba(253,245,232,0.5)' }}
+                  style={{ background: 'transparent', border: '0.5px solid rgba(242,235,226,0.3)', color: 'rgba(242,235,226,0.5)' }}
                 >
                   Nicht mein Weg
                 </button>
@@ -1726,7 +1726,7 @@ export function DiscoverClient({
                     toast('Interesse gesendet!')
                     setRevisitIdx(i => i + 1)
                   }}
-                  className="flex-1 py-3.5 rounded-full font-body text-sm bg-[#FDF5E8] text-[#1A1410] font-normal active:scale-95 transition-all"
+                  className="flex-1 py-3.5 rounded-full font-body text-sm bg-[#F2EBE2] text-[#232323] font-normal active:scale-95 transition-all"
                 >
                   Fühlt sich stimmig an ✦
                 </button>
@@ -1739,19 +1739,19 @@ export function DiscoverClient({
       {/* ── Burnout Hint ── */}
       {showBurnout && (
         <div className="fixed bottom-24 left-4 right-4 z-40 md:left-auto md:right-6 md:max-w-sm">
-          <div className="rounded-2xl p-5" style={{ background: 'rgba(74,32,16,0.95)', border: '0.5px solid rgba(253,245,232,0.12)', backdropFilter: 'blur(20px)' }}>
+          <div className="rounded-2xl p-5" style={{ background: 'rgba(30,48,40,0.95)', border: '0.5px solid rgba(242,235,226,0.12)', backdropFilter: 'blur(20px)' }}>
             <div className="flex items-start gap-3">
               <span className="text-xl flex-shrink-0">🌙</span>
               <div className="flex-1">
-                <h4 className="font-heading text-lg text-[#FDF5E8] mb-1">Eine kurze Beobachtung</h4>
-                <p className="text-xs text-[#FDF5E8]/55 font-body font-light leading-relaxed mb-3">
+                <h4 className="font-heading text-lg text-[#F2EBE2] mb-1">Eine kurze Beobachtung</h4>
+                <p className="text-xs text-[#F2EBE2]/55 font-body font-light leading-relaxed mb-3">
                   Du scheinst gerade viel Energie ins Dating zu stecken. Manchmal ist eine Pause das Bewussteste was man tun kann.
                 </p>
                 <div className="flex gap-2">
-                  <Link href="/profile" className="flex-1 py-2 text-center rounded-full text-xs font-body bg-[#FDF5E8] text-[#1A1410]">
+                  <Link href="/profile" className="flex-1 py-2 text-center rounded-full text-xs font-body bg-[#F2EBE2] text-[#232323]">
                     Pause einlegen
                   </Link>
-                  <button onClick={() => setShowBurnout(false)} className="flex-1 py-2 text-center rounded-full text-xs font-body text-[#FDF5E8]/50" style={{ border: '0.5px solid rgba(253,245,232,0.2)' }}>
+                  <button onClick={() => setShowBurnout(false)} className="flex-1 py-2 text-center rounded-full text-xs font-body text-[#F2EBE2]/50" style={{ border: '0.5px solid rgba(242,235,226,0.2)' }}>
                     Alles gut, danke
                   </button>
                 </div>

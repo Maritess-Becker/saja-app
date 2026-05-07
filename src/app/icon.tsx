@@ -12,7 +12,7 @@ export default function Icon() {
           width: 512,
           height: 512,
           borderRadius: '114px',
-          background: '#7A3E1E',
+          background: '#2F4A3C',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -21,7 +21,7 @@ export default function Icon() {
         <svg width="460" height="460" viewBox="0 0 512 512" fill="none">
           <path
             d="M 256 115 A 141 141 0 1 1 115 256"
-            stroke="#7A3E1E"
+            stroke="#2F4A3C"
             strokeWidth="32"
             strokeLinecap="round"
             fill="none"

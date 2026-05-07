@@ -233,24 +233,24 @@ const CONTENT_SECTIONS = [
 
 const ICON_BG: Record<string, string> = {
   // Kenne dich selbst — Herz & Rose
-  'was-mein-bindungstyp-bedeutet': '#2D7A5F',
+  'was-mein-bindungstyp-bedeutet': '#7A9E8A',
   'love-language-leben':           '#C08080',
   'beziehungsmuster':              '#7B4FA6',
-  'was-ich-wirklich-suche':        '#2D7A5F',
-  'grenzen-kennen':                '#C4603A',
+  'was-ich-wirklich-suche':        '#7A9E8A',
+  'grenzen-kennen':                '#A8654C',
   // Begleitung
-  'gedanke-des-tages':             '#BF9B30',
-  'nach-der-begegnung':            '#A05830',
+  'gedanke-des-tages':             '#BFA76A',
+  'nach-der-begegnung':            '#3D5E4E',
   'wenn-es-schwer-wird':           '#C08080',
-  'zwischen-zwei-begegnungen':     '#A05830',
-  'pause-bewusst-nutzen':          '#BF9B30',
+  'zwischen-zwei-begegnungen':     '#3D5E4E',
+  'pause-bewusst-nutzen':          '#BFA76A',
   // Wissen
-  'bindungstypen-im-dating':       '#2D7A5F',
+  'bindungstypen-im-dating':       '#7A9E8A',
   'gleiche-menschen':              '#7B4FA6',
   'kunst-des-ersten-gesprächs':    '#3A5F8A',
-  'koerper-und-intuition':         '#C4603A',
+  'koerper-und-intuition':         '#A8654C',
   'conscious-dating':              '#3A5F8A',
-  'sternzeichen-beziehungen':      '#BF9B30',
+  'sternzeichen-beziehungen':      '#BFA76A',
   'von-coaches':                   '#7B4FA6',
 }
 
@@ -261,7 +261,7 @@ const MODAL_CONTENT: Record<string, { title: string; body: React.ReactNode }> = 
     title: 'Was mein Bindungstyp bedeutet',
     body: (
       <div className="space-y-4">
-        <p className="font-heading text-xl italic text-[#1A1410] leading-snug">
+        <p className="font-heading text-xl italic text-[#232323] leading-snug">
           &ldquo;Dein Bindungstyp ist kein Urteil — er ist eine Landkarte.&rdquo;
         </p>
         <p className="text-[#6B6058] text-sm leading-relaxed">
@@ -269,17 +269,17 @@ const MODAL_CONTENT: Record<string, { title: string; body: React.ReactNode }> = 
           im Dating, im ersten Gespräch, wenn es eng wird.
         </p>
         {[
-          { typ: 'Sicher', color: '#2D7A5F', text: 'Du kannst Nähe zulassen ohne dich zu verlieren. Im Dating bist du präsent, klar und wenig reaktiv.' },
+          { typ: 'Sicher', color: '#7A9E8A', text: 'Du kannst Nähe zulassen ohne dich zu verlieren. Im Dating bist du präsent, klar und wenig reaktiv.' },
           { typ: 'Ängstlich-präoccupiert', color: '#C08080', text: 'Du sehnst dich tief nach Verbindung und bist sehr feinfühlig für Signale. Wichtig: Unterscheide Intuition von Angst.' },
           { typ: 'Vermeidend-distanziert', color: '#3A5F8A', text: 'Du schätzt Autonomie und tust dich schwer wenn Nähe zu schnell kommt. Echte Verbindung braucht dein eigenes Tempo.' },
           { typ: 'Desorganisiert', color: '#7B4FA6', text: 'Nähe löst gleichzeitig Sehnsucht und Alarm aus. Wachstum beginnt mit Sicherheit — in dir selbst.' },
         ].map((b) => (
-          <div key={b.typ} className="p-4 bg-[#F5F0E8] rounded-2xl border-l-[3px]" style={{ borderLeftColor: b.color }}>
-            <p className="font-body font-medium text-[#1A1410] text-sm mb-1">{b.typ}</p>
+          <div key={b.typ} className="p-4 bg-[#EDE5DC] rounded-2xl border-l-[3px]" style={{ borderLeftColor: b.color }}>
+            <p className="font-body font-medium text-[#232323] text-sm mb-1">{b.typ}</p>
             <p className="text-[#6B6058] text-xs leading-relaxed">{b.text}</p>
           </div>
         ))}
-        <p className="text-xs text-[#A09888] italic">Vollständiger interaktiver Guide folgt.</p>
+        <p className="text-xs text-[#9A8E84] italic">Vollständiger interaktiver Guide folgt.</p>
       </div>
     ),
   },
@@ -287,7 +287,7 @@ const MODAL_CONTENT: Record<string, { title: string; body: React.ReactNode }> = 
     title: 'Meine Love Language leben',
     body: (
       <div className="space-y-4">
-        <p className="font-heading text-xl italic text-[#1A1410]">&ldquo;Nicht jeder liebt so wie du liebst.&rdquo;</p>
+        <p className="font-heading text-xl italic text-[#232323]">&ldquo;Nicht jeder liebt so wie du liebst.&rdquo;</p>
         <p className="text-[#6B6058] text-sm leading-relaxed">
           Den eigenen Liebesstil zu kennen ist nur der erste Schritt. Dieser Guide zeigt wie man
           ihn im Dating aktiv kommuniziert — und den des anderen erkennt.
@@ -299,12 +299,12 @@ const MODAL_CONTENT: Record<string, { title: string; body: React.ReactNode }> = 
           { l: 'Hilfsbereitschaft', tip: 'Handlungen sprechen. Frag: Was würde dir gerade helfen?' },
           { l: 'Körperliche Berührung', tip: 'Frag nach Erlaubnis. Kleine Gesten bedeuten oft mehr als große.' },
         ].map((l) => (
-          <div key={l.l} className="p-3 bg-[#F5F0E8] rounded-xl">
-            <p className="font-medium text-[#1A1410] text-sm">{l.l}</p>
+          <div key={l.l} className="p-3 bg-[#EDE5DC] rounded-xl">
+            <p className="font-medium text-[#232323] text-sm">{l.l}</p>
             <p className="text-[#6B6058] text-xs mt-0.5">{l.tip}</p>
           </div>
         ))}
-        <p className="text-xs text-[#A09888] italic">Vollständiger Guide folgt.</p>
+        <p className="text-xs text-[#9A8E84] italic">Vollständiger Guide folgt.</p>
       </div>
     ),
   },
@@ -312,7 +312,7 @@ const MODAL_CONTENT: Record<string, { title: string; body: React.ReactNode }> = 
     title: 'Meine Beziehungsmuster',
     body: (
       <div className="space-y-4">
-        <p className="font-heading text-xl italic text-[#1A1410]">&ldquo;Was sich wiederholt, will gesehen werden.&rdquo;</p>
+        <p className="font-heading text-xl italic text-[#232323]">&ldquo;Was sich wiederholt, will gesehen werden.&rdquo;</p>
         <p className="text-[#6B6058] text-sm leading-relaxed">
           Diese Reflexionsfragen helfen dir wiederkehrende Themen zu erkennen.
           Deine Antworten werden privat gespeichert.
@@ -325,12 +325,12 @@ const MODAL_CONTENT: Record<string, { title: string; body: React.ReactNode }> = 
           'Was habe ich von meinen Eltern über Liebe gelernt?',
           'Was möchte ich diesmal anders machen?',
         ].map((q, i) => (
-          <div key={i} className="p-3 bg-[#F5F0E8] rounded-xl flex gap-3">
-            <span className="font-heading text-[#A09888] text-base">{i + 1}.</span>
-            <p className="text-[#1A1410] text-sm leading-relaxed">{q}</p>
+          <div key={i} className="p-3 bg-[#EDE5DC] rounded-xl flex gap-3">
+            <span className="font-heading text-[#9A8E84] text-base">{i + 1}.</span>
+            <p className="text-[#232323] text-sm leading-relaxed">{q}</p>
           </div>
         ))}
-        <p className="text-xs text-[#A09888] italic">Antworten werden privat gespeichert. Folgt in Phase 2.</p>
+        <p className="text-xs text-[#9A8E84] italic">Antworten werden privat gespeichert. Folgt in Phase 2.</p>
       </div>
     ),
   },
@@ -338,7 +338,7 @@ const MODAL_CONTENT: Record<string, { title: string; body: React.ReactNode }> = 
     title: 'Was ich wirklich suche',
     body: (
       <div className="space-y-4">
-        <p className="font-heading text-xl italic text-[#1A1410]">&ldquo;Was du wirklich willst, liegt oft tiefer als du denkst.&rdquo;</p>
+        <p className="font-heading text-xl italic text-[#232323]">&ldquo;Was du wirklich willst, liegt oft tiefer als du denkst.&rdquo;</p>
         <p className="text-[#6B6058] text-sm leading-relaxed">
           Über das Onboarding hinaus. Diese Fragen gehen dorthin wo Antworten nicht sofort kommen.
         </p>
@@ -349,12 +349,12 @@ const MODAL_CONTENT: Record<string, { title: string; body: React.ReactNode }> = 
           'Was bin ich bereit zu geben — wirklich?',
           'Was suche ich in jemandem, das ich auch in mir selbst brauche?',
         ].map((q, i) => (
-          <div key={i} className="p-3 bg-[#F5F0E8] rounded-xl flex gap-3">
-            <span className="font-heading text-[#A09888] text-base">{i + 1}.</span>
-            <p className="text-[#1A1410] text-sm leading-relaxed">{q}</p>
+          <div key={i} className="p-3 bg-[#EDE5DC] rounded-xl flex gap-3">
+            <span className="font-heading text-[#9A8E84] text-base">{i + 1}.</span>
+            <p className="text-[#232323] text-sm leading-relaxed">{q}</p>
           </div>
         ))}
-        <p className="text-xs text-[#A09888] italic">Vollständige Reflexion folgt.</p>
+        <p className="text-xs text-[#9A8E84] italic">Vollständige Reflexion folgt.</p>
       </div>
     ),
   },
@@ -362,7 +362,7 @@ const MODAL_CONTENT: Record<string, { title: string; body: React.ReactNode }> = 
     title: 'Meine Grenzen kennen',
     body: (
       <div className="space-y-4">
-        <p className="font-heading text-xl italic text-[#1A1410]">&ldquo;Grenzen sind kein Mauer — sie sind ein Einlass.&rdquo;</p>
+        <p className="font-heading text-xl italic text-[#232323]">&ldquo;Grenzen sind kein Mauer — sie sind ein Einlass.&rdquo;</p>
         <p className="text-[#6B6058] text-sm leading-relaxed">
           Wer seine Grenzen kennt, kann wirklich präsent sein. Dieser Check hilft dir zu verstehen
           was dir nicht verhandelbar ist.
@@ -373,12 +373,12 @@ const MODAL_CONTENT: Record<string, { title: string; body: React.ReactNode }> = 
           { q: 'Wann habe ich früher meine eigenen Grenzen überschritten?', hint: 'Ohne Urteil — nur Wahrnehmung.' },
           { q: 'Wie kommuniziere ich eine Grenze — jetzt, in diesem Moment?', hint: 'Klar, ruhig, direkt.' },
         ].map((item, i) => (
-          <div key={i} className="p-3 bg-[#F5F0E8] rounded-xl">
-            <p className="text-[#1A1410] text-sm font-medium leading-relaxed">{item.q}</p>
-            <p className="text-[#A09888] text-xs mt-1 italic">{item.hint}</p>
+          <div key={i} className="p-3 bg-[#EDE5DC] rounded-xl">
+            <p className="text-[#232323] text-sm font-medium leading-relaxed">{item.q}</p>
+            <p className="text-[#9A8E84] text-xs mt-1 italic">{item.hint}</p>
           </div>
         ))}
-        <p className="text-xs text-[#A09888] italic">Vollständige Reflexion folgt.</p>
+        <p className="text-xs text-[#9A8E84] italic">Vollständige Reflexion folgt.</p>
       </div>
     ),
   },
@@ -390,11 +390,11 @@ const MODAL_CONTENT: Record<string, { title: string; body: React.ReactNode }> = 
         <div className="text-center py-4 space-y-4">
           <p className="text-[#6B6058] text-sm">{new Date().toLocaleDateString('de-DE', { weekday: 'long', day: 'numeric', month: 'long' })}</p>
           <div className="rounded-2xl p-6" style={{ background: 'var(--bg-indigo)' }}>
-            <p className="font-heading text-[22px] italic text-[#FDF5E8] leading-snug">
+            <p className="font-heading text-[22px] italic text-[#F2EBE2] leading-snug">
               &ldquo;{gedanke}&rdquo;
             </p>
           </div>
-          <p className="text-xs text-[#A09888] leading-relaxed">
+          <p className="text-xs text-[#9A8E84] leading-relaxed">
             Täglich wechselnd · ein Gedanke zum bewussten Innehalten.
           </p>
         </div>
@@ -405,7 +405,7 @@ const MODAL_CONTENT: Record<string, { title: string; body: React.ReactNode }> = 
     title: 'Nach der Begegnung',
     body: (
       <div className="space-y-4">
-        <p className="font-heading text-xl italic text-[#1A1410]">&ldquo;Was du nach einer Begegnung spürst, sagt mehr als du denkst.&rdquo;</p>
+        <p className="font-heading text-xl italic text-[#232323]">&ldquo;Was du nach einer Begegnung spürst, sagt mehr als du denkst.&rdquo;</p>
         <p className="text-[#6B6058] text-sm leading-relaxed">
           Eine kurze Reflexionshilfe — direkt danach, wenn der Eindruck noch frisch ist.
         </p>
@@ -415,12 +415,12 @@ const MODAL_CONTENT: Record<string, { title: string; body: React.ReactNode }> = 
           { q: 'Wie war meine Energie danach?', hint: 'Aufgeladen, erschöpft, offen, geschlossen?' },
           { q: 'Was möchte ich davon mitnehmen?', hint: 'Eine Erkenntnis, eine Frage, eine Qualität.' },
         ].map((item, i) => (
-          <div key={i} className="p-3 bg-[#F5F0E8] rounded-xl">
-            <p className="text-[#1A1410] text-sm font-medium">{item.q}</p>
-            <p className="text-[#A09888] text-xs mt-0.5 italic">{item.hint}</p>
+          <div key={i} className="p-3 bg-[#EDE5DC] rounded-xl">
+            <p className="text-[#232323] text-sm font-medium">{item.q}</p>
+            <p className="text-[#9A8E84] text-xs mt-0.5 italic">{item.hint}</p>
           </div>
         ))}
-        <p className="text-xs text-[#A09888] italic">Vollständiger Guide folgt.</p>
+        <p className="text-xs text-[#9A8E84] italic">Vollständiger Guide folgt.</p>
       </div>
     ),
   },
@@ -428,7 +428,7 @@ const MODAL_CONTENT: Record<string, { title: string; body: React.ReactNode }> = 
     title: 'Wenn es schwer wird',
     body: (
       <div className="space-y-4">
-        <p className="font-heading text-xl italic text-[#1A1410]">&ldquo;Es darf schwer sein. Das bedeutet nicht, dass es falsch ist.&rdquo;</p>
+        <p className="font-heading text-xl italic text-[#232323]">&ldquo;Es darf schwer sein. Das bedeutet nicht, dass es falsch ist.&rdquo;</p>
         <p className="text-[#6B6058] text-sm leading-relaxed">
           Für Ablehnung, Unsicherheit, Dating-Müdigkeit. Ehrlich, warm, ohne falsche Aufheiterung.
         </p>
@@ -438,8 +438,8 @@ const MODAL_CONTENT: Record<string, { title: string; body: React.ReactNode }> = 
           { titel: 'Wenn Müdigkeit kommt', text: 'Chronische Dating-Müdigkeit ist real. Der Körper sendet ein Signal. Hör hin, bevor er lauter werden muss.' },
           { titel: 'Wenn du dich fragst ob es sich lohnt', text: 'Das lohnt sich, weil du dir lohnst. Nicht weil es einfach ist.' },
         ].map((item) => (
-          <div key={item.titel} className="p-4 bg-[#F5F0E8] rounded-2xl">
-            <p className="font-body font-medium text-[#1A1410] text-sm mb-1.5">{item.titel}</p>
+          <div key={item.titel} className="p-4 bg-[#EDE5DC] rounded-2xl">
+            <p className="font-body font-medium text-[#232323] text-sm mb-1.5">{item.titel}</p>
             <p className="text-[#6B6058] text-xs leading-relaxed">{item.text}</p>
           </div>
         ))}
@@ -450,7 +450,7 @@ const MODAL_CONTENT: Record<string, { title: string; body: React.ReactNode }> = 
     title: 'Zwischen zwei Begegnungen',
     body: (
       <div className="space-y-4">
-        <p className="font-heading text-xl italic text-[#1A1410]">&ldquo;Was du in der Stille findest, bringst du in jede Begegnung mit.&rdquo;</p>
+        <p className="font-heading text-xl italic text-[#232323]">&ldquo;Was du in der Stille findest, bringst du in jede Begegnung mit.&rdquo;</p>
         <p className="text-[#6B6058] text-sm leading-relaxed">
           Über das Warten, die Pause und was sie dir sagen kann — wenn du ihr zuhörst.
         </p>
@@ -460,12 +460,12 @@ const MODAL_CONTENT: Record<string, { title: string; body: React.ReactNode }> = 
           'Tue etwas das dir gut tut. Dating beginnt bei dir.',
           'Schreib ins Journal. Was ist gerade echt?',
         ].map((tip, i) => (
-          <div key={i} className="flex gap-3 p-3 bg-[#F5F0E8] rounded-xl items-start">
-            <span className="text-[#BF9B30] text-base leading-none mt-0.5">✦</span>
-            <p className="text-[#1A1410] text-sm leading-relaxed">{tip}</p>
+          <div key={i} className="flex gap-3 p-3 bg-[#EDE5DC] rounded-xl items-start">
+            <span className="text-[#BFA76A] text-base leading-none mt-0.5">✦</span>
+            <p className="text-[#232323] text-sm leading-relaxed">{tip}</p>
           </div>
         ))}
-        <p className="text-xs text-[#A09888] italic">Vollständiger Guide folgt.</p>
+        <p className="text-xs text-[#9A8E84] italic">Vollständiger Guide folgt.</p>
       </div>
     ),
   },
@@ -473,7 +473,7 @@ const MODAL_CONTENT: Record<string, { title: string; body: React.ReactNode }> = 
     title: 'Pause bewusst nutzen',
     body: (
       <div className="space-y-4">
-        <p className="font-heading text-xl italic text-[#1A1410]">&ldquo;Pause ist keine Niederlage. Sie ist eine Entscheidung.&rdquo;</p>
+        <p className="font-heading text-xl italic text-[#232323]">&ldquo;Pause ist keine Niederlage. Sie ist eine Entscheidung.&rdquo;</p>
         <p className="text-[#6B6058] text-sm leading-relaxed">
           Wenn der Pause-Modus aktiv ist — wie du diese Zeit wirklich für dich nutzt.
         </p>
@@ -483,8 +483,8 @@ const MODAL_CONTENT: Record<string, { title: string; body: React.ReactNode }> = 
           { titel: 'Was jetzt helfen kann', text: 'Journal schreiben. Einen der Reflexions-Guides nutzen. Dein echtes Leben leben.' },
           { titel: 'Wann du zurückkommst', text: 'Wenn du es willst — nicht wenn du es glaubst zu müssen.' },
         ].map((item) => (
-          <div key={item.titel} className="p-3 bg-[#F5F0E8] rounded-xl">
-            <p className="font-medium text-[#1A1410] text-sm mb-1">{item.titel}</p>
+          <div key={item.titel} className="p-3 bg-[#EDE5DC] rounded-xl">
+            <p className="font-medium text-[#232323] text-sm mb-1">{item.titel}</p>
             <p className="text-[#6B6058] text-xs leading-relaxed">{item.text}</p>
           </div>
         ))}
@@ -495,22 +495,22 @@ const MODAL_CONTENT: Record<string, { title: string; body: React.ReactNode }> = 
     title: 'Bindungstypen im Dating',
     body: (
       <div className="space-y-4">
-        <p className="font-heading text-xl italic text-[#1A1410]">&ldquo;Wie man liebt, lässt sich erkennen — wenn man weiß, wonach man schaut.&rdquo;</p>
+        <p className="font-heading text-xl italic text-[#232323]">&ldquo;Wie man liebt, lässt sich erkennen — wenn man weiß, wonach man schaut.&rdquo;</p>
         <p className="text-[#6B6058] text-sm leading-relaxed">
           Wie sich die vier Typen im Dating konkret verhalten — und was das für dich bedeutet.
         </p>
         {[
-          { typ: 'Sicher', color: '#2D7A5F', verhalten: 'Kommuniziert klar, lässt Nähe zu, gibt Raum ohne Distanz zu schaffen.' },
+          { typ: 'Sicher', color: '#7A9E8A', verhalten: 'Kommuniziert klar, lässt Nähe zu, gibt Raum ohne Distanz zu schaffen.' },
           { typ: 'Ängstlich-präoccupiert', color: '#C08080', verhalten: 'Sehr feinfühlig, liest Signale intensiv, braucht Bestätigung um sich sicher zu fühlen.' },
           { typ: 'Vermeidend-distanziert', color: '#3A5F8A', verhalten: 'Wirkt unabhängig, zieht sich bei zu viel Nähe zurück, öffnet sich langsam.' },
           { typ: 'Desorganisiert', color: '#7B4FA6', verhalten: 'Wechselt zwischen Nähe und Distanz, schwer vorhersehbar, oft tiefes Trauma zugrunde.' },
         ].map((b) => (
-          <div key={b.typ} className="p-4 bg-[#F5F0E8] rounded-2xl border-l-[3px]" style={{ borderLeftColor: b.color }}>
-            <p className="font-body font-medium text-[#1A1410] text-sm mb-1">{b.typ}</p>
+          <div key={b.typ} className="p-4 bg-[#EDE5DC] rounded-2xl border-l-[3px]" style={{ borderLeftColor: b.color }}>
+            <p className="font-body font-medium text-[#232323] text-sm mb-1">{b.typ}</p>
             <p className="text-[#6B6058] text-xs leading-relaxed">{b.verhalten}</p>
           </div>
         ))}
-        <p className="text-xs text-[#A09888] italic">Vollständiger Artikel folgt.</p>
+        <p className="text-xs text-[#9A8E84] italic">Vollständiger Artikel folgt.</p>
       </div>
     ),
   },
@@ -518,24 +518,24 @@ const MODAL_CONTENT: Record<string, { title: string; body: React.ReactNode }> = 
     title: 'Warum ich immer die gleichen Menschen anziehe',
     body: (
       <div className="space-y-4">
-        <p className="font-heading text-xl italic text-[#1A1410]">&ldquo;Muster wiederholen sich bis sie gesehen werden.&rdquo;</p>
+        <p className="font-heading text-xl italic text-[#232323]">&ldquo;Muster wiederholen sich bis sie gesehen werden.&rdquo;</p>
         <p className="text-[#6B6058] text-sm leading-relaxed">
           Über Muster, Projektionen und unbewusste Anziehung. Ehrlich, ohne Schuld — aber klar.
         </p>
-        <div className="p-4 bg-[#F5F0E8] rounded-2xl">
-          <p className="text-[#1A1410] text-sm leading-relaxed">
+        <div className="p-4 bg-[#EDE5DC] rounded-2xl">
+          <p className="text-[#232323] text-sm leading-relaxed">
             Wir ziehen an, was vertraut ist — nicht was gut für uns ist. Das Nervensystem
             kennt Vertrautheit als Sicherheit, auch wenn sie es nicht ist.
           </p>
         </div>
-        <div className="p-4 bg-[#F5F0E8] rounded-2xl">
-          <p className="font-medium text-[#1A1410] text-sm mb-1">Was hilft</p>
+        <div className="p-4 bg-[#EDE5DC] rounded-2xl">
+          <p className="font-medium text-[#232323] text-sm mb-1">Was hilft</p>
           <p className="text-[#6B6058] text-xs leading-relaxed">
             Muster benennen ohne sich zu verurteilen. Therapie oder Coaching. Langsamer werden —
             Anziehung hinterfragen bevor man ihr folgt.
           </p>
         </div>
-        <p className="text-xs text-[#A09888] italic">Vollständiger Artikel folgt.</p>
+        <p className="text-xs text-[#9A8E84] italic">Vollständiger Artikel folgt.</p>
       </div>
     ),
   },
@@ -543,19 +543,19 @@ const MODAL_CONTENT: Record<string, { title: string; body: React.ReactNode }> = 
     title: 'Die Kunst des ersten Gesprächs',
     body: (
       <div className="space-y-4">
-        <p className="font-heading text-xl italic text-[#1A1410]">&ldquo;Ein gutes Gespräch beginnt mit echter Neugier.&rdquo;</p>
+        <p className="font-heading text-xl italic text-[#232323]">&ldquo;Ein gutes Gespräch beginnt mit echter Neugier.&rdquo;</p>
         {[
           { titel: 'Präsent sein', text: 'Nicht in Bewertungsmodus — sondern wirklich da. Was nimmst du an dieser Person wahr?' },
           { titel: 'Echte Fragen stellen', text: 'Nicht „was machst du so?" — sondern was dich wirklich interessiert.' },
           { titel: 'Sich selbst zeigen', text: 'Verletzlichkeit schafft Verbindung. Teile etwas von dir — authentisch, nicht performativ.' },
           { titel: 'Pausen zulassen', text: 'Stille ist kein Problem. Sie ist Raum.' },
         ].map((item) => (
-          <div key={item.titel} className="p-3 bg-[#F5F0E8] rounded-xl">
-            <p className="font-medium text-[#1A1410] text-sm mb-1">{item.titel}</p>
+          <div key={item.titel} className="p-3 bg-[#EDE5DC] rounded-xl">
+            <p className="font-medium text-[#232323] text-sm mb-1">{item.titel}</p>
             <p className="text-[#6B6058] text-xs">{item.text}</p>
           </div>
         ))}
-        <p className="text-xs text-[#A09888] italic">Vollständiger Guide folgt.</p>
+        <p className="text-xs text-[#9A8E84] italic">Vollständiger Guide folgt.</p>
       </div>
     ),
   },
@@ -563,7 +563,7 @@ const MODAL_CONTENT: Record<string, { title: string; body: React.ReactNode }> = 
     title: 'Körper und Intuition',
     body: (
       <div className="space-y-4">
-        <p className="font-heading text-xl italic text-[#1A1410]">&ldquo;Dein Körper weiß mehr als du glaubst.&rdquo;</p>
+        <p className="font-heading text-xl italic text-[#232323]">&ldquo;Dein Körper weiß mehr als du glaubst.&rdquo;</p>
         <p className="text-[#6B6058] text-sm leading-relaxed">
           Körperliche Intelligenz im Dating — was der Körper spürt bevor der Kopf es benennt.
         </p>
@@ -573,15 +573,15 @@ const MODAL_CONTENT: Record<string, { title: string; body: React.ReactNode }> = 
           { signal: 'Erschöpfung nach Begegnungen', bedeutung: 'Energetische Inkompatibilität oder emotionale Anstrengung.' },
           { signal: 'Leichtigkeit', bedeutung: 'Echt, stimmig, sicher.' },
         ].map((item) => (
-          <div key={item.signal} className="p-3 bg-[#F5F0E8] rounded-xl flex gap-3">
-            <span className="text-[#C4603A] text-lg leading-none mt-0.5">○</span>
+          <div key={item.signal} className="p-3 bg-[#EDE5DC] rounded-xl flex gap-3">
+            <span className="text-[#A8654C] text-lg leading-none mt-0.5">○</span>
             <div>
-              <p className="font-medium text-[#1A1410] text-sm">{item.signal}</p>
+              <p className="font-medium text-[#232323] text-sm">{item.signal}</p>
               <p className="text-[#6B6058] text-xs">{item.bedeutung}</p>
             </div>
           </div>
         ))}
-        <p className="text-xs text-[#A09888] italic">Vollständiger Artikel folgt.</p>
+        <p className="text-xs text-[#9A8E84] italic">Vollständiger Artikel folgt.</p>
       </div>
     ),
   },
@@ -589,7 +589,7 @@ const MODAL_CONTENT: Record<string, { title: string; body: React.ReactNode }> = 
     title: 'Conscious Dating — was es wirklich bedeutet',
     body: (
       <div className="space-y-4">
-        <p className="font-heading text-xl italic text-[#1A1410]">&ldquo;Bewusstes Dating ist keine Perfektion. Es ist Präsenz.&rdquo;</p>
+        <p className="font-heading text-xl italic text-[#232323]">&ldquo;Bewusstes Dating ist keine Perfektion. Es ist Präsenz.&rdquo;</p>
         <p className="text-[#6B6058] text-sm leading-relaxed">
           Was bewusstes Dating ist — und was es nicht ist.
         </p>
@@ -597,8 +597,8 @@ const MODAL_CONTENT: Record<string, { title: string; body: React.ReactNode }> = 
           { titel: 'Was es ist', punkte: ['Sich selbst kennen lernen während man andere kennenlernt.', 'Ehrlichkeit — mit sich und anderen.', 'Präsenz statt Performance.', 'Langsam genug um wirklich zu spüren.'] },
           { titel: 'Was es nicht ist', punkte: ['Perfekt sein oder perfekte Partner finden.', 'Jede Begegnung analysieren.', 'Keine negativen Gefühle haben.', 'Immer "entwickelt" wirken.'] },
         ].map((item) => (
-          <div key={item.titel} className="p-4 bg-[#F5F0E8] rounded-2xl">
-            <p className="font-body font-medium text-[#1A1410] text-sm mb-2">{item.titel}</p>
+          <div key={item.titel} className="p-4 bg-[#EDE5DC] rounded-2xl">
+            <p className="font-body font-medium text-[#232323] text-sm mb-2">{item.titel}</p>
             <ul className="space-y-1">
               {item.punkte.map((p) => (
                 <li key={p} className="text-[#6B6058] text-xs flex gap-2">
@@ -615,7 +615,7 @@ const MODAL_CONTENT: Record<string, { title: string; body: React.ReactNode }> = 
     title: 'Dein Sternzeichen & Beziehungen',
     body: (
       <div className="space-y-4">
-        <p className="font-heading text-xl italic text-[#1A1410]">&ldquo;Was die Sterne zeigen — und was du daraus machst.&rdquo;</p>
+        <p className="font-heading text-xl italic text-[#232323]">&ldquo;Was die Sterne zeigen — und was du daraus machst.&rdquo;</p>
         <p className="text-[#6B6058] text-sm leading-relaxed">
           Sternzeichen und Aszendent können interessante Muster beschreiben. Hier: ein nüchterner Blick auf das was dran ist — ohne Mystik, mit echtem Erkenntnisgehalt.
         </p>
@@ -625,13 +625,13 @@ const MODAL_CONTENT: Record<string, { title: string; body: React.ReactNode }> = 
           { sign: 'Luftzeichen', signs: 'Zwillinge · Waage · Wassermann', text: 'Kommunikativ, neugierig, manchmal distanziert. In Beziehungen: intellektuelle Verbindung ist genauso wichtig wie emotionale.' },
           { sign: 'Wasserzeichen', signs: 'Krebs · Skorpion · Fische', text: 'Tief fühlend, intuitiv, intensiv. In Beziehungen: sie suchen echte Tiefe — und brauchen emotionale Sicherheit.' },
         ].map((b) => (
-          <div key={b.sign} className="p-4 bg-[#F5F0E8] rounded-2xl">
-            <p className="font-body font-medium text-[#1A1410] text-sm mb-0.5">{b.sign}</p>
-            <p className="text-[#A09888] text-[11px] mb-1.5 uppercase tracking-wide">{b.signs}</p>
+          <div key={b.sign} className="p-4 bg-[#EDE5DC] rounded-2xl">
+            <p className="font-body font-medium text-[#232323] text-sm mb-0.5">{b.sign}</p>
+            <p className="text-[#9A8E84] text-[11px] mb-1.5 uppercase tracking-wide">{b.signs}</p>
             <p className="text-[#6B6058] text-xs leading-relaxed">{b.text}</p>
           </div>
         ))}
-        <p className="text-xs text-[#A09888] italic">Vollständiger Artikel folgt.</p>
+        <p className="text-xs text-[#9A8E84] italic">Vollständiger Artikel folgt.</p>
       </div>
     ),
   },
@@ -643,21 +643,21 @@ const MODAL_CONTENT: Record<string, { title: string; body: React.ReactNode }> = 
           Kurze Inhalte von Community-Coaches — Holistic Tantra und anderen Partnern.
           Erscheinen mit Coach-Name und Community-Badge.
         </p>
-        <div className="p-5 bg-[#F5F0E8] rounded-2xl">
+        <div className="p-5 bg-[#EDE5DC] rounded-2xl">
           <div className="flex items-center gap-3 mb-3">
             <div className="w-10 h-10 rounded-full bg-[#7B4FA6] flex items-center justify-center">
               <Star className="w-5 h-5 text-white" />
             </div>
             <div>
-              <p className="font-body font-medium text-[#1A1410] text-sm">Anna & Yves</p>
-              <p className="text-[#A09888] text-xs">Holistic Tantra</p>
+              <p className="font-body font-medium text-[#232323] text-sm">Anna & Yves</p>
+              <p className="text-[#9A8E84] text-xs">Holistic Tantra</p>
             </div>
           </div>
           <p className="text-[#6B6058] text-sm leading-relaxed italic">
             &ldquo;Erste Gastbeiträge erscheinen mit dem nächsten Update.&rdquo;
           </p>
         </div>
-        <p className="text-xs text-[#A09888] italic">Coach-Beiträge folgen in Phase 2.</p>
+        <p className="text-xs text-[#9A8E84] italic">Coach-Beiträge folgen in Phase 2.</p>
       </div>
     ),
   },
@@ -760,10 +760,10 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
   }
 
   function tagColor(access: ContentItem['access']) {
-    if (access === 'free') return 'bg-[rgba(45,122,95,0.12)] text-[#2D7A5F]'
-    if (access === 'membership') return 'bg-[rgba(122,62,30,0.12)] text-[#4A2010]'
+    if (access === 'free') return 'bg-[rgba(122,158,138,0.12)] text-[#7A9E8A]'
+    if (access === 'membership') return 'bg-[rgba(47,74,60,0.12)] text-[#1E3028]'
     if (access === 'premium') return 'bg-[rgba(123,79,166,0.12)] text-[#5B3A8A]'
-    return 'bg-[rgba(122,62,30,0.07)] text-[#6B6058]'
+    return 'bg-[rgba(47,74,60,0.07)] text-[#6B6058]'
   }
 
   const activeSection = CONTENT_SECTIONS.find((s) => s.id === activeTab)
@@ -800,11 +800,11 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
   // ── Writing view ──
   if (writingMode) {
     return (
-      <div className="max-w-2xl mx-auto min-h-screen bg-[#FDF5E8] flex flex-col">
+      <div className="max-w-2xl mx-auto min-h-screen bg-[#F2EBE2] flex flex-col">
         <div className="flex items-center gap-3 px-4 pt-5 pb-4">
           <button
             onClick={() => { setWritingMode(false); setDraft('') }}
-            className="w-9 h-9 rounded-full bg-white border border-[rgba(30,20,10,0.08)] flex items-center justify-center text-[#6B6058]"
+            className="w-9 h-9 rounded-full bg-white border border-[rgba(47,74,60,0.08)] flex items-center justify-center text-[#6B6058]"
           >
             <ChevronLeft className="w-4 h-4" />
           </button>
@@ -812,7 +812,7 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
         </div>
         {draftPrompt && (
           <div className="mx-4 mb-5 rounded-2xl p-5" style={{ background: 'var(--bg-indigo)' }}>
-            <p className="font-heading text-lg italic text-[#FDF5E8]/80 leading-snug">
+            <p className="font-heading text-lg italic text-[#F2EBE2]/80 leading-snug">
               &ldquo;{draftPrompt}&rdquo;
             </p>
           </div>
@@ -823,16 +823,16 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
             value={draft}
             onChange={(e) => setDraft(e.target.value)}
             placeholder="Schreib, was dir gerade in den Sinn kommt…"
-            className="w-full h-64 bg-white rounded-2xl p-5 text-sm font-body text-[#1A1410] placeholder:text-[#A09888] leading-relaxed resize-none focus:outline-none focus:ring-2 focus:ring-[#7A3E1E]/20"
-            style={{ boxShadow: '0 2px 16px rgba(26,20,16,0.07)' }}
+            className="w-full h-64 bg-white rounded-2xl p-5 text-sm font-body text-[#232323] placeholder:text-[#9A8E84] leading-relaxed resize-none focus:outline-none focus:ring-2 focus:ring-[#2F4A3C]/20"
+            style={{ boxShadow: '0 2px 16px rgba(35,35,35,0.07)' }}
           />
-          <p className="text-right text-xs text-[#A09888] mt-2 font-body">{draft.length} Zeichen</p>
+          <p className="text-right text-xs text-[#9A8E84] mt-2 font-body">{draft.length} Zeichen</p>
         </div>
         <div className="px-4 pb-10 pt-4">
           <button
             onClick={saveEntry}
             disabled={!draft.trim() || saving}
-            className="w-full py-4 rounded-full bg-[#7A3E1E] text-[#FDF5E8] font-body text-[14px] tracking-wide flex items-center justify-center gap-2 disabled:opacity-40 transition-opacity"
+            className="w-full py-4 rounded-full bg-[#2F4A3C] text-[#F2EBE2] font-body text-[14px] tracking-wide flex items-center justify-center gap-2 disabled:opacity-40 transition-opacity"
           >
             {saving ? <span className="opacity-60">Speichern…</span> : <><Check className="w-4 h-4" />Eintrag speichern</>}
           </button>
@@ -844,11 +844,11 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
   // ── Entry detail view ──
   if (openEntry) {
     return (
-      <div className="max-w-2xl mx-auto min-h-screen bg-[#FDF5E8] flex flex-col">
+      <div className="max-w-2xl mx-auto min-h-screen bg-[#F2EBE2] flex flex-col">
         <div className="flex items-center gap-3 px-4 pt-5 pb-4">
           <button
             onClick={() => setOpenEntry(null)}
-            className="w-9 h-9 rounded-full bg-white border border-[rgba(30,20,10,0.08)] flex items-center justify-center text-[#6B6058]"
+            className="w-9 h-9 rounded-full bg-white border border-[rgba(47,74,60,0.08)] flex items-center justify-center text-[#6B6058]"
           >
             <ChevronLeft className="w-4 h-4" />
           </button>
@@ -856,14 +856,14 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
         </div>
         {openEntry.prompt && (
           <div className="mx-4 mb-5 rounded-2xl p-5" style={{ background: 'var(--bg-indigo)' }}>
-            <p className="font-heading text-lg italic text-[#FDF5E8]/80 leading-snug">
+            <p className="font-heading text-lg italic text-[#F2EBE2]/80 leading-snug">
               &ldquo;{openEntry.prompt}&rdquo;
             </p>
           </div>
         )}
         <div className="flex-1 px-4">
-          <div className="bg-white rounded-2xl p-5" style={{ boxShadow: '0 2px 16px rgba(26,20,16,0.07)' }}>
-            <p className="font-body text-sm text-[#1A1410] leading-relaxed whitespace-pre-wrap">{openEntry.content}</p>
+          <div className="bg-white rounded-2xl p-5" style={{ boxShadow: '0 2px 16px rgba(35,35,35,0.07)' }}>
+            <p className="font-body text-sm text-[#232323] leading-relaxed whitespace-pre-wrap">{openEntry.content}</p>
           </div>
         </div>
       </div>
@@ -874,15 +874,15 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
     <div className="max-w-2xl mx-auto pb-32">
       {/* Header */}
       <div className="sticky top-0 z-20 bg-transparent px-4 pt-5 pb-3 mb-4">
-        <h1 className="font-heading text-[52px] font-light text-[#1A1410] tracking-[-0.5px] leading-none mb-3">Inhalte</h1>
+        <h1 className="font-heading text-[52px] font-light text-[#232323] tracking-[-0.5px] leading-none mb-3">Inhalte</h1>
 
         {/* Main tab toggle: Journal | Für dich */}
-        <div className="flex gap-1 bg-[rgba(122,62,30,0.06)] rounded-full p-1 w-full">
+        <div className="flex gap-1 bg-[rgba(47,74,60,0.06)] rounded-full p-1 w-full">
           <button
             onClick={() => setMainTab('journal')}
             className={cn(
               'flex-1 px-4 py-2 rounded-full text-sm font-body transition-all',
-              mainTab === 'journal' ? 'bg-[#7A3E1E] text-[#FDF5E8]' : 'text-[#6B6058]'
+              mainTab === 'journal' ? 'bg-[#2F4A3C] text-[#F2EBE2]' : 'text-[#6B6058]'
             )}
           >
             Journal
@@ -891,7 +891,7 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
             onClick={() => setMainTab('content')}
             className={cn(
               'flex-1 px-4 py-2 rounded-full text-sm font-body transition-all',
-              mainTab === 'content' ? 'bg-[#7A3E1E] text-[#FDF5E8]' : 'text-[#6B6058]'
+              mainTab === 'content' ? 'bg-[#2F4A3C] text-[#F2EBE2]' : 'text-[#6B6058]'
             )}
           >
             Für dich
@@ -910,11 +910,11 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
               setPatternFeedback(null)
             }
             return (
-              <div className="rounded-2xl p-5 mb-6 bg-white" style={{ boxShadow: '0 4px 24px rgba(26,20,16,0.10)' }}>
+              <div className="rounded-2xl p-5 mb-6 bg-white" style={{ boxShadow: '0 4px 24px rgba(35,35,35,0.10)' }}>
                 <div className="flex items-start gap-4 mb-4">
                   <span className="text-3xl leading-none mt-0.5">{cfg.icon}</span>
                   <div className="flex-1">
-                    <p className="text-[#1A1410] leading-snug mb-2" style={{ fontFamily: 'var(--font-heading)', fontWeight: 300, fontSize: '20px' }}>
+                    <p className="text-[#232323] leading-snug mb-2" style={{ fontFamily: 'var(--font-heading)', fontWeight: 300, fontSize: '20px' }}>
                       {cfg.title}
                     </p>
                     <p className="text-[#6B6058] text-sm leading-relaxed" style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}>
@@ -924,11 +924,11 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
                 </div>
                 <div className="flex gap-2 flex-wrap">
                   <button onClick={() => { dismiss(); startWriting(cfg.journalPrompt) }}
-                    className="flex-1 py-2.5 rounded-full bg-[#7A3E1E] text-[#FDF5E8] font-body text-[13px] transition-opacity hover:opacity-90">
+                    className="flex-1 py-2.5 rounded-full bg-[#2F4A3C] text-[#F2EBE2] font-body text-[13px] transition-opacity hover:opacity-90">
                     {cfg.positive ? 'Das freut mich ✦' : 'Im Journal erforschen →'}
                   </button>
                   <button onClick={dismiss}
-                    className="px-4 py-2.5 rounded-full border border-[rgba(122,62,30,0.20)] text-[#6B6058] font-body text-[13px] transition-colors hover:border-[#7A3E1E]/40">
+                    className="px-4 py-2.5 rounded-full border border-[rgba(47,74,60,0.20)] text-[#6B6058] font-body text-[13px] transition-colors hover:border-[#2F4A3C]/40">
                     Danke, ich weiß
                   </button>
                 </div>
@@ -938,12 +938,12 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
 
           {/* Daily prompt card */}
           <div className="rounded-2xl p-6 mb-6 relative overflow-hidden" style={{ background: 'var(--bg-indigo)' }}>
-            <p className="font-body text-[11px] uppercase tracking-[0.14em] text-[#FDF5E8]/45 mb-3">Tagesimpuls</p>
-            <p className="font-heading text-[22px] italic text-[#FDF5E8] leading-snug mb-5">
+            <p className="font-body text-[11px] uppercase tracking-[0.14em] text-[#F2EBE2]/45 mb-3">Tagesimpuls</p>
+            <p className="font-heading text-[22px] italic text-[#F2EBE2] leading-snug mb-5">
               &ldquo;{dailyPrompt}&rdquo;
             </p>
             <button onClick={() => startWriting(dailyPrompt)}
-              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-[#FDF5E8] text-[#7A3E1E] font-body text-[13px] transition-opacity hover:opacity-90">
+              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-[#F2EBE2] text-[#2F4A3C] font-body text-[13px] transition-opacity hover:opacity-90">
               Jetzt schreiben →
             </button>
           </div>
@@ -951,8 +951,8 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
           {/* Entry list */}
           {journalEntries.length === 0 ? (
             <div className="text-center py-16">
-              <BookOpen className="w-10 h-10 text-[#A09888] mx-auto mb-3" />
-              <p className="text-[#1A1410] font-heading text-xl mb-1">Dein Journal wartet</p>
+              <BookOpen className="w-10 h-10 text-[#9A8E84] mx-auto mb-3" />
+              <p className="text-[#232323] font-heading text-xl mb-1">Dein Journal wartet</p>
               <p className="text-[#6B6058] text-sm font-body">Schreib deinen ersten Eintrag.</p>
             </div>
           ) : (
@@ -960,14 +960,14 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
               {journalEntries.map((entry) => (
                 <button key={entry.id} onClick={() => setOpenEntry(entry)}
                   className="w-full text-left bg-white rounded-2xl px-5 py-4 transition-all active:scale-[0.98]"
-                  style={{ boxShadow: '0 2px 12px rgba(26,20,16,0.07)' }}>
+                  style={{ boxShadow: '0 2px 12px rgba(35,35,35,0.07)' }}>
                   <p className="text-[#6B6058] font-body text-[11px] uppercase tracking-[0.12em] mb-1.5">
                     {formatDate(entry.created_at)}
                   </p>
                   {entry.prompt && (
-                    <p className="font-heading text-base italic text-[#A09888] mb-1 leading-snug line-clamp-1">{entry.prompt}</p>
+                    <p className="font-heading text-base italic text-[#9A8E84] mb-1 leading-snug line-clamp-1">{entry.prompt}</p>
                   )}
-                  <p className="font-heading text-[18px] text-[#1A1410] leading-snug line-clamp-2">{entry.content}</p>
+                  <p className="font-heading text-[18px] text-[#232323] leading-snug line-clamp-2">{entry.content}</p>
                 </button>
               ))}
             </div>
@@ -975,9 +975,9 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
 
           {/* FAB */}
           <button onClick={() => startWriting('')}
-            className="fixed bottom-24 right-5 md:bottom-8 md:right-8 w-14 h-14 rounded-full bg-[#7A3E1E] flex items-center justify-center z-30 transition-transform active:scale-95"
-            style={{ boxShadow: '0 4px 20px rgba(122,62,30,0.35)' }}>
-            <Plus className="w-6 h-6 text-[#FDF5E8]" />
+            className="fixed bottom-24 right-5 md:bottom-8 md:right-8 w-14 h-14 rounded-full bg-[#2F4A3C] flex items-center justify-center z-30 transition-transform active:scale-95"
+            style={{ boxShadow: '0 4px 20px rgba(47,74,60,0.35)' }}>
+            <Plus className="w-6 h-6 text-[#F2EBE2]" />
           </button>
         </div>
       )}
@@ -995,8 +995,8 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
                 className={cn(
                   'flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-body whitespace-nowrap transition-all',
                   activeTab === s.id
-                    ? 'bg-[#7A3E1E] text-[#FDF5E8]'
-                    : 'border border-[rgba(122,62,30,0.15)] text-[#6B6058] hover:border-[#7A3E1E]/40'
+                    ? 'bg-[#2F4A3C] text-[#F2EBE2]'
+                    : 'border border-[rgba(47,74,60,0.15)] text-[#6B6058] hover:border-[#2F4A3C]/40'
                 )}
               >
                 {s.icon}
@@ -1013,19 +1013,19 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
               {activeTab === 'begleitung' && (
                 <button
                   onClick={() => handleOpen(activeSection.items.find(i => i.id === 'gedanke-des-tages')!)}
-                  className="w-full text-left rounded-2xl overflow-hidden active:scale-[0.98] transition-transform duration-150"
+                  className="w-full text-left rounded-2xl overflow-hidden active:scale-[0.98] transition-transform duration-300"
                   style={{ background: 'var(--bg-indigo)' }}
                 >
                   <div className="p-5">
                     <div className="flex items-center gap-2 mb-3">
-                      <span className="text-[#BF9B30] text-base">✦</span>
-                      <p className="font-body text-[11px] uppercase tracking-[0.14em] text-[#FDF5E8]/50">Gedanke des Tages</p>
-                      <span className="ml-auto text-[10px] font-body px-2 py-0.5 rounded-full bg-[rgba(45,122,95,0.25)] text-[#7EB89A]">Kostenlos</span>
+                      <span className="text-[#BFA76A] text-base">✦</span>
+                      <p className="font-body text-[11px] uppercase tracking-[0.14em] text-[#F2EBE2]/50">Gedanke des Tages</p>
+                      <span className="ml-auto text-[10px] font-body px-2 py-0.5 rounded-full bg-[rgba(122,158,138,0.25)] text-[#9AB8A8]">Kostenlos</span>
                     </div>
-                    <p className="font-heading text-[22px] italic text-[#FDF5E8] leading-snug mb-4">
+                    <p className="font-heading text-[22px] italic text-[#F2EBE2] leading-snug mb-4">
                       &ldquo;{dailyGedanke}&rdquo;
                     </p>
-                    <p className="text-[#FDF5E8]/40 font-body text-xs">Täglich wechselnd</p>
+                    <p className="text-[#F2EBE2]/40 font-body text-xs">Täglich wechselnd</p>
                   </div>
                 </button>
               )}
@@ -1040,16 +1040,16 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
                       key={item.id}
                       onClick={() => handleOpen(item)}
                       className={cn(
-                        'bg-white rounded-2xl p-5 w-full text-left flex gap-4 items-start transition-all active:scale-[0.98] duration-150',
+                        'bg-white rounded-2xl p-5 w-full text-left flex gap-4 items-start transition-all active:scale-[0.98] duration-300',
                         !accessible && 'opacity-60'
                       )}
-                      style={{ boxShadow: '0 2px 12px rgba(26,20,16,0.07)' }}
+                      style={{ boxShadow: '0 2px 12px rgba(35,35,35,0.07)' }}
                     >
                       {/* Icon */}
                       <div
                         className="w-11 h-11 rounded-full flex items-center justify-center flex-shrink-0"
                         style={{
-                          backgroundColor: accessible ? (ICON_BG[item.id] ?? '#7A3E1E') : 'rgba(122,62,30,0.10)',
+                          backgroundColor: accessible ? (ICON_BG[item.id] ?? '#2F4A3C') : 'rgba(47,74,60,0.10)',
                           color: '#FFFFFF',
                         }}
                       >
@@ -1059,10 +1059,10 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
                       {/* Text */}
                       <div className="flex-1 min-w-0">
                         <div className="flex items-start gap-2 flex-wrap mb-0.5">
-                          <h3 className="font-heading text-[20px] text-[#1A1410] leading-tight">{item.title}</h3>
+                          <h3 className="font-heading text-[20px] text-[#232323] leading-tight">{item.title}</h3>
                         </div>
                         <div className="flex items-center gap-2 mb-2 flex-wrap">
-                          <span className="text-[10px] font-body text-[#A09888] uppercase tracking-wide">{item.format}</span>
+                          <span className="text-[10px] font-body text-[#9A8E84] uppercase tracking-wide">{item.format}</span>
                           {item.tag && (
                             <span className={cn('text-[10px] px-2 py-0.5 rounded-full font-body font-medium', tagColor(item.access))}>
                               {item.tag}
@@ -1075,7 +1075,7 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
                       {/* Action icon */}
                       <div className="flex-shrink-0 mt-1">
                         {accessible
-                          ? <ChevronRight className="w-4 h-4 text-[#A09888]" />
+                          ? <ChevronRight className="w-4 h-4 text-[#9A8E84]" />
                           : <Lock className="w-4 h-4 text-[#C0B0A0]" />
                         }
                       </div>
@@ -1089,11 +1089,11 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
           {openModal && MODAL_CONTENT[openModal] && (
             <div className="fixed inset-0 bg-black/50 z-50 flex items-end sm:items-center justify-center p-4">
               <div className="bg-white rounded-3xl w-full max-w-lg max-h-[85vh] overflow-y-auto">
-                <div className="sticky top-0 bg-white rounded-t-3xl px-6 pt-6 pb-4 border-b border-[rgba(30,20,10,0.08)] flex items-center justify-between">
-                  <h2 className="font-heading text-2xl text-[#1A1410]">{MODAL_CONTENT[openModal].title}</h2>
+                <div className="sticky top-0 bg-white rounded-t-3xl px-6 pt-6 pb-4 border-b border-[rgba(47,74,60,0.08)] flex items-center justify-between">
+                  <h2 className="font-heading text-2xl text-[#232323]">{MODAL_CONTENT[openModal].title}</h2>
                   <button
                     onClick={() => setOpenModal(null)}
-                    className="w-8 h-8 rounded-full bg-[#EDE8E0] flex items-center justify-center text-[#6B6058] hover:text-[#1A1410]"
+                    className="w-8 h-8 rounded-full bg-[#D8D0C7] flex items-center justify-center text-[#6B6058] hover:text-[#232323]"
                   >
                     ✕
                   </button>

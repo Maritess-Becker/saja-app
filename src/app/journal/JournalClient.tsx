@@ -112,7 +112,7 @@ export function JournalClient({ initialEntries, userId }: Props) {
         <div className="flex items-center gap-3 mb-6">
           <button
             onClick={() => { setWriting(false); setDraft(''); setDraftPrompt(null) }}
-            className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[rgba(122,62,30,0.07)] transition-colors"
+            className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[rgba(47,74,60,0.07)] transition-colors"
           >
             <ChevronLeft className="w-5 h-5 text-[#6B6058]" />
           </button>
@@ -120,9 +120,9 @@ export function JournalClient({ initialEntries, userId }: Props) {
         </div>
 
         {draftPrompt && (
-          <div className="mb-5 px-4 py-4 rounded-2xl bg-white border border-[rgba(122,62,30,0.10)]">
+          <div className="mb-5 px-4 py-4 rounded-2xl bg-white border border-[rgba(47,74,60,0.10)]">
             <p className="text-[10px] text-[#6B6058] uppercase tracking-widest mb-1.5 font-body">Impuls</p>
-            <p className="font-heading text-lg italic text-[#1A1410]">&ldquo;{draftPrompt}&rdquo;</p>
+            <p className="font-heading text-lg italic text-[#232323]">&ldquo;{draftPrompt}&rdquo;</p>
           </div>
         )}
 
@@ -131,7 +131,7 @@ export function JournalClient({ initialEntries, userId }: Props) {
           value={draft}
           onChange={(e) => setDraft(e.target.value)}
           placeholder={draftPrompt ? 'Schreib was auch immer kommt…' : 'Ein Gedanke, eine Beobachtung, ein Gefühl…'}
-          className="w-full min-h-[240px] px-4 py-4 rounded-2xl border border-[rgba(122,62,30,0.12)] bg-white text-[#1A1410] text-sm font-body font-light leading-relaxed resize-none focus:outline-none focus:border-[rgba(122,62,30,0.35)] mb-4"
+          className="w-full min-h-[240px] px-4 py-4 rounded-2xl border border-[rgba(47,74,60,0.12)] bg-white text-[#232323] text-sm font-body font-light leading-relaxed resize-none focus:outline-none focus:border-[rgba(47,74,60,0.35)] mb-4"
         />
 
         <button
@@ -153,7 +153,7 @@ export function JournalClient({ initialEntries, userId }: Props) {
         <div className="flex items-center gap-3 mb-6">
           <button
             onClick={() => setOpenEntry(null)}
-            className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[rgba(122,62,30,0.07)]"
+            className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[rgba(47,74,60,0.07)]"
           >
             <ChevronLeft className="w-5 h-5 text-[#6B6058]" />
           </button>
@@ -162,13 +162,13 @@ export function JournalClient({ initialEntries, userId }: Props) {
           </span>
         </div>
         {openEntry.prompt && (
-          <div className="mb-5 px-4 py-4 rounded-2xl bg-white border border-[rgba(122,62,30,0.10)]">
+          <div className="mb-5 px-4 py-4 rounded-2xl bg-white border border-[rgba(47,74,60,0.10)]">
             <p className="text-[10px] text-[#6B6058] uppercase tracking-widest mb-1 font-body">Impuls</p>
-            <p className="font-heading text-lg italic text-[#1A1410]">&ldquo;{openEntry.prompt}&rdquo;</p>
+            <p className="font-heading text-lg italic text-[#232323]">&ldquo;{openEntry.prompt}&rdquo;</p>
           </div>
         )}
-        <div className="bg-white rounded-2xl border border-[rgba(122,62,30,0.10)] px-5 py-5">
-          <p className="text-[#1A1410] text-sm font-body font-light leading-relaxed whitespace-pre-wrap">
+        <div className="bg-white rounded-2xl border border-[rgba(47,74,60,0.10)] px-5 py-5">
+          <p className="text-[#232323] text-sm font-body font-light leading-relaxed whitespace-pre-wrap">
             {openEntry.content}
           </p>
         </div>
@@ -186,15 +186,15 @@ export function JournalClient({ initialEntries, userId }: Props) {
           <Link href="/profile" className="w-8 h-8 flex items-center justify-center">
             <ChevronLeft className="w-5 h-5 text-[#6B6058]" />
           </Link>
-          <h1 className="font-heading text-[42px] font-light text-[#1A1410] leading-none tracking-tight">Journal</h1>
+          <h1 className="font-heading text-[42px] font-light text-[#232323] leading-none tracking-tight">Journal</h1>
         </div>
       </div>
 
       {/* Daily Prompt Card */}
       {!dailyDone && (
-        <div className="bg-white rounded-2xl border border-[rgba(122,62,30,0.10)] p-5 mb-5 shadow-sm">
+        <div className="bg-white rounded-2xl border border-[rgba(47,74,60,0.10)] p-5 mb-5 shadow-sm">
           <p className="text-[10px] text-[#6B6058] uppercase tracking-widest mb-3 font-body">Frage des Tages</p>
-          <p className="font-heading text-xl italic text-[#1A1410] leading-snug mb-4">
+          <p className="font-heading text-xl italic text-[#232323] leading-snug mb-4">
             &ldquo;{dailyPrompt}&rdquo;
           </p>
           <button onClick={startDaily} className="btn-primary-dark text-sm py-2.5 px-5">
@@ -207,7 +207,7 @@ export function JournalClient({ initialEntries, userId }: Props) {
       <div className="flex justify-end mb-4">
         <button
           onClick={startFree}
-          className="flex items-center gap-2 text-sm text-[#6B6058] hover:text-[#1A1410] font-body transition-colors"
+          className="flex items-center gap-2 text-sm text-[#6B6058] hover:text-[#232323] font-body transition-colors"
         >
           <Plus className="w-4 h-4" /> Freier Eintrag
         </button>
@@ -225,7 +225,7 @@ export function JournalClient({ initialEntries, userId }: Props) {
             <button
               key={entry.id}
               onClick={() => setOpenEntry(entry)}
-              className="w-full text-left bg-white rounded-2xl border border-[rgba(122,62,30,0.08)] px-5 py-4 hover:border-[rgba(122,62,30,0.2)] transition-colors"
+              className="w-full text-left bg-white rounded-2xl border border-[rgba(47,74,60,0.08)] px-5 py-4 hover:border-[rgba(47,74,60,0.2)] transition-colors"
             >
               <div className="flex items-start justify-between gap-3">
                 <div className="flex-1 min-w-0">
@@ -234,7 +234,7 @@ export function JournalClient({ initialEntries, userId }: Props) {
                       {entry.prompt}
                     </p>
                   )}
-                  <p className="text-sm text-[#1A1410] font-body font-light line-clamp-2 leading-relaxed">
+                  <p className="text-sm text-[#232323] font-body font-light line-clamp-2 leading-relaxed">
                     {entry.content}
                   </p>
                 </div>
@@ -250,9 +250,9 @@ export function JournalClient({ initialEntries, userId }: Props) {
       {/* FAB */}
       <button
         onClick={startFree}
-        className="fixed bottom-24 right-5 md:bottom-6 w-12 h-12 bg-[#7A3E1E] rounded-full flex items-center justify-center shadow-lg hover:bg-[#4A2010] transition-colors active:scale-95 z-30"
+        className="fixed bottom-24 right-5 md:bottom-6 w-12 h-12 bg-[#2F4A3C] rounded-full flex items-center justify-center shadow-lg hover:bg-[#1E3028] transition-colors active:scale-95 z-30"
       >
-        <Plus className="w-6 h-6 text-[#FDF5E8]" />
+        <Plus className="w-6 h-6 text-[#F2EBE2]" />
       </button>
     </div>
   )

@@ -280,18 +280,18 @@ export function BegegnungClient({
   // ── Free tier lock ──────────────────────────────────────────────────────
   if (tier === 'free') {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen px-6 text-center bg-[#7A3E1E]">
-        <div className="w-20 h-20 bg-[rgba(253,245,232,0.12)] rounded-full flex items-center justify-center mx-auto mb-6">
-          <Lock className="w-9 h-9 text-[#FDF5E8]/50" />
+      <div className="flex flex-col items-center justify-center min-h-screen px-6 text-center bg-[#2F4A3C]">
+        <div className="w-20 h-20 bg-[rgba(242,235,226,0.12)] rounded-full flex items-center justify-center mx-auto mb-6">
+          <Lock className="w-9 h-9 text-[#F2EBE2]/50" />
         </div>
-        <h2 className="font-heading text-4xl text-[#FDF5E8] mb-3">Begegnung ist gesperrt</h2>
-        <p className="text-[#FDF5E8]/60 leading-relaxed mb-8 max-w-sm">
+        <h2 className="font-heading text-4xl text-[#F2EBE2] mb-3">Begegnung ist gesperrt</h2>
+        <p className="text-[#F2EBE2]/60 leading-relaxed mb-8 max-w-sm">
           Mit der Mitgliedschaft (29 €/Monat) kannst du Begegnungen starten und mit Matches chatten.
         </p>
-        <Link href="/pricing" className="bg-[#FDF5E8] text-[#1A1410] px-8 py-3.5 rounded-full font-body font-semibold hover:bg-white transition-colors">
+        <Link href="/pricing" className="bg-[#F2EBE2] text-[#232323] px-8 py-3.5 rounded-full font-body font-semibold hover:bg-white transition-colors">
           Mitgliedschaft ansehen
         </Link>
-        <p className="text-xs text-[#FDF5E8]/30 mt-4">14 Tage Geld-zurück-Garantie</p>
+        <p className="text-xs text-[#F2EBE2]/30 mt-4">14 Tage Geld-zurück-Garantie</p>
       </div>
     )
   }
@@ -300,10 +300,10 @@ export function BegegnungClient({
   if (!activeMatch || !activeConnection) {
     return (
       <div className="flex flex-col items-center justify-center flex-1 px-6 text-center">
-        <div className="w-20 h-20 bg-[#FDF5E8] rounded-full flex items-center justify-center mx-auto mb-6">
-          <Sparkles className="w-10 h-10 text-[#1A1410]" />
+        <div className="w-20 h-20 bg-[#F2EBE2] rounded-full flex items-center justify-center mx-auto mb-6">
+          <Sparkles className="w-10 h-10 text-[#232323]" />
         </div>
-        <h2 className="font-heading text-4xl text-[#1A1410] mb-4">
+        <h2 className="font-heading text-4xl text-[#232323] mb-4">
           Noch keine aktive Begegnung
         </h2>
         <p className="text-[#6B6058] max-w-sm leading-relaxed mb-8">
@@ -320,13 +320,13 @@ export function BegegnungClient({
           </Link>
         </div>
         <div className="mt-12 max-w-sm">
-          <div className="card bg-[#FDF5E8] border-0">
-            <p className="text-xs text-[#1A1410] font-medium uppercase tracking-wider mb-2">
+          <div className="card bg-[#F2EBE2] border-0">
+            <p className="text-xs text-[#232323] font-medium uppercase tracking-wider mb-2">
               One Connection Rule
             </p>
             <p className="text-[#6B6058] text-sm leading-relaxed">
               Bei Saja kannst du immer nur mit{' '}
-              <strong className="text-[#1A1410]">einer Person gleichzeitig</strong>{' '}
+              <strong className="text-[#232323]">einer Person gleichzeitig</strong>{' '}
               in einer Begegnung sein — für echte Tiefe statt endloses Chatten.
             </p>
           </div>
@@ -340,33 +340,33 @@ export function BegegnungClient({
     <div ref={containerRef} className="flex flex-col w-full max-w-2xl mx-auto overflow-hidden" style={{ height: '100dvh' }}>
 
       {/* Header */}
-      <div className="flex-shrink-0 flex items-center gap-4 p-4 bg-[#7A3E1E]">
-        <Link href={`/profile/${otherProfile?.user_id}`} className="w-12 h-12 rounded-xl bg-[rgba(253,245,232,0.15)] flex items-center justify-center overflow-hidden flex-shrink-0 hover:opacity-90 transition-opacity">
+      <div className="flex-shrink-0 flex items-center gap-4 p-4 bg-[#2F4A3C]">
+        <Link href={`/profile/${otherProfile?.user_id}`} className="w-12 h-12 rounded-xl bg-[rgba(242,235,226,0.15)] flex items-center justify-center overflow-hidden flex-shrink-0 hover:opacity-90 transition-opacity">
           {photoUrl(otherProfile?.photos?.[0]) ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img src={photoUrl(otherProfile?.photos?.[0])} alt="" className="w-full h-full object-cover" />
           ) : (
-            <span className="font-heading text-xl text-[#FDF5E8]">
+            <span className="font-heading text-xl text-[#F2EBE2]">
               {otherProfile?.name?.[0]}
             </span>
           )}
         </Link>
         <Link href={`/profile/${otherProfile?.user_id}`} className="flex-1 min-w-0 hover:opacity-70 transition-opacity">
-          <h2 className="font-heading text-xl text-[#FDF5E8]">{otherProfile?.name}</h2>
+          <h2 className="font-heading text-xl text-[#F2EBE2]">{otherProfile?.name}</h2>
           {otherProfile?.location && !otherProfile.hide_location && (
-            <div className="flex items-center gap-1 text-[#FDF5E8]/50 text-xs">
+            <div className="flex items-center gap-1 text-[#F2EBE2]/50 text-xs">
               <MapPin className="w-3 h-3" />
               {otherProfile.location}
             </div>
           )}
         </Link>
-        <div className="flex items-center gap-1.5 bg-[rgba(253,245,232,0.15)] px-3 py-1.5 rounded-full">
-          <Heart className="w-3.5 h-3.5 text-[#FDF5E8] fill-[#FDF5E8]" />
-          <span className="text-xs text-[#FDF5E8] font-medium">Begegnung aktiv</span>
+        <div className="flex items-center gap-1.5 bg-[rgba(242,235,226,0.15)] px-3 py-1.5 rounded-full">
+          <Heart className="w-3.5 h-3.5 text-[#F2EBE2] fill-[#F2EBE2]" />
+          <span className="text-xs text-[#F2EBE2] font-medium">Begegnung aktiv</span>
         </div>
         <button
           onClick={() => setEndStep('confirm')}
-          className="p-2 text-[#FDF5E8]/40 hover:text-red-300 transition-colors"
+          className="p-2 text-[#F2EBE2]/40 hover:text-red-300 transition-colors"
           title="Begegnung beenden"
         >
           <X className="w-5 h-5" />
@@ -375,20 +375,20 @@ export function BegegnungClient({
 
       {/* Meine Intention */}
       {selectedIntention && (
-        <div className="flex-shrink-0 px-4 py-2 border-b border-[rgba(122,62,30,0.10)] bg-[#FDF5E8]">
+        <div className="flex-shrink-0 px-4 py-2 border-b border-[rgba(47,74,60,0.10)] bg-[#F2EBE2]">
           <p className="text-[10px] text-[#6B6058] uppercase tracking-widest">Meine Intention</p>
           <p className="text-xs text-[#6B6058] font-body font-light">{selectedIntention}</p>
         </div>
       )}
 
       {/* Frage des Tages */}
-      <div className="flex-shrink-0 px-4 py-3 bg-[#FDF5E8] border-b border-[rgba(30,20,10,0.08)]">
-        <p className="text-xs text-[#1A1410] font-medium mb-1">Frage des Tages</p>
+      <div className="flex-shrink-0 px-4 py-3 bg-[#F2EBE2] border-b border-[rgba(47,74,60,0.08)]">
+        <p className="text-xs text-[#232323] font-medium mb-1">Frage des Tages</p>
         <div className="flex items-center justify-between gap-3">
-          <p className="text-sm text-[#1A1410] italic">&ldquo;{dailyQuestion}&rdquo;</p>
+          <p className="text-sm text-[#232323] italic">&ldquo;{dailyQuestion}&rdquo;</p>
           <button
             onClick={sendDailyQuestion}
-            className="text-xs text-[#1A1410] hover:underline flex-shrink-0 font-medium"
+            className="text-xs text-[#232323] hover:underline flex-shrink-0 font-medium"
           >
             Senden
           </button>
@@ -400,10 +400,10 @@ export function BegegnungClient({
         {messages.length === 0 && (
           <div className="text-center py-16">
             <Heart className="w-12 h-12 text-[#6B6058] mx-auto mb-4" />
-            <p className="font-heading text-xl text-[#1A1410]/40">
+            <p className="font-heading text-xl text-[#232323]/40">
               Der Anfang von etwas Besonderem
             </p>
-            <p className="text-[#A09888] text-sm mt-2">
+            <p className="text-[#9A8E84] text-sm mt-2">
               Sende eine erste Nachricht oder nutze die Frage des Tages.
             </p>
           </div>
@@ -414,8 +414,8 @@ export function BegegnungClient({
           return (
             <div key={msg.id} className={cn('flex', isMe ? 'justify-end' : 'justify-start')}>
               {!isMe && (
-                <div className="w-7 h-7 rounded-full bg-[#EDE8E0] flex items-center justify-center flex-shrink-0 mr-2 mt-1">
-                  <span className="text-xs font-heading text-[#1A1410]">
+                <div className="w-7 h-7 rounded-full bg-[#D8D0C7] flex items-center justify-center flex-shrink-0 mr-2 mt-1">
+                  <span className="text-xs font-heading text-[#232323]">
                     {otherProfile?.name?.[0]}
                   </span>
                 </div>
@@ -425,11 +425,11 @@ export function BegegnungClient({
                   'max-w-[75%] px-4 py-3 rounded-2xl text-sm leading-relaxed',
                   isMe
                     ? 'bg-primary text-white rounded-br-sm'
-                    : 'bg-white border border-[rgba(30,20,10,0.08)] text-[#1A1410] rounded-bl-sm'
+                    : 'bg-white border border-[rgba(47,74,60,0.08)] text-[#232323] rounded-bl-sm'
                 )}
               >
                 {msg.content}
-                <p className={cn('text-[10px] mt-1.5', isMe ? 'text-white/50' : 'text-[#A09888]')}>
+                <p className={cn('text-[10px] mt-1.5', isMe ? 'text-white/50' : 'text-[#9A8E84]')}>
                   {formatRelativeTime(msg.created_at)}
                 </p>
               </div>
@@ -442,12 +442,12 @@ export function BegegnungClient({
       {/* Eingabe — bleibt immer unten sichtbar */}
       <form
         onSubmit={sendMessage}
-        className="flex-shrink-0 px-4 pt-3 bg-white border-t border-[rgba(122,62,30,0.12)] flex gap-3"
+        className="flex-shrink-0 px-4 pt-3 bg-white border-t border-[rgba(47,74,60,0.12)] flex gap-3"
         style={{ paddingBottom: 'calc(0.75rem + env(safe-area-inset-bottom, 0px))' }}
       >
         <input
           type="text"
-          className="flex-1 rounded-full border border-[rgba(30,20,10,0.15)] bg-white px-4 py-3 text-sm font-body font-light text-[#1A1410] placeholder:text-[#A09888] focus:outline-none focus:border-[#7A3E1E] focus:border-[1.5px]"
+          className="flex-1 rounded-full border border-[rgba(47,74,60,0.15)] bg-white px-4 py-3 text-sm font-body font-light text-[#232323] placeholder:text-[#9A8E84] focus:outline-none focus:border-[#2F4A3C] focus:border-[1.5px]"
           placeholder="Schreibe etwas…"
           value={text}
           onChange={(e) => setText(e.target.value)}
@@ -455,9 +455,9 @@ export function BegegnungClient({
         <button
           type="submit"
           disabled={sending || !text.trim()}
-          className="w-11 h-11 bg-[#7A3E1E] rounded-full flex items-center justify-center flex-shrink-0 disabled:opacity-40 hover:bg-[#4A2010] transition-colors active:scale-95"
+          className="w-11 h-11 bg-[#2F4A3C] rounded-full flex items-center justify-center flex-shrink-0 disabled:opacity-40 hover:bg-[#1E3028] transition-colors active:scale-95"
         >
-          <Send className="w-4 h-4 text-[#FDF5E8]" />
+          <Send className="w-4 h-4 text-[#F2EBE2]" />
         </button>
       </form>
 
@@ -468,23 +468,23 @@ export function BegegnungClient({
       {showGuided && (
         <div className="fixed inset-0 z-50 flex flex-col px-5 py-8 overflow-y-auto"
           style={{ background: 'var(--bg-violett)' }}>
-          <button onClick={skipGuided} className="self-end text-[#FDF5E8]/40 text-sm font-body mb-6 hover:text-[#FDF5E8]/70">
+          <button onClick={skipGuided} className="self-end text-[#F2EBE2]/40 text-sm font-body mb-6 hover:text-[#F2EBE2]/70">
             Überspringen
           </button>
 
           {guidedStep === 'question' ? (
             <>
-              <h2 className="font-heading text-[32px] text-[#FDF5E8] mb-3 leading-tight">Wie möchtest du beginnen?</h2>
-              <p className="text-[#FDF5E8]/55 font-body font-light text-sm mb-6 leading-relaxed">
+              <h2 className="font-heading text-[32px] text-[#F2EBE2] mb-3 leading-tight">Wie möchtest du beginnen?</h2>
+              <p className="text-[#F2EBE2]/55 font-body font-light text-sm mb-6 leading-relaxed">
                 Wähle eine Ebene — oder schreib einfach was sich richtig anfühlt.
               </p>
 
               {/* Level pills */}
               <div className="flex gap-2 mb-6">
                 {([
-                  { key: 'leicht' as QuestionLevel, label: 'Leicht', badge: 'bg-[rgba(253,245,232,0.12)] text-[#FDF5E8]' },
-                  { key: 'mittel' as QuestionLevel, label: 'Nachdenklich', badge: 'bg-[#7A3E1E] text-[#FDF5E8]' },
-                  { key: 'tief' as QuestionLevel, label: 'In die Tiefe', badge: 'bg-[#A05830] text-[#FDF5E8]' },
+                  { key: 'leicht' as QuestionLevel, label: 'Leicht', badge: 'bg-[rgba(242,235,226,0.12)] text-[#F2EBE2]' },
+                  { key: 'mittel' as QuestionLevel, label: 'Nachdenklich', badge: 'bg-[#2F4A3C] text-[#F2EBE2]' },
+                  { key: 'tief' as QuestionLevel, label: 'In die Tiefe', badge: 'bg-[#3D5E4E] text-[#F2EBE2]' },
                 ] as const).map((lvl) => (
                   <button
                     key={lvl.key}
@@ -495,8 +495,8 @@ export function BegegnungClient({
                     }}
                     className={`px-4 py-2 rounded-full text-sm font-body transition-all border ${
                       guidedLevel === lvl.key
-                        ? 'border-[#FDF5E8] bg-[rgba(253,245,232,0.15)] text-[#FDF5E8]'
-                        : 'border-[rgba(253,245,232,0.2)] text-[#FDF5E8]/55'
+                        ? 'border-[#F2EBE2] bg-[rgba(242,235,226,0.15)] text-[#F2EBE2]'
+                        : 'border-[rgba(242,235,226,0.2)] text-[#F2EBE2]/55'
                     }`}
                   >
                     {lvl.label}
@@ -512,8 +512,8 @@ export function BegegnungClient({
                     onClick={() => setSelectedQuestion(q)}
                     className={`w-full text-left px-5 py-4 rounded-2xl transition-all font-body font-light text-sm leading-relaxed ${
                       selectedQuestion === q
-                        ? 'bg-[rgba(253,245,232,0.14)] border border-[rgba(253,245,232,0.4)] text-[#FDF5E8]'
-                        : 'bg-[rgba(253,245,232,0.06)] border border-[rgba(253,245,232,0.12)] text-[#FDF5E8]/70'
+                        ? 'bg-[rgba(242,235,226,0.14)] border border-[rgba(242,235,226,0.4)] text-[#F2EBE2]'
+                        : 'bg-[rgba(242,235,226,0.06)] border border-[rgba(242,235,226,0.12)] text-[#F2EBE2]/70'
                     }`}
                   >
                     &ldquo;{q}&rdquo;
@@ -528,17 +528,17 @@ export function BegegnungClient({
               >
                 Diese Frage senden ✦
               </button>
-              <button onClick={skipGuided} className="w-full py-3 text-[#FDF5E8]/50 text-sm font-body">
+              <button onClick={skipGuided} className="w-full py-3 text-[#F2EBE2]/50 text-sm font-body">
                 Eigene Nachricht schreiben
               </button>
             </>
           ) : (
             <>
-              <button onClick={() => setGuidedStep('question')} className="self-start text-[#FDF5E8]/40 text-sm font-body mb-6">
+              <button onClick={() => setGuidedStep('question')} className="self-start text-[#F2EBE2]/40 text-sm font-body mb-6">
                 ← Zurück
               </button>
-              <h2 className="font-heading text-[28px] text-[#FDF5E8] mb-2 leading-tight">Meine Intention für dieses Gespräch</h2>
-              <p className="text-[#FDF5E8]/40 font-body font-light text-xs uppercase tracking-widest mb-6">Nur für dich sichtbar</p>
+              <h2 className="font-heading text-[28px] text-[#F2EBE2] mb-2 leading-tight">Meine Intention für dieses Gespräch</h2>
+              <p className="text-[#F2EBE2]/40 font-body font-light text-xs uppercase tracking-widest mb-6">Nur für dich sichtbar</p>
               <div className="space-y-2 mb-8">
                 {INTENTION_OPTIONS.map((opt) => (
                   <button
@@ -546,8 +546,8 @@ export function BegegnungClient({
                     onClick={() => setSelectedIntention(opt)}
                     className={`w-full text-left px-5 py-3.5 rounded-full transition-all font-body font-light text-sm ${
                       selectedIntention === opt
-                        ? 'bg-[#FDF5E8] text-[#1A1410]'
-                        : 'bg-[rgba(253,245,232,0.08)] border border-[rgba(253,245,232,0.15)] text-[#FDF5E8]/70'
+                        ? 'bg-[#F2EBE2] text-[#232323]'
+                        : 'bg-[rgba(242,235,226,0.08)] border border-[rgba(242,235,226,0.15)] text-[#F2EBE2]/70'
                     }`}
                   >
                     {opt}
@@ -569,13 +569,13 @@ export function BegegnungClient({
       {/* ── End Confirm Modal ── */}
       {endStep === 'confirm' && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-[#FDF5E8] rounded-2xl p-6 max-w-sm w-full">
-            <h3 className="font-heading text-2xl text-[#1A1410] mb-3">Begegnung beenden?</h3>
+          <div className="bg-[#F2EBE2] rounded-2xl p-6 max-w-sm w-full">
+            <h3 className="font-heading text-2xl text-[#232323] mb-3">Begegnung beenden?</h3>
             <p className="text-[#6B6058] text-sm mb-6 leading-relaxed font-body">
               Wenn du die Begegnung beendest, seid ihr beide sofort wieder frei.
             </p>
             <div className="flex gap-3">
-              <button onClick={() => setEndStep('none')} className="flex-1 py-3 rounded-full text-sm font-body border border-[rgba(122,62,30,0.2)] text-[#6B6058]">
+              <button onClick={() => setEndStep('none')} className="flex-1 py-3 rounded-full text-sm font-body border border-[rgba(47,74,60,0.2)] text-[#6B6058]">
                 Abbrechen
               </button>
               <button onClick={confirmEnd} className="flex-1 bg-red-500 text-white py-3 rounded-full text-sm font-medium hover:bg-red-600 transition-colors">
@@ -588,9 +588,9 @@ export function BegegnungClient({
 
       {/* ── Closing Message Screen (Feature 9) ── */}
       {endStep === 'closing' && (
-        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center px-6 bg-[#FDF5E8]">
+        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center px-6 bg-[#F2EBE2]">
           <div className="w-full max-w-sm">
-            <h2 className="font-heading text-3xl text-[#1A1410] mb-3 text-center">
+            <h2 className="font-heading text-3xl text-[#232323] mb-3 text-center">
               Möchtest du der anderen Person etwas mitgeben?
             </h2>
             <p className="text-[#6B6058] text-sm font-body text-center mb-6 leading-relaxed">
@@ -600,7 +600,7 @@ export function BegegnungClient({
               value={closingMsg}
               onChange={(e) => setClosingMsg(e.target.value.slice(0, 200))}
               placeholder="Eine kurze ehrliche Nachricht..."
-              className="w-full px-4 py-3 rounded-xl border border-[rgba(122,62,30,0.15)] bg-white text-[#1A1410] text-sm font-body font-light resize-none focus:outline-none focus:border-[rgba(122,62,30,0.4)] mb-2"
+              className="w-full px-4 py-3 rounded-xl border border-[rgba(47,74,60,0.15)] bg-white text-[#232323] text-sm font-body font-light resize-none focus:outline-none focus:border-[rgba(47,74,60,0.4)] mb-2"
               rows={4}
             />
             <div className="flex justify-end mb-4">
@@ -618,9 +618,9 @@ export function BegegnungClient({
 
       {/* ── Emotional Check-in Screen (Feature 10) ── */}
       {endStep === 'checkin' && (
-        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center px-6 bg-[#FDF5E8]">
+        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center px-6 bg-[#F2EBE2]">
           <div className="w-full max-w-sm">
-            <h2 className="font-heading text-[28px] text-[#1A1410] mb-6 text-center">Wie fühlst du dich?</h2>
+            <h2 className="font-heading text-[28px] text-[#232323] mb-6 text-center">Wie fühlst du dich?</h2>
             <div className="grid grid-cols-2 gap-3 mb-6">
               {CHECKIN_OPTIONS.map((opt) => (
                 <button
@@ -628,12 +628,12 @@ export function BegegnungClient({
                   onClick={() => setCheckinResponse(opt.value)}
                   className={`flex flex-col items-center py-5 px-3 rounded-2xl border transition-all ${
                     checkinResponse === opt.value
-                      ? 'border-[rgba(122,62,30,0.4)] bg-[rgba(122,62,30,0.06)]'
-                      : 'border-[rgba(122,62,30,0.10)] bg-white hover:border-[rgba(122,62,30,0.2)]'
+                      ? 'border-[rgba(47,74,60,0.4)] bg-[rgba(47,74,60,0.06)]'
+                      : 'border-[rgba(47,74,60,0.10)] bg-white hover:border-[rgba(47,74,60,0.2)]'
                   }`}
                 >
                   <span className="text-2xl mb-2">{opt.emoji}</span>
-                  <span className="text-xs text-[#1A1410] font-body text-center leading-snug">{opt.label}</span>
+                  <span className="text-xs text-[#232323] font-body text-center leading-snug">{opt.label}</span>
                 </button>
               ))}
             </div>
@@ -643,7 +643,7 @@ export function BegegnungClient({
                   value={checkinNote}
                   onChange={(e) => setCheckinNote(e.target.value)}
                   placeholder="Möchtest du mehr dazu festhalten? (optional)"
-                  className="w-full px-4 py-3 rounded-xl border border-[rgba(122,62,30,0.12)] bg-white text-[#1A1410] text-sm font-body font-light resize-none focus:outline-none"
+                  className="w-full px-4 py-3 rounded-xl border border-[rgba(47,74,60,0.12)] bg-white text-[#232323] text-sm font-body font-light resize-none focus:outline-none"
                   rows={2}
                 />
               </div>
