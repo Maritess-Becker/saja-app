@@ -552,7 +552,7 @@ export function DiscoverClient({
   // Phase 2 onboarding overlay (triggers when phase < 2 and user tries to like)
   const [showPhase2Overlay, setShowPhase2Overlay] = useState(false)
 
-  // ── Licht schicken ────────────────────────────────────────────────────────
+  // ── Stilles Zeichen ───────────────────────────────────────────────────────
   const todayLightKey = `light_count_${todayStr}`
   const [lightSentCount, setLightSentCount] = useState<number>(() => {
     if (typeof window === 'undefined') return 0
@@ -719,7 +719,7 @@ export function DiscoverClient({
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  // ── Licht schicken ────────────────────────────────────────────────────────
+  // ── Stilles Zeichen ───────────────────────────────────────────────────────
 
   async function handleSendLight() {
     if (!profile) return
@@ -750,7 +750,7 @@ export function DiscoverClient({
     await supabase.from('lights').update({ returned: true }).eq('id', lightId)
     setLocalReceivedLights(prev => prev.filter(l => l.id !== lightId))
     setLightReturned(true)
-    toast('✦ Licht zurückgeschickt — anonym und mit Wärme.')
+    toast('✦ Zeichen zurückgeschickt — anonym und mit Wärme.')
   }
 
   async function handleDismissLight(lightId: string) {
@@ -828,14 +828,12 @@ export function DiscoverClient({
   if (isInConnection) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen px-4 text-center bg-[#7A3E1E]">
-        <div className="w-20 h-20 bg-[rgba(253,245,232,0.12)] rounded-full flex items-center justify-center mx-auto mb-6">
-          <Sparkles className="w-10 h-10 text-[#FDF5E8]" />
-        </div>
-        <h2 className="font-heading text-4xl text-[#FDF5E8] mb-4">Du bist in einer Begegnung</h2>
-        <p className="text-[#FDF5E8]/60 max-w-md leading-relaxed mb-8">
-          Die One Connection Rule bedeutet: volle Aufmerksamkeit für eine Person.
+        <p className="font-heading text-[42px] text-[#FDF5E8]/90 mb-3 leading-none">✦</p>
+        <h2 className="font-heading text-4xl text-[#FDF5E8] mb-4">Du bist gerade in einer Begegnung.</h2>
+        <p className="text-[#FDF5E8]/55 max-w-xs leading-relaxed mb-10 font-body font-light text-sm">
+          Volle Präsenz.
         </p>
-        <Link href={`/connection/${connectionId}`} className="bg-[#FDF5E8] text-[#1A1410] px-8 py-3.5 rounded-full font-body font-semibold hover:bg-white transition-colors">
+        <Link href={`/connection/${connectionId}`} className="bg-[#FDF5E8] text-[#1A1410] px-8 py-3.5 rounded-full font-body font-normal hover:bg-white transition-colors">
           Zur Begegnung
         </Link>
       </div>
@@ -1115,7 +1113,7 @@ export function DiscoverClient({
             >
               <p className="text-[#BF9B30] text-xl mb-2">✦</p>
               <p className="font-heading text-[20px] italic text-[#FDF5E8] leading-snug mb-1">
-                &ldquo;Jemand hat dir heute ein stilles Licht geschickt.&rdquo;
+                &ldquo;Jemand hat dir heute ein stilles Zeichen geschickt.&rdquo;
               </p>
               <p className="text-[#FDF5E8]/45 font-body text-xs mb-4">Anonym — kein Name, keine Erwartung.</p>
               <div className="flex gap-2">
@@ -1124,7 +1122,7 @@ export function DiscoverClient({
                   className="flex-1 py-2.5 rounded-xl font-body text-[13px] text-[#FDF5E8] transition-all active:scale-[0.97]"
                   style={{ background: 'rgba(253,245,232,0.18)' }}
                 >
-                  Ein Licht zurückschicken ✦
+                  Ein Zeichen zurückschicken ✦
                 </button>
                 <button
                   onClick={() => handleDismissLight(localReceivedLights[0].id)}
@@ -1177,7 +1175,7 @@ export function DiscoverClient({
               style={{ background: 'rgba(74,32,16,0.92)', backdropFilter: 'blur(12px)' }}
             >
               <p className="text-[#FDF5E8]/90 font-body text-sm leading-relaxed">
-                Du hast heute 3 Lichter verschickt.<br />
+                Du hast heute 3 Zeichen verschickt.<br />
                 <span className="text-[#FDF5E8]/55">Morgen kannst du wieder jemandem eine Freude machen. ✦</span>
               </p>
             </div>
@@ -1461,12 +1459,6 @@ export function DiscoverClient({
                       <span className="text-sm text-[#1A1410] font-medium">{profile.relationship_model}</span>
                     </div>
                   )}
-                  {profile.bindungstyp && (
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-[#6B6058]">Bindungstyp</span>
-                      <span className="text-sm text-[#1A1410] font-medium">{profile.bindungstyp}</span>
-                    </div>
-                  )}
                   {profile.love_language && (
                     <div className="flex items-center justify-between">
                       <span className="text-sm text-[#6B6058]">Love Language</span>
@@ -1497,7 +1489,7 @@ export function DiscoverClient({
               )}
 
               {/* ── Horoskop ── */}
-              {(profile.sun_sign || profile.ascendant || profile.chinese_zodiac) && (
+              {(profile.sun_sign || profile.ascendant) && (
                 <div className="px-5 py-5 border-t border-[rgba(122,62,30,0.10)] space-y-3">
                   <p className="text-[11px] text-[#6B6058] uppercase tracking-widest">Horoskop</p>
                   <div className="flex flex-wrap gap-2">
@@ -1509,11 +1501,6 @@ export function DiscoverClient({
                     {profile.ascendant && (
                       <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(122,62,30,0.08)', color: '#1A1410' }}>
                         ↑ {profile.ascendant.replace(/^[♈♉♊♋♌♍♎♏♐♑♒♓]\s*/, '')}
-                      </span>
-                    )}
-                    {profile.chinese_zodiac && (
-                      <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(122,62,30,0.10)', color: '#1A1410' }}>
-                        {profile.chinese_zodiac}
                       </span>
                     )}
                   </div>
@@ -1611,7 +1598,7 @@ export function DiscoverClient({
                 Gerade nicht
               </button>
 
-              {/* ✦ Licht schicken — dezent, mittig */}
+              {/* ✦ Stilles Zeichen — dezent, mittig */}
               <button
                 onClick={handleSendLight}
                 className="w-10 h-[50px] rounded-xl flex items-center justify-center flex-shrink-0 transition-all active:scale-95"
@@ -1620,8 +1607,8 @@ export function DiscoverClient({
                   border: `1px solid rgba(253,245,232,${lightSentCount >= 3 ? '0.10' : '0.22'})`,
                   opacity: lightSentCount >= 3 ? 0.35 : 1,
                 }}
-                aria-label="Ein stilles Licht schicken"
-                title="Ein stilles Licht schicken — anonym und ohne Erwartung"
+                aria-label="Ein stilles Zeichen schicken"
+                title="Ein stilles Zeichen schicken — anonym und ohne Erwartung"
               >
                 <span className="text-[#BF9B30] text-base leading-none">✦</span>
               </button>

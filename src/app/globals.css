@@ -35,14 +35,14 @@
     radial-gradient(ellipse 200% 150% at 5% 100%, rgba(253,245,232,0.05) 0%, transparent 60%),
     #7A3E1E;
 
-  /* ── Aura / Chakra accent colors ── */
-  --aura-heart:   #2D7A5F;   /* Herzchakra — salbeigrün */
-  --aura-sacral:  #C4603A;   /* Sakralchakra — warmes Terrakotta */
-  --aura-crown:   #7B4FA6;   /* Kronenchakra — sanftes Lavendel */
-  --aura-throat:  #3A5F8A;   /* Kehlchakra — klares Himmelblau */
-  --aura-solar:   #BF9B30;   /* Solarplexus — goldenes Gelb */
-  --aura-root:    #8E3A20;   /* Wurzelchakra — tiefes Rot-Braun */
-  --aura-rose:    #C08080;   /* Herzaura — zartes Rosenrot */
+  /* ── Accent colors ── */
+  --accent-green:  #2D7A5F;
+  --accent-orange: #C4603A;
+  --accent-purple: #7B4FA6;
+  --accent-blue:   #3A5F8A;
+  --accent-gold:   #BF9B30;
+  --accent-red:    #8E3A20;
+  --accent-rose:   #C08080;
 }
 
 /* ── Base ───────────────────────────────────────────────────────────────── */

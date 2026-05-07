@@ -189,23 +189,6 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
                     )}
                   </div>
 
-                  {/* Bindungstyp badge */}
-                  {profile.bindungstyp && (() => {
-                    const BINDUNG_AURA: Record<string, string> = {
-                      'Sicher':                 '#2D7A5F',
-                      'Ängstlich-präoccupiert': '#C08080',
-                      'Vermeidend-distanziert': '#3A5F8A',
-                      'Desorganisiert':         '#7B4FA6',
-                    }
-                    const aura = BINDUNG_AURA[profile.bindungstyp] ?? '#C4603A'
-                    return (
-                      <span className="absolute bottom-2 right-2 font-body text-[10px] px-2 py-0.5 rounded-full text-white"
-                        style={{ backgroundColor: aura }}>
-                        {profile.bindungstyp}
-                      </span>
-                    )
-                  })()}
-
                   {/* Active badge */}
                   {isThisActiveMatch && (
                     <span className="absolute top-2 right-2 flex items-center gap-1 text-xs text-[#7A3E1E] bg-white px-2 py-1 rounded-full">

@@ -284,7 +284,7 @@ export function ProfilePreviewModal({ profile, children }: Props) {
             )}
 
             {/* ── Beziehung & Bindung ── */}
-            {(profile.relationship_model || profile.bindungstyp || profile.love_language) && (
+            {(profile.relationship_model || profile.love_language) && (
               <div className="px-5 py-5 border-t border-[rgba(122,62,30,0.10)] space-y-4">
                 <p className="text-[11px] text-[#6B6058] uppercase tracking-widest">Beziehung &amp; Bindung</p>
                 {profile.relationship_model && (
@@ -293,24 +293,6 @@ export function ProfilePreviewModal({ profile, children }: Props) {
                     <span className="text-sm text-[#1A1410] font-medium">{profile.relationship_model}</span>
                   </div>
                 )}
-                {profile.bindungstyp && (() => {
-                  const BINDUNG_AURA: Record<string, string> = {
-                    'Sicher':                 '#2D7A5F',
-                    'Ängstlich-präoccupiert': '#C08080',
-                    'Vermeidend-distanziert': '#3A5F8A',
-                    'Desorganisiert':         '#7B4FA6',
-                  }
-                  const aura = BINDUNG_AURA[profile.bindungstyp] ?? '#C4603A'
-                  return (
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-[#6B6058]">Bindungstyp</span>
-                    <span
-                      className="text-xs font-body px-2.5 py-1 rounded-full text-white font-medium"
-                      style={{ backgroundColor: aura }}
-                    >{profile.bindungstyp}</span>
-                  </div>
-                  )
-                })()}
                 {profile.love_language && (
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-[#6B6058]">Love Language</span>
@@ -339,7 +321,7 @@ export function ProfilePreviewModal({ profile, children }: Props) {
             )}
 
             {/* ── Horoskop ── */}
-            {(profile.sun_sign || profile.ascendant || profile.chinese_zodiac) && (
+            {(profile.sun_sign || profile.ascendant) && (
               <div className="px-5 py-5 border-t border-[rgba(122,62,30,0.10)] space-y-3">
                 <p className="text-[11px] text-[#6B6058] uppercase tracking-widest">Horoskop</p>
                 <div className="flex flex-wrap gap-2">
@@ -351,11 +333,6 @@ export function ProfilePreviewModal({ profile, children }: Props) {
                   {profile.ascendant && (
                     <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(122,62,30,0.08)', color: '#1A1410' }}>
                       ↑ {profile.ascendant.replace(/^[♈♉♊♋♌♍♎♏♐♑♒♓]\s*/, '')}
-                    </span>
-                  )}
-                  {profile.chinese_zodiac && (
-                    <span className="rounded-full text-[11px] px-3 py-1.5 font-body font-light" style={{ background: 'rgba(122,62,30,0.10)', color: '#A05830' }}>
-                      {profile.chinese_zodiac}
                     </span>
                   )}
                 </div>

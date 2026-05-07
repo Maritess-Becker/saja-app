@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils'
 import toastLib from 'react-hot-toast'
 import { createClient } from '@/lib/supabase/client'
 import type { JournalEntry } from '@/types'
-import { getDailyAffirmation, CATEGORY_LABELS } from '@/lib/affirmations'
+import { getDailyGedanke } from '@/lib/affirmations'
 
 type Tier = 'free' | 'membership' | 'premium'
 
@@ -25,7 +25,7 @@ const JOURNAL_DAILY_PROMPTS = [
   'Wann hast du dich zuletzt wirklich gesehen gefühlt?',
   'Was brauchst du gerade von dir selbst?',
   'Welche Begegnung hat dich zuletzt wirklich berührt — und warum?',
-  'Was schützt du gerade in dir?',
+  'Was bewegt dich gerade?',
   'Wofür bist du heute dankbar?',
 ]
 
@@ -33,44 +33,6 @@ function getDailyPrompt() {
   return JOURNAL_DAILY_PROMPTS[Math.floor(Date.now() / 86_400_000) % JOURNAL_DAILY_PROMPTS.length]
 }
 
-// ─── Täglicher Impuls Pool (Begleitung) ──────────────────────────────────────
-
-const TAEGLICHE_IMPULSE = [
-  'Was macht eine echte Begegnung für dich aus?',
-  'Wann hast du dich zuletzt wirklich gesehen gefühlt?',
-  'Was würdest du dir trauen wenn du wüsstest dass es okay ist?',
-  'Welche Qualität wünschst du dir heute in einer Verbindung?',
-  'Was schützt du gerade — und warum?',
-  'Was bedeutet dir Nähe heute?',
-  'Wofür bist du in deinem Dating-Leben gerade dankbar?',
-  'Was lernst du gerade über dich selbst?',
-  'Welche Begegnung hat dich zuletzt wirklich berührt?',
-  'Was brauchst du um dich sicher zu fühlen?',
-  'Was wünschst du dir von der nächsten Begegnung?',
-  'Was hältst du gerade fest, das du loslassen könntest?',
-  'Wann warst du zuletzt vollständig präsent mit jemandem?',
-  'Was zeigt dir gerade dein Körper, das dein Kopf noch nicht versteht?',
-  'Was bedeutet Verbindung für dich — heute, in diesem Moment?',
-  'Welcher Teil von dir darf heute gesehen werden?',
-  'Was ist der Unterschied zwischen Nähe und Verschmelzung für dich?',
-  'Was brauchst du um wirklich ankommen zu können?',
-  'Welcher Gedanke über Liebe hält dich gerade zurück?',
-  'Was wäre möglich wenn du dir selbst wirklich vertrauen würdest?',
-  'Wie fühlt sich Sicherheit in deinem Körper an?',
-  'Was darf kleiner werden damit Verbindung größer werden kann?',
-  'Was hoffst du dass jemand eines Tages über dich versteht?',
-  'Wann bist du zuletzt einer Person wirklich begegnet — nicht nur konversiert?',
-  'Was trägst du, das nicht mehr deins ist?',
-  'Welche Frage über Liebe stellst du dir gerade heimlich?',
-  'Was wäre anders wenn du dich selbst so wählst wie du gewählt werden möchtest?',
-  'Was gibt dir Kraft wenn Dating sich schwer anfühlt?',
-  'Was bedeutet Authentizität für dich in einer frühen Begegnung?',
-  'Was darf heute ein bisschen leichter sein?',
-]
-
-function getDailyImpuls() {
-  return TAEGLICHE_IMPULSE[Math.floor(Date.now() / 86_400_000) % TAEGLICHE_IMPULSE.length]
-}
 
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' })
@@ -149,18 +111,9 @@ const CONTENT_SECTIONS = [
     icon: <Compass size={16} strokeWidth={1.8} />,
     items: [
       {
-        id: 'heutige-affirmation',
-        title: 'Heutige Affirmation',
-        description: 'Eine Affirmation für dich — täglich wechselnd aus einem Pool von 20 Affirmationen zu Selbstliebe, Präsenz, Verbindung und Mut.',
-        format: 'Tägliche Karte',
-        access: 'free',
-        icon: <Sparkles size={20} strokeWidth={1.8} />,
-        tag: 'Kostenlos',
-      },
-      {
-        id: 'taeglicher-impuls',
-        title: 'Täglicher Impuls',
-        description: 'Jeden Tag ein kurzer Gedanke oder eine Frage zum bewussten Dating — rotierend aus einem Pool von 30+ Impulsen.',
+        id: 'gedanke-des-tages',
+        title: 'Gedanke des Tages',
+        description: 'Ein Gedanke oder eine Frage täglich — zum bewussten Innehalten.',
         format: 'Tägliche Karte',
         access: 'free',
         icon: <Sparkles size={20} strokeWidth={1.8} />,
@@ -255,6 +208,15 @@ const CONTENT_SECTIONS = [
         tag: 'Kostenlos',
       },
       {
+        id: 'sternzeichen-beziehungen',
+        title: 'Dein Sternzeichen & Beziehungen',
+        description: 'Was Sternzeichen und Aszendent über Beziehungsmuster sagen können — und was nicht. Ein nüchterner Blick mit echtem Erkenntnisgehalt.',
+        format: 'Artikel',
+        access: 'free',
+        icon: <Sparkles size={20} strokeWidth={1.8} />,
+        tag: 'Kostenlos',
+      },
+      {
         id: 'von-coaches',
         title: 'Von Coaches',
         description: 'Kurze Inhalte von Community-Coaches — Holistic Tantra und anderen Partnern. Mit Coach-Name und Community-Badge.',
@@ -276,19 +238,19 @@ const ICON_BG: Record<string, string> = {
   'beziehungsmuster':              '#7B4FA6',
   'was-ich-wirklich-suche':        '#2D7A5F',
   'grenzen-kennen':                '#C4603A',
-  // Begleitung — Solar & Sacral
-  'heutige-affirmation':           '#C08080',
-  'taeglicher-impuls':             '#BF9B30',
+  // Begleitung
+  'gedanke-des-tages':             '#BF9B30',
   'nach-der-begegnung':            '#A05830',
   'wenn-es-schwer-wird':           '#C08080',
   'zwischen-zwei-begegnungen':     '#A05830',
   'pause-bewusst-nutzen':          '#BF9B30',
-  // Wissen — Throat & Crown
+  // Wissen
   'bindungstypen-im-dating':       '#2D7A5F',
   'gleiche-menschen':              '#7B4FA6',
   'kunst-des-ersten-gesprächs':    '#3A5F8A',
   'koerper-und-intuition':         '#C4603A',
   'conscious-dating':              '#3A5F8A',
+  'sternzeichen-beziehungen':      '#BF9B30',
   'von-coaches':                   '#7B4FA6',
 }
 
@@ -310,7 +272,7 @@ const MODAL_CONTENT: Record<string, { title: string; body: React.ReactNode }> = 
           { typ: 'Sicher', color: '#2D7A5F', text: 'Du kannst Nähe zulassen ohne dich zu verlieren. Im Dating bist du präsent, klar und wenig reaktiv.' },
           { typ: 'Ängstlich-präoccupiert', color: '#C08080', text: 'Du sehnst dich tief nach Verbindung und bist sehr feinfühlig für Signale. Wichtig: Unterscheide Intuition von Angst.' },
           { typ: 'Vermeidend-distanziert', color: '#3A5F8A', text: 'Du schätzt Autonomie und tust dich schwer wenn Nähe zu schnell kommt. Echte Verbindung braucht dein eigenes Tempo.' },
-          { typ: 'Desorganisiert', color: '#7B4FA6', text: 'Nähe löst gleichzeitig Sehnsucht und Alarm aus. Heilung beginnt mit Sicherheit — in dir selbst.' },
+          { typ: 'Desorganisiert', color: '#7B4FA6', text: 'Nähe löst gleichzeitig Sehnsucht und Alarm aus. Wachstum beginnt mit Sicherheit — in dir selbst.' },
         ].map((b) => (
           <div key={b.typ} className="p-4 bg-[#F5F0E8] rounded-2xl border-l-[3px]" style={{ borderLeftColor: b.color }}>
             <p className="font-body font-medium text-[#1A1410] text-sm mb-1">{b.typ}</p>
@@ -420,47 +382,24 @@ const MODAL_CONTENT: Record<string, { title: string; body: React.ReactNode }> = 
       </div>
     ),
   },
-  'heutige-affirmation': {
-    title: 'Heutige Affirmation',
+  'gedanke-des-tages': {
+    title: 'Gedanke des Tages',
     body: (() => {
-      const aff = getDailyAffirmation()
+      const gedanke = getDailyGedanke()
       return (
         <div className="text-center py-4 space-y-4">
           <p className="text-[#6B6058] text-sm">{new Date().toLocaleDateString('de-DE', { weekday: 'long', day: 'numeric', month: 'long' })}</p>
-          <div
-            className="rounded-2xl p-6"
-            style={{ background: 'var(--bg-indigo)' }}
-          >
+          <div className="rounded-2xl p-6" style={{ background: 'var(--bg-indigo)' }}>
             <p className="font-heading text-[22px] italic text-[#FDF5E8] leading-snug">
-              &ldquo;{aff.content}&rdquo;
+              &ldquo;{gedanke}&rdquo;
             </p>
           </div>
-          <span className="inline-block text-[10px] uppercase tracking-widest px-3 py-1 rounded-full bg-[#C08080]/15 text-[#C08080]">
-            {CATEGORY_LABELS[aff.category]}
-          </span>
           <p className="text-xs text-[#A09888] leading-relaxed">
-            Täglich wechselnd · 20 Affirmationen zu Selbstliebe, Präsenz, Verbindung und Mut.
+            Täglich wechselnd · ein Gedanke zum bewussten Innehalten.
           </p>
         </div>
       )
     })(),
-  },
-  'taeglicher-impuls': {
-    title: 'Täglicher Impuls',
-    body: (
-      <div className="text-center py-4 space-y-4">
-        <p className="text-[#6B6058] text-sm">{new Date().toLocaleDateString('de-DE', { weekday: 'long', day: 'numeric', month: 'long' })}</p>
-        <div className="bg-[#F5F0E8] rounded-2xl p-6">
-          <p className="font-heading text-[22px] italic text-[#1A1410] leading-snug">
-            &ldquo;{getDailyImpuls()}&rdquo;
-          </p>
-        </div>
-        <p className="text-xs text-[#A09888] leading-relaxed">
-          Jeden Tag ein neuer Impuls — rotierend aus einem Pool von 30+ Fragen und Gedanken
-          zum bewussten Dating.
-        </p>
-      </div>
-    ),
   },
   'nach-der-begegnung': {
     title: 'Nach der Begegnung',
@@ -672,6 +611,30 @@ const MODAL_CONTENT: Record<string, { title: string; body: React.ReactNode }> = 
       </div>
     ),
   },
+  'sternzeichen-beziehungen': {
+    title: 'Dein Sternzeichen & Beziehungen',
+    body: (
+      <div className="space-y-4">
+        <p className="font-heading text-xl italic text-[#1A1410]">&ldquo;Was die Sterne zeigen — und was du daraus machst.&rdquo;</p>
+        <p className="text-[#6B6058] text-sm leading-relaxed">
+          Sternzeichen und Aszendent können interessante Muster beschreiben. Hier: ein nüchterner Blick auf das was dran ist — ohne Mystik, mit echtem Erkenntnisgehalt.
+        </p>
+        {[
+          { sign: 'Feuerzeichen', signs: 'Widder · Löwe · Schütze', text: 'Direkt, leidenschaftlich, manchmal ungeduldig. In Beziehungen: sie initiieren gerne, brauchen aber Raum für Autonomie.' },
+          { sign: 'Erdzeichen', signs: 'Stier · Jungfrau · Steinbock', text: 'Verlässlich, beständig, körpernah. In Beziehungen: aufgebaut auf Vertrauen und konkreten Gesten.' },
+          { sign: 'Luftzeichen', signs: 'Zwillinge · Waage · Wassermann', text: 'Kommunikativ, neugierig, manchmal distanziert. In Beziehungen: intellektuelle Verbindung ist genauso wichtig wie emotionale.' },
+          { sign: 'Wasserzeichen', signs: 'Krebs · Skorpion · Fische', text: 'Tief fühlend, intuitiv, intensiv. In Beziehungen: sie suchen echte Tiefe — und brauchen emotionale Sicherheit.' },
+        ].map((b) => (
+          <div key={b.sign} className="p-4 bg-[#F5F0E8] rounded-2xl">
+            <p className="font-body font-medium text-[#1A1410] text-sm mb-0.5">{b.sign}</p>
+            <p className="text-[#A09888] text-[11px] mb-1.5 uppercase tracking-wide">{b.signs}</p>
+            <p className="text-[#6B6058] text-xs leading-relaxed">{b.text}</p>
+          </div>
+        ))}
+        <p className="text-xs text-[#A09888] italic">Vollständiger Artikel folgt.</p>
+      </div>
+    ),
+  },
   'von-coaches': {
     title: 'Von Coaches',
     body: (
@@ -757,7 +720,7 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
   // ── Content state ──
   const [activeTab, setActiveTab] = useState('kenne-dich-selbst')
   const [openModal, setOpenModal] = useState<string | null>(null)
-  const dailyAffirmation = getDailyAffirmation()
+  const dailyGedanke = getDailyGedanke()
 
   // ── Main tab: content vs journal ──
   const [mainTab, setMainTab] = useState<'content' | 'journal'>('content')
@@ -770,7 +733,6 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
   const [saving, setSaving] = useState(false)
   const [openEntry, setOpenEntry] = useState<JournalEntry | null>(null)
   const dailyPrompt = getDailyPrompt()
-  const dailyImpuls = getDailyImpuls()
 
   // ── Pattern Feedback state ──
   const [patternFeedback, setPatternFeedback] = useState<string | null>(null)
@@ -1047,53 +1009,30 @@ export function ContentClient({ tier, purchasedIds, userId, initialJournalEntrie
           {activeSection && (
             <div className="space-y-3">
 
-              {/* Special: Heutige Affirmation featured card (Begleitung only) */}
+              {/* Special: Gedanke des Tages featured card (Begleitung only) */}
               {activeTab === 'begleitung' && (
                 <button
-                  onClick={() => handleOpen(activeSection.items.find(i => i.id === 'heutige-affirmation')!)}
-                  className="w-full text-left rounded-2xl overflow-hidden active:scale-[0.98] transition-transform duration-150"
-                  style={{ background: 'var(--bg-indigo)' }}
-                >
-                  <div className="p-5">
-                    <div className="flex items-center gap-2 mb-3">
-                      <span className="text-[#C08080] text-base">✦</span>
-                      <p className="font-body text-[11px] uppercase tracking-[0.14em] text-[#FDF5E8]/50">Heutige Affirmation</p>
-                      <span className="ml-auto text-[10px] font-body px-2 py-0.5 rounded-full bg-[rgba(192,128,128,0.2)] text-[#C08080]">Kostenlos</span>
-                    </div>
-                    <p className="font-heading text-[20px] italic text-[#FDF5E8] leading-snug mb-3">
-                      &ldquo;{dailyAffirmation.content}&rdquo;
-                    </p>
-                    <p className="text-[#FDF5E8]/40 font-body text-xs">
-                      {CATEGORY_LABELS[dailyAffirmation.category]} · Täglich wechselnd
-                    </p>
-                  </div>
-                </button>
-              )}
-
-              {/* Special: Täglicher Impuls featured card (Begleitung only) */}
-              {activeTab === 'begleitung' && (
-                <button
-                  onClick={() => handleOpen(activeSection.items.find(i => i.id === 'taeglicher-impuls')!)}
+                  onClick={() => handleOpen(activeSection.items.find(i => i.id === 'gedanke-des-tages')!)}
                   className="w-full text-left rounded-2xl overflow-hidden active:scale-[0.98] transition-transform duration-150"
                   style={{ background: 'var(--bg-indigo)' }}
                 >
                   <div className="p-5">
                     <div className="flex items-center gap-2 mb-3">
                       <span className="text-[#BF9B30] text-base">✦</span>
-                      <p className="font-body text-[11px] uppercase tracking-[0.14em] text-[#FDF5E8]/50">Täglicher Impuls</p>
+                      <p className="font-body text-[11px] uppercase tracking-[0.14em] text-[#FDF5E8]/50">Gedanke des Tages</p>
                       <span className="ml-auto text-[10px] font-body px-2 py-0.5 rounded-full bg-[rgba(45,122,95,0.25)] text-[#7EB89A]">Kostenlos</span>
                     </div>
                     <p className="font-heading text-[22px] italic text-[#FDF5E8] leading-snug mb-4">
-                      &ldquo;{dailyImpuls}&rdquo;
+                      &ldquo;{dailyGedanke}&rdquo;
                     </p>
-                    <p className="text-[#FDF5E8]/40 font-body text-xs">Täglich wechselnd · 30+ Impulse</p>
+                    <p className="text-[#FDF5E8]/40 font-body text-xs">Täglich wechselnd</p>
                   </div>
                 </button>
               )}
 
               {/* Regular content cards */}
               {activeSection.items
-                .filter(item => !(activeTab === 'begleitung' && (item.id === 'taeglicher-impuls' || item.id === 'heutige-affirmation')))
+                .filter(item => !(activeTab === 'begleitung' && item.id === 'gedanke-des-tages'))
                 .map((item) => {
                   const accessible = canAccess(item)
                   return (

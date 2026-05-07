@@ -22,7 +22,7 @@ const GROUPS = [
     members: 142,
     posts: 38,
     latestPost: '„Wie erkenne ich anxious attachment bei mir selbst?"',
-    tags: ['Ängstlich', 'Vermeidend', 'Sicher', 'Heilung'],
+    tags: ['Ängstlich', 'Vermeidend', 'Sicher', 'Wachstum'],
   },
   {
     id: 'bewusste-sexualitaet',
@@ -30,11 +30,11 @@ const GROUPS = [
     iconBg: '#C4603A',
     iconColor: '#FFFFFF',
     name: 'Bewusste Sexualität',
-    description: 'Ein sicherer Raum für Gespräche über gelebte Sexualität, sexuelle Heilung und Verkörperung.',
+    description: 'Ein sicherer Raum für Gespräche über gelebte Sexualität, persönliches Wachstum und Verkörperung.',
     members: 89,
     posts: 24,
     latestPost: '„Was bedeutet verkörperte Sexualität für dich?"',
-    tags: ['Sexualität', 'Heilung', 'Embodiment', 'Sicherheit'],
+    tags: ['Sexualität', 'Wachstum', 'Embodiment', 'Sicherheit'],
   },
   {
     id: 'tantric-dating',
@@ -65,8 +65,8 @@ const GROUPS = [
     icon: <Leaf size={22} strokeWidth={1.8} />,
     iconBg: '#2D7A5F',
     iconColor: '#FFFFFF',
-    name: 'Selbstliebe & Heilung',
-    description: 'Wachstum beginnt bei dir. Trauma, Heilung, inneres Kind — und was das mit Beziehungen zu tun hat.',
+    name: 'Wachstum & Veränderung',
+    description: 'Wachstum beginnt bei dir. Muster erkennen, Verhaltensweisen verändern — und was das mit Beziehungen zu tun hat.',
     members: 178,
     posts: 52,
     latestPost: '„Wie innere Kindarbeit mein Dating verändert hat"',
@@ -98,7 +98,7 @@ const DEMO_POSTS: Record<string, Array<{ author: string; time: string; text: str
   ],
   'bewusste-sexualitaet': [
     { author: 'Julia W.', time: 'vor 4 Std.', text: 'Was bedeutet verkörperte Sexualität für euch? Für mich ist es der Unterschied zwischen Performen und wirklich Spüren.', replies: 18, likes: 52 },
-    { author: 'Lena K.', time: 'gestern', text: 'Sexuelle Heilung war für mich ein langer Prozess. Hat jemand Empfehlungen für Körperarbeit-Praktizierende?', replies: 7, likes: 29 },
+    { author: 'Lena K.', time: 'gestern', text: 'Persönliches Wachstum in diesem Bereich war für mich ein langer Prozess. Hat jemand Empfehlungen für Körperarbeit-Praktizierende?', replies: 7, likes: 29 },
   ],
 }
 

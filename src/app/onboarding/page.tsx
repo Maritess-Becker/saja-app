@@ -43,10 +43,6 @@ function getSunSign(dateStr: string): string {
   return '♓ Fische'
 }
 
-function getChineseZodiac(year: number): string {
-  const animals = ['Ratte', 'Ochse', 'Tiger', 'Hase', 'Drache', 'Schlange', 'Pferd', 'Ziege', 'Affe', 'Hahn', 'Hund', 'Schwein']
-  return animals[((year - 1900) % 12 + 12) % 12]
-}
 
 // ── Constants ─────────────────────────────────────────────────────────
 const TOTAL_STEPS = 7
@@ -221,7 +217,6 @@ export default function OnboardingPage() {
         birth_date: birthDate || null,
         age,
         sun_sign: birthDate ? getSunSign(birthDate) : null,
-        chinese_zodiac: birthDate ? getChineseZodiac(new Date(birthDate).getFullYear()) : null,
         gender: gender || null,
         location: location || null,
         occupation: occupation || null,
