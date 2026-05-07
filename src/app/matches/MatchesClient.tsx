@@ -118,22 +118,18 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
         navigateTo="/begegnung"
       />
       <div className="max-w-2xl mx-auto px-4 pb-32">
-        {/* Sticky header + gradient fade — one container so they stick together */}
-        <div className="sticky top-0 z-20 -mx-4">
-          <div className="bg-[#2F4A3C] px-4 pt-5 pb-4">
-            <h1 className="font-heading text-[52px] font-light text-[#F2EBE2] tracking-[-0.5px] leading-none mb-1">Matches</h1>
-            {activeMatchId ? (
-              <span className="flex items-center gap-2 text-[#F2EBE2]/70 text-[13px] font-body">
-                <Sparkles className="w-4 h-4 text-[#F2EBE2]/70 flex-shrink-0" />
-                One Connection Rule aktiv
-              </span>
-            ) : (
-              <p className="font-body text-sm text-[#F2EBE2]/60">{matches.length} gegenseitige Interessen</p>
-            )}
-          </div>
-          {/* Gradient fade from header to content */}
-          <div className="h-7 bg-gradient-to-b from-[#2F4A3C] to-transparent pointer-events-none" />
+        {/* Header */}
+        <div className="pt-12 pb-5">
+          <h1 className="font-heading text-[52px] font-normal text-primary tracking-[-0.5px] leading-none mb-1">Matches</h1>
+          {activeMatchId ? (
+            <p className="text-[#9A8E84] font-body text-sm font-light">One Connection Rule aktiv</p>
+          ) : (
+            <p className="text-[#9A8E84] font-body text-sm font-light">{matches.length} gegenseitige Interessen</p>
+          )}
         </div>
+
+        {/* One Connection hint */}
+        <p className="text-xs text-[rgba(47,74,60,0.35)] font-light mb-6">✦ &nbsp; Du kannst eine Begegnung gleichzeitig führen.</p>
 
         <div className="space-y-4">
           {matches.map((match) => {
@@ -151,13 +147,12 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
               <div
                 key={match.id}
                 className={cn(
-                  'bg-white rounded-2xl overflow-hidden active:scale-[0.98] transition-transform duration-300',
+                  'rounded-2xl bg-[#F2EBE2] overflow-hidden shadow-sm active:scale-[0.98] transition-transform duration-300',
                   isThisActiveMatch ? 'ring-2 ring-[#2F4A3C]' : ''
                 )}
-                style={{ boxShadow: isRequested && !isRequester && !isActive ? '0 2px 12px rgba(35,35,35,0.08), inset 4px 0 0 #2F4A3C' : '0 2px 12px rgba(35,35,35,0.08)' }}
               >
-                {/* Photo area */}
-                <Link href={`/profile/${profile.user_id}`} className="block relative h-[220px] overflow-hidden">
+                {/* Photo strip with serif name */}
+                <Link href={`/profile/${profile.user_id}`} className="block relative h-48 overflow-hidden bg-gradient-to-br from-[#3D5E4E] to-[#1E3028]">
                   {photo ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
@@ -166,75 +161,76 @@ export function MatchesClient({ matches, currentUserId, activeMatchId, tier }: P
                       className="absolute inset-0 w-full h-full object-cover object-top"
                     />
                   ) : (
-                    <div className="absolute inset-0 bg-[rgba(47,74,60,0.07)] flex items-center justify-center">
-                      <span className="font-heading text-5xl text-[#6B6058]">
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="font-heading text-5xl text-[#F2EBE2]/20">
                         {profile.name?.[0]}
                       </span>
                     </div>
                   )}
 
                   {/* Gradient overlay */}
-                  <div className="absolute bottom-0 left-0 right-0 h-[60%] bg-gradient-to-t from-black/70 to-transparent" />
+                  <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(20,34,26,0.75) 0%, transparent 50%)' }} />
 
-                  {/* Name + city on gradient */}
-                  <div className="absolute bottom-3 left-4 right-14">
-                    <p className="font-heading text-2xl font-normal text-white leading-tight">
+                  {/* Name — bottom left serif */}
+                  <div className="absolute bottom-0 left-0 right-0 z-10 px-5 pb-4">
+                    <h2 className="font-heading text-[32px] font-normal text-[#F2EBE2] leading-none tracking-[-0.3px]">
                       {profile.name}{!profile.hide_age && profile.age ? `, ${profile.age}` : ''}
-                    </p>
+                    </h2>
                     {!profile.hide_location && profile.location && (
-                      <div className="flex items-center gap-1 text-white/70 font-body text-xs mt-0.5">
-                        <MapPin className="w-3 h-3" />
-                        {profile.location}
-                      </div>
+                      <p className="text-[rgba(242,235,226,0.50)] text-xs mt-1 font-light">{profile.location}</p>
                     )}
                   </div>
 
                   {/* Active badge */}
                   {isThisActiveMatch && (
-                    <span className="absolute top-2 right-2 flex items-center gap-1 text-xs text-[#2F4A3C] bg-white px-2 py-1 rounded-full">
+                    <span className="absolute top-2 right-2 flex items-center gap-1 text-xs text-[#2F4A3C] bg-white px-2 py-1 rounded-full z-20">
                       <CheckCircle className="w-3 h-3" /> Aktiv
                     </span>
                   )}
                 </Link>
 
-                {/* Below photo */}
-                <div className="px-4 pt-3 pb-4">
-                  {/* Prompt preview */}
-                  {profile.prompts?.[0]?.question && (
-                    <p className="font-heading italic text-sm text-[#6B6058] truncate mb-3">
-                      „{profile.prompts[0].question}"
+                {/* Card body */}
+                <div className="px-5 pt-4 pb-5">
+                  {/* Bio/intention preview */}
+                  {(profile.bio || profile.intention) && (
+                    <p className="text-sm font-light text-[#6B6058] leading-relaxed mb-4">
+                      {profile.bio || profile.intention}
                     </p>
                   )}
 
-                  {/* Actions */}
-                  <div className="flex gap-2 flex-wrap">
-                    {isActive ? (
-                      <Link href={`/connection/${match.id}`} className="btn-primary-dark text-xs py-2 px-4">
-                        Zum Chat
-                      </Link>
-                    ) : isRequested && !isRequester ? (
-                      <button
-                        onClick={() => acceptConnection(connection.id, match.id)}
-                        disabled={loading === connection.id}
-                        className="btn-primary-dark text-xs py-2 px-4"
-                      >
-                        {loading === connection.id ? '...' : 'Anfrage annehmen'}
-                      </button>
-                    ) : isRequested && isRequester ? (
-                      <span className="flex items-center gap-1.5 text-xs text-[#6B6058]">
-                        <Clock className="w-3.5 h-3.5" /> Anfrage gesendet
-                      </span>
-                    ) : (
-                      <button
-                        onClick={() => requestConnection(match.id)}
-                        disabled={loading === match.id || (!!activeMatchId && !isThisActiveMatch)}
-                        className={cn(
-                          'w-full border-[1.5px] border-[#2F4A3C] text-[#2F4A3C] bg-transparent hover:bg-[#2F4A3C]/5 rounded-xl text-sm py-3 px-4 transition-colors duration-200 disabled:opacity-40 disabled:cursor-not-allowed font-body font-medium'
-                        )}
-                      >
-                        {loading === match.id ? '...' : 'Begegnung anfragen'}
-                      </button>
-                    )}
+                  {/* Footer: timestamp left + action right */}
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="text-[#9A8E84] text-xs font-light">
+                      {match.created_at ? `Match ${new Date(match.created_at).toLocaleDateString('de-DE', { day: 'numeric', month: 'short' })}` : 'Match'}
+                    </span>
+
+                    <div>
+                      {isActive ? (
+                        <Link href={`/connection/${match.id}`} className="bg-[#2F4A3C] text-[#F2EBE2] text-xs font-normal px-5 py-2.5 rounded-xl">
+                          Zum Chat
+                        </Link>
+                      ) : isRequested && !isRequester ? (
+                        <button
+                          onClick={() => acceptConnection(connection.id, match.id)}
+                          disabled={loading === connection.id}
+                          className="bg-[#2F4A3C] text-[#F2EBE2] text-xs font-normal px-5 py-2.5 rounded-xl disabled:opacity-50"
+                        >
+                          {loading === connection.id ? '...' : 'Anfrage annehmen'}
+                        </button>
+                      ) : isRequested && isRequester ? (
+                        <span className="flex items-center gap-1.5 text-xs text-[#6B6058]">
+                          <Clock className="w-3.5 h-3.5" /> Anfrage gesendet
+                        </span>
+                      ) : (
+                        <button
+                          onClick={() => requestConnection(match.id)}
+                          disabled={loading === match.id || (!!activeMatchId && !isThisActiveMatch)}
+                          className="bg-[#2F4A3C] text-[#F2EBE2] text-xs font-normal px-5 py-2.5 rounded-xl disabled:opacity-40 disabled:cursor-not-allowed"
+                        >
+                          {loading === match.id ? '...' : 'Begegnung anfragen'}
+                        </button>
+                      )}
+                    </div>
                   </div>
 
                   {isRequested && !isRequester && connection?.expires_at && (

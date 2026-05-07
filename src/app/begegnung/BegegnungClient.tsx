@@ -337,132 +337,132 @@ export function BegegnungClient({
 
   // ── Aktive Begegnung ────────────────────────────────────────────────────
   return (
-    <div ref={containerRef} className="flex flex-col w-full max-w-2xl mx-auto overflow-hidden" style={{ height: '100dvh' }}>
+    <div ref={containerRef} className="flex flex-col w-full max-w-2xl mx-auto overflow-hidden" style={{ height: '100dvh', background: 'var(--bg-indigo)' }}>
 
-      {/* Header */}
-      <div className="flex-shrink-0 flex items-center gap-4 p-4 bg-[#2F4A3C]">
-        <Link href={`/profile/${otherProfile?.user_id}`} className="w-12 h-12 rounded-xl bg-[rgba(242,235,226,0.15)] flex items-center justify-center overflow-hidden flex-shrink-0 hover:opacity-90 transition-opacity">
-          {photoUrl(otherProfile?.photos?.[0]) ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={photoUrl(otherProfile?.photos?.[0])} alt="" className="w-full h-full object-cover" />
-          ) : (
-            <span className="font-heading text-xl text-[#F2EBE2]">
-              {otherProfile?.name?.[0]}
-            </span>
-          )}
-        </Link>
-        <Link href={`/profile/${otherProfile?.user_id}`} className="flex-1 min-w-0 hover:opacity-70 transition-opacity">
-          <h2 className="font-heading text-xl text-[#F2EBE2]">{otherProfile?.name}</h2>
-          {otherProfile?.location && !otherProfile.hide_location && (
-            <div className="flex items-center gap-1 text-[#F2EBE2]/50 text-xs">
-              <MapPin className="w-3 h-3" />
-              {otherProfile.location}
-            </div>
-          )}
-        </Link>
-        <div className="flex items-center gap-1.5 bg-[rgba(242,235,226,0.15)] px-3 py-1.5 rounded-full">
-          <Heart className="w-3.5 h-3.5 text-[#F2EBE2] fill-[#F2EBE2]" />
-          <span className="text-xs text-[#F2EBE2] font-medium">Begegnung aktiv</span>
-        </div>
+      {/* Top bar */}
+      <div className="flex-shrink-0 flex items-center justify-between px-6 pt-12 pb-0">
+        <span className="font-heading text-[22px] font-normal tracking-[-0.3px]" style={{ color: 'rgba(242,235,226,0.45)' }}>Saja</span>
         <button
           onClick={() => setEndStep('confirm')}
-          className="p-2 text-[#F2EBE2]/40 hover:text-red-300 transition-colors"
-          title="Begegnung beenden"
+          className="text-xs font-light font-body bg-transparent border-none cursor-pointer"
+          style={{ color: 'rgba(242,235,226,0.20)' }}
         >
-          <X className="w-5 h-5" />
+          Begegnung beenden
         </button>
       </div>
 
-      {/* Meine Intention */}
-      {selectedIntention && (
-        <div className="flex-shrink-0 px-4 py-2 border-b border-[rgba(47,74,60,0.10)] bg-[#F2EBE2]">
-          <p className="text-[10px] text-[#6B6058] uppercase tracking-widest">Meine Intention</p>
-          <p className="text-xs text-[#6B6058] font-body font-light">{selectedIntention}</p>
-        </div>
-      )}
+      {/* Main scrollable content */}
+      <div className="flex-1 overflow-y-auto overscroll-contain flex flex-col px-7 pt-10 pb-6">
 
-      {/* Frage des Tages */}
-      <div className="flex-shrink-0 px-4 py-3 bg-[#F2EBE2] border-b border-[rgba(47,74,60,0.08)]">
-        <p className="text-xs text-[#232323] font-medium mb-1">Frage des Tages</p>
-        <div className="flex items-center justify-between gap-3">
-          <p className="text-sm text-[#232323] italic">&ldquo;{dailyQuestion}&rdquo;</p>
+        {/* Quiet ✦ symbol */}
+        <p className="font-heading text-[40px] leading-none mb-8" style={{ color: 'rgba(242,235,226,0.20)' }}>✦</p>
+
+        {/* Partner name */}
+        <div className="mb-10">
+          <h2 className="font-heading text-[56px] font-normal text-[#F2EBE2] leading-none mb-2 tracking-[-0.5px]">
+            {otherProfile?.name}
+          </h2>
+          {(() => {
+            const parts = [
+              (!otherProfile?.hide_location && otherProfile?.location) ? otherProfile.location : '',
+              otherProfile?.age ? String(otherProfile.age) : '',
+              otherProfile?.sun_sign ?? '',
+            ].filter(Boolean)
+            return parts.length > 0 ? (
+              <p className="text-sm font-light font-body" style={{ color: 'rgba(242,235,226,0.35)' }}>{parts.join(' · ')}</p>
+            ) : null
+          })()}
+        </div>
+
+        {/* Daily question */}
+        <div className="mb-10" style={{ borderLeft: '1.5px solid rgba(242,235,226,0.12)', paddingLeft: '20px' }}>
+          <p className="text-[10px] uppercase tracking-widest mb-2 font-body" style={{ color: 'rgba(242,235,226,0.35)' }}>Frage des Tages</p>
+          <p className="font-heading text-[22px] font-normal leading-[1.45]" style={{ color: 'rgba(242,235,226,0.80)' }}>&ldquo;{dailyQuestion}&rdquo;</p>
           <button
             onClick={sendDailyQuestion}
-            className="text-xs text-[#232323] hover:underline flex-shrink-0 font-medium"
+            className="mt-2 text-[10px] font-body transition-colors"
+            style={{ color: 'rgba(242,235,226,0.25)', background: 'none', border: 'none', cursor: 'pointer' }}
           >
-            Senden
+            Als Nachricht senden
           </button>
         </div>
-      </div>
 
-      {/* Nachrichten — einziger scrollbarer Bereich */}
-      <div className="flex-1 overflow-y-auto overscroll-contain px-4 py-6 space-y-3">
-        {messages.length === 0 && (
-          <div className="text-center py-16">
-            <Heart className="w-12 h-12 text-[#6B6058] mx-auto mb-4" />
-            <p className="font-heading text-xl text-[#232323]/40">
-              Der Anfang von etwas Besonderem
-            </p>
-            <p className="text-[#9A8E84] text-sm mt-2">
-              Sende eine erste Nachricht oder nutze die Frage des Tages.
-            </p>
+        {/* Meine Intention */}
+        {selectedIntention && (
+          <div className="mb-6">
+            <p className="text-[10px] uppercase tracking-widest font-body mb-1" style={{ color: 'rgba(242,235,226,0.25)' }}>Meine Intention</p>
+            <p className="text-xs font-body font-light" style={{ color: 'rgba(242,235,226,0.50)' }}>{selectedIntention}</p>
           </div>
         )}
 
-        {messages.map((msg) => {
-          const isMe = msg.sender_id === currentUserId
-          return (
-            <div key={msg.id} className={cn('flex', isMe ? 'justify-end' : 'justify-start')}>
-              {!isMe && (
-                <div className="w-7 h-7 rounded-full bg-[#D8D0C7] flex items-center justify-center flex-shrink-0 mr-2 mt-1">
-                  <span className="text-xs font-heading text-[#232323]">
-                    {otherProfile?.name?.[0]}
-                  </span>
-                </div>
-              )}
-              <div
-                className={cn(
-                  'max-w-[75%] px-4 py-3 rounded-2xl text-sm leading-relaxed',
-                  isMe
-                    ? 'bg-primary text-white rounded-br-sm'
-                    : 'bg-white border border-[rgba(47,74,60,0.08)] text-[#232323] rounded-bl-sm'
-                )}
-              >
-                {msg.content}
-                <p className={cn('text-[10px] mt-1.5', isMe ? 'text-white/50' : 'text-[#9A8E84]')}>
-                  {formatRelativeTime(msg.created_at)}
-                </p>
-              </div>
+        {/* Messages */}
+        <div className="space-y-3 mb-4">
+          {messages.length === 0 && (
+            <div className="text-center py-8">
+              <p className="font-heading text-xl" style={{ color: 'rgba(242,235,226,0.20)' }}>
+                Der Anfang von etwas Besonderem
+              </p>
             </div>
-          )
-        })}
-        <div ref={bottomRef} />
+          )}
+
+          {messages.map((msg) => {
+            const isMe = msg.sender_id === currentUserId
+            return (
+              <div key={msg.id} className={cn('flex', isMe ? 'justify-end' : 'justify-start')}>
+                {!isMe && (
+                  <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mr-2 mt-1" style={{ background: 'rgba(242,235,226,0.12)' }}>
+                    <span className="text-xs font-heading" style={{ color: 'rgba(242,235,226,0.60)' }}>
+                      {otherProfile?.name?.[0]}
+                    </span>
+                  </div>
+                )}
+                <div
+                  className={cn(
+                    'max-w-[75%] px-4 py-3 rounded-2xl text-sm leading-relaxed',
+                    isMe ? 'rounded-br-sm' : 'rounded-bl-sm'
+                  )}
+                  style={isMe
+                    ? { background: 'rgba(242,235,226,0.18)', color: '#F2EBE2' }
+                    : { background: 'rgba(242,235,226,0.08)', border: '0.5px solid rgba(242,235,226,0.10)', color: 'rgba(242,235,226,0.80)' }
+                  }
+                >
+                  {msg.content}
+                  <p className="text-[10px] mt-1.5" style={{ color: 'rgba(242,235,226,0.30)' }}>
+                    {formatRelativeTime(msg.created_at)}
+                  </p>
+                </div>
+              </div>
+            )
+          })}
+          <div ref={bottomRef} />
+        </div>
+
+        {/* Message input */}
+        <form
+          onSubmit={sendMessage}
+          className="flex gap-3 items-center rounded-2xl px-4 py-3 mt-2"
+          style={{ background: 'rgba(242,235,226,0.06)', border: '0.5px solid rgba(242,235,226,0.10)' }}
+        >
+          <input
+            type="text"
+            className="flex-1 bg-transparent border-none outline-none text-sm font-body font-light"
+            style={{ color: '#F2EBE2' }}
+            placeholder="Schreib etwas…"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+          />
+          <button
+            type="submit"
+            disabled={sending || !text.trim()}
+            className="text-lg disabled:opacity-20 transition-colors"
+            style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(242,235,226,0.30)' }}
+          >↑</button>
+        </form>
+
       </div>
 
-      {/* Eingabe — bleibt immer unten sichtbar */}
-      <form
-        onSubmit={sendMessage}
-        className="flex-shrink-0 px-4 pt-3 bg-white border-t border-[rgba(47,74,60,0.12)] flex gap-3"
-        style={{ paddingBottom: 'calc(0.75rem + env(safe-area-inset-bottom, 0px))' }}
-      >
-        <input
-          type="text"
-          className="flex-1 rounded-full border border-[rgba(47,74,60,0.15)] bg-white px-4 py-3 text-sm font-body font-light text-[#232323] placeholder:text-[#9A8E84] focus:outline-none focus:border-[#2F4A3C] focus:border-[1.5px]"
-          placeholder="Schreibe etwas…"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-        />
-        <button
-          type="submit"
-          disabled={sending || !text.trim()}
-          className="w-11 h-11 bg-[#2F4A3C] rounded-full flex items-center justify-center flex-shrink-0 disabled:opacity-40 hover:bg-[#1E3028] transition-colors active:scale-95"
-        >
-          <Send className="w-4 h-4 text-[#F2EBE2]" />
-        </button>
-      </form>
-
-      {/* Abstand zur Nav auf Mobile — kollabiert wenn Tastatur offen ist */}
-      <div ref={spacerRef} className="flex-shrink-0 md:hidden bg-white" style={{ height: 'calc(4rem + env(safe-area-inset-bottom, 0px))' }} />
+      {/* Abstand zur Nav auf Mobile */}
+      <div ref={spacerRef} className="flex-shrink-0 md:hidden" style={{ height: 'calc(4rem + env(safe-area-inset-bottom, 0px))', background: 'var(--bg-indigo)' }} />
 
       {/* ── Guided First Message Overlay — 3 Ebenen ── */}
       {showGuided && (

@@ -218,15 +218,42 @@ export function ProfileSelfView({ profile, tier }: Props) {
   return (
     <div className="max-w-lg mx-auto pb-36">
 
-      {/* Header with title + Bearbeiten button */}
-      <div className="px-4 pt-5 pb-4 flex items-center justify-between">
-        <h1 className="font-heading text-[52px] font-light text-[#232323] tracking-[-0.5px] leading-none">Mein Profil</h1>
+      {/* Hero — full gradient, h-80, serif name */}
+      <div className="relative h-80 overflow-hidden" style={{ background: 'var(--bg-indigo)' }}>
+        {/* Photo */}
+        {photoUrl(photos[0]) ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={photoUrl(photos[0])} alt={profile.name} className="absolute inset-0 w-full h-full object-cover" />
+        ) : null}
+        {/* Bottom gradient overlay */}
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(20,34,26,0.80) 0%, transparent 55%)' }} />
+
+        {/* Edit button — top right */}
         <Link
           href="/profile/edit"
-          className="flex items-center gap-1.5 border border-[rgba(47,74,60,0.25)] text-[#232323] hover:bg-[rgba(47,74,60,0.06)] rounded-full text-xs py-1.5 px-3 font-body transition-colors duration-200"
+          className="absolute top-14 right-5 z-10 flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-body"
+          style={{
+            background: 'rgba(242,235,226,0.12)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
+            border: '0.5px solid rgba(242,235,226,0.18)',
+            color: 'rgba(242,235,226,0.70)',
+            letterSpacing: '0.04em',
+          }}
         >
-          <Edit className="w-3.5 h-3.5" /> Bearbeiten
+          <Edit className="w-3 h-3" /> Bearbeiten
         </Link>
+
+        {/* Name + subtitle — bottom left */}
+        <div className="absolute bottom-0 left-0 right-0 z-10 px-6 pb-7">
+          <h1 className="font-heading text-[48px] font-normal text-[#F2EBE2] tracking-[-0.5px] leading-none mb-1">
+            {profile.name}
+            {!profile.hide_age && profile.birth_date ? `, ${calculateAge(profile.birth_date)}` : !profile.hide_age && profile.age ? `, ${profile.age}` : ''}
+          </h1>
+          {profile.intention && (
+            <p className="text-[rgba(242,235,226,0.45)] text-sm font-light">{profile.intention}</p>
+          )}
+        </div>
       </div>
 
       {/* ── Trial banner ── */}
@@ -266,63 +293,34 @@ export function ProfileSelfView({ profile, tier }: Props) {
       {/* ── Phase progress circles ── */}
       <PhaseCircles phase={onboardingPhase} />
 
-      {/* ── Emotionale Kapazität + Pause ── */}
-      <div className="mx-4 mb-4 bg-[#F2EBE2] rounded-2xl border border-[rgba(47,74,60,0.08)] p-4">
-        <div className="flex items-center justify-between mb-3">
-          <p className="text-[9px] text-[#6B6058] uppercase tracking-[0.12em] font-body">Mein Status</p>
+      {/* ── Emotionale Kapazität + Pause — plain text ── */}
+      <div className="px-5 py-5 border-b border-[rgba(47,74,60,0.08)]">
+        <div className="flex items-center justify-between mb-4">
+          <p className="text-[10px] text-[#9A8E84] uppercase tracking-[0.10em] font-semibold">Gerade</p>
           <button
             onClick={togglePause}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-body transition-colors ${
               paused
                 ? 'bg-[#2F4A3C] text-[#F2EBE2]'
-                : 'bg-[#D8D0C7] text-[#232323] hover:bg-[rgba(47,74,60,0.12)]'
+                : 'bg-[rgba(47,74,60,0.07)] text-[#232323] hover:bg-[rgba(47,74,60,0.12)]'
             }`}
           >
             <Moon className="w-3 h-3" />
             {paused ? 'Pause aktiv' : 'Pause einlegen'}
           </button>
         </div>
-        <div className="grid grid-cols-2 gap-2">
+        <div className="flex flex-col gap-2">
           {CAPACITY_OPTIONS.map((opt) => (
             <button
               key={opt.value}
               onClick={() => saveCapacity(opt.value)}
-              className={`flex items-center gap-2 px-3 py-2.5 rounded-xl border transition-all text-left ${
-                capacity === opt.value
-                  ? 'border-[#2F4A3C] bg-[#2F4A3C]'
-                  : 'border-[rgba(47,74,60,0.12)] bg-[#D8D0C7] hover:bg-[rgba(47,74,60,0.08)]'
-              }`}
+              className="text-left py-2 transition-all"
             >
-              <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: opt.dot }} />
-              <span className={`text-xs font-body font-light leading-snug ${capacity === opt.value ? 'text-[#F2EBE2]' : 'text-[#232323]'}`}>
-                {opt.label}
+              <span className={`text-sm font-light font-body ${capacity === opt.value ? 'text-[#2F4A3C] font-medium' : 'text-[#9A8E84]'}`}>
+                {capacity === opt.value ? '· ' : ''}{opt.label}
               </span>
             </button>
           ))}
-        </div>
-      </div>
-
-      {/* ── Foto 1 — groß, mit Name-Overlay ── */}
-      <div className="mx-3 rounded-3xl overflow-hidden shadow-md relative" style={{ height: '78vh' }}>
-        {photoUrl(photos[0]) ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={photoUrl(photos[0])} alt={profile.name} className="w-full h-full object-cover" />
-        ) : (
-          <div className="w-full h-full bg-[rgba(47,74,60,0.07)] flex items-center justify-center">
-            <span className="font-heading text-8xl text-[#6B6058]">{profile.name?.[0]}</span>
-          </div>
-        )}
-        <div className="absolute bottom-0 left-0 right-0 h-52 bg-gradient-to-t from-[rgba(30,48,40,0.88)] to-transparent pointer-events-none" />
-        <div className="absolute bottom-5 left-5 text-white">
-          <h2 className="font-heading text-4xl drop-shadow">
-            {profile.name}{!profile.hide_age && profile.birth_date ? `, ${calculateAge(profile.birth_date)}` : !profile.hide_age && profile.age ? `, ${profile.age}` : ''}
-          </h2>
-          {!profile.hide_location && profile.location && (
-            <div className="flex items-center gap-1.5 text-white/75 text-sm mt-1">
-              <MapPin className="w-3.5 h-3.5" />
-              {profile.location}
-            </div>
-          )}
         </div>
       </div>
 
@@ -447,14 +445,15 @@ export function ProfileSelfView({ profile, tier }: Props) {
       {/* ── Werte ── */}
       {profile.werte?.length > 0 && (
         <div className="px-5 py-5 border-t border-[rgba(47,74,60,0.10)]">
-          <p className="text-[11px] text-[#6B6058] uppercase tracking-widest mb-3">Werte</p>
+          <p className="text-[10px] text-[#9A8E84] uppercase tracking-[0.10em] font-semibold mb-3">Werte</p>
           <div className="flex flex-wrap gap-2">
             {profile.werte.map((w) => (
-              <span key={w} className="text-sm text-[#232323] bg-[rgba(47,74,60,0.07)] px-3 py-1.5 rounded-full">{w}</span>
+              <span key={w} className="bg-[rgba(47,74,60,0.06)] text-[#6B6058] rounded-full px-3 py-1.5 text-sm font-light">{w}</span>
             ))}
           </div>
         </div>
       )}
+      <div className="border-b border-[rgba(47,74,60,0.08)] my-0" />
 
       {/* ── Meine Welt ── */}
       {(profile.my_world?.length ?? 0) > 0 && (
@@ -652,23 +651,20 @@ export function ProfileSelfView({ profile, tier }: Props) {
       )}
 
       {/* ── Einstellungen ── */}
-      <div className="mx-4 mt-6 bg-[#F2EBE2] rounded-2xl border border-[rgba(47,74,60,0.12)] p-6 mb-8">
-        <h3 className="font-heading text-xl text-[#232323] mb-4">Einstellungen</h3>
-        <div className="space-y-1">
-          {settingsItems.map(({ label, icon: Icon, href, danger }) => (
-            <Link
-              key={label}
-              href={href}
-              className={`flex items-center gap-3 py-3 px-1 rounded-xl transition-colors hover:bg-[#2F4A3C] text-sm font-body ${
-                danger ? 'text-red-400' : 'text-[#6B6058]'
-              }`}
-            >
-              <Icon className="w-4 h-4 flex-shrink-0" />
-              <span className="flex-1">{label}</span>
-              <ChevronRight className="w-4 h-4 text-[#D8D0C7]" />
-            </Link>
-          ))}
-        </div>
+      <div className="px-5 mt-6 mb-8">
+        <p className="text-[10px] text-[#9A8E84] uppercase tracking-[0.10em] font-semibold mb-3">Einstellungen</p>
+        {settingsItems.map(({ label, icon: Icon, href, danger }, i) => (
+          <Link
+            key={label}
+            href={href}
+            className={`flex items-center justify-between py-3.5 ${i > 0 ? 'border-t border-[rgba(47,74,60,0.07)]' : ''} text-sm font-light font-body ${
+              danger ? 'text-[#A8654C]' : 'text-[#6B6058]'
+            }`}
+          >
+            <span>{label}</span>
+            <span style={{ color: 'rgba(47,74,60,0.25)', fontSize: 16 }}>›</span>
+          </Link>
+        ))}
       </div>
 
     </div>
